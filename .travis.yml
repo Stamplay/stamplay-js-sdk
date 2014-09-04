@@ -6,4 +6,6 @@ language: node_js
 node_js:
   - '0.10'
 notifications:
-  email: false
+  email:
+    - cristian.roselli@stamplay.com
+    - claudio.petrini@stamplay.com
