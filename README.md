@@ -91,10 +91,10 @@ An object with the following properties:
 * patch : default false, if true an HTTP PATCH is sent to the server instead of PUT for updating the model 
 
 ###destroy()
-Deletes the object from the server by making a DELETE request. If the model is new false is returned.
+Deletes the object from the server by making a DELETE request. If the model is new, false is returned.
 
 # Collection
-Collections are sets of models.. You can ```fetch``` the collection from the server and a set of Underscore methods.   
+Collections are sets of models. You can ```fetch``` the collection from the server and a set of Underscore methods.   
 
 ##Methods
 
@@ -105,7 +105,7 @@ Populate the collection with all the available models. If no [queryParameters](#
 Remove the model with the specified id from the collection. 
 You can pass an array of ids to remove from the collection. 
 
-### get(id)
+### get(id)
 Get a model from a collection, specified by an id.
 
 ### at(index)
@@ -118,7 +118,7 @@ Remove and return the last model from a collection, if collection is empty retur
 Remove and return the first model from a collection, if collection is empty return false.
 
 ### add(model)
-Add a model to the collection at the end of the collection.
+Add a model at the end of the collection.
 
 #Action methods
 These methods are a fast way to ```rate```, ```vote``` and ```comment``` a resource. 
@@ -129,14 +129,14 @@ All these methods return a promise.
 var tag = new Stamplay.Cobject('tag').Model;
 tag.rate(4).then(function(){
 	var actions = tag.get('actions');
-	console.log(actions.ratings); // You can see the ratings, the average rate and the users who v
+	console.log(actions.ratings); // You can see the ratings, the average rate and the users who rated the resource
 });
 ```
 ##Methods
 ###vote() 
 Vote the resource.
 ###rate(rating)
-Rate the resource, only integer values as parameters.
+Rate the resource, only integer values as parameter.
 ###comment(text)
 Comment the resource with the text.
 ###twitter_share()
@@ -165,10 +165,11 @@ var users = new Stamplay.User().Collection;
 A Stamplay.User Model instance inherits all the [Model](#model) methods.
 
 ```javascript
-user.fetch(id);
-user.set('displayName', 'New display name');
-user.save().then(function(){
-	user.get('displayName'); //returns New display name
+user.fetch(id).then(function(){
+	user.set('displayName', 'New display name');
+	user.save().then(function(){
+		user.get('displayName'); //returns New display name
+	});
 });
 ```
 
@@ -182,7 +183,7 @@ users.fetch().then(function(){
 ```
 
 ## Model methods
-User model has the following additional methods
+User model has the following additional methods.
 ###currentUser()
 If the user is logged it populates the model with the user's data, otherwise the model is empty. 
 
@@ -196,7 +197,7 @@ The login method can be used for logging in with:
 * third party services
 * local authentication
 
-####Third party services login(service)
+####Third party services login (service)
 You can use this method for logging users with third party services by passing the service as first and only parameter.
 
 ```javascript
@@ -223,7 +224,7 @@ user.login('email@provider.com', 'mySecret').then(function(){
 	user.get('displayName');
 });  
 ```
-Note that for this kind of login you have to [register](TODO) the user first. 
+Note that for this kind of login you have to [register](#signupdata) the user first. 
  
 ###signup(data)
 Register user for local authentication. ```data``` parameter must be an object containing at least ```email``` and ```password``` keys.
@@ -259,10 +260,11 @@ var tags = new Stamplay.Cobject('tag').Collection;
 A Stamplay.Cobject Model instance inherits all the [Model](#model) methods.
 
 ```javascript
-tag.fetch(id);
-tag.set('description', 'Description');
-tag.save().then(function(){
-	tag.get('description'); //returns Description
+tag.fetch(id).then(function(){
+	tag.set('description', 'Description');
+	tag.save().then(function(){
+		tag.get('description'); //returns Description
+	});
 });
 ```
 
@@ -274,13 +276,12 @@ tags.fetch().then(function(){
 	firstTag.get('description');
 });
 ```
-## Methods
+## Model methods
 The Stamplay.Cobject.Model inherits all the Action methods.
 
 ```javascript
 tag.vote().then(function(){
 	var actions = tag.get('actions');
 	console.log(actions.votes); // You can see the number of votes and who has already voted
-	
 });
 ```
