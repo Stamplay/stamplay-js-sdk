@@ -21,18 +21,20 @@ Just import the JS SDK in your HTML page and you're ready to go.
 		
 			// Initializing the user informations
 			var user = new Stamplay.User().Model;
-			user.currentUser();
-
-			// Reading data
-			var tags = new Stamplay.Cobject('tag').Collection();
-			tags.fetch().then(function(){
-				var tag = new Stamplay.Cobject('tag').Model;
-				tag.set('name', 'javascript');
-				tag.save().then(function(){
-					tags.add(tag);
+			user.currentUser().then(function(){
+				// Reading data
+				var tags = new Stamplay.Cobject('tag').Collection();
+				tags.fetch().then(function(){
+					var tag = new Stamplay.Cobject('tag').Model;
+					tag.set('name', 'javascript');
+					tag.save().then(function(){
+						tags.add(tag);
+					});
+					
 				});
 				
 			});
+
 		</script>
 	</body>
 </html>
@@ -40,18 +42,18 @@ Just import the JS SDK in your HTML page and you're ready to go.
 
 This javascript SDK expose through the Stamplay object the following components:
  
-* User
-* Custom Object
+* [User](#user)
+* [Custom Object](#custom-object)
 
 Every component can expose two main classes:
 
-* Model
-* Collection
+* [Model](#model)
+* [Collection](#collection)
 
 #Model
 Models are the heart of any JavaScript application, a model keeps the application logic and with the Stamplay model you can easily synchronize the data between client and the Stamplay platform.
 
-The following is a contrived example, but it demonstrates defining a User Model model, setting an attribute, and saving it in the application. 
+The following is a contrived example, but it demonstrates defining a User model, setting an attribute, and saving it in the application. 
 
 ```javascript
 var registrationData = {
@@ -76,11 +78,11 @@ Some models can expose Action's methods, refer to the Actions .
 Returns the value of the property
 ### set(property, value)
 Sets the value of the property
-### unset(property)
+### unset(property)
 Delete the property from the object
 ### fetch(id, queryParameters)
 Resets the model's state from the server. Useful if the model has never been populated with data, or if you'd like to ensure that you have the latest server state. 
-Refer to the [queryParameters](#markdown-header-query-parameters) documentation. 
+Refer to the [queryParameters](#query-parameters) documentation. 
 ### save(options)
 Saves the model to the database. If the model is new a POST request is made, otherwise, unless specified a PUT request is sent.
 #### options 
@@ -97,7 +99,7 @@ Collections are sets of models.. You can ```fetch``` the collection from the ser
 ##Methods
 
 ### fetch(queryParams)
-Populate the collection with all the available models. If no [queryParameters](#markdown-header-query-parameters) are passed the collection is populated with the first 20 models ordered by id. 
+Populate the collection with all the available models. If no [queryParameters](#query-parameters) are passed the collection is populated with the first 20 models ordered by id. 
 
 ### remove(id)
 Remove the model with the specified id from the collection. 
@@ -141,7 +143,7 @@ Comment the resource with the text.
 Calls the Twitter share endpoint. Note that this method updates the twitter_share counter but it is not responsible for sharing the resource on Twitter.  
 ###facebook_share
 Calls the Facebook share endpoint. Note that this method updates the facebook_share counter but it is not responsible for sharing the resource on Facebook.  
-#query parameters
+#Query parameters
 An object representing the parameters that should be added in the request. 
 
 You can use these keys in the object:
@@ -160,7 +162,7 @@ var user = new Stamplay.User().Model;
 var users = new Stamplay.User().Collection;
 ```
 
-A Stamplay.User Model instance inherits all the Model methods.
+A Stamplay.User Model instance inherits all the [Model](#model) methods.
 
 ```javascript
 user.fetch(id);
@@ -170,7 +172,7 @@ user.save().then(function(){
 });
 ```
 
-A Stamplay.User.Collection instance inherits all the Collection methods.
+A Stamplay.User.Collection instance inherits all the [Collection](#collection) methods.
 
 ```javascript
 users.fetch().then(function(){
@@ -254,7 +256,7 @@ var tag = new Stamplay.Cobject('tag').Model;
 var tags = new Stamplay.Cobject('tag').Collection;
 ```
 
-A Stamplay.Cobject Model instance inherits all the Model methods.
+A Stamplay.Cobject Model instance inherits all the [Model](#model) methods.
 
 ```javascript
 tag.fetch(id);
@@ -264,7 +266,7 @@ tag.save().then(function(){
 });
 ```
 
-A Stamplay.Cobject.Collection instance inherits all the Collection methods.
+A Stamplay.Cobject.Collection instance inherits all the [Collection](#collection) methods.
 
 ```javascript
 tags.fetch().then(function(){
