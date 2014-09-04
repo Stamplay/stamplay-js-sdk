@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stamplay JS SDK tests">
+    <meta name="author" content="Stamplay developers">
+    <link href="../bower_components/mocha/mocha.css" rel="stylesheet">
+
+    <title>Stamplay | An awesome new app</title>
+  </head>
+
+  <body>
+   	<div id="mocha"></div>
+    
+	  <script src="../bower_components/q/q.js"></script>
+	  <script src="../bower_components/underscore/underscore-min.js"></script>
+	  <script src="../stamplay.js"></script>
+
+	  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+	  <script src="../bower_components/mocha/mocha.js"></script>
+	  <script src="../bower_components/chai/chai.js"></script>
+
+	  <script src="../bower_components/sinon/lib/sinon.js"></script>
+	  <script src="../bower_components/sinon/lib/sinon/assert.js"></script>
+	  <script src="../bower_components/sinon/lib/sinon/spy.js"></script>
+	  <script src="../bower_components/sinon/lib/sinon/call.js"></script>
+	  <script src="../bower_components/sinon/lib/sinon/stub.js"></script>
+	  <script src="../bower_components/sinon/lib/sinon/util/event.js"></script>
+	  <script src="../bower_components/sinon/lib/sinon/util/fake_xml_http_request.js"></script>
+
+	  <script>
+	    mocha.setup('tdd');
+	    var assert = chai.assert;
+	  </script>
+	  
+	  <script src="stamplay.js"></script>
+	  <script src="support.js"></script>
+	  <script src="cobject.model.js"></script>
+	  <script src="cobject.collection.js"></script>
+	  <script src="user.model.js"></script>
+
+	  <script>
+	    if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
+	    else { mocha.run(); }
+	  </script>
+  </body>
+
+</html>
