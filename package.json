@@ -6,7 +6,9 @@
   "author": {
     "name": "Stamplay javascript SDK"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "mocha-phantomjs ./tests/tests.html"
+    },
   "dependencies": {
     "mocha-phantomjs": "^3.5.0",
     "phantomjs": "^1.9.7-15"
