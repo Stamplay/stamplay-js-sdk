@@ -97,7 +97,7 @@ Refer to the [queryParameters](#query-parameters) documentation.
 ###destroy()
 Deletes the object from the server by making a DELETE request. If the model is new, false is returned.
 <a name="Model.save"></a>
-### save(options)
+###save(options)
 Saves the model to the database. If the model is new a POST request is made, otherwise, unless specified a PUT request is sent.
 #### options 
 An object with the following properties: 
@@ -105,32 +105,43 @@ An object with the following properties:
 * patch : default false, if true an HTTP PATCH is sent to the server instead of PUT for updating the model 
 
 ##Actions
-Some models can expose Action's methods, refer to the [Actions](#Actions) .
+Some models can expose Action's methods, refer to the [Actions](#action-methods) .
 
 # Collection
 Collections are sets of models. You can ```fetch``` the collection from the server and a set of Underscore methods.   
 
 ##Methods
 
+  * <a href="#Collection.fetch"> <code>fetch()</code></a>
+  * <a href="#Collection.remove"><code>remove()</code></a>
+  * <a href="#Collection.get"><code>get()</code></a>
+  * <a href="#Collection.at"><code>at()</code></a>
+  * <a href="#Collection.pop"><code>pop()</code></a>
+  * <a href="#Collection.shift"><code>shift()</code></a>
+  * <a href="#Collection.add"><code>add()</code></a> 
+
+-------------------------------------------------------
+
+<a name="Collection.fetch"></a>
 ### fetch(queryParams)
 Populate the collection with all the available models. If no [queryParameters](#query-parameters) are passed the collection is populated with the first 20 models ordered by id. 
-
+<a name="Collection.remove"></a>
 ### remove(id)
 Remove the model with the specified id from the collection. 
 You can pass an array of ids to remove from the collection. 
-
+<a name="Collection.get"></a>
 ### get(id)
 Get a model from a collection, specified by an id.
-
+<a name="Collection.at"></a>
 ### at(index)
 Get a model from a collection, specified by index. In this moment collection aren't sorted so **at** will still retrieve models in insertion order.
-
+<a name="Collection.pop"></a>
 ### pop()
 Remove and return the last model from a collection, if collection is empty return false. 
-
+<a name="Collection.shift"></a>
 ### shift()
 Remove and return the first model from a collection, if collection is empty return false.
-
+<a name="Collection.add"></a>
 ### add(model)
 Add a model at the end of the collection.
 
