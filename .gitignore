@@ -8,9 +8,6 @@
 *.sublime-workspace
 .dump.rdb
 
-# Dist #
-################
-dist/*
 
 # No codebase related stuff #
 #############################
