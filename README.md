@@ -17,24 +17,21 @@ Just import the JS SDK in your HTML page and you're ready to go.
 		<script src="path/to/stamplay-sdk.js"></script>
 
 		<script type="text/javascript">
-
-		
 			// Initializing the user informations
 			var user = new Stamplay.User().Model;
-			user.currentUser().then(function(){
+			var tag = new Stamplay.Cobject('tag').Model;
+			var tags = new Stamplay.Cobject('tag').Collection;
+			
+			user.currentUser()
+			.then(function(){
 				// Reading data
-				var tags = new Stamplay.Cobject('tag').Collection();
-				tags.fetch().then(function(){
-					var tag = new Stamplay.Cobject('tag').Model;
-					tag.set('name', 'javascript');
-					tag.save().then(function(){
-						tags.add(tag);
-					});
-					
-				});
-				
+				return tags.fetch()	
+			}).then(function(){
+				tag.set('name', 'javascript');
+				return tag.save();
+			}).then(function(){
+				tags.add(tag);
 			});
-
 		</script>
 	</body>
 </html>
@@ -61,14 +58,15 @@ var registrationData = {
 	password: 'mySecret'
 };
 var newUser = new Stamplay.User;
-newUser.signup(registrationData).then(function(){
+newUser.signup(registrationData)
+.then(function(){
 	// User is now registered
 	newUser.set('phoneNumber', '020 123 4567' );
-	newUser.save().then(function(){
-		// User is saved server side
-		var number = newUser.get('phoneNumber'); // number value is 020 123 4567 
-	})
-});
+	return newUser.save();
+}).then(function(){
+	// User is saved server side
+	var number = newUser.get('phoneNumber'); // number value is 020 123 4567 
+})
 ```
 
 ##Actions
@@ -127,9 +125,10 @@ All these methods return a promise.
      
 ```javascript
 var tag = new Stamplay.Cobject('tag').Model;
-tag.rate(4).then(function(){
+tag.rate(4)
+.then(function(){
 	var actions = tag.get('actions');
-	console.log(actions.ratings); // You can see the ratings, the average rate and the users who rated the resource
+	console.log(actions.ratings); // You can see the ratings, the average rate and the users who v
 });
 ```
 ##Methods
@@ -165,7 +164,8 @@ var users = new Stamplay.User().Collection;
 A Stamplay.User Model instance inherits all the [Model](#model) methods.
 
 ```javascript
-user.fetch(id).then(function(){
+user.fetch(id)
+.then(function(){
 	user.set('displayName', 'New display name');
 	user.save().then(function(){
 		user.get('displayName'); //returns New display name
@@ -176,7 +176,8 @@ user.fetch(id).then(function(){
 A Stamplay.User.Collection instance inherits all the [Collection](#collection) methods.
 
 ```javascript
-users.fetch().then(function(){
+users.fetch()
+.then(function(){
 	var firstUser = users.at(0);
 	firstUser.get('displayName');
 })
@@ -188,7 +189,8 @@ User model has the following additional methods.
 If the user is logged it populates the model with the user's data, otherwise the model is empty. 
 
 ```javascript
-user.currentUser().then(function(){
+user.currentUser()
+.then(function(){
 	user.get('displayName');
 })
 ```
@@ -201,7 +203,8 @@ The login method can be used for logging in with:
 You can use this method for logging users with third party services by passing the service as first and only parameter.
 
 ```javascript
-user.login('facebook').then(function(){
+user.login('facebook')
+.then(function(){
 	user.get('displayName');
 });
 ```
@@ -220,7 +223,8 @@ You can use one of the following as parameter for logging in with third party se
 Authentication with email and password. you can use the login method in this way.
 
 ```javascript
-user.login('email@provider.com', 'mySecret').then(function(){
+user.login('email@provider.com', 'mySecret')
+.then(function(){
 	user.get('displayName');
 });  
 ```
@@ -235,7 +239,8 @@ var registrationData = {
 	password: 'mySecret',
 	displayName: 'John Stamplay'
 };
-user.signup(registrationData).then(function(){
+user.signup(registrationData)
+.then(function(){
 	user.get('displayName');
 });  
 ```
@@ -260,18 +265,21 @@ var tags = new Stamplay.Cobject('tag').Collection;
 A Stamplay.Cobject Model instance inherits all the [Model](#model) methods.
 
 ```javascript
-tag.fetch(id).then(function(){
+tag.fetch(id)
+.then(function(){
 	tag.set('description', 'Description');
-	tag.save().then(function(){
-		tag.get('description'); //returns Description
-	});
+	return tag.save()
+	})
+.then(function(){
+	tag.get('description'); //returns Description
 });
 ```
 
 A Stamplay.Cobject.Collection instance inherits all the [Collection](#collection) methods.
 
 ```javascript
-tags.fetch().then(function(){
+tags.fetch()
+.then(function(){
 	var firstTag = tags.at(0);
 	firstTag.get('description');
 });
@@ -280,7 +288,8 @@ tags.fetch().then(function(){
 The Stamplay.Cobject.Model inherits all the Action methods.
 
 ```javascript
-tag.vote().then(function(){
+tag.vote()
+.then(function(){
 	var actions = tag.get('actions');
 	console.log(actions.votes); // You can see the number of votes and who has already voted
 });
