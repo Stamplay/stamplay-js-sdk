@@ -117,7 +117,6 @@ An object with the following properties:
 
 * patch : default false, if true an HTTP PATCH is sent to the server instead of PUT for updating the model 
 
-##Action methods
 <a name="Action.vote"></a>
 ###vote() 
 Vote the resource.
