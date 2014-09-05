@@ -1,6 +1,6 @@
 Stamplay JavaScript SDK
 ===============
-[![Build Status](https://travis-ci.org/Stamplay/stamplay-js-sdk.svg)](https://travis-ci.org/Stamplay/stamplay-js-sdk)
+[![Build Status](https://travis-ci.org/Stamplay/stamplay-js-sdk.svg?branch=master)](https://travis-ci.org/Stamplay/stamplay-js-sdk)
 [![Production version]()](http://img.shields.io/badge/download-36%20kB-blue.svg)
 
 ##Getting Started
@@ -70,52 +70,79 @@ newUser.signup(registrationData)
 })
 ```
 
-##Actions
-Some models can expose Action's methods, refer to the Actions .
 ##Methods
+
+  * <a href="#Model.get"> <code>get()</code></a>
+  * <a href="#Model.set"><code>set()</code></a>
+  * <a href="#Model.unset"><code>unset</code></a>
+  * <a href="#Model.fetch"><code>fetch()</code></a>
+  * <a href="#Model.destroy"><code>destroy()</code></a>
+  * <a href="#Model.save"><code>save()</code></a>
+ 
+-------------------------------------------------------
+  
+<a name="Model.get"></a>
 ### get(property)
 Returns the value of the property
+<a name="Model.set"></a>
 ### set(property, value)
 Sets the value of the property
+<a name="Model.unset"></a>
 ### unset(property)
 Delete the property from the object
+<a name="Model.fetch"></a>
 ### fetch(id, queryParameters)
 Resets the model's state from the server. Useful if the model has never been populated with data, or if you'd like to ensure that you have the latest server state. 
 Refer to the [queryParameters](#query-parameters) documentation. 
-### save(options)
+<a name="Model.destroy"></a>
+###destroy()
+Deletes the object from the server by making a DELETE request. If the model is new, false is returned.
+<a name="Model.save"></a>
+###save(options)
 Saves the model to the database. If the model is new a POST request is made, otherwise, unless specified a PUT request is sent.
 #### options 
 An object with the following properties: 
 
 * patch : default false, if true an HTTP PATCH is sent to the server instead of PUT for updating the model 
 
-###destroy()
-Deletes the object from the server by making a DELETE request. If the model is new, false is returned.
+##Actions
+Some models can expose Action's methods, refer to the [Actions](#action-methods) .
 
 # Collection
 Collections are sets of models. You can ```fetch``` the collection from the server and a set of Underscore methods.   
 
 ##Methods
 
+  * <a href="#Collection.fetch"> <code>fetch()</code></a>
+  * <a href="#Collection.remove"><code>remove()</code></a>
+  * <a href="#Collection.get"><code>get()</code></a>
+  * <a href="#Collection.at"><code>at()</code></a>
+  * <a href="#Collection.pop"><code>pop()</code></a>
+  * <a href="#Collection.shift"><code>shift()</code></a>
+  * <a href="#Collection.add"><code>add()</code></a> 
+
+-------------------------------------------------------
+
+<a name="Collection.fetch"></a>
 ### fetch(queryParams)
 Populate the collection with all the available models. If no [queryParameters](#query-parameters) are passed the collection is populated with the first 20 models ordered by id. 
-
+<a name="Collection.remove"></a>
 ### remove(id)
 Remove the model with the specified id from the collection. 
 You can pass an array of ids to remove from the collection. 
-
+<a name="Collection.get"></a>
 ### get(id)
 Get a model from a collection, specified by an id.
-
+<a name="Collection.at"></a>
 ### at(index)
 Get a model from a collection, specified by index. In this moment collection aren't sorted so **at** will still retrieve models in insertion order.
-
+<a name="Collection.pop"></a>
 ### pop()
 Remove and return the last model from a collection, if collection is empty return false. 
-
+<a name="Collection.shift"></a>
 ### shift()
 Remove and return the first model from a collection, if collection is empty return false.
-
+<a name="Collection.add"></a>
 ### add(model)
 Add a model at the end of the collection.
 
@@ -133,14 +160,28 @@ tag.rate(4)
 });
 ```
 ##Methods
+
+  * <a href="#Action.vote"><code>vote()</code></a>
+  * <a href="#Action.rate"><code>rate()</code></a>
+  * <a href="#Action.comment"><code>comment()</code></a>
+  * <a href="#Action.twitter_share"><code>twitter_share()</code></a>
+  * <a href="#Action.facebook_share"><code>facebook_share()</code></a>
+
+-------------------------------------------------------
+
+<a name="Action.vote"></a>
 ###vote() 
 Vote the resource.
+<a name="Action.rate"></a>
 ###rate(rating)
 Rate the resource, only integer values as parameter.
+<a name="Action.comment"></a>
 ###comment(text)
 Comment the resource with the text.
+<a name="Action.twitter_share"></a>
 ###twitter_share()
-Calls the Twitter share endpoint. Note that this method updates the twitter_share counter but it is not responsible for sharing the resource on Twitter.  
+Calls the Twitter share endpoint. Note that this method updates the twitter_share counter but it is not responsible for sharing the resource on Twitter.
+<a name="Action.facebook_share"></a>  
 ###facebook_share
 Calls the Facebook share endpoint. Note that this method updates the facebook_share counter but it is not responsible for sharing the resource on Facebook.  
 #Query parameters
@@ -295,3 +336,11 @@ tag.vote()
 	console.log(actions.votes); // You can see the number of votes and who has already voted
 });
 ```
+# Build
+To build a production ready library you need to have NPM and Bower installed and then run those two commands:
+
+```bash
+npm install && bower install
+grunt build
+```
+
