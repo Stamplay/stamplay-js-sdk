@@ -5,39 +5,29 @@ Stamplay JavaScript SDK
 ##Getting Started
 Just import the JS SDK in your HTML page and you're ready to go.
 
-```html
+```javascript
+var user = new Stamplay.User().Model;
+var tags = new Stamplay.Cobject('tag').Collection;
+var tag;
 
-<!DOCTYPE html>
-<html>
-	<head>
-	<!-- Nice things here -->
-	</head>
-	<body>
-		<!-- Beautiful DOM elements here -->
-		<script src="path/to/stamplay-sdk.js"></script>
-
-		<script type="text/javascript">
-			// Initializing the user informations
-			var user = new Stamplay.User().Model;
-			var tag = new Stamplay.Cobject('tag').Model;
-			var tags = new Stamplay.Cobject('tag').Collection;
-			
-			user.currentUser()
-			.then(function(){
-				// Reading data
-				return tags.fetch()	
-			}).then(function(){
-				tag.set('name', 'javascript');
-				return tag.save();
-			}).then(function(){
-				tags.add(tag);
-			});
-		</script>
-	</body>
-</html>
+//Gettings 
+user.currentUser()
+.then(function(){
+  // Populating tags collection with all available data
+  return tags.fetch();
+})
+.then(function(){
+  tag = new Stamplay.Cobject('tag').Model;
+  tag.set('name', 'javascript');
+  return tag.save();
+ })
+.then(function(){
+  tags.add(tag);
+});
 ```
 
-This javascript SDK expose through the Stamplay object the following components:
+##Available components
+This JavaScript SDK expose through the Stamplay object the following components:
  
 * [User](#user)
 * [Custom Object](#custom-object)
@@ -69,7 +59,22 @@ newUser.signup(registrationData)
 })
 ```
 
-##Methods
+##Model actions
+Some components expose the model actions too.
+These methods are a fast way to ```rate```, ```vote``` and ```comment``` a resource. 
+Moreover there are two methods for keeping track of the Twitter and Facebook shares.
+All these methods return a promise.
+
+```javascript
+var tag = new Stamplay.Cobject('tag').Model;
+tag.rate(4)
+.then(function(){
+	var actions = tag.get('actions');
+	console.log(actions.ratings); // You can see the ratings, the average rate and the users who rate
+});
+```
+
+##Model methods
 
   * <a href="#Model.get"> <code>get()</code></a>
   * <a href="#Model.set"><code>set()</code></a>
@@ -77,6 +82,13 @@ newUser.signup(registrationData)
   * <a href="#Model.fetch"><code>fetch()</code></a>
   * <a href="#Model.destroy"><code>destroy()</code></a>
   * <a href="#Model.save"><code>save()</code></a>
+  * <a href="#Action.vote"><code>vote()</code></a>
+
+###Action methods
+  * <a href="#Action.rate"><code>rate()</code></a>
+  * <a href="#Action.comment"><code>comment()</code></a>
+  * <a href="#Action.twitter_share"><code>twitter_share()</code></a>
+  * <a href="#Action.facebook_share"><code>facebook_share()</code></a>
  
 -------------------------------------------------------
   
@@ -104,8 +116,25 @@ An object with the following properties:
 
 * patch : default false, if true an HTTP PATCH is sent to the server instead of PUT for updating the model 
 
-##Actions
-Some models can expose Action's methods, refer to the [Actions](#action-methods) .
+##Action methods
+<a name="Action.vote"></a>
+###vote() 
+Vote the resource.
+<a name="Action.rate"></a>
+###rate(rating)
+Rate the resource, only integer values as parameter.
+<a name="Action.comment"></a>
+###comment(text)
+Comment the resource with the text.
+<a name="Action.twitter_share"></a>
+###twitter_share()
+Calls the Twitter share endpoint. Note that this method updates the twitter_share counter but it is not responsible for sharing the resource on Twitter.
+<a name="Action.facebook_share"></a>  
+###facebook_share
+Calls the Facebook share endpoint. Note that this method updates the facebook_share counter but it is not responsible for sharing the resource on Facebook.  
+
+-------------------------------------------------------
+
 
 # Collection
 Collections are sets of models. You can ```fetch``` the collection from the server and a set of Underscore methods.   
@@ -145,55 +174,6 @@ Remove and return the first model from a collection, if collection is empty retu
 ### add(model)
 Add a model at the end of the collection.
 
-#Action methods
-These methods are a fast way to ```rate```, ```vote``` and ```comment``` a resource. 
-Moreover there are two methods for keeping track of the Twitter and Facebook shares.
-All these methods return a promise.
-     
-```javascript
-var tag = new Stamplay.Cobject('tag').Model;
-tag.rate(4)
-.then(function(){
-	var actions = tag.get('actions');
-	console.log(actions.ratings); // You can see the ratings, the average rate and the users who v
-});
-```
-##Methods
-
-  * <a href="#Action.vote"><code>vote()</code></a>
-  * <a href="#Action.rate"><code>rate()</code></a>
-  * <a href="#Action.comment"><code>comment()</code></a>
-  * <a href="#Action.twitter_share"><code>twitter_share()</code></a>
-  * <a href="#Action.facebook_share"><code>facebook_share()</code></a>
-
--------------------------------------------------------
-
-<a name="Action.vote"></a>
-###vote() 
-Vote the resource.
-<a name="Action.rate"></a>
-###rate(rating)
-Rate the resource, only integer values as parameter.
-<a name="Action.comment"></a>
-###comment(text)
-Comment the resource with the text.
-<a name="Action.twitter_share"></a>
-###twitter_share()
-Calls the Twitter share endpoint. Note that this method updates the twitter_share counter but it is not responsible for sharing the resource on Twitter.
-<a name="Action.facebook_share"></a>  
-###facebook_share
-Calls the Facebook share endpoint. Note that this method updates the facebook_share counter but it is not responsible for sharing the resource on Facebook.  
-#Query parameters
-An object representing the parameters that should be added in the request. 
-
-You can use these keys in the object:
-
-* **page** : a number representing the pagination page. Must be used in conjunction with per_page.  default: 1
-* **per_page**: the number of results in a single page. Must be used in conjunction with page.   default: 20
-* **select**: the attributes that you want to be returned from the server. default: none
-* **sort**: the name of the attribute on which you want to sort on. If a ```-``` symbol is present before the attribute name, the sorting is made on descendant order.   
-* **n** : the number results to return
- 
 #User
 You can create both Model and Collection of a Stamplay.User.
 
