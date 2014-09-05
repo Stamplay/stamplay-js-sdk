@@ -1,0 +1,55 @@
+# Edits/Editors #
+#################
+._*
+*~
+*BAK
+.project
+*.sublime-project
+*.sublime-workspace
+.dump.rdb
+
+# Dist #
+################
+dist/*
+
+# No codebase related stuff #
+#############################
+docs
+pids
+logs
+results
+.vagrant
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+.AppleDouble
+
+# NPM & Bower #
+###############
+node_modules
+npm-debug.log
+.nodemonignore
+bower_components
+
+# Others     #
+#######################
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.gz.min.css
+.idea
+dump.rdb
+
+# wiki
+#####################
+wiki/

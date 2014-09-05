@@ -12,10 +12,12 @@
 
   <body>
    	<div id="mocha"></div>
-    
+
+	  <script src="./xmlhttprequest.js"></script>
+
 	  <script src="../bower_components/q/q.js"></script>
 	  <script src="../bower_components/underscore/underscore-min.js"></script>
-	  <script src="../stamplay.js"></script>
+	  <script src="../src/stamplay.js"></script>
 
 	  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 	  <script src="../bower_components/mocha/mocha.js"></script>
@@ -27,18 +29,21 @@
 	  <script src="../bower_components/sinon/lib/sinon/call.js"></script>
 	  <script src="../bower_components/sinon/lib/sinon/stub.js"></script>
 	  <script src="../bower_components/sinon/lib/sinon/util/event.js"></script>
+		<script>
+			global = {};
+			global.XMLHttpRequest = function() {}
+		</script>
 	  <script src="../bower_components/sinon/lib/sinon/util/fake_xml_http_request.js"></script>
+
+
 
 	  <script>
 	    mocha.setup('tdd');
 	    var assert = chai.assert;
 	  </script>
 	  
-	  <script src="stamplay.js"></script>
-	  <script src="support.js"></script>
 	  <script src="cobject.model.js"></script>
-	  <script src="cobject.collection.js"></script>
-	  <script src="user.model.js"></script>
+
 
 	  <script>
 	    if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
