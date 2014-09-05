@@ -83,9 +83,9 @@ tag.rate(4)
   * <a href="#Model.fetch"><code>fetch()</code></a>
   * <a href="#Model.destroy"><code>destroy()</code></a>
   * <a href="#Model.save"><code>save()</code></a>
-  * <a href="#Action.vote"><code>vote()</code></a>
 
 ###Action methods
+  * <a href="#Action.vote"><code>vote()</code></a>
   * <a href="#Action.rate"><code>rate()</code></a>
   * <a href="#Action.comment"><code>comment()</code></a>
   * <a href="#Action.twitter_share"><code>twitter_share()</code></a>
@@ -204,8 +204,18 @@ users.fetch()
 })
 ```
 
-## Model methods
+## User additional methods
+
 User model has the following additional methods.
+
+  * <a href="#User.currentUser"> <code>currentUser()</code></a>
+  * <a href="#User.login"><code>login()</code></a>
+  * <a href="#User.signup"><code>signup()</code></a>
+  * <a href="#User.logout"><code>logout()</code></a>
+
+-------------------------------------------------------
+
+<a name="User.currentUser"></a>
 ###currentUser()
 If the user is logged it populates the model with the user's data, otherwise the model is empty. 
 
@@ -215,6 +225,7 @@ user.currentUser()
 	user.get('displayName');
 })
 ```
+<a name="User.login"></a>
 ###login()
 The login method can be used for logging in with:
 * third party services
@@ -250,7 +261,7 @@ user.login('email@provider.com', 'mySecret')
 });  
 ```
 Note that for this kind of login you have to [register](#signupdata) the user first. 
- 
+ <a name="User.data"></a>
 ###signup(data)
 Register user for local authentication. ```data``` parameter must be an object containing at least ```email``` and ```password``` keys.
 
@@ -265,7 +276,7 @@ user.signup(registrationData)
 	user.get('displayName');
 });  
 ```
-
+ <a name="User.logout"></a>
 ###logout()
 Redirect the browser to the logout url.
 
@@ -305,8 +316,8 @@ tags.fetch()
 	firstTag.get('description');
 });
 ```
-## Model methods
-The Stamplay.Cobject.Model inherits all the Action methods.
+## Cobject additional methods
+The Stamplay.Cobject.Model inherits all the [Action](#action-methods) methods.
 
 ```javascript
 tag.vote()
