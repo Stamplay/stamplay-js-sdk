@@ -167,14 +167,20 @@ tag.rate(4)
   * <a href="#Action.facebook_share"><code>facebook_share()</code></a>
 
 -------------------------------------------------------
+
+<a name="Action.vote"></a>
 ###vote() 
 Vote the resource.
+<a name="Action.rate"></a>
 ###rate(rating)
 Rate the resource, only integer values as parameter.
+<a name="Action.comment"></a>
 ###comment(text)
 Comment the resource with the text.
+<a name="Action.twitter_share"></a>
 ###twitter_share()
-Calls the Twitter share endpoint. Note that this method updates the twitter_share counter but it is not responsible for sharing the resource on Twitter.  
+Calls the Twitter share endpoint. Note that this method updates the twitter_share counter but it is not responsible for sharing the resource on Twitter.
+<a name="Action.facebook_share"></a>  
 ###facebook_share
 Calls the Facebook share endpoint. Note that this method updates the facebook_share counter but it is not responsible for sharing the resource on Facebook.  
 #Query parameters
