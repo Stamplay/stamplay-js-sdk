@@ -136,10 +136,10 @@ suite('Stamplay Cobject Model ', function () {
 
   test('get method', function () {
 
-    assert.equal(cinstance.instance.number_property, 5);
-    assert.equal(cinstance.instance.string_property, 'a_string');
-    assert.deepEqual(cinstance.instance.object_property, object_value);
-    assert.deepEqual(cinstance.instance.array_property, array_value);
+    assert.equal(cinstance.get('number_property'), 5);
+    assert.equal(cinstance.get('string_property'), 'a_string');
+    assert.deepEqual(cinstance.get('object_property'), object_value);
+    assert.deepEqual(cinstance.get('array_property'), array_value);
 
   });
 

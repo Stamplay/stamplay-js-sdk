@@ -255,5 +255,13 @@ suite('Stamplay Cobject Collection ', function () {
 
   });
 
+  test('has no action methods', function () {
+    assert.isUndefined(coll_cinstance.vote);
+    assert.isUndefined(coll_cinstance.rate);
+    assert.isUndefined(coll_cinstance.comment);
+    assert.isUndefined(coll_cinstance.twitterShare);
+    assert.isUndefined(coll_cinstance.facebookShare);
+  });
+
 
 });

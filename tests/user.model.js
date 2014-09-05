@@ -1,3 +1,10 @@
+/*   
+
+	How to run this test
+	- Go to the root of the project
+	- Launch mocha-phantomjs ./tests/tests.html
+
+*/
 suite('Stamplay User Model ', function () {
 
 	var user;
@@ -154,191 +161,123 @@ suite('Stamplay User Model ', function () {
 		assert.equal(url, location.protocol + '//' + document.domain + '/auth/v0/logout');
 	});
 
-	// test('constructor method', function () {
-	// 	var newObject = {
-	// 		first: 1,
-	// 		second: 2,
-	// 		nested_object: {
-	// 			first_nested: 1,
-	// 			second_nested: 2,
-	// 			third_array: [1, 2, 3]
-	// 		},
-	// 		a_string: 'a string'
-	// 	};
-	// 	var newCinstance = new Stamplay.Cobject('cobjectId').Model;
-	// 	newCinstance.constructor(newObject);
+	// constructor, get, set, unset tested in cobject.model.js
+	// model methods
 
-	// 	assert.deepEqual(newCinstance.instance, newObject);
+	test('fetch method', function (done) {
 
-	// 	newCinstance.instance = {};
+		var newUser = new Stamplay.User().Model;
 
-	// 	newObject = {
-	// 		first: {
-	// 			nested_first: undefined
-	// 		}
-	// 	}
-	// 	newCinstance.constructor(newObject);
+		newUser.fetch("123").then(function () {
+			assert.equal(newUser.get('_id'), 123);
+			assert.equal(newUser.get('displayName'), 'John Stamplay');
+			done();
+		});
 
-	// 	assert.deepEqual(newCinstance.instance, newObject);
-
-	// });
-
-	// test('get method', function () {
-
-	// 	assert.equal(cinstance.instance.number_property, 5);
-	// 	assert.equal(cinstance.instance.string_property, 'a_string');
-	// 	assert.deepEqual(cinstance.instance.object_property, object_value);
-	// 	assert.deepEqual(cinstance.instance.array_property, array_value);
-
-	// });
-
-	// test('set method', function () {
-
-	// 	cinstance.set('number_property', 2);
-	// 	assert.equal(cinstance.instance.number_property, 2);
-
-	// 	cinstance.set('string_property', 'string');
-	// 	assert.equal(cinstance.instance.string_property, 'string');
-
-	// 	var new_object_value = {
-	// 		p2: 'test'
-	// 	};
-	// 	cinstance.set('object_property', new_object_value);
-	// 	assert.deepEqual(cinstance.instance.object_property, new_object_value);
-
-	// 	var new_array_value = ['a', 'b', 'c'];
-	// 	cinstance.set('array_property', new_object_value);
-	// 	assert.deepEqual(cinstance.instance.array_property, new_object_value);
-
-	// });
-
-	// test('unset method', function () {
-
-	// 	cinstance.unset('number_property');
-	// 	assert.isUndefined(cinstance.instance.number_property, 'After unset number_property doesn\'t exists');
-
-	// 	cinstance.unset('string_property');
-	// 	assert.isUndefined(cinstance.instance.string_property, 'After unset string_property doesn\'t exists');
-
-	// 	cinstance.unset('object_property');
-	// 	assert.isUndefined(cinstance.instance.object_property, 'After unset object_property doesn\'t exists');
-
-	// 	cinstance.unset('array_property');
-	// 	assert.isUndefined(cinstance.instance.array_property, 'After unset array_property doesn\'t exists');
-
-	// });
-
-	// test('fetch method', function (done) {
-
-	// 	var newCinstance = new Stamplay.Cobject('cobjectId').Model;
-
-	// 	newCinstance.fetch("123").then(function () {
-	// 		assert.equal(newCinstance.get('_id'), 123);
-	// 		assert.equal(newCinstance.get('comment'), 'Hey there');
-	// 		done();
-	// 	});
-
-	// 	assert.equal(this.request.url, '/api/cobject/v0/cobjectId/123');
+		assert.equal(this.request.url, '/api/user/v0/users/123');
 
 
-	// 	this.request.respond(200, {
-	// 		"Content-Type": "application/json"
-	// 	}, '{ "_id": 123, "comment": "Hey there" }');
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, '{ "_id": 123, "displayName": "John Stamplay" }');
 
-	// });
+	});
 
-	// test('save method POST', function () {
+	test('save method POST', function (done) {
 
-	// 	cinstance.save().then(function () {
-	// 		assert.equal(cinstance.get('_id'), 123);
-	// 		done();
-	// 	});
+		var newUser = new Stamplay.User().Model;
+		newUser.set('displayName', 'John Stamplay');
 
-	// 	cinstance.set('_id', 123);
+		newUser.save().then(function () {
+			done();
+		});
 
-	// 	assert.equal(this.request.method, 'POST');
-	// 	assert.equal(this.request.url, '/api/cobject/v0/cobjectId');
+		assert.equal(this.request.method, 'POST');
+		assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+		assert.equal(this.request.requestBody, JSON.stringify(newUser.instance));
+		assert.equal(this.request.url, '/api/user/v0/users');
 
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, JSON.stringify(newUser.instance));
 
-	// 	this.request.respond(200, {
-	// 		"Content-Type": "application/json"
-	// 	}, JSON.stringify(cinstance.instance));
+	});
 
-	// });
+	test('save method PUT', function (done) {
 
-	// test('save method PUT', function () {
+		var newUser = new Stamplay.User().Model;
+		newUser.set('_id', 123);
 
-	// 	var oldInstance = new Stamplay.Cobject('cobjectId').Model;
-	// 	oldInstance.set('_id', 1);
+		newUser.save().then(function () {
+			done();
+		});
 
-	// 	oldInstance.save().then(function () {
-	// 		assert.equal(oldInstance.get('_id'), 1);
-	// 		done();
-	// 	});
+		assert.equal(this.request.method, 'PUT');
+		assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+		assert.equal(this.request.requestBody, JSON.stringify(newUser.instance));
+		assert.equal(this.request.url, '/api/user/v0/users/123');
 
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, JSON.stringify(newUser.instance));
 
-	// 	assert.equal(this.request.method, 'PUT');
-	// 	assert.equal(this.request.requestBody, JSON.stringify(oldInstance.instance));
-	// 	assert.equal(this.request.url, '/api/cobject/v0/cobjectId/1');
+	});
 
+	test('save method PATCH', function (done) {
 
-	// 	this.request.respond(200, {
-	// 		"Content-Type": "application/json"
-	// 	}, JSON.stringify({
-	// 		_id: 1
-	// 	}));
+		var newUser = new Stamplay.User().Model;
+		newUser.set('_id', 123);
 
-	// });
+		newUser.save({
+			patch: true
+		}).then(function () {
+			done();
+		});
 
-	// test('save method PATCH', function () {
+		assert.equal(this.request.method, 'PATCH');
+		assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+		//Patch should send only changed attributes but right now PATCH = PUT
+		assert.equal(this.request.requestBody, JSON.stringify(newUser.instance));
+		assert.equal(this.request.url, '/api/user/v0/users/123');
 
-	// 	var oldInstance = new Stamplay.Cobject('cobjectId').Model;
-	// 	oldInstance.set('_id', 1);
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, JSON.stringify(newUser.instance));
 
+	})
 
-	// 	oldInstance.save({
-	// 		patch: true
-	// 	}).then(function () {
-	// 		assert.equal(oldInstance.get('_id'), 1);
-	// 		done();
-	// 	});
+	test('destroy method', function (done) {
 
+		var newUser = new Stamplay.User().Model;
+		newUser.set('_id', 123);
 
-	// 	assert.equal(this.request.method, 'PATCH');
-	// 	assert.equal(this.request.url, '/api/cobject/v0/cobjectId/1');
+		newUser.destroy().then(function () {
 
-	// 	//Patch should send only changed attributes but right now PATCH = PUT
-	// 	assert.equal(this.request.requestBody, JSON.stringify(oldInstance.instance));
+			var notDeletable = new Stamplay.User().Model;
+			var unableToDestroy = notDeletable.destroy();
+			assert.isFalse(unableToDestroy, 'A non saved instance shouldn\'t make the ajax call');
+			done();
+		});
 
-	// 	this.request.respond(200, {
-	// 		"Content-Type": "application/json"
-	// 	}, JSON.stringify({
-	// 		_id: 1
-	// 	}));
+		assert.equal(this.request.method, 'DELETE');
+		assert.equal(this.request.url, '/api/user/v0/users/123');
+		//Patch should send only changed attributes but right now PATCH = PUT
+		assert.isUndefined(this.request.requestBody);
 
-	// })
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, JSON.stringify({}));
 
-	// test('destroy method', function (done) {
-	// 	cinstance.set('_id', 1);
-	// 	cinstance.destroy().then(function () {
+	});
 
-	// 		var newCinstance = new Stamplay.Cobject('cobjectId').Model;
-	// 		var unableToDestroy = newCinstance.destroy();
-	// 		assert.isFalse(unableToDestroy, 'A non saved instance shouldn\'t make the ajax call');
+	test('has no action methods', function () {
+		var newUser = new Stamplay.User().Model;
 
-	// 		done();
-	// 	});
-
-
-	// 	assert.equal(this.request.method, 'DELETE');
-	// 	assert.equal(this.request.url, '/api/cobject/v0/cobjectId/1');
-	// 	//Patch should send only changed attributes but right now PATCH = PUT
-	// 	assert.isUndefined(this.request.requestBody);
-
-	// 	this.request.respond(200, {
-	// 		"Content-Type": "application/json"
-	// 	}, '{}');
-
-	// });
+		assert.isUndefined(newUser.vote);
+		assert.isUndefined(newUser.rate);
+		assert.isUndefined(newUser.comment);
+		assert.isUndefined(newUser.twitterShare);
+		assert.isUndefined(newUser.facebookShare);
+	});
 
 });
