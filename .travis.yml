@@ -1,12 +1,13 @@
 before_script:
-  - npm install -g grunt-cli
-  - npm install -g bower
-  - bower install 
+- npm install -g grunt-cli
+- npm install -g bower
+- bower install
 language: node_js
 node_js:
-  - '0.10'
+- '0.10'
 notifications:
   email:
-    - cristian.roselli@stamplay.com
-    - claudio.petrini@stamplay.com
-  
+  - cristian.roselli@stamplay.com
+  - claudio.petrini@stamplay.com
+  slack:
+    secure: SSJvRHEy30DEFjNcadAejJ0XP35e+HTnLoPwX0CSd0+J/OsNISo/ICbuEo44VTdGKP/quvGnvZq7F9t5ccaAdUyWkfTbr11eTwBKnsIBxjk/3GtA9yZO+OmcodywgPCRMzKzqLS3IOgp04KLkKI241XjLZ8Z2QJF7CQSE6M5Tm8=
