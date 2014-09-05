@@ -159,6 +159,14 @@ tag.rate(4)
 });
 ```
 ##Methods
+
+  * <a href="#Action.vote"><code>vote()</code></a>
+  * <a href="#Action.rate"><code>rate()</code></a>
+  * <a href="#Action.comment"><code>comment()</code></a>
+  * <a href="#Action.twitter_share"><code>twitter_share()</code></a>
+  * <a href="#Action.facebook_share"><code>facebook_share()</code></a>
+
+-------------------------------------------------------
 ###vote() 
 Vote the resource.
 ###rate(rating)
