@@ -8,12 +8,12 @@ suite('Stamplay Cobject Model ', function () {
 
   //For each test
   setup('Creating a new Cobject model', function () {
+
     cinstance = new Stamplay.Cobject('cobjectId').Model;
     cinstance.instance.number_property = 5;
     cinstance.instance.string_property = 'a_string';
     cinstance.instance.object_property = object_value;
     cinstance.instance.array_property = array_value;
-
 
     this.xhr = sinon.useFakeXMLHttpRequest();
     this.request;
@@ -25,7 +25,7 @@ suite('Stamplay Cobject Model ', function () {
   });
 
 
-  test.only('fetch method', function (done) {
+  test('fetch method', function (done) {
 
     var newCinstance = new Stamplay.Cobject('cobjectId').Model;
 
@@ -180,7 +180,7 @@ suite('Stamplay Cobject Model ', function () {
   });
 
 
-  test('save method POST', function () {
+  test('save method POST', function (done) {
 
     cinstance.save().then(function () {
       assert.equal(cinstance.get('_id'), 123);
@@ -199,7 +199,7 @@ suite('Stamplay Cobject Model ', function () {
 
   });
 
-  test('save method PUT', function () {
+  test('save method PUT', function (done) {
 
     var oldInstance = new Stamplay.Cobject('cobjectId').Model;
     oldInstance.set('_id', 1);
@@ -223,7 +223,7 @@ suite('Stamplay Cobject Model ', function () {
 
   });
 
-  test('save method PATCH', function () {
+  test('save method PATCH', function (done) {
 
     var oldInstance = new Stamplay.Cobject('cobjectId').Model;
     oldInstance.set('_id', 1);
@@ -341,7 +341,7 @@ suite('Stamplay Cobject Model ', function () {
     }
   });
 
-  test('Comment method', function () {
+  test('Comment method', function (done) {
     cinstance.instance.actions = {
       comments: []
     };
@@ -367,9 +367,12 @@ suite('Stamplay Cobject Model ', function () {
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/comment');
     assert.equal(this.request.requestBody, JSON.stringify(data));
 
+    this.request.respond(200, {
+      "Content-Type": "application/json"
+    }, JSON.stringify(cinstance));
   });
 
-  test('twitterShare method', function () {
+  test('twitterShare method', function (done) {
     cinstance.instance._id = '123';
     cinstance.instance.actions = {
       twitter_shares: {
@@ -380,7 +383,6 @@ suite('Stamplay Cobject Model ', function () {
 
     cinstance.twitterShare().then(function () {
       assert.equal(cinstance.get('actions').twitter_shares.total, 1);
-      assert.equal(cinstance.get('actions').twitter_shares.avg, 1);
       assert.equal(cinstance.get('actions').twitter_shares.users[0], 'userId');
       done();
     });

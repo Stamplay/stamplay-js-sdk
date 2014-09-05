@@ -96,7 +96,7 @@ suite('Stamplay User Model ', function () {
 
 	});
 
-	test('user login method with Stamplay service', function () {
+	test('user login method with Stamplay service', function (done) {
 
 		user.login('email@email.com', 'my_password').then(function () {
 			assert.equal(user.get('_id'), 123);

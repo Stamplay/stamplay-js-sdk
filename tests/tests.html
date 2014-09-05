@@ -12,7 +12,7 @@
 
   <body>
    	<div id="mocha"></div>
-
+   	<!-- Phantom JS doesn't have xmlhttprequest -->
 	  <script src="./xmlhttprequest.js"></script>
 
 	  <script src="../bower_components/q/q.js"></script>
@@ -24,16 +24,26 @@
 	  <script src="../bower_components/chai/chai.js"></script>
 
 	  <script src="../bower_components/sinon/lib/sinon.js"></script>
+	  <script src="../bower_components/sinon/lib/sinon/util/event.js"></script>
+	  <script src="../bower_components/sinon/lib/sinon/util/fake_xml_http_request.js"></script>
 	  <script src="../bower_components/sinon/lib/sinon/assert.js"></script>
 	  <script src="../bower_components/sinon/lib/sinon/spy.js"></script>
 	  <script src="../bower_components/sinon/lib/sinon/call.js"></script>
 	  <script src="../bower_components/sinon/lib/sinon/stub.js"></script>
-	  <script src="../bower_components/sinon/lib/sinon/util/event.js"></script>
 		<script>
-			global = {};
-			global.XMLHttpRequest = function() {}
+
+			// https://github.com/cjohansen/Sinon.JS/issues/319
+			if (navigator.userAgent.indexOf('PhantomJS') !== -1) {
+      window.ProgressEvent = function (type, params) {
+        params = params || {};
+
+        this.lengthComputable = params.lengthComputable || false;
+        this.loaded = params.loaded || 0;
+        this.total = params.total || 0;
+      };
+    }
+
 		</script>
-	  <script src="../bower_components/sinon/lib/sinon/util/fake_xml_http_request.js"></script>
 
 
 
@@ -42,8 +52,11 @@
 	    var assert = chai.assert;
 	  </script>
 	  
+	  <script src="stamplay.js"></script>
+	  <script src="support.js"></script>
 	  <script src="cobject.model.js"></script>
-
+	  <script src="cobject.collection.js"></script>
+	  <script src="user.model.js"></script>
 
 	  <script>
 	    if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
