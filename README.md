@@ -1,6 +1,6 @@
 Stamplay JavaScript SDK
 ===============
-[![Build Status](https://travis-ci.org/Stamplay/stamplay-js-sdk.svg)](https://travis-ci.org/Stamplay/stamplay-js-sdk)
+[![Build Status](https://travis-ci.org/Stamplay/stamplay-js-sdk.svg?branch=master)](https://travis-ci.org/Stamplay/stamplay-js-sdk)
 
 ##Getting Started
 Just import the JS SDK in your HTML page and you're ready to go.
@@ -69,18 +69,34 @@ newUser.signup(registrationData)
 })
 ```
 
-##Actions
-Some models can expose Action's methods, refer to the Actions .
 ##Methods
+
+  * <a href="#Model.get"> <code>get()</code></a>
+  * <a href="#Model.set"><code>set()</code></a>
+  * <a href="#Model.unset"><code>unset</code></a>
+  * <a href="#Model.fetch"><code>fetch()</code></a>
+  * <a href="#Model.destroy"><code>destroy()</code></a>
+  * <a href="#Model.save"><code>save()</code></a>
+ 
+-------------------------------------------------------
+  
+<a name="Model.get"></a>
 ### get(property)
 Returns the value of the property
+<a name="Model.set"></a>
 ### set(property, value)
 Sets the value of the property
+<a name="Model.unset"></a>
 ### unset(property)
 Delete the property from the object
+<a name="Model.fetch"></a>
 ### fetch(id, queryParameters)
 Resets the model's state from the server. Useful if the model has never been populated with data, or if you'd like to ensure that you have the latest server state. 
 Refer to the [queryParameters](#query-parameters) documentation. 
+<a name="Model.destroy"></a>
+###destroy()
+Deletes the object from the server by making a DELETE request. If the model is new, false is returned.
+<a name="Model.save"></a>
 ### save(options)
 Saves the model to the database. If the model is new a POST request is made, otherwise, unless specified a PUT request is sent.
 #### options 
@@ -88,8 +104,8 @@ An object with the following properties:
 
 * patch : default false, if true an HTTP PATCH is sent to the server instead of PUT for updating the model 
 
-###destroy()
-Deletes the object from the server by making a DELETE request. If the model is new, false is returned.
+##Actions
+Some models can expose Action's methods, refer to the [Actions](#Actions) .
 
 # Collection
 Collections are sets of models. You can ```fetch``` the collection from the server and a set of Underscore methods.   
