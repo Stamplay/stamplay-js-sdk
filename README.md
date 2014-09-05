@@ -333,4 +333,3 @@ To build a production ready library you need to have NPM and Bower installed and
 npm install && bower install
 grunt build
 ```
-
