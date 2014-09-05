@@ -335,3 +335,11 @@ tag.vote()
 	console.log(actions.votes); // You can see the number of votes and who has already voted
 });
 ```
+# Build
+To build a production ready library you need to have NPM and Bower installed and then run those two commands:
+
+```bash
+npm install && bower install
+grunt build
+```
+
