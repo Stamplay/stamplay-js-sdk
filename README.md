@@ -1,7 +1,7 @@
 Stamplay JavaScript SDK
 ===============
 [![Build Status](https://travis-ci.org/Stamplay/stamplay-js-sdk.svg?branch=master)](https://travis-ci.org/Stamplay/stamplay-js-sdk)
-[![Production version](http://img.shields.io/badge/download-36%20kB-blue.svg)](http://img.shields.io/badge/download-36%20kB-blue.svg)
+[![Production version](http://img.shields.io/badge/download-36%20kB-blue.svg)](https://raw.githubusercontent.com/Stamplay/stamplay-js-sdk/master/dist/stamplay.min.js)
 
 ##Getting Started
 Just import the JS SDK in your HTML page and you're ready to go.
