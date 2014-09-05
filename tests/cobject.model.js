@@ -190,6 +190,7 @@ suite('Stamplay Cobject Model ', function () {
     cinstance.set('_id', 123);
 
     assert.equal(this.request.method, 'POST');
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId');
 
 
@@ -212,6 +213,7 @@ suite('Stamplay Cobject Model ', function () {
 
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestBody, JSON.stringify(oldInstance.instance));
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/1');
 
 
@@ -238,6 +240,7 @@ suite('Stamplay Cobject Model ', function () {
 
 
     assert.equal(this.request.method, 'PATCH');
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/1');
 
     //Patch should send only changed attributes but right now PATCH = PUT
@@ -264,6 +267,7 @@ suite('Stamplay Cobject Model ', function () {
 
 
     assert.equal(this.request.method, 'DELETE');
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/1');
 
     assert.isUndefined(this.request.requestBody);
@@ -294,6 +298,7 @@ suite('Stamplay Cobject Model ', function () {
     cinstance.instance.actions.votes.users.push('userId')
 
     assert.equal(this.request.method, 'PUT');
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/vote');
     this.request.respond(200, {
       "Content-Type": "application/json"
@@ -322,6 +327,7 @@ suite('Stamplay Cobject Model ', function () {
     cinstance.instance.actions.ratings.users.push('userId');
 
     assert.equal(this.request.method, 'PUT');
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
     assert.equal(this.request.requestBody, JSON.stringify({
       rate: 1
     }));
@@ -364,6 +370,7 @@ suite('Stamplay Cobject Model ', function () {
     };
 
     assert.equal(this.request.method, 'PUT');
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/comment');
     assert.equal(this.request.requestBody, JSON.stringify(data));
 
@@ -391,8 +398,9 @@ suite('Stamplay Cobject Model ', function () {
     cinstance.instance.actions.twitter_shares.users.push('userId');
 
     assert.equal(this.request.method, 'PUT');
-
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/twitter_share');
+
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(cinstance));
@@ -418,8 +426,9 @@ suite('Stamplay Cobject Model ', function () {
     cinstance.instance.actions.facebook_shares.users.push('userId');
 
     assert.equal(this.request.method, 'PUT');
-
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/facebook_share');
+
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(cinstance));

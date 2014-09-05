@@ -51,7 +51,7 @@
 		}
 
 		var deferred = Q.defer(),
-			  req = new XMLHttpRequest();
+			req = new XMLHttpRequest();
 
 		req.open(options.method || 'GET', options.url, options.async || true);
 
@@ -69,7 +69,7 @@
 			}
 			if ([200, 304].indexOf(req.status) === -1) {
 				deferred.reject(req);
-			}else {
+			} else {
 				deferred.resolve(req.responseText);
 			}
 		};
@@ -114,8 +114,8 @@
 })(this);
 
 /* Exspose BaseComponent the super class of all components on Stamplay.
-*  It extends Model and Collection.  
-*/
+ *  It extends Model and Collection.
+ */
 (function (root) {
 
 	/* Action constructor, it takes a instance of BaseComponent */
@@ -185,8 +185,8 @@
 	}
 
 	/* Model constructor, it takes brickId, resourceId and hasAction
-	*  If hasAction is true, Model extends Action
-	*/
+	 *  If hasAction is true, Model extends Action
+	 */
 	function Model(brickId, resourceId, hasAction) {
 
 		// Model variable
@@ -273,9 +273,6 @@
 			return Stamplay.makeAPromise({
 				method: method,
 				url: url,
-				headers: {
-					'Content-Type': 'application/json'
-				},
 				data: this.instance
 			});
 		},
@@ -300,7 +297,7 @@
 	}
 
 	/* Collection constructor, it takes brickId, resourceId 
-	*/
+	 */
 	function Collection(brickId, resourceId) {
 
 		//Collection variable
@@ -424,8 +421,8 @@
 
 	}
 	/* BaseComponent constructor, it takes brickId, resourceId and hasAction
-	*  If hasAction is true, Model extends Action
-	*/
+	 *  If hasAction is true, Model extends Action
+	 */
 	function BaseComponent(brickId, resourceId, hasAction) {
 		//variable
 		this.Model = {};
@@ -459,7 +456,7 @@
 		This class rappresent the Custom Object component on Stamplay platform
 		It very easy to use: Stamplay.Cobject([customObjectid])
 	*/
-	
+
 	//constructor
 	function Cobject(resourceId) {
 		Stamplay.BaseComponent.call(this, 'cobject', resourceId, true);
@@ -531,7 +528,7 @@
 				root.Stamplay.Support.redirect(location.protocol + '//' + document.domain + url);
 			}
 		},
-		
+
 		// signup function, it takes objcet data
 		// If data.email and data.password doesn't exists return error
 		// any other attributes in data was save to User  
