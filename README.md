@@ -127,10 +127,10 @@ Rate the resource, only integer values as parameter.
 ###comment(text)
 Comment the resource with the text.
 <a name="Action.twitter_share"></a>
-###twitter_share()
+###twitterShare()
 Calls the Twitter share endpoint. Note that this method updates the twitter_share counter but it is not responsible for sharing the resource on Twitter.
 <a name="Action.facebook_share"></a>  
-###facebook_share
+###facebookShare()
 Calls the Facebook share endpoint. Note that this method updates the facebook_share counter but it is not responsible for sharing the resource on Facebook.  
 
 -------------------------------------------------------
