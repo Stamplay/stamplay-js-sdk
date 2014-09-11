@@ -85,8 +85,12 @@ suite('Stamplay Cobject Model ', function () {
     assert.isFunction(cinstance.rate, 'rate method exists');
   });
 
-  test('has the vote method', function () {
-    assert.isFunction(cinstance.vote, 'rate method exists');
+  test('has the upvote method', function () {
+    assert.isFunction(cinstance.upVote, 'upvote method exists');
+  });
+
+  test('has the downvote method', function () {
+    assert.isFunction(cinstance.downVote, 'downvote method exists');
   });
 
   test('has the facebookShare method', function () {
@@ -278,32 +282,70 @@ suite('Stamplay Cobject Model ', function () {
 
   });
 
-  test('vote method', function (done) {
+  test('upVote method', function (done) {
     cinstance.instance._id = '123';
     cinstance.instance.actions = {
       votes: {
         total: 0,
-        users: []
+        users: [],
+        users_upvote: [],
+        users_downvote: []
       }
     };
 
-    cinstance.vote().then(function () {
+    cinstance.upVote().then(function () {
       assert.equal(cinstance.get('actions').votes.total, 1);
       assert.equal(cinstance.get('actions').votes.users[0], 'userId');
-
+      assert.equal(cinstance.get('actions').votes.users_upvote[0], 'userId');
       done();
     });
 
     cinstance.instance.actions.votes.total++;
     cinstance.instance.actions.votes.users.push('userId')
+    cinstance.instance.actions.votes.users_upvote.push('userId')
+
 
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+    assert.equal(this.request.requestBody, JSON.stringify({type: 'upvote'}));
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/vote');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(cinstance));
   });
+
+  test('downVote method', function (done) {
+    cinstance.instance._id = '123';
+    cinstance.instance.actions = {
+      votes: {
+        total: 0,
+        users: [],
+        users_upvote: [],
+        users_downvote: []
+      }
+    };
+
+    cinstance.upVote().then(function () {
+      assert.equal(cinstance.get('actions').votes.total, 1);
+      assert.equal(cinstance.get('actions').votes.users[0], 'userId');
+      assert.equal(cinstance.get('actions').votes.users_downvote[0], 'userId');
+      done();
+    });
+
+    cinstance.instance.actions.votes.total++;
+    cinstance.instance.actions.votes.users.push('userId')
+    cinstance.instance.actions.votes.users_downvote.push('userId')
+
+
+    assert.equal(this.request.method, 'PUT');
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+    assert.equal(this.request.requestBody, JSON.stringify({type: 'downvote'}));
+    assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/vote');
+    this.request.respond(200, {
+      "Content-Type": "application/json"
+    }, JSON.stringify(cinstance));
+  });
+
 
   test('rate method', function (done) {
     cinstance.instance._id = '123';

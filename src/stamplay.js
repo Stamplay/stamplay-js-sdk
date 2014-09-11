@@ -122,20 +122,39 @@
 	function Action(instance) {
 
 		// private function, use for make parametric Promises
-		var makeActionPromise = function (action) {
-			return Stamplay.makeAPromise({
-				method: 'PUT',
-				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + instance._id + '/' + action
-			}).then(function (response) {
-				instance = JSON.parse(response);
-			});
+		var makeActionPromise = function (action, type) {
+			if(type){
+				return Stamplay.makeAPromise({
+					method: 'PUT',
+					data: {
+						type: type
+					},
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + instance._id + '/' + action
+				}).then(function (response) {
+					instance = JSON.parse(response);
+				});
+			}else {
+				return Stamplay.makeAPromise({
+					method: 'PUT',
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + instance._id + '/' + action
+				}).then(function (response) {
+					instance = JSON.parse(response);
+				});
+			}
 		}
 
-		// vote function
+		// upVote function
 		// Modifies instance of model and return a promise
-		this.vote = function () {
-			return makeActionPromise.call(this, 'vote')
+		this.upVote = function () {
+			return makeActionPromise.call(this, 'vote', 'upvote')
 		};
+
+		// upVote function
+		// Modifies instance of model and return a promise
+		this.downVote = function () {
+			return makeActionPromise.call(this, 'vote', 'downvote')
+		};
+
 
 		// rate function, it takes a vote parameter. 
 		// Modifies instance of model and return a promise
