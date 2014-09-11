@@ -167,6 +167,7 @@ suite('Stamplay Cobject Model ', function () {
 
   });
 
+
   test('unset method', function () {
 
     cinstance.unset('number_property');
@@ -475,6 +476,95 @@ suite('Stamplay Cobject Model ', function () {
       "Content-Type": "application/json"
     }, JSON.stringify(cinstance.instance));
   })
+
+
+  test('getComments method', function () {
+    
+    cinstance.instance._id = '123';
+    cinstance.instance.actions = {
+      comments : [{
+        userId: '123',
+        displayName: 'displayName'
+      }]
+    };
+    assert.equal(cinstance.getComments().length, 1);
+    assert.equal(cinstance.getComments()[0].userId, '123');
+  
+  });
+
+  test('getVotes method', function () {
+    
+    cinstance.instance._id = '123';
+    cinstance.instance.actions = {
+      votes : {
+        total: 2,
+        users: ['123','124'],
+        users_upvote: ['1','2','3'],
+        users_downvote: ['1','2','3','1','2','3']
+      } 
+    };
+    assert.equal(cinstance.getVotes().length, 2);
+    assert.equal(cinstance.getVotes()[0], '123');
+    assert.equal(cinstance.getVotes()[1], '124');
+
+    assert.equal(cinstance.getVotes('up').length, 3);
+    assert.equal(cinstance.getVotes('up')[0], '1');
+    assert.equal(cinstance.getVotes('up')[1], '2');
+    assert.equal(cinstance.getVotes('up')[2], '3');
+
+    assert.equal(cinstance.getVotes('down').length, 6);
+    assert.equal(cinstance.getVotes('down')[3], '1');
+    assert.equal(cinstance.getVotes('down')[4], '2');
+    assert.equal(cinstance.getVotes('down')[5], '3');
+  
+  });
+
+  test('getRatings method', function () {
+    
+    cinstance.instance._id = '123';
+    cinstance.instance.actions = {
+      ratings : {
+        total: 1,
+        avg: 1,
+        users: [{userId: '123', rating: 1}]
+      }
+    };
+    assert.equal(cinstance.getRatings().length, 1);
+    assert.equal(cinstance.getRatings()[0].userId, '123');
+    assert.equal(cinstance.getRatings()[0].rating, 1);
+
+  });
+
+
+  test('getTwitterShares method', function () {
+    
+    cinstance.instance._id = '123';
+    cinstance.instance.actions = {
+      twitter_shares : {
+        total: 1,
+        users: ['123']
+      }
+    };
+    assert.equal(cinstance.getTwitterShares().length, 1);
+    assert.equal(cinstance.getTwitterShares()[0], '123');
+;
+
+  });
+
+  test('getFacebookShares method', function () {
+    
+    cinstance.instance._id = '123';
+    cinstance.instance.actions = {
+      facebook_shares : {
+        total: 1,
+        users: ['123']
+      }
+    };
+    assert.equal(cinstance.getFacebookShares().length, 1);
+    assert.equal(cinstance.getFacebookShares()[0], '123');
+
+  });
+
 
 
 });

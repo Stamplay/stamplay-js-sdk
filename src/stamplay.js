@@ -201,6 +201,32 @@
 			return makeActionPromise.call(this, 'facebook_share')
 		};
 
+		// simplest methods for get Actions
+
+		this.getComments = function(){
+			return this.get('actions').comments;
+		};
+
+		this.getVotes = function(type){
+			if(type && (type == 'up' || type == 'down')){
+				return this.get('actions').votes['users_'+type+'vote'];
+			}else{
+				return this.get('actions').votes.users;
+			}
+		};
+
+		this.getRatings = function(type){
+			return this.get('actions').ratings.users
+		};
+		
+		this.getTwitterShares = function(){
+			return this.get('actions').twitter_shares.users
+		};
+
+		this.getFacebookShares = function(){
+			return this.get('actions').facebook_shares.users
+		};
+
 	}
 
 	/* Model constructor, it takes brickId, resourceId and hasAction
