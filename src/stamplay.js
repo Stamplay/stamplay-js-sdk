@@ -127,14 +127,10 @@
 			if(type){
 				return Stamplay.makeAPromise({
 					method: 'PUT',
-					data: {
-						type: type
-					},
+					data: { type: type },
 					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/' + action
 				}).then(function (response) {
-					
 					_this.instance = JSON.parse(response);
-					console.log(_this.instance)
 				});
 			}else {
 				return Stamplay.makeAPromise({

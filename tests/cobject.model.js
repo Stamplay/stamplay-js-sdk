@@ -282,7 +282,7 @@ suite('Stamplay Cobject Model ', function () {
 
   });
 
-  test.only('upVote method', function (done) {
+  test('upVote method', function (done) {
     cinstance.instance._id = '123';
     cinstance.instance.actions = {
       votes: {
@@ -294,8 +294,6 @@ suite('Stamplay Cobject Model ', function () {
     };
 
     cinstance.upVote().then(function () {
-      console.log( cinstance.get('actions') )
-      
       assert.equal(cinstance.get('actions').votes.total, 1);
       assert.equal(cinstance.get('actions').votes.users[0], 'userId');
       assert.equal(cinstance.get('actions').votes.users_upvote[0], 'userId');
@@ -313,7 +311,7 @@ suite('Stamplay Cobject Model ', function () {
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/vote');
     this.request.respond(200, {
       "Content-Type": "application/json"
-    }, JSON.stringify(cinstance));
+    }, JSON.stringify(cinstance.instance));
   });
 
   test('downVote method', function (done) {
@@ -345,7 +343,7 @@ suite('Stamplay Cobject Model ', function () {
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/vote');
     this.request.respond(200, {
       "Content-Type": "application/json"
-    }, JSON.stringify(cinstance));
+    }, JSON.stringify(cinstance.instance));
   });
 
 
@@ -379,7 +377,7 @@ suite('Stamplay Cobject Model ', function () {
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/rate');
     this.request.respond(200, {
       "Content-Type": "application/json"
-    }, JSON.stringify(cinstance));
+    }, JSON.stringify(cinstance.instance));
   });
 
   test('Rate method throws an error if a type different from integer is passed to rate', function () {
@@ -420,7 +418,7 @@ suite('Stamplay Cobject Model ', function () {
 
     this.request.respond(200, {
       "Content-Type": "application/json"
-    }, JSON.stringify(cinstance));
+    }, JSON.stringify(cinstance.instance));
   });
 
   test('twitterShare method', function (done) {
@@ -447,11 +445,11 @@ suite('Stamplay Cobject Model ', function () {
 
     this.request.respond(200, {
       "Content-Type": "application/json"
-    }, JSON.stringify(cinstance));
+    }, JSON.stringify(cinstance.instance));
 
   });
 
-  test('facebookShare', function (done) {
+  test('facebookShare method', function (done) {
     cinstance.instance._id = '123';
     cinstance.instance.actions = {
       facebook_shares: {
@@ -475,7 +473,7 @@ suite('Stamplay Cobject Model ', function () {
 
     this.request.respond(200, {
       "Content-Type": "application/json"
-    }, JSON.stringify(cinstance));
+    }, JSON.stringify(cinstance.instance));
   })
 
 
