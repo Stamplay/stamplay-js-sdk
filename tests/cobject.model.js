@@ -325,7 +325,7 @@ suite('Stamplay Cobject Model ', function () {
       }
     };
 
-    cinstance.upVote().then(function () {
+    cinstance.downVote().then(function () {
       assert.equal(cinstance.get('actions').votes.total, 1);
       assert.equal(cinstance.get('actions').votes.users[0], 'userId');
       assert.equal(cinstance.get('actions').votes.users_downvote[0], 'userId');
