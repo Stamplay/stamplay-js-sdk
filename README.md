@@ -117,9 +117,12 @@ An object with the following properties:
 
 * patch : default false, if true an HTTP PATCH is sent to the server instead of PUT for updating the model 
 
-<a name="Action.vote"></a>
-###vote() 
-Vote the resource.
+<a name="Action.upVote"></a>
+###upVote() 
+Vote up the resource.
+<a name="Action.downVote"></a>
+###downVote() 
+Vote down the resource.
 <a name="Action.rate"></a>
 ###rate(rating)
 Rate the resource, only integer values as parameter.

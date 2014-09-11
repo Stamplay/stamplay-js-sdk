@@ -119,26 +119,29 @@
 (function (root) {
 
 	/* Action constructor, it takes a instance of BaseComponent */
-	function Action(instance) {
+	function Action() {
 
 		// private function, use for make parametric Promises
 		var makeActionPromise = function (action, type) {
+			var _this = this;
 			if(type){
 				return Stamplay.makeAPromise({
 					method: 'PUT',
 					data: {
 						type: type
 					},
-					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + instance._id + '/' + action
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/' + action
 				}).then(function (response) {
-					instance = JSON.parse(response);
+					
+					_this.instance = JSON.parse(response);
+					console.log(_this.instance)
 				});
 			}else {
 				return Stamplay.makeAPromise({
 					method: 'PUT',
-					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + instance._id + '/' + action
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/' + action
 				}).then(function (response) {
-					instance = JSON.parse(response);
+					_this.instance = JSON.parse(response);
 				});
 			}
 		}
@@ -155,20 +158,20 @@
 			return makeActionPromise.call(this, 'vote', 'downvote')
 		};
 
-
 		// rate function, it takes a vote parameter. 
 		// Modifies instance of model and return a promise
 		this.rate = function (vote) {
 			// vote must be integer
+			var _this = this;
 			if (parseInt(vote)) {
 				return Stamplay.makeAPromise({
 					method: 'PUT',
 					data: {
 						rate: vote
 					},
-					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + instance._id + '/rate'
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/rate'
 				}).then(function (response) {
-					instance = JSON.parse(response);
+					_this.instance = JSON.parse(response);
 				});
 			} else {
 				throw new Error('vote parameter to rate function must be a integer');
@@ -178,12 +181,13 @@
 		// comment function, it takes a text parameter. 
 		// Modifies instance of model and return a promise
 		this.comment = function (text) {
+			var _this = this;
 			return Stamplay.makeAPromise({
 				method: 'PUT',
 				data: {
 					text: text
 				},
-				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + instance._id + '/comment'
+				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/comment'
 			}).then(function (response) {
 				instance = JSON.parse(response);
 			});
@@ -218,7 +222,7 @@
 
 		// if baseComponent hasAction add some methods to Model 
 		if (hasAction) {
-			Action.call(this, this.instance)
+			Action.call(this)
 		}
 
 		// constructor

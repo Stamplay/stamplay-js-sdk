@@ -282,7 +282,7 @@ suite('Stamplay Cobject Model ', function () {
 
   });
 
-  test('upVote method', function (done) {
+  test.only('upVote method', function (done) {
     cinstance.instance._id = '123';
     cinstance.instance.actions = {
       votes: {
@@ -294,6 +294,8 @@ suite('Stamplay Cobject Model ', function () {
     };
 
     cinstance.upVote().then(function () {
+      console.log( cinstance.get('actions') )
+      
       assert.equal(cinstance.get('actions').votes.total, 1);
       assert.equal(cinstance.get('actions').votes.users[0], 'userId');
       assert.equal(cinstance.get('actions').votes.users_upvote[0], 'userId');
