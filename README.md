@@ -85,11 +85,18 @@ tag.rate(4)
   * <a href="#Model.save"><code>save()</code></a>
 
 ###Action methods
-  * <a href="#Action.vote"><code>vote()</code></a>
+  * <a href="#Action.upVote"><code>upVote()</code></a>
+  * <a href="#Action.downVote"><code>downVote()</code></a>
   * <a href="#Action.rate"><code>rate()</code></a>
   * <a href="#Action.comment"><code>comment()</code></a>
-  * <a href="#Action.twitter_share"><code>twitter_share()</code></a>
-  * <a href="#Action.facebook_share"><code>facebook_share()</code></a>
+  * <a href="#Action.twitterShare"><code>twitterShare()</code></a>
+  * <a href="#Action.facebookShare"><code>facebookShare()</code></a>
+  * <a href="#Action.getComments"><code>getComments()</code></a>
+  * <a href="#Action.getVotes"><code>getVotes()</code></a>
+  * <a href="#Action.getRatings"><code>getRatings()</code></a>
+  * <a href="#Action.getTwitterShares"><code>getTwitterShares()</code></a>
+  * <a href="#Action.getFacebookShares"><code>getFacebookShares()</code></a>
+
  
 -------------------------------------------------------
   
@@ -129,12 +136,27 @@ Rate the resource, only integer values as parameter.
 <a name="Action.comment"></a>
 ###comment(text)
 Comment the resource with the text.
-<a name="Action.twitter_share"></a>
+<a name="Action.twitterShare"></a>
 ###twitterShare()
 Calls the Twitter share endpoint. Note that this method updates the twitter_share counter but it is not responsible for sharing the resource on Twitter.
-<a name="Action.facebook_share"></a>  
+<a name="Action.facebookShare"></a>  
 ###facebookShare()
-Calls the Facebook share endpoint. Note that this method updates the facebook_share counter but it is not responsible for sharing the resource on Facebook.  
+Calls the Facebook share endpoint. Note that this method updates the facebook_share counter but it is not responsible for sharing the resource on Facebook.
+<a name="Action.getComments"></a>  
+###getComments()
+Get all comments of this resource. Return an Array   
+<a name="Action.getVotes"></a>  
+###getVotes()
+Get all userId of voters. If you want the only down vote or up vote, call getVotes('down') or getVotes('up'). Return an Array
+<a name="Action.getRatings"></a>  
+###getRatings()
+Get all Users's ratings. Return an Array
+<a name="Action.getTwitterShares"></a>  
+###getTwitterShares()
+Get all Users's twitter shares. Return an Array
+<a name="Action.getFacebookShares"></a>  
+###getFacebookShares()
+Get all Users's facebook shares. Return an Array
 
 -------------------------------------------------------
 
