@@ -358,3 +358,9 @@ To build a production ready library you need to have NPM and Bower installed and
 npm install && bower install
 grunt build
 ```
+# CDN delivery
+To load the Stamplay SDK from the Cloudfront content distribution network just include the following in your page:
+
+```javascript
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.2/stamplay.min.js"></script>
+```
