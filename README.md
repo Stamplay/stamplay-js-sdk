@@ -67,18 +67,6 @@ newUser.signup(registrationData)
 })
 ```
 
-##Model actions
-Some components' models have built-in social actions and the SDK provides a fast way to ```rate```, ```upvote```, ```downvote``` and ```comment``` a resource. Models with social actions also give you a way to track how many times they have been shared on Twitter and Facebook. All these methods return a promise.
-
-```javascript
-var tag = new Stamplay.Cobject('tag').Model;
-tag.rate(4)
-.then(function(){
-	var actions = tag.get('actions');
-	console.log(actions.ratings); // You can see the ratings, the average rate and the users who rate
-});
-```
-
 ##Model methods
 
   * <a href="#Model.get"> <code>get()</code></a>
@@ -89,6 +77,8 @@ tag.rate(4)
   * <a href="#Model.save"><code>save()</code></a>
 
 ###Action methods
+Some models have built-in social actions and the SDK provides a fast way to ```rate```, ```upvote```, ```downvote``` and ```comment``` a resource. Models with social actions also give you a way to track how many times they have been shared on Twitter and Facebook. All these methods return a promise.
+
   * <a href="#Action.upVote"><code>upVote()</code></a>
   * <a href="#Action.downVote"><code>downVote()</code></a>
   * <a href="#Action.rate"><code>rate()</code></a>
@@ -101,7 +91,15 @@ tag.rate(4)
   * <a href="#Action.getTwitterShares"><code>getTwitterShares()</code></a>
   * <a href="#Action.getFacebookShares"><code>getFacebookShares()</code></a>
 
- 
+```javascript
+var tag = new Stamplay.Cobject('tag').Model;
+tag.rate(4)
+.then(function(){
+	var actions = tag.get('actions');
+	console.log(actions.ratings); // You can see the ratings, the average rate and the users who rate
+});
+```
+
 -------------------------------------------------------
   
 <a name="Model.get"></a>
