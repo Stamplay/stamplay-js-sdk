@@ -258,7 +258,7 @@ user.currentUser()
 ###login()
 The login method can be used for logging in with:
 * third party services
-* local authentication
+* Authentication with email and password
 
 ####Third party services login (service)
 You can use this method for logging users with third party services by passing the service as first and only parameter.
@@ -272,15 +272,15 @@ user.login('facebook')
 #####Available services
 You can use one of the following as parameter for logging in with third party service:
    
-* facebook
-* google
-* twitter
-* dropbox
-* linkedin
-* instagram
-* angellist
+* Facebook
+* Google
+* Twitter
+* Dropbox
+* Linkedin
+* Instagram
+* Angel List
 
-#### Local authentication
+#### Authentication with email and password
 Authentication with email and password. you can use the login method in this way.
 
 ```javascript
