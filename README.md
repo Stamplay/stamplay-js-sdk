@@ -4,7 +4,15 @@ Stamplay JavaScript SDK
 [![Production version](http://img.shields.io/badge/download-36%20kB-blue.svg)](https://raw.githubusercontent.com/Stamplay/stamplay-js-sdk/master/dist/stamplay.min.js)
 
 ##Getting Started
-Just import the JS SDK in your HTML page and you're ready to go.
+The Stamplay JavaScript SDK provides a JavaScript library making it even easier to access the Stamplay cloud platform.
+To enable support for Stamplay-related functions in your web app, you'll need to include `stamplay.min.js` in your app. 
+To do this, add the following to the head block of your HTML:
+
+```HTML
+<script type="text/javascript" src="path/to/js/sdk/stamplay.min.js"></script>
+```
+For use inside browsers, a window scoped variable called `Stamplay` is created.
+Our JavaScript SDK is based on the popular Backbone.js framework. It is compatible with existing Backbone applications with minimal changes on your part. Our goal is to minimize configuration and let you quickly start building your JavaScript and HTML5 app on Stamplay. Here is a simple example of usage:
 
 ```javascript
 var user = new Stamplay.User().Model;
