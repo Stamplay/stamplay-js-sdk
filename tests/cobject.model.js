@@ -272,7 +272,7 @@ suite('Stamplay Cobject Model ', function () {
 
 
     assert.equal(this.request.method, 'DELETE');
-    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+    assert.notEqual(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/1');
 
     assert.isUndefined(this.request.requestBody);
@@ -308,7 +308,9 @@ suite('Stamplay Cobject Model ', function () {
 
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.requestBody, JSON.stringify({type: 'upvote'}));
+    assert.equal(this.request.requestBody, JSON.stringify({
+      type: 'upvote'
+    }));
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/vote');
     this.request.respond(200, {
       "Content-Type": "application/json"
@@ -340,7 +342,9 @@ suite('Stamplay Cobject Model ', function () {
 
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.requestBody, JSON.stringify({type: 'downvote'}));
+    assert.equal(this.request.requestBody, JSON.stringify({
+      type: 'downvote'
+    }));
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/vote');
     this.request.respond(200, {
       "Content-Type": "application/json"
@@ -479,29 +483,29 @@ suite('Stamplay Cobject Model ', function () {
 
 
   test('getComments method', function () {
-    
+
     cinstance.instance._id = '123';
     cinstance.instance.actions = {
-      comments : [{
+      comments: [{
         userId: '123',
         displayName: 'displayName'
       }]
     };
     assert.equal(cinstance.getComments().length, 1);
     assert.equal(cinstance.getComments()[0].userId, '123');
-  
+
   });
 
   test('getVotes method', function () {
-    
+
     cinstance.instance._id = '123';
     cinstance.instance.actions = {
-      votes : {
+      votes: {
         total: 2,
-        users: ['123','124'],
-        users_upvote: ['1','2','3'],
-        users_downvote: ['1','2','3','1','2','3']
-      } 
+        users: ['123', '124'],
+        users_upvote: ['1', '2', '3'],
+        users_downvote: ['1', '2', '3', '1', '2', '3']
+      }
     };
     assert.equal(cinstance.getVotes().length, 2);
     assert.equal(cinstance.getVotes()[0], '123');
@@ -516,17 +520,20 @@ suite('Stamplay Cobject Model ', function () {
     assert.equal(cinstance.getVotes('down')[3], '1');
     assert.equal(cinstance.getVotes('down')[4], '2');
     assert.equal(cinstance.getVotes('down')[5], '3');
-  
+
   });
 
   test('getRatings method', function () {
-    
+
     cinstance.instance._id = '123';
     cinstance.instance.actions = {
-      ratings : {
+      ratings: {
         total: 1,
         avg: 1,
-        users: [{userId: '123', rating: 1}]
+        users: [{
+          userId: '123',
+          rating: 1
+        }]
       }
     };
     assert.equal(cinstance.getRatings().length, 1);
@@ -537,25 +544,24 @@ suite('Stamplay Cobject Model ', function () {
 
 
   test('getTwitterShares method', function () {
-    
+
     cinstance.instance._id = '123';
     cinstance.instance.actions = {
-      twitter_shares : {
+      twitter_shares: {
         total: 1,
         users: ['123']
       }
     };
     assert.equal(cinstance.getTwitterShares().length, 1);
-    assert.equal(cinstance.getTwitterShares()[0], '123');
-;
+    assert.equal(cinstance.getTwitterShares()[0], '123');;
 
   });
 
   test('getFacebookShares method', function () {
-    
+
     cinstance.instance._id = '123';
     cinstance.instance.actions = {
-      facebook_shares : {
+      facebook_shares: {
         total: 1,
         users: ['123']
       }

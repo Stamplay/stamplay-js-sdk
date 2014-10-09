@@ -2000,7 +2000,9 @@ return Q;
 		});
 
 		// Default content-Type  
-		req.setRequestHeader('Content-Type', 'application/json')
+		if (options.method && options.method !== 'DELETE') {
+			req.setRequestHeader('Content-Type', 'application/json');
+		}
 
 		req.onreadystatechange = function (e) {
 			if (req.readyState !== 4) {
@@ -2063,15 +2065,17 @@ return Q;
 		// private function, use for make parametric Promises
 		var makeActionPromise = function (action, type) {
 			var _this = this;
-			if(type){
+			if (type) {
 				return Stamplay.makeAPromise({
 					method: 'PUT',
-					data: { type: type },
+					data: {
+						type: type
+					},
 					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/' + action
 				}).then(function (response) {
 					_this.instance = JSON.parse(response);
 				});
-			}else {
+			} else {
 				return Stamplay.makeAPromise({
 					method: 'PUT',
 					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/' + action
@@ -2142,27 +2146,27 @@ return Q;
 
 		// simplest methods for get Actions
 
-		this.getComments = function(){
+		this.getComments = function () {
 			return this.get('actions').comments;
 		};
 
-		this.getVotes = function(type){
-			if(type && (type == 'up' || type == 'down')){
-				return this.get('actions').votes['users_'+type+'vote'];
-			}else{
+		this.getVotes = function (type) {
+			if (type && (type == 'up' || type == 'down')) {
+				return this.get('actions').votes['users_' + type + 'vote'];
+			} else {
 				return this.get('actions').votes.users;
 			}
 		};
 
-		this.getRatings = function(type){
+		this.getRatings = function (type) {
 			return this.get('actions').ratings.users
 		};
-		
-		this.getTwitterShares = function(){
+
+		this.getTwitterShares = function () {
 			return this.get('actions').twitter_shares.users
 		};
 
-		this.getFacebookShares = function(){
+		this.getFacebookShares = function () {
 			return this.get('actions').facebook_shares.users
 		};
 
