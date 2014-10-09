@@ -4,7 +4,14 @@ Stamplay JavaScript SDK
 [![Production version](http://img.shields.io/badge/download-36%20kB-blue.svg)](https://raw.githubusercontent.com/Stamplay/stamplay-js-sdk/master/dist/stamplay.min.js)
 
 ##Getting Started
-Just import the JS SDK in your HTML page and you're ready to go.
+The Stamplay JavaScript SDK provides a JavaScript library making it even easier to access the Stamplay cloud platform. On this initial release the SDK let you work with the most important and flexible components of our platform: `User` and `Custom Objects`. To enable support for Stamplay-related functions in your web app, you'll need to include `stamplay.min.js` in your app. 
+To do this, add the following to the head block of your HTML:
+
+```HTML
+<script type="text/javascript" src="path/to/js/sdk/stamplay.min.js"></script>
+```
+For use inside browsers, a window scoped variable called `Stamplay` is created.
+Our JavaScript SDK is based on the popular Backbone.js framework. It is compatible with existing Backbone applications with minimal changes on your part. Our goal is to minimize configuration and let you quickly start building your JavaScript and HTML5 app on Stamplay. Here is a simple example of usage:
 
 ```javascript
 var user = new Stamplay.User().Model;
@@ -28,7 +35,7 @@ user.currentUser()
 ```
 
 ##Available components
-This JavaScript SDK expose through the Stamplay object the following components:
+This JavaScript SDK expose through the Stamplay variable the following components:
  
 * [User](#user)
 * [Custom Object](#custom-object)
@@ -39,9 +46,9 @@ Every component can expose two main classes:
 * [Collection](#collection)
 
 #Model
-Models are the heart of any JavaScript application, a model keeps the application logic and with the Stamplay model you can easily synchronize the data between client and the Stamplay platform.
+Models are the heart of any JavaScript application, containing the interactive data as well as a large part of the logic surrounding it: conversions, validations, computed properties, and access control.
 
-The following is a contrived example, but it demonstrates defining a User model, setting an attribute, and saving it in the application. 
+The following example shows how to create a new instance of a User model ( models, collections and views work the same way ), add a new attribute, and saving it in the application. 
 
 ```javascript
 var registrationData = {
@@ -60,21 +67,6 @@ newUser.signup(registrationData)
 })
 ```
 
-##Model actions
-Some components expose the model actions too.
-These methods are a fast way to ```rate```, ```vote``` and ```comment``` a resource. 
-Moreover there are two methods for keeping track of the Twitter and Facebook shares.
-All these methods return a promise.
-
-```javascript
-var tag = new Stamplay.Cobject('tag').Model;
-tag.rate(4)
-.then(function(){
-	var actions = tag.get('actions');
-	console.log(actions.ratings); // You can see the ratings, the average rate and the users who rate
-});
-```
-
 ##Model methods
 
   * <a href="#Model.get"> <code>get()</code></a>
@@ -85,6 +77,8 @@ tag.rate(4)
   * <a href="#Model.save"><code>save()</code></a>
 
 ###Action methods
+Some models have built-in social actions and the SDK provides a fast way to ```rate```, ```upvote```, ```downvote``` and ```comment``` a resource. Models with social actions also give you a way to track how many times they have been shared on Twitter and Facebook. All these methods return a promise.
+
   * <a href="#Action.upVote"><code>upVote()</code></a>
   * <a href="#Action.downVote"><code>downVote()</code></a>
   * <a href="#Action.rate"><code>rate()</code></a>
@@ -97,7 +91,15 @@ tag.rate(4)
   * <a href="#Action.getTwitterShares"><code>getTwitterShares()</code></a>
   * <a href="#Action.getFacebookShares"><code>getFacebookShares()</code></a>
 
- 
+```javascript
+var tag = new Stamplay.Cobject('tag').Model;
+tag.rate(4)
+.then(function(){
+	var actions = tag.get('actions');
+	console.log(actions.ratings); // You can see the ratings, the average rate and the users who rate
+});
+```
+
 -------------------------------------------------------
   
 <a name="Model.get"></a>
@@ -254,7 +256,7 @@ user.currentUser()
 ###login()
 The login method can be used for logging in with:
 * third party services
-* local authentication
+* Authentication with email and password
 
 ####Third party services login (service)
 You can use this method for logging users with third party services by passing the service as first and only parameter.
@@ -268,15 +270,15 @@ user.login('facebook')
 #####Available services
 You can use one of the following as parameter for logging in with third party service:
    
-* facebook
-* google
-* twitter
-* dropbox
-* linkedin
-* instagram
-* angellist
+* Facebook
+* Google
+* Twitter
+* Dropbox
+* Linkedin
+* Instagram
+* Angel List
 
-#### Local authentication
+#### Authentication with email and password
 Authentication with email and password. you can use the login method in this way.
 
 ```javascript
