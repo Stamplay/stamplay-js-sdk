@@ -364,5 +364,5 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```javascript
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.2/stamplay.min.js"/>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.3/stamplay.min.js"></script>
 ```
