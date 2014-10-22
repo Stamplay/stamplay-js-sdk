@@ -47,9 +47,27 @@ suite('Webhook', function () {
 
     var w2 = new Stamplay.Webhook('a_b-c');
     assert.equal(w2.url, '/api/webhook/v0/a_bc/catch');
+  });
 
-    // var w3 = new Stamplay.Webhook('?');
-    // assert.equal(w1.url, '/api/webhook/v0/a_bc/catch');
+  test('that get method will send a get request', function (done) {
+    var response = {
+      name: 'myWebHook',
+      webhookId = 'mywebhook'
+    }
+
+    webhook.get().then(function (response) {
+      console.log('response');
+      console.log(response);
+      done();
+    });
+
+    assert.equal(this.request.method, 'GET');
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+    assert.equal(this.request.url, '/api/webhook/v0/mywebhook/catch');
+
+    this.request.respond(200, {
+      "Content-Type": "application/json"
+    }, JSON.stringify(response));
 
   });
 
