@@ -46,7 +46,10 @@ suite('Webhook', function () {
     assert.equal(w1.url, '/api/webhook/v0/test_test/catch');
 
     var w2 = new Stamplay.Webhook('a_b-c');
-    assert.equal(w1.url, '/api/webhook/v0/a_bc/catch');
+    assert.equal(w2.url, '/api/webhook/v0/a_bc/catch');
+
+    // var w3 = new Stamplay.Webhook('?');
+    // assert.equal(w1.url, '/api/webhook/v0/a_bc/catch');
 
   });
 
