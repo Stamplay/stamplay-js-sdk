@@ -1,6 +1,10 @@
 suite('Webhook', function () {
 
   var webhook;
+  var response = {
+    name: 'myWebHook',
+    webhookId: 'mywebhook'
+  };
 
   setup('Creating a new Webhook', function () {
 
@@ -50,14 +54,9 @@ suite('Webhook', function () {
   });
 
   test('that get method will send a get request', function (done) {
-    var response = {
-      name: 'myWebHook',
-      webhookId: 'mywebhook'
-    }
+
 
     webhook.get().then(function (response) {
-      console.log('response');
-      console.log(response);
       done();
     });
 
@@ -71,5 +70,34 @@ suite('Webhook', function () {
 
   });
 
+  test('that get method will send a post request', function (done) {
+    webhook.post().then(function (response) {
+      done();
+    });
+
+    assert.equal(this.request.method, 'POST');
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+    assert.equal(this.request.url, '/api/webhook/v0/mywebhook/catch');
+
+    this.request.respond(200, {
+      "Content-Type": "application/json"
+    }, JSON.stringify(response));
+
+  });
+
+  test('that get method will send a put request', function (done) {
+    webhook.post().then(function (response) {
+      done();
+    });
+
+    assert.equal(this.request.method, 'PUT');
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+    assert.equal(this.request.url, '/api/webhook/v0/mywebhook/catch');
+
+    this.request.respond(200, {
+      "Content-Type": "application/json"
+    }, JSON.stringify(response));
+
+  });
 
 });
