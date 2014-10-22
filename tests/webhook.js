@@ -36,6 +36,9 @@ suite('Webhook', function () {
     assert.isFunction(webhook.post, 'post method exists');
   });
 
+  test('has the url property', function () {
+    assert.isString(webhook.url, 'url string exists');
+  });
 
 
 });
