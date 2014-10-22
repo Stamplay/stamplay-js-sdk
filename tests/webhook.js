@@ -62,7 +62,7 @@ suite('Webhook', function () {
     });
 
     assert.equal(this.request.method, 'GET');
-    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;");
     assert.equal(this.request.url, '/api/webhook/v0/mywebhook/catch');
 
     this.request.respond(200, {
