@@ -38,7 +38,12 @@ suite('Webhook', function () {
 
   test('has the url property', function () {
     assert.isString(webhook.url, 'url string exists');
+    assert.equal(webhook.url, '/api/webhook/v0/mywebhook/catch');
   });
+
+  // test('that the url is formatted correctly', function () {
+
+  // });
 
 
 });
