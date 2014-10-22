@@ -52,7 +52,7 @@ suite('Webhook', function () {
   test('that get method will send a get request', function (done) {
     var response = {
       name: 'myWebHook',
-      webhookId = 'mywebhook'
+      webhookId: 'mywebhook'
     }
 
     webhook.get().then(function (response) {
