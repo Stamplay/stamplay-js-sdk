@@ -41,9 +41,14 @@ suite('Webhook', function () {
     assert.equal(webhook.url, '/api/webhook/v0/mywebhook/catch');
   });
 
-  // test('that the url is formatted correctly', function () {
+  test('that the url is formatted correctly', function () {
+    var w1 = new Stamplay.Webhook('Test_Test');
+    assert.equal(w1.url, '/api/webhook/v0/test_test/catch');
 
-  // });
+    var w2 = new Stamplay.Webhook('a_b-c');
+    assert.equal(w1.url, '/api/webhook/v0/a_bc/catch');
+
+  });
 
 
 });
