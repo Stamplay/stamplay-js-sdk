@@ -86,7 +86,7 @@ suite('Webhook', function () {
   });
 
   test('that get method will send a put request', function (done) {
-    webhook.post().then(function (response) {
+    webhook.put().then(function (response) {
       done();
     });
 
