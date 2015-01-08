@@ -263,5 +263,4 @@ suite('Stamplay Cobject Collection ', function () {
     assert.isUndefined(coll_cinstance.facebookShare);
   });
 
-
 });

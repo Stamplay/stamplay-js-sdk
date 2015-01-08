@@ -17,13 +17,13 @@
  */
 (function (root) {
 
-	/* private function for handling query parameters */
+	/* private function for handling this parameters */
 	var parseQueryParams = function (options) {
-		var keys = Object.keys(options.queryParams);
+		var keys = Object.keys(options.thisParams);
 		for (var i = 0; i < keys.length; i++) {
 			var conjunction = (i > 0) ? '&' : '?';
 			var key = keys[i];
-			options.url = options.url + conjunction + key + '=' + options.queryParams[key];
+			options.url = options.url + conjunction + key + '=' + options.thisParams[key];
 		}
 	}
 
@@ -37,7 +37,7 @@
 				headers: [{}],
 				data: {}
 				async: true (default) || false,
-				queryParams : {
+				thisParams : {
 					page : 1,
 					per_page : 10
 				}
@@ -45,8 +45,8 @@
 
 		*/
 
-		// parsing query parameter
-		if (options.queryParams) {
+		// parsing this parameter
+		if (options.thisParams) {
 			parseQueryParams(options);
 		}
 
@@ -110,6 +110,95 @@
 	var support = new Support();
 	// Added Support Object to Stamplay
 	root.Stamplay.Support = support;
+
+})(this);
+
+/* Add Query function to Stamplay
+ * it use for handling some funcctionality
+ * very easy to use : Stamplay.Query('user').equalTo('name':'john')
+ */
+(function (root) {
+	// constructor for Query Object
+	// model is required ever
+	function Query(model, instance) {
+		this.currentQuery = {};
+		this.model = model;
+		this.instance = instance;
+		//method for parsing the currentquery 
+		var parseCurrentQuery = function(currentQuery){
+			var query = {}
+			for(var key in currentQuery){
+				if(key =='find'){
+					for(attr in currentQuery[key]){
+						query[attr] = currentQuery[key][attr]
+					}
+				}else if(key=='limit'){
+					query['n'] = currentQuery[key]
+				}else if(key=='select'){
+					query['select'] = currentQuery[key].join(",")
+				}else if(key=='sort'){
+					query['sort'] = currentQuery[key]
+				}
+			}
+			return query;
+		}
+		//method to run the query you make with Query object
+		this.exec = function(){
+			if(!this.instance)
+				this.instance = this.model+'s'; 
+			var thisParams = parseCurrentQuery(this.currentQuery)
+			return Stamplay.makeAPromise({
+				method: 'GET',
+				url: '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance,
+				thisParams: thisParams
+			}).then(function (response) {
+				return response
+			})
+		};
+		//method to set an attribute must be equal to given value
+		this.equalTo = function(attr, value){
+			if(!this.currentQuery.find)
+				this.currentQuery.find = {}
+			if(typeof attr == "object")
+				for(key in attr){
+					this.currentQuery.find[key] = attr[key] 
+				}
+			else
+				this.currentQuery.find[attr] =  value
+			return this;
+		};
+		//method to limit the results of query
+		this.limit = function(limit){
+			this.currentQuery.limit = limit 
+			return this;
+		}
+		//method to select only the attrs do you want to see
+		this.select = function(attr){
+			if(!this.currentQuery.select)
+				this.currentQuery.select = []
+			if(attr instanceof Array)
+				for(var i=0; i<attr.length; i++){
+					this.currentQuery.select.push(attr[i]) 
+				}
+			else
+				this.currentQuery.select.push(attr) 
+			return this
+		}
+		//method to sort ascending
+		this.sortAscending = function(attr){
+			this.currentQuery.sort= attr 
+			return this
+		}
+		//method to sort descending
+		this.sortDescending = function(attr){
+				this.currentQuery.sort = '-'+attr 
+			return this
+		}
+
+	};
+
+	// Added Query Object to Stamplay
+	root.Stamplay.Query = Query;
 
 })(this);
 
@@ -279,16 +368,16 @@
 			delete this.instance[key];
 		},
 
-		// fetch function, it takes _id and queryParams
+		// fetch function, it takes _id and thisParams
 		//  Modifies instance of model with the response of Stamplay's server
-		this.fetch = function (_id, queryParams) {
+		this.fetch = function (_id, thisParams) {
 
-			queryParams = queryParams || {};
+			thisParams = thisParams || {};
 			var _this = this;
 			return Stamplay.makeAPromise({
 				method: 'GET',
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + _id,
-				queryParams: queryParams
+				thisParams: thisParams
 			}).then(function (response) {
 				_this.instance = JSON.parse(response);
 			});
@@ -411,17 +500,17 @@
 			}
 		},
 
-		// fetch function, it takes queryParams
+		// fetch function, it takes thisParams
 		// Return a promise. Modify the instance with the data from Stamplay Server
-		this.fetch = function (queryParams) {
+		this.fetch = function (thisParams) {
 
-			queryParams = queryParams || {};
+			thisParams = thisParams || {};
 			var _this = this;
 
 			return Stamplay.makeAPromise({
 				method: 'GET',
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId,
-				queryParams: queryParams
+				thisParams: thisParams
 			}).then(function (response) {
 				//iterate on data and instance a new Model with the prototype functions
 				JSON.parse(response).data.forEach(function (singleInstance) {
@@ -626,8 +715,6 @@
 
 		this.url = '/api/webhook/'+ Stamplay.VERSION +'/'+resource+'/catch';
 		
-		
-
 		this.get = function(){
 			return Stamplay.makeAPromise({
 					method: 'GET',

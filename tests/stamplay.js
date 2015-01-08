@@ -8,6 +8,10 @@ suite('Stamplay Object ', function () {
 		assert.typeOf(window.Stamplay.Support, 'object', 'window.Stamplay.Support exists');
 	});
 
+	test('expose Query object', function () {
+		assert.typeOf(window.Stamplay.Query, 'function', 'window.Stamplay.Query constructor exists');
+	});
+
 	test('expose Cobject constructor', function () {
 		assert.typeOf(window.Stamplay.Cobject, 'function', 'window.Stamplay.Cobject constructor exists');
 	});
