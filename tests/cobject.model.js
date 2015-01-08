@@ -37,7 +37,6 @@ suite('Stamplay Cobject Model ', function () {
 
     assert.equal(this.request.url, '/api/cobject/v0/cobjectId/123');
 
-
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, '{ "_id": 123, "comment": "Hey there" }');

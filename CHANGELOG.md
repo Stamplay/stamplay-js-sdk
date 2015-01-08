@@ -1,5 +1,11 @@
 # Stamplay JS SDK Changelog
 
+0.0.3 / 08-01-2015
+==================
+
+* Added Query object to make to easy use query and webHook component 
+
+
 0.0.2 / 19-09-2014
 ==================
 
