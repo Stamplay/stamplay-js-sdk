@@ -163,8 +163,6 @@ Get all Users's twitter shares. Return an Array
 ###getFacebookShares()
 Get all Users's facebook shares. Return an Array
 
--------------------------------------------------------
-
 
 # Collection
 Collections are sets of models. You can ```fetch``` the collection from the server and a set of Underscore methods.   
@@ -204,6 +202,75 @@ Remove and return the first model from a collection, if collection is empty retu
 ### add(model)
 Add a model at the end of the collection.
 
+
+# Query
+Query are sets of methods for make easy to use the query filter on Stamplay.
+The constructor take two arguments, model and instance.
+The first parameter is require, it is the model name of resource like 'user' or 'photo'.
+The second parameter is the name of instance of model. 
+For example for a custom object called tag you must write a line of code like this:
+
+```javascript
+var query = new Stamplay.query('cobject','tag') 
+```
+
+The following code show you how to use query object:
+```javascript
+var query = new Stamplay.query('cobject','tag').equalTo('name','foo')
+query.exec().then(function(response){
+  //the response of your query 
+}) 
+```
+Please remember to running the query use the method exec(), it returns a promise.
+
+##Methods
+
+  * <a href="#Query.equalTo"><code>equalTo()</code></a>
+  * <a href="#Query.limit"><code>limit()()</code></a>
+  * <a href="#Query.select"><code>select()</code></a>
+  * <a href="#Query.sortAscending"><code>sortAscending()</code></a>
+  * <a href="#Query.sortDescending"><code>sortDescending()</code></a>
+  * <a href="#Query.exec"> <code>exec()</code></a>
+
+-------------------------------------------------------
+
+<a name="Query.equalTo"></a>
+### equalTo(attr,value)
+This method take two arguments. The query returns all documents that have the attribute equal to the given value.
+
+<a name="Query.limit"></a>
+### limit(n)
+This method take an argument, the number of maximum results return to you 
+
+<a name="Query.select"></a>
+### select('attr')
+This method take an argument, the name of attribute you want to select.
+If you need more than one argument you can set an array of attributes  
+
+<a name="Query.sortAscending"></a>
+### sortAscending('attr')
+This method take an argument, the name of attribute you want to sorting
+
+<a name="Query.sortDiscending"></a>
+### sortDiscending('attr')
+This method take an argument, the name of attribute you want to sorting
+
+<a name="Query.exec"></a>
+### exec()
+This method runs the query and return a promise
+
+##Pipeline
+
+If you want create a more complex query you could use all methods, check this example:
+
+```javascript
+var query = new Stamplay.query('cobject','tag')
+query.equalTo('name','foo').limit(10).select(['name','description']).sort('description');
+query.exec().then(function(response){
+  //the response of your query 
+}) 
+```
+
 #Model
 Models are the heart of any JavaScript application, a model keeps the application logic and with the Stamplay model you can easily synchronize the data between client and the Stamplay platform.
 
@@ -225,8 +292,6 @@ newUser.signup(registrationData)
   var number = newUser.get('phoneNumber'); // number value is 020 123 4567 
 })
 ```
-
-
 
 #User
 You can create both Model and Collection of a Stamplay.User.
