@@ -383,7 +383,7 @@ user.login('email@provider.com', 'mySecret')
 ```
 Note that for this kind of login you have to [register](#signupdata) the user first. 
  <a name="User.data"></a>
-###signup(data)
+###signup()
 Register user for local authentication. ```data``` parameter must be an object containing at least ```email``` and ```password``` keys.
 
 ```javascript
