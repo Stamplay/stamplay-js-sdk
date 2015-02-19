@@ -4,6 +4,14 @@ suite('Stamplay Object ', function () {
 		assert.typeOf(window.Stamplay, 'object', 'window.Stamplay exists');
 	})
 
+	test('exists as Stamplay function called removeAttributes', function () {
+		assert.typeOf(window.Stamplay.removeAttributes, 'function', 'window.Stamplay.removeAttributes exists');
+	});
+
+	test('exists as Stamplay function called makeAPromise', function () {
+		assert.typeOf(window.Stamplay.makeAPromise, 'function', 'window.Stamplay.makeAPromise exists');
+	});
+
 	test('expose Support object', function () {
 		assert.typeOf(window.Stamplay.Support, 'object', 'window.Stamplay.Support exists');
 	})

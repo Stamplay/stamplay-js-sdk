@@ -10,6 +10,8 @@
 	root.Stamplay = root.Stamplay || {};
 	/* setting attribute API Version */
 	root.Stamplay.VERSION = "v0";
+	/* Silence Q logging*/
+	Q.stopUnhandledRejectionTracking();
 }(this));
 
 /* Add function to handle ajax calls, returning a promise
@@ -42,9 +44,7 @@
 					per_page : 10
 				}
 			} 
-
 		*/
-
 		// parsing query parameter
 		if (options.queryParams) {
 			parseQueryParams(options);
@@ -52,9 +52,7 @@
 
 		var deferred = Q.defer(),
 			req = new XMLHttpRequest();
-
 		req.open(options.method || 'GET', options.url, options.async || true);
-
 		// Set request headers if provided.
 		Object.keys(options.headers || {}).forEach(function (key) {
 			req.setRequestHeader(key, options.headers[key]);
@@ -64,7 +62,6 @@
 		if (options.method && options.method !== 'DELETE') {
 			req.setRequestHeader('Content-Type', 'application/json');
 		}
-
 		req.onreadystatechange = function (e) {
 			if (req.readyState !== 4) {
 				return;
@@ -72,15 +69,29 @@
 			if ([200, 304].indexOf(req.status) === -1) {
 				deferred.reject(req);
 			} else {
-				deferred.resolve(req.responseText);
+				deferred.resolve(JSON.parse(req.responseText));
 			}
 		};
 
 		req.send(JSON.stringify(options.data) || void 0);
-
 		return deferred.promise;
 	}
 
+	/* function to remove attributes from model before send the request to server*/
+	root.Stamplay.removeAttributes = function(brick, instance){
+		switch (brick){
+			case 'cobject':
+				delete instance.__v;
+				delete instance.cobjectId;
+				delete instance.actions;
+				delete instance.appId;
+				delete instance.id;
+			break;
+			default:
+			break;
+
+		}
+	}
 }(this));
 
 /* Add Support function to Stamplay
@@ -134,14 +145,14 @@
 					},
 					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/' + action
 				}).then(function (response) {
-					_this.instance = JSON.parse(response);
+					_this.instance = response;
 				});
 			} else {
 				return Stamplay.makeAPromise({
 					method: 'PUT',
 					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/' + action
 				}).then(function (response) {
-					_this.instance = JSON.parse(response);
+					_this.instance = response;
 				});
 			}
 		}
@@ -171,7 +182,7 @@
 					},
 					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/rate'
 				}).then(function (response) {
-					_this.instance = JSON.parse(response);
+					_this.instance = response;
 				});
 			} else {
 				throw new Error('vote parameter to rate function must be a integer');
@@ -189,7 +200,7 @@
 				},
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/comment'
 			}).then(function (response) {
-				instance = JSON.parse(response);
+				instance = response;
 			});
 		};
 
@@ -292,7 +303,7 @@
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + _id,
 				queryParams: queryParams
 			}).then(function (response) {
-				_this.instance = JSON.parse(response);
+				_this.instance = response;
 			});
 
 		},
@@ -317,12 +328,16 @@
 
 			if (method === 'PATCH' || method === 'PUT') {
 				url = url + '/' + this.get('_id');
+				Stamplay.removeAttributes(this.brickId,this.instance)
 			}
 
+			var _this = this;
 			return Stamplay.makeAPromise({
 				method: method,
 				url: url,
 				data: this.instance
+			}).then(function (response) {
+				_this.instance = response;
 			});
 		},
 
@@ -426,7 +441,7 @@
 				queryParams: queryParams
 			}).then(function (response) {
 				//iterate on data and instance a new Model with the prototype functions
-				JSON.parse(response).data.forEach(function (singleInstance) {
+				response.data.forEach(function (singleInstance) {
 					var instanceModel;
 					//cobject has a particular constructor
 					if (_this.brickId == 'cobject') {
@@ -545,7 +560,7 @@
 				method: 'GET',
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/getStatus'
 			}).then(function (response) {
-				_this.instance = JSON.parse(response).user || {};
+				_this.instance = response.user || {};
 			});
 		},
 
@@ -568,7 +583,7 @@
 					data: data,
 					url: '/auth/' + Stamplay.VERSION + '/local/login',
 				}).then(function (response) {
-					_this.instance = JSON.parse(response) || {};
+					_this.instance = response || {};
 
 				});
 
@@ -592,7 +607,7 @@
 					data: data,
 					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId
 				}).then(function (response) {
-					_this.instance = JSON.parse(response) || {};
+					_this.instance = response || {};
 				});
 
 			} else {
