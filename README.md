@@ -1,10 +1,10 @@
 Stamplay JavaScript SDK
 ===============
 [![Build Status](https://travis-ci.org/Stamplay/stamplay-js-sdk.svg?branch=master)](https://travis-ci.org/Stamplay/stamplay-js-sdk)
-[![Production version](http://img.shields.io/badge/download-36%20kB-blue.svg)](https://raw.githubusercontent.com/Stamplay/stamplay-js-sdk/master/dist/stamplay.min.js)
+[![Production version](http://img.shields.io/badge/download-38%20kB-blue.svg)](https://raw.githubusercontent.com/Stamplay/stamplay-js-sdk/master/dist/stamplay.min.js)
 
 ##Getting Started
-The Stamplay JavaScript SDK provides a JavaScript library making it even easier to access the Stamplay cloud platform. On this initial release the SDK let you work with the most important and flexible components of our platform: `User` and `Custom Objects`. To enable support for Stamplay-related functions in your web app, you'll need to include `stamplay.min.js` in your app. 
+The Stamplay JavaScript SDK provides a JavaScript library making it even easier to access the Stamplay cloud platform. On this initial release the SDK let you work with the most important and flexible components of our platform: `User` , `Custom Objects` and `Webhook`.To enable support for Stamplay-related functions in your web app, you'll need to include `stamplay.min.js` in your app. 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
@@ -33,6 +33,23 @@ user.currentUser()
   tags.add(tag);
 });
 ```
+
+Our JavaScript SDK has just two dependecies one is [Undescore](https://github.com/jashkenas/underscore) and the other is 
+[Q](https://github.com/kriskowal/q). Most of the methods of Stamplay Javascript SDK returns a promise. Promises have a then method, which you can use to get the 'eventual' return value or thrown exception (rejection).
+
+```javascript
+
+var tag = new Stamplay.Cobject('tag').Model;
+tag.set('name','stamplay')
+tag.save().then(function(){
+  //success
+  //Stamplay Javascript SDK updates the tag object with the response of the API call    
+}, function(err){
+  //error
+  //Stamplay Javascript SDK returns the request 
+});
+
+```  
 
 ##Available components
 This JavaScript SDK expose through the Stamplay variable the following components:
