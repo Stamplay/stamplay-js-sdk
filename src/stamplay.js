@@ -25,7 +25,7 @@
 
 	root.Stamplay.init = function(appId){
 		root.Stamplay.APPID  = appId; 
-		root.Stamplay.BASEURL = 'http://'+appId+'.stamplayapp.com'
+		root.Stamplay.BASEURL = 'https://'+appId+'.stamplayapp.com'
 	} 
 
 	/* private function for handling this parameters */
