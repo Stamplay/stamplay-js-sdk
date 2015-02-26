@@ -8,7 +8,7 @@ The Stamplay JavaScript SDK provides a JavaScript library making it even easier 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.5/stamplay.min.js"/>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.6/stamplay.min.js"/>
 ```
 For use inside browsers, a window scoped variable called `Stamplay` is created.
 For a correct use you must inizialize the SDK with the following code, that is very IMPORTANT:
@@ -532,5 +532,5 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```javascript
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.5/stamplay.min.js"/>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.6/stamplay.min.js"/>
 ```
