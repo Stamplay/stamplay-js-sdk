@@ -76,7 +76,7 @@ suite('Stamplay User Model ', function () {
 		});
 
 		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, '/api/user/v0/getStatus');
+		assert.equal(this.request.url, null+'/api/user/v0/getStatus');
 
 		this.request.respond(200, {
 			"Content-Type": "application/json"
@@ -96,7 +96,7 @@ suite('Stamplay User Model ', function () {
 		});
 
 		services.forEach(function (service, i) {
-			var url = '/auth/' + Stamplay.VERSION + '/' + service + '/connect';
+			var url = null+'/auth/' + Stamplay.VERSION + '/' + service + '/connect';
 			assert.equal(arr[i], location.protocol + '//' + document.domain + url);
 		});
 		Stamplay.Support.redirect.restore(); // Unwraps the spy
@@ -111,7 +111,7 @@ suite('Stamplay User Model ', function () {
 		});
 
 		assert.equal(this.request.method, 'POST');
-		assert.equal(this.request.url, '/auth/v0/local/login');
+		assert.equal(this.request.url, null+'/auth/v0/local/login');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(onSignup));
@@ -132,7 +132,7 @@ suite('Stamplay User Model ', function () {
 		});
 
 		assert.equal(this.request.method, 'POST');
-		assert.equal(this.request.url, '/api/user/v0/users');
+		assert.equal(this.request.url, null+'/api/user/v0/users');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(data));
@@ -174,7 +174,7 @@ suite('Stamplay User Model ', function () {
 			done();
 		});
 
-		assert.equal(this.request.url, '/api/user/v0/users/123');
+		assert.equal(this.request.url, null+'/api/user/v0/users/123');
 
 
 		this.request.respond(200, {
@@ -195,7 +195,7 @@ suite('Stamplay User Model ', function () {
 		assert.equal(this.request.method, 'POST');
 		assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
 		assert.equal(this.request.requestBody, JSON.stringify(newUser.instance));
-		assert.equal(this.request.url, '/api/user/v0/users');
+		assert.equal(this.request.url, null+'/api/user/v0/users');
 
 		this.request.respond(200, {
 			"Content-Type": "application/json"
@@ -215,7 +215,7 @@ suite('Stamplay User Model ', function () {
 		assert.equal(this.request.method, 'PUT');
 		assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
 		assert.equal(this.request.requestBody, JSON.stringify(newUser.instance));
-		assert.equal(this.request.url, '/api/user/v0/users/123');
+		assert.equal(this.request.url, null+'/api/user/v0/users/123');
 
 		this.request.respond(200, {
 			"Content-Type": "application/json"
@@ -238,7 +238,7 @@ suite('Stamplay User Model ', function () {
 		assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
 		//Patch should send only changed attributes but right now PATCH = PUT
 		assert.equal(this.request.requestBody, JSON.stringify(newUser.instance));
-		assert.equal(this.request.url, '/api/user/v0/users/123');
+		assert.equal(this.request.url, null+'/api/user/v0/users/123');
 
 		this.request.respond(200, {
 			"Content-Type": "application/json"
@@ -260,7 +260,7 @@ suite('Stamplay User Model ', function () {
 		});
 
 		assert.equal(this.request.method, 'DELETE');
-		assert.equal(this.request.url, '/api/user/v0/users/123');
+		assert.equal(this.request.url, null+'/api/user/v0/users/123');
 		//Patch should send only changed attributes but right now PATCH = PUT
 		assert.isUndefined(this.request.requestBody);
 
