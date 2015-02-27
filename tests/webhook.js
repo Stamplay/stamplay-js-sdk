@@ -42,15 +42,15 @@ suite('Webhook', function () {
 
   test('has the url property', function () {
     assert.isString(webhook.url, 'url string exists');
-    assert.equal(webhook.url, null+'/api/webhook/v0/mywebhook/catch');
+    assert.equal(webhook.url, '/api/webhook/v0/mywebhook/catch');
   });
 
   test('that the url is formatted correctly', function () {
     var w1 = new Stamplay.Webhook('Test_Test');
-    assert.equal(w1.url, null+'/api/webhook/v0/test_test/catch');
+    assert.equal(w1.url, '/api/webhook/v0/test_test/catch');
 
     var w2 = new Stamplay.Webhook('a_b-c');
-    assert.equal(w2.url, null+'/api/webhook/v0/a_bc/catch');
+    assert.equal(w2.url, '/api/webhook/v0/a_bc/catch');
   });
 
   test('that get method will send a get request', function (done) {
@@ -62,7 +62,7 @@ suite('Webhook', function () {
 
     assert.equal(this.request.method, 'GET');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-    assert.equal(this.request.url, null+'/api/webhook/v0/mywebhook/catch');
+    assert.equal(this.request.url, '/api/webhook/v0/mywebhook/catch');
 
     this.request.respond(200, {
       "Content-Type": "application/json"
@@ -77,7 +77,7 @@ suite('Webhook', function () {
 
     assert.equal(this.request.method, 'POST');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, null+'/api/webhook/v0/mywebhook/catch');
+    assert.equal(this.request.url, '/api/webhook/v0/mywebhook/catch');
 
     this.request.respond(200, {
       "Content-Type": "application/json"
@@ -92,7 +92,7 @@ suite('Webhook', function () {
 
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, null+'/api/webhook/v0/mywebhook/catch');
+    assert.equal(this.request.url, '/api/webhook/v0/mywebhook/catch');
 
     this.request.respond(200, {
       "Content-Type": "application/json"
