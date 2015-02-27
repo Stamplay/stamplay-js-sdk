@@ -23,5 +23,5 @@
     "q": "1.0.0"
   },
   "keywords": ["stamplay-sdk", "stamplay"],
-  "private": "false"
+  "homepage": "https://github.com/Stamplay/stamplay-js-sdk"
 }
