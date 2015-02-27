@@ -2,13 +2,14 @@ Stamplay JavaScript SDK
 ===============
 [![Build Status](https://travis-ci.org/Stamplay/stamplay-js-sdk.svg?branch=master)](https://travis-ci.org/Stamplay/stamplay-js-sdk)
 [![Production version](http://img.shields.io/badge/download-38%20kB-blue.svg)](https://raw.githubusercontent.com/Stamplay/stamplay-js-sdk/master/dist/stamplay.min.js)
+[![Bower version](https://badge.fury.io/bo/stamplay-sdk.svg)](http://badge.fury.io/bo/stamplay-sdk)
 
 ##Getting Started
 The Stamplay JavaScript SDK provides a JavaScript library making it even easier to access the Stamplay cloud platform. On this initial release the SDK let you work with the most important and flexible components of our platform: `User` , `Custom Objects` and `Webhook`.To enable support for Stamplay-related functions in your web app, you'll need to include `stamplay.min.js` in your app. 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.4/stamplay.min.js"/>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.5/stamplay.min.js"/>
 ```
 For use inside browsers, a window scoped variable called `Stamplay` is created.
 Our JavaScript SDK is based on the popular Backbone.js framework. It is compatible with existing Backbone applications with minimal changes on your part. Our goal is to minimize configuration and let you quickly start building your JavaScript and HTML5 app on Stamplay. Here is a simple example of usage:
@@ -347,6 +348,7 @@ users.fetch()
 User model has the following additional methods.
 
   * <a href="#User.currentUser"> <code>currentUser()</code></a>
+  * <a href="#User.isLogged"> <code>isLogged()</code></a>
   * <a href="#User.login"><code>login()</code></a>
   * <a href="#User.signup"><code>signup()</code></a>
   * <a href="#User.logout"><code>logout()</code></a>
@@ -362,6 +364,13 @@ user.currentUser()
 .then(function(){
 	user.get('displayName');
 })
+```
+
+<a name="User.isLogged"></a>
+###isLogged()
+The isLogged method return a boolean 
+```javascript
+var status = user.isLogged();
 ```
 <a name="User.login"></a>
 ###login()
@@ -526,5 +535,5 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```javascript
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.4/stamplay.min.js"/>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.5/stamplay.min.js"/>
 ```

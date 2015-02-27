@@ -56,6 +56,7 @@ suite('Stamplay User Model ', function () {
 
 	test('has the user custom methods', function () {
 		assert.isFunction(user.currentUser, 'user status exists');
+		assert.isFunction(user.isLogged, 'user isLogged exists');
 		assert.isFunction(user.login, 'login status exists');
 		assert.isFunction(user.logout, 'logout status exists');
 		assert.isFunction(user.signup, 'signup status exists');
@@ -69,9 +70,10 @@ suite('Stamplay User Model ', function () {
 	});
 
 	test('user currentUser method', function (done) {
+		assert.equal(user.isLogged(), false)
 
 		user.currentUser().then(function () {
-			assert.equal(user.get('_id'), 123);
+			assert.equal(user.isLogged(), true)
 			done();
 		});
 
@@ -81,6 +83,21 @@ suite('Stamplay User Model ', function () {
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(validUser));
+	});
+
+	test('user isLogged method', function (done) {
+
+
+		user.login('email@email.com', 'my_password').then(function () {
+			assert.equal(user.get('_id'), 123);
+			done();
+		});
+
+		assert.equal(this.request.method, 'POST');
+		assert.equal(this.request.url, '/auth/v0/local/login');
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, JSON.stringify(onSignup));
 	});
 
 	test('user login method with external services', function () {

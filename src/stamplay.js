@@ -527,6 +527,7 @@
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId,
 				thisParams: thisParams
 			}).then(function (response) {
+				_this.instance = [];
 				//iterate on data and instance a new Model with the prototype functions
 				response.data.forEach(function (singleInstance) {
 					var instanceModel;
@@ -650,6 +651,13 @@
 				_this.instance = response.user || {};
 			});
 		},
+		// isLoggedfunction
+		// return true if user is logged
+		this.Model.isLogged = function(){
+			if(this.instance._id)
+				return true
+			return false
+		}
 
 		// login function, it takes serviceOrEmail and password
 		// if exists password parameter, login strategy is local Authentication
