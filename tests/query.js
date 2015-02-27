@@ -38,28 +38,28 @@ suite('Stamplay Query ', function () {
 
     var query = new Stamplay.Query('user')
     query.equalTo('name','pippo').exec().then(function(){})
-    assert.equal(this.request.url, null+'/api/user/v0/users?name=pippo');
+    assert.equal(this.request.url, '/api/user/v0/users?name=pippo');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, '{ "_id": 123, "name": "Pippo" }');
 
     var query = new Stamplay.Query('user')
     query.equalTo('name','pippo').limit(5).sortAscending('name').exec().then(function(){})
-    assert.equal(this.request.url, null+'/api/user/v0/users?name=pippo&n=5&sort=name');
+    assert.equal(this.request.url, '/api/user/v0/users?name=pippo&n=5&sort=name');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, '{ "_id": 123, "name": "Pippo" }');
 
     var query = new Stamplay.Query('user')
     query.equalTo('name','pippo').select(['description','name','surname']).sortAscending('name').exec().then(function(){})
-    assert.equal(this.request.url, null+'/api/user/v0/users?name=pippo&select=description,name,surname&sort=name');
+    assert.equal(this.request.url, '/api/user/v0/users?name=pippo&select=description,name,surname&sort=name');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, '{ "_id": 123, "name": "Pippo", "surname":"paperino", "description":"cartoon"}');
 
     var query = new Stamplay.Query('cobject','tag')
     query.equalTo('description','pippo').sortAscending('name').limit(5).exec().then(function(){})
-    assert.equal(this.request.url, null+'/api/cobject/v0/tag?description=pippo&sort=name&n=5');
+    assert.equal(this.request.url, '/api/cobject/v0/tag?description=pippo&sort=name&n=5');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, '{ "_id": 123, "description": "Pippo" }');

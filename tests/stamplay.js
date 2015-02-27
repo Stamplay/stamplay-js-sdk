@@ -8,10 +8,6 @@ suite('Stamplay Object ', function () {
 		assert.typeOf(window.Stamplay.removeAttributes, 'function', 'window.Stamplay.removeAttributes exists');
 	});
 
-	test('exists as Stamplay function called init', function () {
-		assert.typeOf(window.Stamplay.init, 'function', 'window.Stamplay.init exists');
-	});
-
 	test('exists as Stamplay function called makeAPromise', function () {
 		assert.typeOf(window.Stamplay.makeAPromise, 'function', 'window.Stamplay.makeAPromise exists');
 	});
