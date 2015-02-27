@@ -1,4 +1,4 @@
-/*! Stamplay v0.0.5 | (c) 2015 The Stamplay Dreamteam */ 
+/*! Stamplay v0.0.4 | (c) 2015 The Stamplay Dreamteam */ 
 //     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1949,10 +1949,6 @@ return Q;
 	root.Stamplay = root.Stamplay || {};
 	/* setting attribute API Version */
 	root.Stamplay.VERSION = "v0";
-	/* setting attribute APPID */
-	root.Stamplay.APPID   =  null;
-	/* base url */
-	root.Stamplay.BASEURL =  null;
 	/* Silence Q logging*/
 	Q.stopUnhandledRejectionTracking();
 }(this));
@@ -1961,11 +1957,6 @@ return Q;
  * Very simple to use: Stamplay.makePromise({options})
  */
 (function (root) {
-
-	root.Stamplay.init = function(appId){
-		root.Stamplay.APPID  = appId; 
-		root.Stamplay.BASEURL = 'https://'+appId+'.stamplayapp.com'
-	} 
 
 	/* private function for handling this parameters */
 	var parseQueryParams = function (options) {
@@ -2061,7 +2052,7 @@ return Q;
 				data: {
 					email: email
 				},
-				url: Stamplay.BASEURL + '/api/auth/' + Stamplay.VERSION + '/validate/email'
+				url: '/api/auth/' + Stamplay.VERSION + '/validate/email'
 			})
 		}
 
@@ -2108,7 +2099,7 @@ return Q;
 			var thisParams = parseCurrentQuery(this.currentQuery)
 			return Stamplay.makeAPromise({
 				method: 'GET',
-				url: Stamplay.BASEURL + '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance,
+				url: '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance,
 				thisParams: thisParams
 			}).then(function (response) {
 				return response
@@ -2178,14 +2169,14 @@ return Q;
 					data: {
 						type: type
 					},
-					url: Stamplay.BASEURL + '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/' + action
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/' + action
 				}).then(function (response) {
 					_this.instance = response;
 				});
 			} else {
 				return Stamplay.makeAPromise({
 					method: 'PUT',
-					url: Stamplay.BASEURL + '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/' + action
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/' + action
 				}).then(function (response) {
 					_this.instance = response;
 				});
@@ -2215,7 +2206,7 @@ return Q;
 					data: {
 						rate: vote
 					},
-					url: Stamplay.BASEURL + '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/rate'
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/rate'
 				}).then(function (response) {
 					_this.instance = response;
 				});
@@ -2233,7 +2224,7 @@ return Q;
 				data: {
 					text: text
 				},
-				url: Stamplay.BASEURL + '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/comment'
+				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/comment'
 			}).then(function (response) {
 				instance = response;
 			});
@@ -2335,7 +2326,7 @@ return Q;
 			var _this = this;
 			return Stamplay.makeAPromise({
 				method: 'GET',
-				url: Stamplay.BASEURL + '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + _id,
+				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + _id,
 				thisParams: thisParams
 			}).then(function (response) {
 				_this.instance = response;
@@ -2359,7 +2350,7 @@ return Q;
 
 			var method = (!this.instance._id) ? 'POST' : getUpdateMethod();
 
-			var url = Stamplay.BASEURL + '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId;
+			var url = '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId;
 
 			if (method === 'PATCH' || method === 'PUT') {
 				url = url + '/' + this.get('_id');
@@ -2383,7 +2374,7 @@ return Q;
 
 				return Stamplay.makeAPromise({
 					method: 'DELETE',
-					url: Stamplay.BASEURL + '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.get('_id')
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.get('_id')
 				});
 
 			} else {
@@ -2472,7 +2463,7 @@ return Q;
 
 			return Stamplay.makeAPromise({
 				method: 'GET',
-				url: Stamplay.BASEURL + '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId,
+				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId,
 				thisParams: thisParams
 			}).then(function (response) {
 				//iterate on data and instance a new Model with the prototype functions
@@ -2593,7 +2584,7 @@ return Q;
 			var _this = this;
 			return Stamplay.makeAPromise({
 				method: 'GET',
-				url: Stamplay.BASEURL + '/api/' + this.brickId + '/' + Stamplay.VERSION + '/getStatus'
+				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/getStatus'
 			}).then(function (response) {
 				_this.instance = response.user || {};
 			});
@@ -2616,14 +2607,14 @@ return Q;
 				return Stamplay.makeAPromise({
 					method: 'POST',
 					data: data,
-					url: Stamplay.BASEURL + '/auth/' + Stamplay.VERSION + '/local/login',
+					url: '/auth/' + Stamplay.VERSION + '/local/login',
 				}).then(function (response) {
 					_this.instance = response || {};
 
 				});
 
 			} else {
-				var url = Stamplay.BASEURL +  '/auth/' + Stamplay.VERSION + '/' + serviceOrEmail + '/connect'
+				var url =  '/auth/' + Stamplay.VERSION + '/' + serviceOrEmail + '/connect'
 				root.Stamplay.Support.redirect(location.protocol + '//' + document.domain + url);
 			}
 		},
@@ -2640,7 +2631,7 @@ return Q;
 				return Stamplay.makeAPromise({
 					method: 'POST',
 					data: data,
-					url: Stamplay.BASEURL + '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId
 				}).then(function (response) {
 					_this.instance = response || {};
 				});
@@ -2676,7 +2667,7 @@ return Q;
 
 		var resource = resourceId.replace(/[^\w\s]/gi, '').trim().toLowerCase().replace(/\s+/g, '_');
 
-		this.url = Stamplay.BASEURL + '/api/webhook/'+ Stamplay.VERSION +'/'+resource+'/catch';
+		this.url = '/api/webhook/'+ Stamplay.VERSION +'/'+resource+'/catch';
 		
 		this.get = function(){
 			return Stamplay.makeAPromise({
