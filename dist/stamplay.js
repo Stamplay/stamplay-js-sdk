@@ -2590,7 +2590,8 @@ return Q;
 				_this.instance = response.user || {};
 			});
 		},
-
+		// isLoggedfunction
+		// return true if user is logged
 		this.Model.isLogged = function(){
 			if(this.instance._id)
 				return true
