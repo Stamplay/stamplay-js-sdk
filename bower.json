@@ -5,12 +5,13 @@
     "Claudio Petrini",
     "Cristian Roselli"
   ],
+  "main": "dist/stamplay.js",
   "license": "MIT",
   "ignore": [
-    "**/.*",
     "node_modules",
     "bower_components",
-    "test",
+    "grunt",
+    "grunt-task",
     "tests"
   ],
   "dependencies": {
@@ -20,5 +21,7 @@
     "chai": "~1.9.1",
     "underscore": "~1.7.0",
     "q": "1.0.0"
-  }
+  },
+  "keywords": ["stamplay-sdk", "stamplay"],
+  "private": "false"
 }
