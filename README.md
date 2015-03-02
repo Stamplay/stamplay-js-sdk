@@ -78,7 +78,7 @@ var registrationData = {
 	email : 'user@provider.com',
 	password: 'mySecret'
 };
-var newUser = new Stamplay.User;
+var newUser = new Stamplay.User().Model;
 newUser.signup(registrationData)
 .then(function(){
 	// User is now registered
