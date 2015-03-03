@@ -92,9 +92,7 @@ suite('Stamplay Cobject Collection ', function () {
     });
 
     this.request.respond(200, {
-      "Content-Type": "application/json",
-      "x-total-elements":"2",
-      "link":'<http://editor.stamplay.com/api/cobject/v0/coinstances?page=1&per_page=10&cobjectId=cobjectId>; rel="last",<http://editor.stamplay.com/api/cobject/v0/coinstances?&cobjectId=cobjectId>; rel="generic"'
+      "Content-Type": "application/json"
     }, '{"data": [{ "_id": 123, "comment": "Hey there" }, { "_id": 124, "comment": "Hey there you" }]}');
   });
 
@@ -102,7 +100,7 @@ suite('Stamplay Cobject Collection ', function () {
 
     var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
 
-    newCinstance.fetch().then(function () {
+    newCinstance.fetch(null,true).then(function () {
 
       assert.isArray(newCinstance.instance);
       assert.equal(newCinstance.instance.length, 2, 'Two instances should be present');

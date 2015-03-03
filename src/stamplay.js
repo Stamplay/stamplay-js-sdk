@@ -597,7 +597,7 @@
 
 		// fetch function, it takes thisParams
 		// Return a promise. Modify the instance with the data from Stamplay Server
-		this.fetch = function (thisParams) {
+		this.fetch = function (thisParams, headers) {
 
 			thisParams = thisParams || {};
 			var _this = this;
@@ -606,7 +606,7 @@
 				method: 'GET',
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId,
 				thisParams: thisParams
-			},true).then(function (response) {
+			},headers).then(function (response) {
 				//set two attributes to collection
 				if(response.totalElement && response.link){
 					_this.totalElement = parseInt(response.totalElement);
