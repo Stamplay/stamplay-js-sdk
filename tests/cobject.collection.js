@@ -1,3 +1,4 @@
+
 suite('Stamplay Cobject Collection ', function () {
 
   var coll_cinstance;
@@ -22,8 +23,6 @@ suite('Stamplay Cobject Collection ', function () {
     coll_cinstance = new Stamplay.Cobject('cobjectId').Collection;
     coll_cinstance.add(i1);
     coll_cinstance.add(i2);
-
-
 
     this.xhr = sinon.useFakeXMLHttpRequest();
     this.request;
@@ -93,10 +92,39 @@ suite('Stamplay Cobject Collection ', function () {
     });
 
     this.request.respond(200, {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "x-total-elements":"2",
+      "link":'<http://editor.stamplay.com/api/cobject/v0/coinstances?page=1&per_page=10&cobjectId=cobjectId>; rel="last",<http://editor.stamplay.com/api/cobject/v0/coinstances?&cobjectId=cobjectId>; rel="generic"'
     }, '{"data": [{ "_id": 123, "comment": "Hey there" }, { "_id": 124, "comment": "Hey there you" }]}');
+  });
 
+  test('fetch function with headers', function (done) {
 
+    var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
+
+    newCinstance.fetch().then(function () {
+
+      assert.isArray(newCinstance.instance);
+      assert.equal(newCinstance.instance.length, 2, 'Two instances should be present');
+
+      assert.equal(newCinstance.instance[0].get('_id'), 123);
+      assert.equal(newCinstance.instance[0].get('comment'), 'Hey there');
+
+      assert.equal(newCinstance.instance[1].get('_id'), 124);
+      assert.equal(newCinstance.instance[1].get('comment'), 'Hey there you');
+
+      assert.equal(newCinstance.totalElement, 2);
+      assert.equal(newCinstance.link.generic,'http://editor.stamplay.com/api/cobject/v0/coinstances?&cobjectId=cobjectId&sort=-dt_create');
+      assert.equal(newCinstance.link.last,'http://editor.stamplay.com/api/cobject/v0/coinstances?page=1&per_page=10&cobjectId=cobjectId&sort=-dt_create');
+
+      done();
+    })
+
+    this.request.respond(200, {
+      "Content-Type": "application/json",
+      "x-total-elements":"2",
+      "link":'<http://editor.stamplay.com/api/cobject/v0/coinstances?page=1&per_page=10&cobjectId=cobjectId>; rel="last",<http://editor.stamplay.com/api/cobject/v0/coinstances?&cobjectId=cobjectId>; rel="generic"'
+    }, '{"data": [{ "_id": 123, "comment": "Hey there" }, { "_id": 124, "comment": "Hey there you" }]}');
   });
 
   test('remove function with single _id', function () {
@@ -147,6 +175,23 @@ suite('Stamplay Cobject Collection ', function () {
     assert.equal(onlyOne.get('_id'), 124);
   });
 
+  test('underscore method exists',function(){
+
+    var collectionMethods = {  forEach: 3, each: 3, map: 3, collect: 3, reduce: 4,
+      foldl: 4, inject: 4, reduceRight: 4, foldr: 4, find: 3, detect: 3, filter: 3,
+      select: 3, reject: 3, every: 3, all: 3, some: 3, any: 3, include: 2,
+      contains: 2, invoke: 2, max: 3, min: 3, toArray: 1, size: 1, first: 3,
+      head: 3, take: 3, initial: 3, rest: 3, tail: 3, drop: 3, last: 3,
+      without: 0, difference: 0, indexOf: 3, shuffle: 1, lastIndexOf: 3,
+      isEmpty: 1, chain: 1, sample: 3, partition: 3 }
+
+    var model = {}
+    _.each(collectionMethods, function(length, method) {
+      assert.isFunction(coll_cinstance[method], method);
+    })
+
+  })
+
   test('at function', function () {
     var first = coll_cinstance.at(0);
     assert.equal(first.get('_id'), 123);
@@ -161,7 +206,6 @@ suite('Stamplay Cobject Collection ', function () {
     });
     assert.isUndefined(nothingHere3);
     assert.equal(coll_cinstance.instance.length, 2);
-
   });
 
   test('get function', function () {
@@ -174,8 +218,6 @@ suite('Stamplay Cobject Collection ', function () {
     assert.isUndefined(instanceGet_wrong_id);
     var instanceGet_undefined_id = coll_cinstance.get();
     assert.isUndefined(instanceGet_undefined_id);
-
-
   });
 
   test('add function', function () {
@@ -199,7 +241,6 @@ suite('Stamplay Cobject Collection ', function () {
 
     coll_cinstance.add();
     assert.equal(coll_cinstance.instance.length, 3);
-
   });
 
   test('length property', function () {
@@ -212,12 +253,12 @@ suite('Stamplay Cobject Collection ', function () {
     coll_cinstance.add(i3);
     len = coll_cinstance.length;
     assert.equal(len, 3);
-
   });
 
   test('pop function', function () {
     // Remove and return the last model from a collection.
     var lastElem = coll_cinstance.pop();
+
     assert.equal(lastElem.get('_id'), 124);
     assert.equal(coll_cinstance.length, 1);
 
@@ -232,7 +273,6 @@ suite('Stamplay Cobject Collection ', function () {
     var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
     lastElem = coll_cinstance.pop();
     assert.isFalse(lastElem);
-
   });
 
   test('shift function', function () {
@@ -252,7 +292,6 @@ suite('Stamplay Cobject Collection ', function () {
     var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
     lastElem = coll_cinstance.shift();
     assert.isFalse(lastElem);
-
   });
 
   test('has no action methods', function () {

@@ -137,6 +137,18 @@ suite('Stamplay Cobject Model ', function () {
 
   });
 
+  test('underscore method exists',function(){
+
+    var modelMethods = { keys: 1, values: 1, pairs: 1, invert: 1, pick: 0,
+      omit: 0, chain: 1, isEmpty: 1 }
+  
+    var model = {}
+    _.each(modelMethods, function(length, method) {
+      assert.isFunction(cinstance[method], method);
+    })
+
+  });
+
   test('get method', function () {
 
     assert.equal(cinstance.get('number_property'), 5);

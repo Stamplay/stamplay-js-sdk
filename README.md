@@ -9,7 +9,7 @@ The Stamplay JavaScript SDK provides a JavaScript library making it even easier 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.5/stamplay.min.js"></script>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.6/stamplay.min.js"></script>
 ```
 For use inside browsers, a window scoped variable called `Stamplay` is created.
 Our JavaScript SDK is based on the popular Backbone.js framework. It is compatible with existing Backbone applications with minimal changes on your part. Our goal is to minimize configuration and let you quickly start building your JavaScript and HTML5 app on Stamplay. Here is a simple example of usage:
@@ -231,12 +231,12 @@ The second parameter is the name of instance of model.
 For example for a custom object called tag you must write a line of code like this:
 
 ```javascript
-var query = new Stamplay.query('cobject','tag') 
+var query = new Stamplay.Query('cobject','tag') 
 ```
 
 The following code show you how to use query object:
 ```javascript
-var query = new Stamplay.query('cobject','tag').equalTo('name','foo')
+var query = new Stamplay.Query('cobject','tag').equalTo('name','foo')
 query.exec().then(function(response){
   //the response of your query 
 }) 
@@ -284,7 +284,7 @@ This method runs the query and return a promise
 If you want create a more complex query you could use all methods, check this example:
 
 ```javascript
-var query = new Stamplay.query('cobject','tag')
+var query = new Stamplay.Query('cobject','tag')
 query.equalTo('name','foo').limit(10).select(['name','description']).sort('description');
 query.exec().then(function(response){
   //the response of your query 
@@ -535,5 +535,5 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```HTML
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.5/stamplay.min.js"></script>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.6/stamplay.min.js"></script>
 ```

@@ -4,7 +4,7 @@ module.exports = {
 		stripBanners: {
 			block: true
 		},
-		banner: "/*! Stamplay v<%= pkg.version %> | " + "(c) " + new Date().getFullYear() + " The Stamplay Dreamteam */ \n"
+		banner: "/*! Stamplay v<%= pkg.version %> | " + "(c) " + new Date().getFullYear() + " The Stamplay Dreamteam */"
 	},
 	dist: {
 		src: [

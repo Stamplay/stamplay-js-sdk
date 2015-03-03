@@ -1,5 +1,10 @@
 # Stamplay JS SDK Changelog
 
+0.0.6 / 03-03-2015 
+==================
+
+* Added underscore method to Collection and Model, added total element and link to collection for handle the pagination 
+
 0.0.4 / 19-02-2015
 ==================
 

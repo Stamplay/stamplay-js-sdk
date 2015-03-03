@@ -29,9 +29,25 @@
 		}
 	}
 
+	/* private function for parse link's header */ 
+	var parseLink = function(parts, link) {
+      for (var i = 0; i < parts.length; i++) {
+        var section = parts[i].split(';');
+        if (section.length != 2) {
+          throw new Error("section could not be split on ';'");
+        }
+        var url = section[0].replace(/<(.*)>/, '$1').trim();
+        var name = section[1].replace(/rel="(.*)"/, '$1').trim();
+        if (url.indexOf('&sort=') < 0) {
+          url += '&sort=-dt_create';
+        }
+        link[name] = url;
+      }
+    }
+
 	/* function for handling any calls to Stamplay Platform */
 	/* Options parameter is an object  */
-	root.Stamplay.makeAPromise = function (options) {
+	root.Stamplay.makeAPromise = function (options, wantHeaders) {
 		/*
 			options : {
 				method: GET|POST|PUT|DELETE|PATCH
@@ -68,7 +84,19 @@
 			if ([200, 304].indexOf(req.status) === -1) {
 				deferred.reject(req);
 			} else {
-				deferred.resolve(JSON.parse(req.responseText));
+
+				//parse the JSON response from the server
+				var response =JSON.parse(req.responseText)
+					
+				if(wantHeaders){
+					//parse headers
+					var parts = req.getResponseHeader('link').split(',');
+					response.link = {};
+					parseLink(parts, response.link);
+					response.totalElement = req.getResponseHeader('x-total-elements')
+					deferred.resolve(response);
+				}else
+					deferred.resolve(response);
 			}
 		};
 		req.send(JSON.stringify(options.data) || void 0);
@@ -218,6 +246,37 @@
  */
 (function (root) {
 
+	//method to add underscore function
+	var addMethod = function(length, method, attribute) {
+	    switch (length) {
+	      case 1: return function() {
+	        return _[method](this[attribute]);
+	      };
+	      case 2: return function(value) {
+	        return _[method](this[attribute], value);
+	      };
+	      case 3: return function(iteratee, context) {
+	        return _[method](this[attribute], iteratee, context);
+	      };
+	      case 4: return function(iteratee, defaultVal, context) {
+	        return _[method](this[attribute], iteratee, defaultVal, context);
+	      };
+	      default: return function() {
+	        var args = Array.prototype.slice.call(arguments);
+	        args.unshift(this[attribute]);
+	        return _[method].apply(_, args);
+	      };
+	    }
+	  };
+
+	//method to add underscore method to collection or model
+	var addUnderscoreMethods = function(Class, methods, attribute) {
+	  _.each(methods, function(length, method) {
+	      if (_[method]) 
+	      	Class[method] = addMethod.call(Class, length, method, attribute);
+	  });
+	};
+
 	/* Action constructor, it takes a instance of BaseComponent */
 	function Action() {
 
@@ -344,6 +403,12 @@
 		// name of subresource
 		this.resourceId = resourceId;
 
+		var modelMethods = { keys: 1, values: 1, pairs: 1, invert: 1, pick: 0,
+      omit: 0, chain: 1, isEmpty: 1 };
+
+  	// Mix in each Underscore method as a proxy to `Model#attributes`.
+  	addUnderscoreMethods(this, modelMethods, 'instance');
+
 		// if baseComponent hasAction add some methods to Model 
 		if (hasAction) {
 			Action.call(this)
@@ -460,7 +525,22 @@
 		this.resourceId = resourceId;
 		//length of Collection
 		this.length = this.instance.length
+		//total element 
+		this.totalElement = 0;
+		//links for pagination
+		this.link = {};
 
+	  var collectionMethods = {  forEach: 3, each: 3, map: 3, collect: 3, reduce: 4,
+      foldl: 4, inject: 4, reduceRight: 4, foldr: 4, find: 3, detect: 3, filter: 3,
+      select: 3, reject: 3, every: 3, all: 3, some: 3, any: 3, include: 2,
+      contains: 2, invoke: 2, max: 3, min: 3, toArray: 1, size: 1, first: 3,
+      head: 3, take: 3, initial: 3, rest: 3, tail: 3, drop: 3, last: 3,
+      without: 0, difference: 0, indexOf: 3, shuffle: 1, lastIndexOf: 3,
+      isEmpty: 1, chain: 1, sample: 3, partition: 3 }
+
+  	// Mix in each Underscore method as a proxy to `Collection`.
+  	addUnderscoreMethods(this, collectionMethods, 'instance');
+		
 		// get function, it takes _id 
 		// Return Model with _id
 		this.get = function (_id) {
@@ -526,7 +606,12 @@
 				method: 'GET',
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId,
 				thisParams: thisParams
-			}).then(function (response) {
+			},true).then(function (response) {
+				//set two attributes to collection
+				if(response.totalElement && response.link){
+					_this.totalElement = parseInt(response.totalElement);
+					_this.link = response.link;
+				}
 				_this.instance = [];
 				//iterate on data and instance a new Model with the prototype functions
 				response.data.forEach(function (singleInstance) {
