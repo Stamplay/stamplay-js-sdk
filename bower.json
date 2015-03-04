@@ -1,6 +1,6 @@
 {
   "name": "stamplay-js-sdk",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "authors": [
     "Claudio Petrini",
     "Cristian Roselli"
@@ -22,6 +22,9 @@
     "underscore": "~1.7.0",
     "q": "1.0.0"
   },
-  "keywords": ["stamplay-sdk", "stamplay"],
+  "keywords": [
+    "stamplay-sdk",
+    "stamplay"
+  ],
   "homepage": "https://github.com/Stamplay/stamplay-js-sdk"
 }
