@@ -75,18 +75,18 @@ The following example shows how to create a new instance of a User model ( model
 
 ```javascript
 var registrationData = {
-	email : 'user@provider.com',
-	password: 'mySecret'
+  email : 'user@provider.com',
+  password: 'mySecret'
 };
 var newUser = new Stamplay.User().Model;
 newUser.signup(registrationData)
 .then(function(){
-	// User is now registered
-	newUser.set('phoneNumber', '020 123 4567' );
-	return newUser.save();
+  // User is now registered
+  newUser.set('phoneNumber', '020 123 4567' );
+  return newUser.save();
 }).then(function(){
-	// User is saved server side
-	var number = newUser.get('phoneNumber'); // number value is 020 123 4567 
+  // User is saved server side
+  var number = newUser.get('phoneNumber'); // number value is 020 123 4567 
 })
 ```
 
@@ -118,8 +118,8 @@ Some models have built-in social actions and the SDK provides a fast way to ```r
 var tag = new Stamplay.Cobject('tag').Model;
 tag.rate(4)
 .then(function(){
-	var actions = tag.get('actions');
-	console.log(actions.ratings); // You can see the ratings, the average rate and the users who rate
+  var actions = tag.get('actions');
+  console.log(actions.ratings); // You can see the ratings, the average rate and the users who rate
 });
 ```
 
@@ -271,8 +271,8 @@ If you need more than one argument you can set an array of attributes
 ### sortAscending('attr')
 This method take an argument, the name of attribute you want to sorting
 
-<a name="Query.sortDiscending"></a>
-### sortDiscending('attr')
+<a name="Query.sortDescending"></a>
+### sortDescending('attr')
 This method take an argument, the name of attribute you want to sorting
 
 <a name="Query.exec"></a>
@@ -326,10 +326,10 @@ A Stamplay.User Model instance inherits all the [Model](#model) methods.
 ```javascript
 user.fetch(id)
 .then(function(){
-	user.set('displayName', 'New display name');
-	user.save().then(function(){
-		user.get('displayName'); //returns New display name
-	});
+  user.set('displayName', 'New display name');
+  user.save().then(function(){
+    user.get('displayName'); //returns New display name
+  });
 });
 ```
 
@@ -338,8 +338,8 @@ A Stamplay.User.Collection instance inherits all the [Collection](#collection) m
 ```javascript
 users.fetch()
 .then(function(){
-	var firstUser = users.at(0);
-	firstUser.get('displayName');
+  var firstUser = users.at(0);
+  firstUser.get('displayName');
 })
 ```
 
@@ -362,7 +362,7 @@ If the user is logged it populates the model with the user's data, otherwise the
 ```javascript
 user.currentUser()
 .then(function(){
-	user.get('displayName');
+  user.get('displayName');
 })
 ```
 
@@ -384,7 +384,7 @@ You can use this method for logging users with third party services by passing t
 ```javascript
 user.login('facebook')
 .then(function(){
-	user.get('displayName');
+  user.get('displayName');
 });
 ```
 #####Available services
@@ -404,7 +404,7 @@ Authentication with email and password. you can use the login method in this way
 ```javascript
 user.login('email@provider.com', 'mySecret')
 .then(function(){
-	user.get('displayName');
+  user.get('displayName');
 });  
 ```
 Note that for this kind of login you have to [register](#signupdata) the user first. 
@@ -414,13 +414,13 @@ Register user for local authentication. ```data``` parameter must be an object c
 
 ```javascript
 var registrationData = {
-	email : 'user@provider.com',
-	password: 'mySecret',
-	displayName: 'John Stamplay'
+  email : 'user@provider.com',
+  password: 'mySecret',
+  displayName: 'John Stamplay'
 };
 user.signup(registrationData)
 .then(function(){
-	user.get('displayName');
+  user.get('displayName');
 });  
 ```
  <a name="User.logout"></a>
@@ -446,11 +446,11 @@ A Stamplay.Cobject Model instance inherits all the [Model](#model) methods.
 ```javascript
 tag.fetch(id)
 .then(function(){
-	tag.set('description', 'Description');
-	return tag.save()
-	})
+  tag.set('description', 'Description');
+  return tag.save()
+  })
 .then(function(){
-	tag.get('description'); //returns Description
+  tag.get('description'); //returns Description
 });
 ```
 
@@ -459,8 +459,8 @@ A Stamplay.Cobject.Collection instance inherits all the [Collection](#collection
 ```javascript
 tags.fetch()
 .then(function(){
-	var firstTag = tags.at(0);
-	firstTag.get('description');
+  var firstTag = tags.at(0);
+  firstTag.get('description');
 });
 ```
 ## Cobject additional methods
@@ -469,8 +469,8 @@ The Stamplay.Cobject.Model inherits all the [Action](#action-methods) methods.
 ```javascript
 tag.vote()
 .then(function(){
-	var actions = tag.get('actions');
-	console.log(actions.votes); // You can see the number of votes and who has already voted
+  var actions = tag.get('actions');
+  console.log(actions.votes); // You can see the number of votes and who has already voted
 });
 ```
 
