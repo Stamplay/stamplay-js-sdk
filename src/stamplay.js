@@ -17,7 +17,7 @@
 	/* baseUrl */
 	root.Stamplay.BASEURL = "";
 	/*  check if exist local storage with the support of store.js */
-	if (window.localStorage && store.enabled){
+	if(window.localStorage && store.enabled){
    root.Stamplay.USESTORAGE = true;
 	}
 	/* init method for setup the base url */

@@ -10,7 +10,7 @@ module.exports = {
 		src: [
                   'bower_components/underscore/underscore-min.js',
                   'bower_components/q/q.js',
-                  'bower_components/store.js/store.min.js',
+                  'bower_components/store.js/store.js',
                   'src/stamplay.js',
                   'src/promise.js',
                   'src/baseComponent.js',
