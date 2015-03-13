@@ -28,6 +28,9 @@
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/getStatus'
 			}).then(function (response) {
 				_this.instance = response.user || {};
+				if(Stamplay.USESTORAGE){
+					store.set('stamplay-user', _this.instance)
+				}
 			});
 		},
 		// isLoggedfunction
@@ -58,7 +61,9 @@
 					url: '/auth/' + Stamplay.VERSION + '/local/login',
 				}).then(function (response) {
 					_this.instance = response || {};
-
+					if(Stamplay.USESTORAGE){
+						store.set('stamplay-user', _this.instance)
+					}
 				});
 
 			} else {
@@ -82,6 +87,9 @@
 					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId
 				}).then(function (response) {
 					_this.instance = response || {};
+					if(Stamplay.USESTORAGE){
+						store.set('stamplay-user', _this.instance)
+					}
 				});
 
 			} else {
@@ -91,6 +99,9 @@
 
 		// logout function
 		this.Model.logout = function () {
+			if(Stamplay.USESTORAGE){
+				store.remove('stamplay-user')
+			}
 			root.Stamplay.Support.redirect(location.protocol + '//' + document.domain + '/auth/v0/logout');
 		}
 

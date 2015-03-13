@@ -54,7 +54,7 @@
 		}
 
 		var deferred = Q.defer(),
-			req = new XMLHttpRequest();
+		req = new XMLHttpRequest();
 		req.open(options.method || 'GET', options.url, options.async || true);
 		// Set request headers if provided.
 		Object.keys(options.headers || {}).forEach(function (key) {
@@ -64,6 +64,14 @@
 		if (options.method && options.method !== 'DELETE') {
 			req.setRequestHeader('Content-Type', 'application/json');
 		}
+		
+		var headerStamplay = 'localhost';
+		if (root.Stamplay.APPID != "") {
+			headerStamplay = root.Stamplay.APPID;
+		}
+		
+		req.setRequestHeader('Stamplay-App', headerStamplay);
+		
 		req.onreadystatechange = function (e) {
 			if (req.readyState !== 4) {
 				return;

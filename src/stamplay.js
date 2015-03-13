@@ -10,16 +10,20 @@
 	root.Stamplay = root.Stamplay || {};
 	/* setting attribute API Version */
 	root.Stamplay.VERSION = "v0";
-	/* Silence Q logging*/
+	/* Silence Q logging */
 	Q.stopUnhandledRejectionTracking();
 	/* appId */
 	root.Stamplay.APPID = ""
 	/* baseUrl */
 	root.Stamplay.BASEURL = "";
-	/* init method for setup the base url*/
+	/*  check if exist local storage with the support of store.js */
+	if (window.localStorage && store.enabled){
+   root.Stamplay.USESTORAGE = true;
+	}
+	/* init method for setup the base url */
 	root.Stamplay.init = function(appId){
 		root.Stamplay.BASEURL = 'https://'+appId+'.stamplayapp.com';
 		root.Stamplay.APPID   = appId;
 	}
-
+	
 }(this));
