@@ -68,9 +68,56 @@ suite('Stamplay Cobject Collection ', function () {
     assert.property(coll_cinstance, 'length', 'length is a property');
   });
 
+  test('has the count method', function () {
+    assert.isFunction(coll_cinstance.count, 'count method exists');
+  });
+
+  test('has the set method', function () {
+    assert.isFunction(coll_cinstance.set, 'set method exists');
+  });
+
   test('has the instance property which is an array', function () {
     assert.isArray(coll_cinstance.instance, 'instance property is an array')
     assert.equal(coll_cinstance.instance.length, 2, 'instance property is an array')
+  });
+
+  test('set function with no element', function (done) {
+
+    var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
+
+    var array = [];
+    newCinstance.set(array)
+    assert.isArray(newCinstance.instance);
+    assert.equal(newCinstance.instance.length, 0, '0 instances should be present');  
+    done();  
+  });
+
+  test('set function with 2 elements', function (done) {
+
+    var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
+
+    var array = [{'_id':123, 'comment':'Hey there'},{'_id':124, 'comment':'Hey there you'}];
+    newCinstance.set(array)
+    assert.isArray(newCinstance.instance);
+    assert.equal(newCinstance.instance.length, 2, 'Two instances should be present');
+    assert.equal(newCinstance.instance[0].get('_id'), 123);
+    assert.equal(newCinstance.instance[0].get('comment'), 'Hey there');
+    assert.equal(newCinstance.instance[1].get('_id'), 124);
+    assert.equal(newCinstance.instance[1].get('comment'), 'Hey there you');
+    done();  
+  });
+
+  test('set function with 2 elements, one of this is not an Object', function (done) {
+
+    var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
+
+    var array = [{'_id':123, 'comment':'Hey there'},'a'];
+    newCinstance.set(array)
+    assert.isArray(newCinstance.instance);
+    assert.equal(newCinstance.instance.length, 1, 'One instances should be present');
+    assert.equal(newCinstance.instance[0].get('_id'), 123);
+    assert.equal(newCinstance.instance[0].get('comment'), 'Hey there');
+    done();  
   });
 
   test('fetch function', function (done) {
@@ -94,7 +141,7 @@ suite('Stamplay Cobject Collection ', function () {
     this.request.respond(200, {
       "Content-Type": "application/json",
       "x-total-elements":"2",
-      "link":'<http://editor.stamplay.com/api/cobject/v0/coinstances?page=1&per_page=10&cobjectId=cobjectId>; rel="last",<http://editor.stamplay.com/api/cobject/v0/coinstances?&cobjectId=cobjectId>; rel="generic"'
+      "link":'<https://test.stamplayapp.com/api/cobject/v0/coinstances?page=1&per_page=10&cobjectId=cobjectId>; rel="last",<https://test.stamplayapp.com/api/cobject/v0/coinstances?&cobjectId=cobjectId>; rel="generic"'
     }, '{"data": [{ "_id": 123, "comment": "Hey there" }, { "_id": 124, "comment": "Hey there you" }]}');
   });
 
@@ -113,9 +160,9 @@ suite('Stamplay Cobject Collection ', function () {
       assert.equal(newCinstance.instance[1].get('_id'), 124);
       assert.equal(newCinstance.instance[1].get('comment'), 'Hey there you');
 
-      assert.equal(newCinstance.totalElement, 2);
-      assert.equal(newCinstance.link.generic,'http://editor.stamplay.com/api/cobject/v0/coinstances?&cobjectId=cobjectId&sort=-dt_create');
-      assert.equal(newCinstance.link.last,'http://editor.stamplay.com/api/cobject/v0/coinstances?page=1&per_page=10&cobjectId=cobjectId&sort=-dt_create');
+      assert.equal(newCinstance.totalElements, 2);
+      assert.equal(newCinstance.pagination.generic,'https://test.stamplayapp.com/api/cobject/v0/coinstances?&cobjectId=cobjectId&sort=-dt_create');
+      assert.equal(newCinstance.pagination.last,'https://test.stamplayapp.com/api/cobject/v0/coinstances?page=1&per_page=10&cobjectId=cobjectId&sort=-dt_create');
 
       done();
     })
@@ -123,7 +170,7 @@ suite('Stamplay Cobject Collection ', function () {
     this.request.respond(200, {
       "Content-Type": "application/json",
       "x-total-elements":"2",
-      "link":'<http://editor.stamplay.com/api/cobject/v0/coinstances?page=1&per_page=10&cobjectId=cobjectId>; rel="last",<http://editor.stamplay.com/api/cobject/v0/coinstances?&cobjectId=cobjectId>; rel="generic"'
+      "link":'<https://test.stamplayapp.com/api/cobject/v0/coinstances?page=1&per_page=10&cobjectId=cobjectId>; rel="last",<https://test.stamplayapp.com/api/cobject/v0/coinstances?&cobjectId=cobjectId>; rel="generic"'
     }, '{"data": [{ "_id": 123, "comment": "Hey there" }, { "_id": 124, "comment": "Hey there you" }]}');
   });
 

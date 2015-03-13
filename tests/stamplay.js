@@ -4,6 +4,22 @@ suite('Stamplay Object ', function () {
 		assert.typeOf(window.Stamplay, 'object', 'window.Stamplay exists');
 	});
 
+	test('exists as Stamplay VERSION property', function () {
+		assert.typeOf(window.Stamplay.VERSION, 'String', 'window.Stamplay.VERSION exists');
+	});
+
+	test('exists as Stamplay BASEURL property', function () {
+		assert.typeOf(window.Stamplay.BASEURL, 'String', 'window.Stamplay.BASEURL exists');
+	});
+
+	test('exists as Stamplay APPID property', function () {
+		assert.typeOf(window.Stamplay.APPID, 'String', 'window.Stamplay.APPID exists');
+	});
+
+	test('exists as Stamplay function called init', function () {
+		assert.typeOf(window.Stamplay.init, 'function', 'window.Stamplay.init exists');
+	});
+
 	test('exists as Stamplay function called removeAttributes', function () {
 		assert.typeOf(window.Stamplay.removeAttributes, 'function', 'window.Stamplay.removeAttributes exists');
 	});

@@ -1,4 +1,4 @@
-/*! Stamplay v0.0.5 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.7.0
+/*! Stamplay v0.0.9 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -1944,17 +1944,25 @@ return Q;
 /* ---- STAMPLAY JS SDK ---- */
 /* Initizialize library */
 (function (root) {
+
 	/*  Inizialization of Stamplay Object */
 	root.Stamplay = root.Stamplay || {};
 	/* setting attribute API Version */
 	root.Stamplay.VERSION = "v0";
 	/* Silence Q logging*/
 	Q.stopUnhandledRejectionTracking();
-}(this));
+	/* appId */
+	root.Stamplay.APPID = ""
+	/* baseUrl */
+	root.Stamplay.BASEURL = "";
+	/* init method for setup the base url*/
+	root.Stamplay.init = function(appId){
+		root.Stamplay.BASEURL = 'https://'+appId+'.stamplayapp.com';
+		root.Stamplay.APPID   = appId;
+	}
 
-/* Add function to handle ajax calls, returning a promise
- * Very simple to use: Stamplay.makePromise({options})
- */
+}(this));
+/* ---- STAMPLAY JS SDK ---- */
 (function (root) {
 
 	/* private function for handling this parameters */
@@ -2003,6 +2011,9 @@ return Q;
 		if (options.thisParams) {
 			parseQueryParams(options);
 		}
+		if(root.Stamplay.APPID != "" ){
+			options.url = root.Stamplay.BASEURL + options.url;
+		}
 
 		var deferred = Q.defer(),
 			req = new XMLHttpRequest();
@@ -2029,9 +2040,9 @@ return Q;
 				if(wantHeaders){
 					//parse headers
 					var parts = req.getResponseHeader('link').split(',');
-					response.link = {};
-					parseLink(parts, response.link);
-					response.totalElement = req.getResponseHeader('x-total-elements')
+					response.pagination = {};
+					parseLink(parts, response.pagination);
+					response.totalElements = req.getResponseHeader('x-total-elements')
 					deferred.resolve(response);
 				}else
 					deferred.resolve(response);
@@ -2051,138 +2062,20 @@ return Q;
 				delete instance.appId;
 				delete instance.id;
 			break;
+			case 'user':
+				delete instance._id;
+				delete instance.id;
+				delete instance.__v;
+			break;
 			default:
 			break;
 
 		}
 	}
 }(this));
-
-/* Add Support function to Stamplay
- * it use for handling some funcctionality
- * very easy to use : Stamplay.Support.redirect('http://stamplay.com')
- */
+/* ---- STAMPLAY JS SDK ---- */
 (function (root) {
 
-	// constructor for Support Object
-	function Support() {
-
-		// function to redirect to specified url
-		this.redirect = function (url) {
-			window.location.href = url;
-		},
-
-		// function for check if you have user with a specific email 
-		this.validateEmail = function (email) {
-			return Stamplay.makeAPromise({
-				method: 'POST',
-				data: {
-					email: email
-				},
-				url: '/api/auth/' + Stamplay.VERSION + '/validate/email'
-			})
-		}
-
-	};
-	var support = new Support();
-	// Added Support Object to Stamplay
-	root.Stamplay.Support = support;
-
-})(this);
-
-/* Add Query function to Stamplay
- * it use for handling some funcctionality
- * very easy to use : Stamplay.Query('user').equalTo('name':'john')
- */
-(function (root) {
-	// constructor for Query Object
-	// model is required ever
-	function Query(model, instance) {
-		this.currentQuery = {};
-		this.model = model;
-		this.instance = instance;
-		//method for parsing the currentquery 
-		var parseCurrentQuery = function(currentQuery){
-			var query = {}
-			for(var key in currentQuery){
-				if(key =='find'){
-					for(attr in currentQuery[key]){
-						query[attr] = currentQuery[key][attr]
-					}
-				}else if(key=='limit'){
-					query['n'] = currentQuery[key]
-				}else if(key=='select'){
-					query['select'] = currentQuery[key].join(",")
-				}else if(key=='sort'){
-					query['sort'] = currentQuery[key]
-				}
-			}
-			return query;
-		}
-		//method to run the query you make with Query object
-		this.exec = function(){
-			if(!this.instance)
-				this.instance = this.model+'s'; 
-			var thisParams = parseCurrentQuery(this.currentQuery)
-			return Stamplay.makeAPromise({
-				method: 'GET',
-				url: '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance,
-				thisParams: thisParams
-			}).then(function (response) {
-				return response
-			})
-		};
-		//method to set an attribute must be equal to given value
-		this.equalTo = function(attr, value){
-			if(!this.currentQuery.find)
-				this.currentQuery.find = {}
-			if(typeof attr == "object")
-				for(key in attr){
-					this.currentQuery.find[key] = attr[key] 
-				}
-			else
-				this.currentQuery.find[attr] =  value
-			return this;
-		};
-		//method to limit the results of query
-		this.limit = function(limit){
-			this.currentQuery.limit = limit 
-			return this;
-		}
-		//method to select only the attrs do you want to see
-		this.select = function(attr){
-			if(!this.currentQuery.select)
-				this.currentQuery.select = []
-			if(attr instanceof Array)
-				for(var i=0; i<attr.length; i++){
-					this.currentQuery.select.push(attr[i]) 
-				}
-			else
-				this.currentQuery.select.push(attr) 
-			return this
-		}
-		//method to sort ascending
-		this.sortAscending = function(attr){
-			this.currentQuery.sort= attr 
-			return this
-		}
-		//method to sort descending
-		this.sortDescending = function(attr){
-				this.currentQuery.sort = '-'+attr 
-			return this
-		}
-
-	};
-
-	// Added Query Object to Stamplay
-	root.Stamplay.Query = Query;
-
-})(this);
-
-/* Exspose BaseComponent the super class of all components on Stamplay.
- *  It extends Model and Collection.
- */
-(function (root) {
 
 	//method to add underscore function
 	var addMethod = function(length, method, attribute) {
@@ -2284,7 +2177,7 @@ return Q;
 				},
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/comment'
 			}).then(function (response) {
-				instance = response;
+				_this.instance = response;
 			});
 		};
 
@@ -2533,6 +2426,39 @@ return Q;
 			}
 		},
 
+		//return the number of entries on Stamplay's db
+		this.count = function(){
+			return this.totalElements;
+		}
+
+		//set collection with an array of model 
+		this.set = function(models){
+
+			if(models instanceof Array){
+				var _this = this;
+				models.forEach(function (singleInstance) {
+					if(singleInstance instanceof Object){
+						var instanceModel;
+						//cobject has a particular constructor
+						if (_this.brickId == 'cobject') {
+							instanceModel = new root.Stamplay.Cobject(_this.resourceId)
+							instanceModel = instanceModel.Model.constructor(singleInstance);
+						} else {
+							//capitalize resource for implement dynamic inizialization of model
+							var dynamicModel = _this.brickId.charAt(0).toUpperCase() + _this.brickId.slice(1);
+							instanceModel = new root.Stamplay[dynamicModel]
+							instanceModel = instanceModel.Model.constructor(singleInstance);
+						}
+						_this.instance.push(instanceModel);
+						}
+				})
+				_this.length = _this.instance.length
+			}else{
+				throw new Error('Set method on Collection wants an Array');
+			}
+
+		}
+
 		// fetch function, it takes thisParams
 		// Return a promise. Modify the instance with the data from Stamplay Server
 		this.fetch = function (thisParams) {
@@ -2540,15 +2466,19 @@ return Q;
 			thisParams = thisParams || {};
 			var _this = this;
 
+			if(_this.brickId == 'cobject'){
+				var headers = true;
+			}
+
 			return Stamplay.makeAPromise({
 				method: 'GET',
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId,
 				thisParams: thisParams
-			},true).then(function (response) {
+			}, headers).then(function (response) {
 				//set two attributes to collection
-				if(response.totalElement && response.link){
-					_this.totalElement = parseInt(response.totalElement);
-					_this.link = response.link;
+				if(response.totalElements && response.pagination){
+					_this.totalElements = parseInt(response.totalElements);
+					_this.pagination = response.pagination;
 				}
 				_this.instance = [];
 				//iterate on data and instance a new Model with the prototype functions
@@ -2610,47 +2540,183 @@ return Q;
 	root.Stamplay.BaseComponent = BaseComponent;
 
 }(this));
-
-/* Brick : Cobject 
-	GET     '/api/cobject/v0/:cobjectId 
-	GET     '/api/cobject/v0/:cobjectId/:id   
-	PUT     '/api/cobject/v0/:cobjectId/:id   
-	PATCH   '/api/cobject/v0/:cobjectId/:id 
-	POST    '/api/cobject/v0/:cobjectId       
-	DELETE  '/api/cobject/v0/:cobjectId/:id
-	PUT			'/api/cobject/v0/:cobjectId/:id/rate
-	PUT     '/api/cobject/v0/:cobjectId/:id/comment
-	PUT     '/api/cobject/v0/:cobjectId/:id/vote
-	PUT     '/api/cobject/v0/:cobjectId/:id/facebook_share
-	PUT     '/api/cobject/v0/:cobjectId/:id/twitter_share 
-*/
+/* ---- STAMPLAY JS SDK ---- */
 (function (root) {
+	// constructor for paramsBuilder Object
+	function ParamsBuilder() {
+		
+		this.currentQuery = {};
 
-	/**
-		Custom object component : Stamplay.Cobject 
-		This class rappresent the Custom Object component on Stamplay platform
-		It very easy to use: Stamplay.Cobject([customObjectid])
-	*/
+		//method for parsing the currentquery 
+		var parseCurrentQuery = function(currentQuery){
+			var query = {}
+			for(var key in currentQuery){
+				if(key =='find'){
+					for(attr in currentQuery[key]){
+						query[attr] = currentQuery[key][attr]
+					}
+				}else if(key=='limit'){
+					query['n'] = currentQuery[key]
+				}else if(key=='select'){
+					query['select'] = currentQuery[key].join(",")
+				}else if(key=='sort'){
+					query['sort'] = currentQuery[key]
+				}
+			}
+			return query;
+		}
+		//method to compile the params
+		this.compile = function(){
+			return parseCurrentQuery(this.currentQuery)
+		}
+	
+		//method to set an attribute must be equal to given value
+		this.equalTo = function(attr, value){
+			if(!this.currentQuery.find)
+				this.currentQuery.find = {}
+			if(typeof attr == "object")
+				for(key in attr){
+					this.currentQuery.find[key] = attr[key] 
+				}
+			else
+				this.currentQuery.find[attr] =  value
+			return this;
+		};
+		//method to limit the results of query
+		this.limit = function(limit){
+			this.currentQuery.limit = limit 
+			return this;
+		}
+		//method to select only the attrs do you want to see
+		this.select = function(attr){
+			if(!this.currentQuery.select)
+				this.currentQuery.select = []
+			if(attr instanceof Array)
+				for(var i=0; i<attr.length; i++){
+					this.currentQuery.select.push(attr[i]) 
+				}
+			else
+				this.currentQuery.select.push(attr) 
+			return this
+		}
+		//method to sort ascending
+		this.sortAscending = function(attr){
+			this.currentQuery.sort= attr 
+			return this
+		}
+		//method to sort descending
+		this.sortDescending = function(attr){
+			this.currentQuery.sort = '-'+attr 
+			return this
+		}
 
-	//constructor
-	function Cobject(resourceId) {
-		Stamplay.BaseComponent.call(this, 'cobject', resourceId, true);
-	}
-	//Added Cobject to Stamplay 
-	root.Stamplay.Cobject = Cobject;
+	};
+
+	// Added Query Object to Stamplay
+	root.Stamplay.ParamsBuilder = ParamsBuilder;
 
 })(this);
 
+(function (root) {
+	// constructor for Query Object
+	// model is required ever
+	function Query(model, instance) {
+		
+		this.model = model;
+		this.instance = instance;
+		this.currentQuery = [];
+		this.executable = '';
+	
+		this.or = function(){
+			var obj = { $or : []}
+			for(var i=0; i<arguments.length; i++){
+				if(arguments[i] instanceof root.Stamplay.Query)
+					obj.$or.push(arguments[i].currentQuery[0])
+				else
+					throw new Error('Please Or function take only Query object')	
+			}
+			this.currentQuery.push(obj)
+			return this;
+		}
 
-/* Brick : User 
- 	GET    '/api/user/v0/users'
-  GET    '/api/user/v0/users/:id'
-  POST   '/api/user/v0/users'
-  PUT    '/api/user/v0/users/:id'
-  DELETE '/api/user/v0/users/:id'
-  GET    '/api/user/v0/getStatus'
-*/
+		this.greaterThan = function(attr, value){
+			var obj = {}
+			obj[attr] = {"$gt":value}
+			this.currentQuery.push(obj)
+			return this
+		}	
 
+		this.greaterThanOrEqual = function(attr, value){
+			var obj = {}
+			obj[attr] = {"$gte":value}
+			this.currentQuery.push(obj)
+			return this
+		}
+
+		this.lessThan = function(attr, value){
+			var obj = {}
+			obj[attr] = {"$lt":value}
+			this.currentQuery.push(obj)
+			return this
+		}	
+
+		this.lessThanOrEqual = function(attr, value){
+			var obj = {}
+			obj[attr] = {"$lte":value}
+			this.currentQuery.push(obj)
+			return this
+		}
+
+		this.equalTo = function(attr, value){
+			var obj = {}
+			obj[attr] = value
+			this.currentQuery.push(obj)
+			return this
+		}
+
+		this.exists = function(attr){
+			var obj = {}
+			obj[attr] = {"$exists":true}
+			this.currentQuery.push(obj)
+			return this
+		}
+
+		this.notExists = function(attr){
+			var obj = {}
+			obj[attr] = {"$exists":false}
+			this.currentQuery.push(obj)
+			return this
+		}
+
+		this.exec = function(){
+			//build query
+			for(var i=0;i<this.currentQuery.length;i++){	
+				var partial = JSON.stringify(this.currentQuery[i]);
+				partial = partial.substring(1, partial.length-1)
+				if(i==0)
+					this.executable += partial
+				else
+					this.executable += ','+partial
+			}
+			if(!this.instance)
+				this.instance = this.model+'s'; 
+				var thisParams = this.executable;
+			return Stamplay.makeAPromise({
+				method: 'GET',
+				url: '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance +'?where={'+this.executable+'}' ,
+			}).then(function (response) {
+				return response.data
+			})
+		}
+
+
+	};
+
+	// Added Query Object to Stamplay
+	root.Stamplay.Query = Query;
+
+})(this);
+/* ---- STAMPLAY JS SDK ---- */
 (function (root) {
 
 	/**
@@ -2743,12 +2809,27 @@ return Q;
 	root.Stamplay.User = User;
 
 })(this);
-
-/* Brick : Webhook 
-*/
+/* ---- STAMPLAY JS SDK ---- */
 (function (root) {
 
 	/**
+		Custom object component : Stamplay.Cobject 
+		This class rappresent the Custom Object component on Stamplay platform
+		It very easy to use: Stamplay.Cobject([customObjectid])
+	*/
+
+	//constructor
+	function Cobject(resourceId) {
+		Stamplay.BaseComponent.call(this, 'cobject', resourceId, true);
+	}
+	//Added Cobject to Stamplay 
+	root.Stamplay.Cobject = Cobject;
+
+})(this);
+/* ---- STAMPLAY JS SDK ---- */
+(function (root) {
+
+	/*
 		Webhook component : Stamplay.Webhook 
 		This class rappresent the Webhook Object component on Stamplay platform
 		It very easy to use: Stamplay.Webhook([WebhookName])
@@ -2783,7 +2864,35 @@ return Q;
 		}
 
 	}
-	//Added Cobject to Stamplay 
+	//Added Webhook to Stamplay 
 	root.Stamplay.Webhook = Webhook;
+
+})(this);
+/* ---- STAMPLAY JS SDK ---- */
+(function (root) {
+
+	// constructor for Support Object
+	function Support() {
+
+		// function to redirect to specified url
+		this.redirect = function (url) {
+			window.location.href = url;
+		},
+
+		// function for check if you have user with a specific email 
+		this.validateEmail = function (email) {
+			return Stamplay.makeAPromise({
+				method: 'POST',
+				data: {
+					email: email
+				},
+				url: '/api/auth/' + Stamplay.VERSION + '/validate/email'
+			})
+		}
+
+	};
+	var support = new Support();
+	// Added Support Object to Stamplay
+	root.Stamplay.Support = support;
 
 })(this);

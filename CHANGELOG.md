@@ -1,5 +1,13 @@
 # Stamplay JS SDK Changelog
 
+0.0.9 /
+
+* Fix comment method
+* Added header attribute on Collection (see pagination and totalElements obj)
+* Added count method
+* Modify the return of Query.exec() 
+* Added initialization method on collection
+
 0.0.6 / 03-03-2015 
 ==================
 

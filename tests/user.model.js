@@ -101,7 +101,7 @@ suite('Stamplay User Model ', function () {
 	});
 
 	test('user login method with external services', function () {
-		var services = ['facebook', 'google', 'twitter', 'dropbox', 'linkedin', 'instagram', 'angellist'];
+		var services = ['facebook', 'google', 'twitter', 'dropbox', 'linkedin', 'instagram', 'angellist', 'github'];
 
 		var arr = [];
 		var stub = sinon.stub(Stamplay.Support, "redirect", function (url) {
