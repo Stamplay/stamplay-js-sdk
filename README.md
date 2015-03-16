@@ -207,7 +207,7 @@ Collections are sets of models. You can ```fetch``` the collection from the serv
 -------------------------------------------------------
 <a name="Collection.fetch"></a>
 ### fetch()
-Populate the collection with all the available models. If no [FetchParameters](#FetchParameters) are passed the collection is populated with the first 20 models ordered by id. 
+Populate the collection with all the available models. If no [FetchParams](#FetchParams) are passed the collection is populated with the first 20 models ordered by id. 
 <a name="Collection.remove"></a>
 ### remove(id)
 Remove the model with the specified id from the collection. 
@@ -227,6 +227,8 @@ Remove and return the first model from a collection, if collection is empty retu
 <a name="Collection.add"></a>
 ### add(model)
 Add a model at the end of the collection.
+
+-------------------------------------------------------
 
 <a name="FetchParams"></a>
 The Collection have some other methods, we call those FetchParams
@@ -274,10 +276,9 @@ If you want create a more complex params you could use all methods, check this e
 
 ```javascript
 var coll = new Stamplay.Cobject('tag').Collection
-coll.equalTo('name','foo').limit(10).select(['name','description']).sort('description');
+coll.equalTo('name','foo').limit(10).sort('description');
 coll.fetch(function(){
-  //Now coll is a Collection with 10 tags with the name 'foo', sorted by description and the only attributes that they have 
-  //are name and description  
+  //Now coll is a Collection with 10 tags with the name 'foo', sorted by description  
 })
 
 ```
