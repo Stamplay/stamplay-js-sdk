@@ -2208,12 +2208,16 @@ return Q;
 			req.setRequestHeader('Content-Type', 'application/json');
 		}
 		
-		var headerStamplay = 'localhost';
+		var headerStamplay;
 		if (root.Stamplay.APPID != "") {
 			headerStamplay = root.Stamplay.APPID;
+		}else{
+			headerStamplay = location.host;
+			headerStamplay = headerStamplay.replace(/^www\./,'')
+			headerStamplay = headerStamplay.replace(/:[0-9]*$/g,'')
 		}
 		
-		req.setRequestHeader('Stamplay-App', headerStamplay);
+		req.setRequestHeader('stamplay-app', headerStamplay);
 		
 		req.onreadystatechange = function (e) {
 			if (req.readyState !== 4) {

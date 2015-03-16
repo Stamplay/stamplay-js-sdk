@@ -74,7 +74,7 @@
 			headerStamplay = headerStamplay.replace(/:[0-9]*$/g,'')
 		}
 		
-		req.setRequestHeader('Stamplay-App', headerStamplay);
+		req.setRequestHeader('stamplay-app', headerStamplay);
 		
 		req.onreadystatechange = function (e) {
 			if (req.readyState !== 4) {
