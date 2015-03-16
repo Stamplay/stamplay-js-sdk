@@ -75,7 +75,6 @@ Every component can expose two main classes:
 Also this components the sdk have some support objects to help you in common operation:
 
 * [Query](#query)
-* [ParamsBuilder](#paramsBuilder)
 
 #Model
 Models are the heart of any JavaScript application, containing the interactive data as well as a large part of the logic surrounding it: conversions, validations, computed properties, and access control.
@@ -144,9 +143,8 @@ Sets the value of the property
 ### unset(property)
 Delete the property from the object
 <a name="Model.fetch"></a>
-### fetch(id, queryParameters)
+### fetch(id)
 Resets the model's state from the server. Useful if the model has never been populated with data, or if you'd like to ensure that you have the latest server state. 
-Refer to the [queryParameters](#paramsBuilder) documentation. 
 <a name="Model.destroy"></a>
 ###destroy()
 Deletes the object from the server by making a DELETE request. If the model is new, false is returned.
@@ -207,10 +205,23 @@ Collections are sets of models. You can ```fetch``` the collection from the serv
   * <a href="#Collection.add"><code>add()</code></a> 
 
 -------------------------------------------------------
+<a name="FetchParams"></a>
+FetchParams helps you to create a more flexible and complex fetch object.
+
+##FetchParams
+
+  * <a href="#FetchParams.equalTo"><code>equalTo()</code></a>
+  * <a href="#FetchParams.limit"><code>limit()</code></a>
+  * <a href="#FetchParams.select"><code>select()</code></a>
+  * <a href="#FetchParams.sortAscending"><code>sortAscending()</code></a>
+  * <a href="#FetchParams.sortDescending"><code>sortDescending()</code></a>
+  * <a href="#FetchParams.compile"> <code>compile()</code></a>
+
+-------------------------------------------------------
 
 <a name="Collection.fetch"></a>
-### fetch(queryParams)
-Populate the collection with all the available models. If no [queryParameters](#paramsBuilder) are passed the collection is populated with the first 20 models ordered by id. 
+### fetch()
+Populate the collection with all the available models. If no [FetchParameters](#FetchParameters) are passed the collection is populated with the first 20 models ordered by id. 
 <a name="Collection.remove"></a>
 ### remove(id)
 Remove the model with the specified id from the collection. 
@@ -230,6 +241,48 @@ Remove and return the first model from a collection, if collection is empty retu
 <a name="Collection.add"></a>
 ### add(model)
 Add a model at the end of the collection.
+
+<a name="FetchParams.equalTo"></a>
+### equalTo(attr,value)
+This method take two arguments, the attribute equal to the given value.
+
+<a name="FetchParams.limit"></a>
+### limit(n)
+This method take an argument, the number of maximum results return to you 
+
+<a name="FetchParams.select"></a>
+### select('attr')
+This method take an argument, the name of attribute you want to select.
+If you need more than one argument you can set an array of attributes  
+
+<a name="FetchParams.sortAscending"></a>
+### sortAscending('attr')
+This method take an argument, the name of attribute you want to sorting
+
+<a name="FetchParams.sortDiscending"></a>
+### sortDiscending('attr')
+This method take an argument, the name of attribute you want to sorting
+
+<a name="FetchParams.pagination"></a>
+### pagination(page, per_page)
+This method return the 'per_page' element from the 'page'. 
+
+
+##Pipeline
+
+If you want create a more complex params you could use all methods, check this example:
+
+```javascript
+var coll = new Stamplay.Cobject('tag').Collection
+coll.equalTo('name','foo').limit(10).select(['name','description']).sort('description');
+coll.fetch(function(){
+  //Now coll is a Collection with 10 tags with the name 'foo', sorted by description and the only attributes that they have 
+  //are name and description  
+})
+
+```
+
+-------------------------------------------------------
 
 # Query
 
@@ -255,7 +308,7 @@ Please remember to running the query use the method exec(), it returns a promise
 ##Methods
 
   * <a href="#Query.greaterThan"><code>greaterThan()</code></a>
-  * <a href="#Query.greaterThanOrEqual"><code>greaterThanOrEqual()()</code></a>
+  * <a href="#Query.greaterThanOrEqual"><code>greaterThanOrEqual()</code></a>
   * <a href="#Query.lessThan"><code>lessThan()</code></a>
   * <a href="#Query.lessThanOrEqual"><code>lessThanOrEqual()</code></a>
   * <a href="#Query.equalTo"><code>equalTo()</code></a>
@@ -314,72 +367,6 @@ query.exec().then(function(response){
 }) 
 ```
 
-<a name="paramsBuilder"></a>
-
-#ParamsBuilder
-
-ParamsBuilder helps you to create a correct object that represent the query parameters that you can pass to fetch method.
-Please remember that if you use ParamsBuilder you must call the compile method, this is the function that returns the correct object. See the example below:
-
-```javascript
-var params = new Stamplay.paramsBuilder()
-params.equalTo('name','foo')
-
-var parameters = params.compile()
-//Now parameters is a simple object in javascript
-
-var obj = new Stamplay.Cobject('tag').Collection
-obj.fetch(parameters).then(function(){
-  // that's it :)
-})
-```
-
-##Methods
-
-  * <a href="#paramsBuilder.equalTo"><code>equalTo()</code></a>
-  * <a href="#paramsBuilder.limit"><code>limit()()</code></a>
-  * <a href="#paramsBuilder.select"><code>select()</code></a>
-  * <a href="#paramsBuilder.sortAscending"><code>sortAscending()</code></a>
-  * <a href="#paramsBuilder.sortDescending"><code>sortDescending()</code></a>
-  * <a href="#paramsBuilder.compile"> <code>compile()</code></a>
-
--------------------------------------------------------
-
-<a name="paramsBuilder.equalTo"></a>
-### equalTo(attr,value)
-This method take two arguments, the attribute equal to the given value.
-
-<a name="paramsBuilder.limit"></a>
-### limit(n)
-This method take an argument, the number of maximum results return to you 
-
-<a name="paramsBuilder.select"></a>
-### select('attr')
-This method take an argument, the name of attribute you want to select.
-If you need more than one argument you can set an array of attributes  
-
-<a name="paramsBuilder.sortAscending"></a>
-### sortAscending('attr')
-This method take an argument, the name of attribute you want to sorting
-
-<a name="paramsBuilder.sortDiscending"></a>
-### sortDiscending('attr')
-This method take an argument, the name of attribute you want to sorting
-
-<a name="paramsBuilder.compile"></a>
-### compile()
-This method compile the params and return a obj
-
-##Pipeline
-
-If you want create a more complex params you could use all methods, check this example:
-
-```javascript
-var params = new Stamplay.paramsBuilder()
-params.equalTo('name','foo').limit(10).select(['name','description']).sort('description');
-var parameters = params.compile()
-
-```
 
 #Model
 Models are the heart of any JavaScript application, a model keeps the application logic and with the Stamplay model you can easily synchronize the data between client and the Stamplay platform.

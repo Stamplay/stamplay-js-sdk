@@ -290,10 +290,88 @@
 		this.totalElement = 0;
 		//links for pagination
 		this.link = {};
+		//the fetchParameters
+		this.currentQuery = {};
+
+		//method for parsing the currentquery 
+		var parseCurrentQuery = function(currentQuery){
+			var query = {}
+			for(var key in currentQuery){
+				if(key =='find'){
+					for(attr in currentQuery[key]){
+						query[attr] = currentQuery[key][attr]
+					}
+				}else if(key=='limit'){
+					query['n'] = currentQuery[key]
+				}else if(key=='select'){
+					query['select'] = currentQuery[key].join(",")
+				}else if(key=='sort'){
+					query['sort'] = currentQuery[key]
+				}else if(key =='pagination'){
+					query['page'] = currentQuery[key][0]
+					query['per_page'] = currentQuery[key][1]
+				}
+			}
+			return query;
+		}
+
+		//method to compile the params
+		this.compile = function(){
+			return parseCurrentQuery(this.currentQuery)
+		}
+		
+		//method to set the pagination
+		this.pagination = function(page, perPage){
+			if(page && perPage){	
+				this.currentQuery.pagination = [ page, perPage ];
+			}else{
+				throw new Error('Pagination want two parameters');
+			}
+			return this;
+		}
+		//method to set an attribute must be equal to given value
+		this.equalTo = function(attr, value){
+			if(!this.currentQuery.find)
+				this.currentQuery.find = {}
+			if(typeof attr == "object")
+				for(key in attr){
+					this.currentQuery.find[key] = attr[key] 
+				}
+			else
+				this.currentQuery.find[attr] =  value
+			return this;
+		};
+		//method to limit the results of query
+		this.limit = function(limit){
+			this.currentQuery.limit = limit 
+			return this;
+		}
+		//method to select only the attrs do you want to see
+		this.select = function(attr){
+			if(!this.currentQuery.select)
+				this.currentQuery.select = []
+			if(attr instanceof Array)
+				for(var i=0; i<attr.length; i++){
+					this.currentQuery.select.push(attr[i]) 
+				}
+			else
+				this.currentQuery.select.push(attr) 
+			return this
+		}
+		//method to sort ascending
+		this.sortAscending = function(attr){
+			this.currentQuery.sort= attr 
+			return this
+		}
+		//method to sort descending
+		this.sortDescending = function(attr){
+			this.currentQuery.sort = '-'+attr 
+			return this
+		}
 
 	  var collectionMethods = {  forEach: 3, each: 3, map: 3, collect: 3, reduce: 4,
       foldl: 4, inject: 4, reduceRight: 4, foldr: 4, find: 3, detect: 3, filter: 3,
-      select: 3, reject: 3, every: 3, all: 3, some: 3, any: 3, include: 2,
+ 			reject: 3, every: 3, all: 3, some: 3, any: 3, include: 2,
       contains: 2, invoke: 2, max: 3, min: 3, toArray: 1, size: 1, first: 3,
       head: 3, take: 3, initial: 3, rest: 3, tail: 3, drop: 3, last: 3,
       without: 0, difference: 0, indexOf: 3, shuffle: 1, lastIndexOf: 3,
@@ -393,7 +471,7 @@
 		// Return a promise. Modify the instance with the data from Stamplay Server
 		this.fetch = function (thisParams) {
 
-			thisParams = thisParams || {};
+			thisParams = thisParams || this.compile;
 			var _this = this;
 
 			if(_this.brickId == 'cobject'){
