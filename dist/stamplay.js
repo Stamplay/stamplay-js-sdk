@@ -2192,8 +2192,15 @@ return Q;
 		if (options.thisParams) {
 			parseQueryParams(options);
 		}
+
+		var headerStamplay;
 		if(root.Stamplay.APPID != "" ){
 			options.url = root.Stamplay.BASEURL + options.url;
+			headerStamplay = root.Stamplay.APPID;
+		}else{
+			headerStamplay = location.host;
+			headerStamplay = headerStamplay.replace(/^www\./,'')
+			headerStamplay = headerStamplay.replace(/:[0-9]*$/g,'')
 		}
 
 		var deferred = Q.defer(),
@@ -2207,12 +2214,6 @@ return Q;
 		if (options.method && options.method !== 'DELETE') {
 			req.setRequestHeader('Content-Type', 'application/json');
 		}
-		
-		var headerStamplay = 'localhost';
-		if (root.Stamplay.APPID != "") {
-			headerStamplay = root.Stamplay.APPID;
-		}
-		
 		req.setRequestHeader('Stamplay-App', headerStamplay);
 		
 		req.onreadystatechange = function (e) {
@@ -2510,6 +2511,9 @@ return Q;
 				data: this.instance
 			}).then(function (response) {
 				_this.instance = response;
+				if(_this.brickId == 'user' && Stamplay.USESTORAGE){
+				 	store.set('stamplay-user', _this.instance)
+				}
 			});
 		},
 
@@ -2922,15 +2926,22 @@ return Q;
 		// Modifies the instance of User 
 		this.Model.currentUser = function () {
 			var _this = this;
-			return Stamplay.makeAPromise({
-				method: 'GET',
-				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/getStatus'
-			}).then(function (response) {
-				_this.instance = response.user || {};
-				if(Stamplay.USESTORAGE){
-					store.set('stamplay-user', _this.instance)
-				}
-			});
+			if(Stamplay.USESTORAGE && Stamplay.USERCACHING){
+				var deferred = Q.defer();
+					deferred.resolve(store.get('stamplay-user'));
+				return deferred.promise;
+			}else{
+				return Stamplay.makeAPromise({
+							 	method: 'GET',
+							  url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/getStatus'
+							  }).then(function (response) {
+									_this.instance = response.user || {};
+									if(Stamplay.USESTORAGE){
+										Stamplay.USERCACHING = true;
+										store.set('stamplay-user', _this.instance)
+									}
+								});
+			}
 		},
 		// isLoggedfunction
 		// return true if user is logged

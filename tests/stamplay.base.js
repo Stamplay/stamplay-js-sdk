@@ -13,7 +13,9 @@ suite('Stamplay functions ', function () {
 
 	suite('removeAttributes', function(){
 		var instanceCobj;
-		var instanceAnother
+		var instanceAnother; 
+		var	instanceUser;
+		
 		setup('Create the variables for the test', function(){
 			instanceCobj = {
 				__v:0,
@@ -32,6 +34,16 @@ suite('Stamplay functions ', function () {
 				id:'1234',
 				attribute : 'immortal'
 			}
+			
+			instanceUser = {
+				__v:0,
+				_id:'12123435',
+				appId: '1234',
+				id:'1234',
+				attribute : 'immortal',
+				name :'stamplay'
+			}
+
 			instanceAnother = {
 				__v:0,
 				cobjectId:'instance',
@@ -50,6 +62,15 @@ suite('Stamplay functions ', function () {
 			assert.equal(instanceCobj.appId, undefined);
 			assert.equal(instanceCobj.__v, undefined);
 			assert.equal(instanceCobj.attribute, 'immortal');
+		});
+
+		test('user delete attributes', function () {		
+			window.Stamplay.removeAttributes('user',instanceUser);
+			assert.equal(instanceUser.id, undefined);
+			assert.equal(instanceUser._id, undefined);
+			assert.equal(instanceUser.__v, undefined);
+			assert.equal(instanceUser.attribute, 'immortal');
+			assert.equal(instanceUser.name, 'stamplay');
 		});
 
 		test('Another component delete attributes', function(){

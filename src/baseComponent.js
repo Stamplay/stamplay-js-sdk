@@ -248,6 +248,9 @@
 				data: this.instance
 			}).then(function (response) {
 				_this.instance = response;
+				if(_this.brickId == 'user' && Stamplay.USESTORAGE){
+				 	store.set('stamplay-user', _this.instance)
+				}
 			});
 		},
 

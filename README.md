@@ -44,8 +44,7 @@ user.currentUser()
 });
 ```
 
-Our JavaScript SDK has just two dependecies one is [Undescore](https://github.com/jashkenas/underscore) and the other is 
-[Q](https://github.com/kriskowal/q). Most of the methods of Stamplay Javascript SDK returns a promise. Promises have a then method, which you can use to get the 'eventual' return value or thrown exception (rejection).
+Our JavaScript SDK has just three dependecies one is [Undescore](https://github.com/jashkenas/underscore), [Q](https://github.com/kriskowal/q) and the other is [StoreJs](https://github.com/marcuswestin/store.js). Most of the methods of Stamplay Javascript SDK returns a promise. Promises have a then method, which you can use to get the 'eventual' return value or thrown exception (rejection).
 
 ```javascript
 
@@ -147,7 +146,7 @@ Delete the property from the object
 <a name="Model.fetch"></a>
 ### fetch(id, queryParameters)
 Resets the model's state from the server. Useful if the model has never been populated with data, or if you'd like to ensure that you have the latest server state. 
-Refer to the [queryParameters](#query-parameters) documentation. 
+Refer to the [queryParameters](#paramsBuilder) documentation. 
 <a name="Model.destroy"></a>
 ###destroy()
 Deletes the object from the server by making a DELETE request. If the model is new, false is returned.
@@ -211,7 +210,7 @@ Collections are sets of models. You can ```fetch``` the collection from the serv
 
 <a name="Collection.fetch"></a>
 ### fetch(queryParams)
-Populate the collection with all the available models. If no [queryParameters](#query-parameters) are passed the collection is populated with the first 20 models ordered by id. 
+Populate the collection with all the available models. If no [queryParameters](#paramsBuilder) are passed the collection is populated with the first 20 models ordered by id. 
 <a name="Collection.remove"></a>
 ### remove(id)
 Remove the model with the specified id from the collection. 
@@ -317,9 +316,23 @@ query.exec().then(function(response){
 
 <a name="paramsBuilder"></a>
 
-#Paramsbuilder
+#ParamsBuilder
 
-Please remember to running the compile method, it returns a object.
+ParamsBuilder helps you to create a correct object that represent the query parameters that you can pass to fetch method.
+Please remember that if you use ParamsBuilder you must call the compile method, this is the function that returns the correct object. See the example below:
+
+```javascript
+var params = new Stamplay.paramsBuilder()
+params.equalTo('name','foo')
+
+var parameters = params.compile()
+//Now parameters is a simple object in javascript
+
+var obj = new Stamplay.Cobject('tag').Collection
+obj.fetch(parameters).then(function(){
+  // that's it :)
+})
+```
 
 ##Methods
 
@@ -368,9 +381,6 @@ var parameters = params.compile()
 
 ```
 
-
-
-
 #Model
 Models are the heart of any JavaScript application, a model keeps the application logic and with the Stamplay model you can easily synchronize the data between client and the Stamplay platform.
 
@@ -394,6 +404,7 @@ newUser.signup(registrationData)
 ```
 
 #User
+
 You can create both Model and Collection of a Stamplay.User.
 
 ```javascript
@@ -460,12 +471,10 @@ The login method can be used for logging in with:
 
 ####Third party services login (service)
 You can use this method for logging users with third party services by passing the service as first and only parameter.
+This method make a redirect to login endpoint. It not return a promise!
 
 ```javascript
 user.login('facebook')
-.then(function(){
-	user.get('displayName');
-});
 ```
 #####Available services
 You can use one of the following as parameter for logging in with third party service:

@@ -23,15 +23,22 @@
 		// Modifies the instance of User 
 		this.Model.currentUser = function () {
 			var _this = this;
-			return Stamplay.makeAPromise({
-				method: 'GET',
-				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/getStatus'
-			}).then(function (response) {
-				_this.instance = response.user || {};
-				if(Stamplay.USESTORAGE){
-					store.set('stamplay-user', _this.instance)
-				}
-			});
+			if(Stamplay.USESTORAGE && Stamplay.USERCACHING){
+				var deferred = Q.defer();
+				deferred.resolve(store.get('stamplay-user'));
+				return deferred.promise;
+			}else{
+				return Stamplay.makeAPromise({
+							 	method: 'GET',
+							  url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/getStatus'
+							  }).then(function (response) {
+									_this.instance = response.user || {};
+									if(Stamplay.USESTORAGE){
+										Stamplay.USERCACHING = true;
+										store.set('stamplay-user', _this.instance)
+									}
+								});
+			}
 		},
 		// isLoggedfunction
 		// return true if user is logged

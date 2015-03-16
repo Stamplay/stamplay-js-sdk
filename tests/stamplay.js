@@ -16,6 +16,12 @@ suite('Stamplay Object ', function () {
 		assert.typeOf(window.Stamplay.APPID, 'String', 'window.Stamplay.APPID exists');
 	});
 
+	if(window.localStorage && store.enabled){
+		test('exists as Stamplay USESTORAGE property', function () {
+			assert.typeOf(window.Stamplay.USESTORAGE, 'Boolean', 'window.Stamplay.USESTORAGE exists');
+		});
+	}
+
 	test('exists as Stamplay function called init', function () {
 		assert.typeOf(window.Stamplay.init, 'function', 'window.Stamplay.init exists');
 	});
