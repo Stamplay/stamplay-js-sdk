@@ -71,7 +71,8 @@
 		if (options.method && options.method !== 'DELETE') {
 			req.setRequestHeader('Content-Type', 'application/json');
 		}
-		req.setRequestHeader('Stamplay-App', headerStamplay);
+				
+		req.setRequestHeader('stamplay-app', headerStamplay);
 		
 		req.onreadystatechange = function (e) {
 			if (req.readyState !== 4) {
