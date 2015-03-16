@@ -139,13 +139,9 @@ suite('Stamplay Cobject Collection ', function () {
     });
 
     this.request.respond(200, {
-<<<<<<< HEAD
-      "Content-Type": "application/json"
-=======
       "Content-Type": "application/json",
       "x-total-elements":"2",
       "link":'<https://test.stamplayapp.com/api/cobject/v0/coinstances?page=1&per_page=10&cobjectId=cobjectId>; rel="last",<https://test.stamplayapp.com/api/cobject/v0/coinstances?&cobjectId=cobjectId>; rel="generic"'
->>>>>>> development
     }, '{"data": [{ "_id": 123, "comment": "Hey there" }, { "_id": 124, "comment": "Hey there you" }]}');
   });
 

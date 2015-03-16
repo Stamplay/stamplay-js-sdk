@@ -348,15 +348,9 @@ This method take one argument. The query returns all documents that have the att
 ### notExists(attr)
 This method take one argument. The query returns all documents that don't have the attribute.
 
-<<<<<<< HEAD
-<a name="Query.sortDescending"></a>
-### sortDescending('attr')
-This method take an argument, the name of attribute you want to sorting
-=======
 <a name="Query.or"></a>
 ### or(query,query,...)
 This method take n Stamplay.Query object. The query returns all documents that match at least a query.
->>>>>>> development
 
 <a name="Query.exec"></a>
 ### exec()
@@ -469,12 +463,6 @@ This method make a redirect to login endpoint. It not return a promise!
 
 ```javascript
 user.login('facebook')
-<<<<<<< HEAD
-.then(function(){
-  user.get('displayName');
-});
-=======
->>>>>>> development
 ```
 #####Available services
 You can use one of the following as parameter for logging in with third party service:
