@@ -2,7 +2,7 @@ Stamplay JavaScript SDK
 ===============
 [![Build Status](https://travis-ci.org/Stamplay/stamplay-js-sdk.svg?branch=master)](https://travis-ci.org/Stamplay/stamplay-js-sdk)
 [![Production version](http://img.shields.io/badge/download-38%20kB-blue.svg)](https://raw.githubusercontent.com/Stamplay/stamplay-js-sdk/master/dist/stamplay.min.js)
-[![Bower version](https://badge.fury.io/bo/stamplay-sdk.svg)](http://badge.fury.io/bo/stamplay-sdk)
+[![Bower version](https://badge.fury.io/bo/stamplay-js-sdk.svg)](http://badge.fury.io/bo/stamplay-js-sdk)
 
 ##Getting Started
 The Stamplay JavaScript SDK provides a JavaScript library making it even easier to access the Stamplay cloud platform. On this initial release the SDK let you work with the most important and flexible components of our platform: `User` , `Custom Objects` and `Webhook`.To enable support for Stamplay-related functions in your web app, you'll need to include `stamplay.min.js` in your app. 
