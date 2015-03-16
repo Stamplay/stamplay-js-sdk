@@ -9,9 +9,18 @@ The Stamplay JavaScript SDK provides a JavaScript library making it even easier 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.6/stamplay.min.js"></script>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.9/stamplay.min.js"></script>
 ```
 For use inside browsers, a window scoped variable called `Stamplay` is created.
+
+If you use the SDK on a different domain from *.stamplayapp.com, remember to call this method to initialize the SDK,
+it's really IMPORTANT:
+
+```javascript
+//APPID is the appid of your app on Stamplay's Editor
+Stamplay.init("APPID");
+```
+
 Our JavaScript SDK is based on the popular Backbone.js framework. It is compatible with existing Backbone applications with minimal changes on your part. Our goal is to minimize configuration and let you quickly start building your JavaScript and HTML5 app on Stamplay. Here is a simple example of usage:
 
 ```javascript
@@ -35,8 +44,7 @@ user.currentUser()
 });
 ```
 
-Our JavaScript SDK has just two dependecies one is [Undescore](https://github.com/jashkenas/underscore) and the other is 
-[Q](https://github.com/kriskowal/q). Most of the methods of Stamplay Javascript SDK returns a promise. Promises have a then method, which you can use to get the 'eventual' return value or thrown exception (rejection).
+Our JavaScript SDK has just three dependecies one is [Undescore](https://github.com/jashkenas/underscore), [Q](https://github.com/kriskowal/q) and the other is [StoreJs](https://github.com/marcuswestin/store.js). Most of the methods of Stamplay Javascript SDK returns a promise. Promises have a then method, which you can use to get the 'eventual' return value or thrown exception (rejection).
 
 ```javascript
 
@@ -135,9 +143,8 @@ Sets the value of the property
 ### unset(property)
 Delete the property from the object
 <a name="Model.fetch"></a>
-### fetch(id, queryParameters)
+### fetch(id)
 Resets the model's state from the server. Useful if the model has never been populated with data, or if you'd like to ensure that you have the latest server state. 
-Refer to the [queryParameters](#query-parameters) documentation. 
 <a name="Model.destroy"></a>
 ###destroy()
 Deletes the object from the server by making a DELETE request. If the model is new, false is returned.
@@ -198,10 +205,9 @@ Collections are sets of models. You can ```fetch``` the collection from the serv
   * <a href="#Collection.add"><code>add()</code></a> 
 
 -------------------------------------------------------
-
 <a name="Collection.fetch"></a>
-### fetch(queryParams)
-Populate the collection with all the available models. If no [queryParameters](#query-parameters) are passed the collection is populated with the first 20 models ordered by id. 
+### fetch()
+Populate the collection with all the available models. If no [FetchParams](#FetchParams) are passed the collection is populated with the first 20 models ordered by id. 
 <a name="Collection.remove"></a>
 ### remove(id)
 Remove the model with the specified id from the collection. 
@@ -222,11 +228,68 @@ Remove and return the first model from a collection, if collection is empty retu
 ### add(model)
 Add a model at the end of the collection.
 
+-------------------------------------------------------
+
+<a name="FetchParams"></a>
+The Collection have some other methods, we call those FetchParams
+These help you to create a more flexible and complex fetch object.
+
+##FetchParams
+
+  * <a href="#FetchParams.equalTo"><code>equalTo()</code></a>
+  * <a href="#FetchParams.limit"><code>limit()</code></a>
+  * <a href="#FetchParams.select"><code>select()</code></a>
+  * <a href="#FetchParams.sortAscending"><code>sortAscending()</code></a>
+  * <a href="#FetchParams.sortDescending"><code>sortDescending()</code></a>
+  * <a href="#FetchParams.pagination"> <code>pagination()</code></a>
+
+-------------------------------------------------------
+<a name="FetchParams.equalTo"></a>
+### equalTo(attr,value)
+This method take two arguments, the attribute equal to the given value.
+
+<a name="FetchParams.limit"></a>
+### limit(n)
+This method take an argument, the number of maximum results return to you 
+
+<a name="FetchParams.select"></a>
+### select('attr')
+This method take an argument, the name of attribute you want to select.
+If you need more than one argument you can set an array of attributes  
+
+<a name="FetchParams.sortAscending"></a>
+### sortAscending('attr')
+This method take an argument, the name of attribute you want to sorting
+
+<a name="FetchParams.sortDiscending"></a>
+### sortDiscending('attr')
+This method take an argument, the name of attribute you want to sorting
+
+<a name="FetchParams.pagination"></a>
+### pagination(page, per_page)
+This method return the 'per_page' element from the 'page'. 
+
+
+##Pipeline
+
+If you want create a more complex params you could use all methods, check this example:
+
+```javascript
+var coll = new Stamplay.Cobject('tag').Collection
+coll.equalTo('name','foo').limit(10).sort('description');
+coll.fetch(function(){
+  //Now coll is a Collection with 10 tags with the name 'foo', sorted by description  
+})
+
+```
+
+-------------------------------------------------------
 
 # Query
+
 Query are sets of methods for make easy to use the query filter on Stamplay.
 The constructor take two arguments, model and instance.
-The first parameter is require, it is the model name of resource like 'user' or 'photo'.
+The first parameter is require, it is the model name of resource like 'user' or 'cobject'.
 The second parameter is the name of instance of model. 
 For example for a custom object called tag you must write a line of code like this:
 
@@ -245,35 +308,55 @@ Please remember to running the query use the method exec(), it returns a promise
 
 ##Methods
 
+  * <a href="#Query.greaterThan"><code>greaterThan()</code></a>
+  * <a href="#Query.greaterThanOrEqual"><code>greaterThanOrEqual()</code></a>
+  * <a href="#Query.lessThan"><code>lessThan()</code></a>
+  * <a href="#Query.lessThanOrEqual"><code>lessThanOrEqual()</code></a>
   * <a href="#Query.equalTo"><code>equalTo()</code></a>
-  * <a href="#Query.limit"><code>limit()()</code></a>
-  * <a href="#Query.select"><code>select()</code></a>
-  * <a href="#Query.sortAscending"><code>sortAscending()</code></a>
-  * <a href="#Query.sortDescending"><code>sortDescending()</code></a>
+  * <a href="#Query.exists"><code>exists()</code></a>
+  * <a href="#Query.notExists"><code>notExists()</code></a>
+  * <a href="#Query.or"><code>or()</code></a>
   * <a href="#Query.exec"> <code>exec()</code></a>
 
 -------------------------------------------------------
+
+<a name="Query.greaterThan"></a>
+### greaterThan(attr,value)
+This method take two arguments. The query returns all documents that have the attribute greater than the given value.
+
+<a name="Query.greaterThanOrEqual"></a>
+### greaterThanOrEqual(attr,value)
+This method take two arguments. The query returns all documents that have the attribute greater or equal than the given value.
+
+<a name="Query.lessThan"></a>
+### lessThan(attr, value)
+This method take two arguments. The query returns all documents that have the attribute less than the given value.
+
+<a name="Query.lessThanOrEqual"></a>
+### lessThanOrEqual(attr, value)
+This method take two arguments. The query returns all documents that have the attribute less or equal than the given value.
 
 <a name="Query.equalTo"></a>
 ### equalTo(attr,value)
 This method take two arguments. The query returns all documents that have the attribute equal to the given value.
 
-<a name="Query.limit"></a>
-### limit(n)
-This method take an argument, the number of maximum results return to you 
+<a name="Query.exists"></a>
+### exists(attr)
+This method take one argument. The query returns all documents that have the attribute.
 
-<a name="Query.select"></a>
-### select('attr')
-This method take an argument, the name of attribute you want to select.
-If you need more than one argument you can set an array of attributes  
+<a name="Query.notExists"></a>
+### notExists(attr)
+This method take one argument. The query returns all documents that don't have the attribute.
 
-<a name="Query.sortAscending"></a>
-### sortAscending('attr')
-This method take an argument, the name of attribute you want to sorting
-
+<<<<<<< HEAD
 <a name="Query.sortDescending"></a>
 ### sortDescending('attr')
 This method take an argument, the name of attribute you want to sorting
+=======
+<a name="Query.or"></a>
+### or(query,query,...)
+This method take n Stamplay.Query object. The query returns all documents that match at least a query.
+>>>>>>> development
 
 <a name="Query.exec"></a>
 ### exec()
@@ -285,11 +368,12 @@ If you want create a more complex query you could use all methods, check this ex
 
 ```javascript
 var query = new Stamplay.Query('cobject','tag')
-query.equalTo('name','foo').limit(10).select(['name','description']).sort('description');
+query.equalTo('name','foo').lessThan('value',10).exists('description')
 query.exec().then(function(response){
   //the response of your query 
 }) 
 ```
+
 
 #Model
 Models are the heart of any JavaScript application, a model keeps the application logic and with the Stamplay model you can easily synchronize the data between client and the Stamplay platform.
@@ -314,6 +398,7 @@ newUser.signup(registrationData)
 ```
 
 #User
+
 You can create both Model and Collection of a Stamplay.User.
 
 ```javascript
@@ -380,12 +465,16 @@ The login method can be used for logging in with:
 
 ####Third party services login (service)
 You can use this method for logging users with third party services by passing the service as first and only parameter.
+This method make a redirect to login endpoint. It not return a promise!
 
 ```javascript
 user.login('facebook')
+<<<<<<< HEAD
 .then(function(){
   user.get('displayName');
 });
+=======
+>>>>>>> development
 ```
 #####Available services
 You can use one of the following as parameter for logging in with third party service:
@@ -396,6 +485,7 @@ You can use one of the following as parameter for logging in with third party se
 * Dropbox
 * Linkedin
 * Instagram
+* Github
 * Angel List
 
 #### Authentication with email and password
@@ -535,5 +625,5 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```HTML
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.6/stamplay.min.js"></script>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.9/stamplay.min.js"></script>
 ```
