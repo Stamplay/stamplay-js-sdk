@@ -2583,7 +2583,7 @@ return Q;
 		this.compile = function(){
 			return parseCurrentQuery(this.currentQuery)
 		}
-		
+
 		//method to set the pagination
 		this.pagination = function(page, perPage){
 			if(page && perPage){	
@@ -2735,7 +2735,7 @@ return Q;
 		// Return a promise. Modify the instance with the data from Stamplay Server
 		this.fetch = function (thisParams) {
 
-			thisParams = thisParams || this.compile;
+			thisParams = thisParams || this.compile();
 			var _this = this;
 
 			if(_this.brickId == 'cobject'){

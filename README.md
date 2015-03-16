@@ -241,7 +241,7 @@ These help you to create a more flexible and complex fetch object.
   * <a href="#FetchParams.select"><code>select()</code></a>
   * <a href="#FetchParams.sortAscending"><code>sortAscending()</code></a>
   * <a href="#FetchParams.sortDescending"><code>sortDescending()</code></a>
-  * <a href="#FetchParams.compile"> <code>compile()</code></a>
+  * <a href="#FetchParams.pagination"> <code>pagination()</code></a>
 
 -------------------------------------------------------
 <a name="FetchParams.equalTo"></a>
