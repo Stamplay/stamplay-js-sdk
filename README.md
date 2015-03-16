@@ -205,20 +205,6 @@ Collections are sets of models. You can ```fetch``` the collection from the serv
   * <a href="#Collection.add"><code>add()</code></a> 
 
 -------------------------------------------------------
-<a name="FetchParams"></a>
-FetchParams helps you to create a more flexible and complex fetch object.
-
-##FetchParams
-
-  * <a href="#FetchParams.equalTo"><code>equalTo()</code></a>
-  * <a href="#FetchParams.limit"><code>limit()</code></a>
-  * <a href="#FetchParams.select"><code>select()</code></a>
-  * <a href="#FetchParams.sortAscending"><code>sortAscending()</code></a>
-  * <a href="#FetchParams.sortDescending"><code>sortDescending()</code></a>
-  * <a href="#FetchParams.compile"> <code>compile()</code></a>
-
--------------------------------------------------------
-
 <a name="Collection.fetch"></a>
 ### fetch()
 Populate the collection with all the available models. If no [FetchParameters](#FetchParameters) are passed the collection is populated with the first 20 models ordered by id. 
@@ -242,6 +228,20 @@ Remove and return the first model from a collection, if collection is empty retu
 ### add(model)
 Add a model at the end of the collection.
 
+<a name="FetchParams"></a>
+The Collection have some other methods, we call those FetchParams
+These help you to create a more flexible and complex fetch object.
+
+##FetchParams
+
+  * <a href="#FetchParams.equalTo"><code>equalTo()</code></a>
+  * <a href="#FetchParams.limit"><code>limit()</code></a>
+  * <a href="#FetchParams.select"><code>select()</code></a>
+  * <a href="#FetchParams.sortAscending"><code>sortAscending()</code></a>
+  * <a href="#FetchParams.sortDescending"><code>sortDescending()</code></a>
+  * <a href="#FetchParams.compile"> <code>compile()</code></a>
+
+-------------------------------------------------------
 <a name="FetchParams.equalTo"></a>
 ### equalTo(attr,value)
 This method take two arguments, the attribute equal to the given value.
