@@ -277,7 +277,7 @@ If you want create a more complex params you could use all methods, check this e
 ```javascript
 var coll = new Stamplay.Cobject('tag').Collection
 coll.equalTo('name','foo').limit(10).sort('description');
-coll.fetch(function(){
+coll.fetch().then(function(){
   //Now coll is a Collection with 10 tags with the name 'foo', sorted by description  
 })
 
