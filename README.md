@@ -11,7 +11,7 @@ To do this, add the following to the head block of your HTML:
 ```HTML
 <script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.9/stamplay.min.js"></script>
 ```
-For use inside browsers, a window scoped variable called `Stamplay` is created.
+To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
 If you use the SDK on a different domain from *.stamplayapp.com, remember to call this method to initialize the SDK,
 it's really IMPORTANT:
