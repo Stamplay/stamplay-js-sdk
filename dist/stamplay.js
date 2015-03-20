@@ -2871,6 +2871,24 @@ return Q;
 			return this
 		}
 
+		this.sortAscending = function(value){
+			var obj = {
+				$sort: {}
+			}
+			obj.$sort[value] = 1
+			this.currentQuery.push(obj)
+			return this
+		}
+
+		this.sortDescending = function(value){
+			var obj = {
+				$sort: {}
+			}
+			obj.$sort[value] = -1
+			this.currentQuery.push(obj)
+			return this
+		}
+
 		this.exists = function(attr){
 			var obj = {}
 			obj[attr] = {"$exists":true}

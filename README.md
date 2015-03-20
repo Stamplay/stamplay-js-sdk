@@ -315,6 +315,8 @@ Please remember to running the query use the method exec(), it returns a promise
   * <a href="#Query.equalTo"><code>equalTo()</code></a>
   * <a href="#Query.exists"><code>exists()</code></a>
   * <a href="#Query.notExists"><code>notExists()</code></a>
+  * <a href="#Query.sortAscending"><code>sortAscending()</code></a>
+  * <a href="#Query.sortDescending"><code>sortDescending()</code></a>
   * <a href="#Query.or"><code>or()</code></a>
   * <a href="#Query.exec"> <code>exec()</code></a>
 
@@ -347,6 +349,14 @@ This method take one argument. The query returns all documents that have the att
 <a name="Query.notExists"></a>
 ### notExists(attr)
 This method take one argument. The query returns all documents that don't have the attribute.
+
+<a name="Query.sortAscending"></a>
+### sortAscending(attr)
+This method take one argument. The query returns the documents sorted ascending on attr.
+
+<a name="Query.sortDescending"></a>
+### sortDescending(attr)
+This method take one argument. The query returns the documents sorted descending on attr.
 
 <a name="Query.or"></a>
 ### or(query,query,...)

@@ -41,6 +41,18 @@ suite('Stamplay Query ', function () {
     assert.equal(query.currentQuery[0].b , 'b')
   })
 
+  test('has sortAscending method', function(){
+    var query = new Stamplay.Query('cobject','tag').sortAscending('b')
+    assert.isObject(query.currentQuery[0])
+    assert.equal(query.currentQuery[0].$sort['b'] , 1)
+  })
+
+  test('has sortDescending method', function(){
+    var query = new Stamplay.Query('cobject','tag').sortDescending('b')
+    assert.isObject(query.currentQuery[0])
+    assert.equal(query.currentQuery[0].$sort['b'] , -1)
+  })
+
   test('has exists method', function(){
     var query = new Stamplay.Query('cobject','tag').exists('b')
     assert.isObject(query.currentQuery[0].b)
@@ -61,7 +73,6 @@ suite('Stamplay Query ', function () {
     assert.equal(query.currentQuery[0].$or[0].b.$exists, false)
     assert.equal(query.currentQuery[0].$or[1].c, 'c')
   })
-
 
   test('has exec method', function(){
     assert.isFunction(new Stamplay.Query('cobject','tag').exec)    

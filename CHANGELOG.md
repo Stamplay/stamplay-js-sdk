@@ -1,6 +1,12 @@
 # Stamplay JS SDK Changelog
 
+0.0.10  / 20-03-2015
+=================
+
+* Added sort method on query
+
 0.0.9 /
+=================
 
 * Fix comment method
 * Added header attribute on Collection (see pagination and totalElements obj)
