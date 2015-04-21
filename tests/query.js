@@ -11,6 +11,13 @@ suite('Stamplay Query ', function () {
 
   });
 
+   test('has between method', function(){
+    var query = new Stamplay.Query('cobject','tag').between('a',1, 5)
+    assert.isObject(query.currentQuery[0].a)
+    assert.equal(query.currentQuery[0].a.$gte, 1)
+    assert.equal(query.currentQuery[0].a.$lte, 5)
+  })
+
   test('has gte method', function(){
     var query = new Stamplay.Query('cobject','tag').greaterThanOrEqual('a',1)
     assert.isObject(query.currentQuery[0].a)

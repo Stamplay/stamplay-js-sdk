@@ -1,4 +1,4 @@
-/*! Stamplay v0.0.9 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.7.0
+/*! Stamplay v0.0.10 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -2834,6 +2834,13 @@ return Q;
 			}
 			this.currentQuery.push(obj)
 			return this;
+		}
+
+		this.between = function(attr,value1,value2){
+			var obj = {}
+			obj[attr] = {"$gte":value1, "$lte":value2}
+			this.currentQuery.push(obj)
+			return this
 		}
 
 		this.greaterThan = function(attr, value){

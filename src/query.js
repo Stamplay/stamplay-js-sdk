@@ -24,6 +24,13 @@
 			return this;
 		}
 
+		this.between = function(attr,value1,value2){
+			var obj = {}
+			obj[attr] = {"$gte":value1, "$lte":value2}
+			this.currentQuery.push(obj)
+			return this
+		}
+
 		this.greaterThan = function(attr, value){
 			var obj = {}
 			obj[attr] = {"$gt":value}

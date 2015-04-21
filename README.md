@@ -9,7 +9,7 @@ The Stamplay JavaScript SDK provides a JavaScript library making it even easier 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.10/stamplay.min.js"></script>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.11/stamplay.min.js"></script>
 ```
 To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
@@ -312,6 +312,7 @@ Please remember to running the query use the method exec(), it returns a promise
   * <a href="#Query.greaterThanOrEqual"><code>greaterThanOrEqual()</code></a>
   * <a href="#Query.lessThan"><code>lessThan()</code></a>
   * <a href="#Query.lessThanOrEqual"><code>lessThanOrEqual()</code></a>
+  * <a href="#Query.between"><code>between()</code></a>
   * <a href="#Query.equalTo"><code>equalTo()</code></a>
   * <a href="#Query.exists"><code>exists()</code></a>
   * <a href="#Query.notExists"><code>notExists()</code></a>
@@ -337,6 +338,10 @@ This method take two arguments. The query returns all documents that have the at
 <a name="Query.lessThanOrEqual"></a>
 ### lessThanOrEqual(attr, value)
 This method take two arguments. The query returns all documents that have the attribute less or equal than the given value.
+
+<a name="Query.between"></a>
+### between(attr, value1, value2)
+This method take three arguments. The query returns all documents that have the attribute between value1 and value2.
 
 <a name="Query.equalTo"></a>
 ### equalTo(attr,value)
@@ -623,5 +628,5 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```HTML
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.10/stamplay.min.js"></script>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.11/stamplay.min.js"></script>
 ```
