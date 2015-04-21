@@ -9,7 +9,7 @@ The Stamplay JavaScript SDK provides a JavaScript library making it even easier 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.11/stamplay.min.js"></script>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.12/stamplay.min.js"></script>
 ```
 To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
@@ -573,23 +573,9 @@ You cannot create a Model or Collection of a WebHook.
 
 Webhook has the following additional methods.
 
-  * <a href="#Webhook.get"> <code>get()</code></a>
   * <a href="#Webhook.post"><code>post()</code></a>
-  * <a href="#Webhook.put"><code>put()</code></a>
 
 -------------------------------------------------------
-
-<a name="Webhook.get"></a>
-###Get
-
-It's a simple method to make a GET call to webhook 
-
-```javascript
-var webhook = new Stamplay.Webhook('myWebHook');
-webhook.get().then(function (response) {
-  //do what you want with the response
-});
-```
 
 <a name="Webhook.post"></a>
 ###Post
@@ -604,18 +590,6 @@ webhook.post(data).then(function (response) {
 });
 ```
 
-<a name="Webhook.put"></a>
-###Put
-
-It's a simple method to make a PUT call to webhook 
-
-```javascript
-var webhook = new Stamplay.Webhook('anotherWebHook');
-var data = { foo: 'bar2' }
-webhook.put(data).then(function (response) {
-  //do what you want with the response
-});
-```
 
 # Build
 To build a production ready library you need to have NPM and Bower installed and then run those two commands:
@@ -628,5 +602,5 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```HTML
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.11/stamplay.min.js"></script>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.12/stamplay.min.js"></script>
 ```

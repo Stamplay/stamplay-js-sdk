@@ -1,4 +1,4 @@
-/*! Stamplay v0.0.10 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.7.0
+/*! Stamplay v0.0.12 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.7.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -3082,19 +3082,6 @@ return Q;
 
 		this.url = '/api/webhook/'+ Stamplay.VERSION +'/'+resource+'/catch';
 		
-		this.get = function(){
-			return Stamplay.makeAPromise({
-					method: 'GET',
-					url: this.url
-				})
-		}
-		this.put = function(data){
-			return Stamplay.makeAPromise({
-				method: 'PUT',
-				data: data,
-				url: this.url
-			})
-		}
 		this.post = function(data){
 			return Stamplay.makeAPromise({
 				method: 'POST',

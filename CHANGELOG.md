@@ -1,9 +1,10 @@
 # Stamplay JS SDK Changelog
 
-0.0.11  / 21-04-2015
+0.0.12  / 21-04-2015
 =================
 
 * Added between method on query
+* Remove get and put method on webhook
 
 0.0.10  / 20-03-2015
 =================

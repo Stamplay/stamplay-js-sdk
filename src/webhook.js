@@ -15,19 +15,6 @@
 
 		this.url = '/api/webhook/'+ Stamplay.VERSION +'/'+resource+'/catch';
 		
-		this.get = function(){
-			return Stamplay.makeAPromise({
-					method: 'GET',
-					url: this.url
-				})
-		}
-		this.put = function(data){
-			return Stamplay.makeAPromise({
-				method: 'PUT',
-				data: data,
-				url: this.url
-			})
-		}
 		this.post = function(data){
 			return Stamplay.makeAPromise({
 				method: 'POST',
