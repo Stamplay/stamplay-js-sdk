@@ -176,7 +176,7 @@ suite('Stamplay User Model ', function () {
 		Stamplay.Support.redirect.restore(); // Unwraps the spy
 
 		var url = arr[0] || '';
-		assert.equal(url, location.protocol + '//' + document.domain + '/auth/' + Stamplay.VERSION + '/logout');
+		assert.equal(url, '/auth/' + Stamplay.VERSION + '/logout');
 	});
 
 	// constructor, get, set, unset tested in cobject.model.js
