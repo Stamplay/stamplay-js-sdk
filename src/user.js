@@ -93,7 +93,7 @@
 					if (Stamplay.USESTORAGE) {
 						store.remove(window.location.origin + '-jwt');
 					}
-					root.Stamplay.Support.redirect(location.protocol + '//' + document.domain + '/auth/' + Stamplay.VERSION + '/logout');
+					root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
 				}
 
 		}
