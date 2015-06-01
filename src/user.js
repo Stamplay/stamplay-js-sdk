@@ -26,6 +26,7 @@
 			if(Stamplay.USESTORAGE && Stamplay.USERCACHING){
 				var deferred = Q.defer();
 				deferred.resolve(store.get('stamplay-user'));
+				_this.instance = store.get('stamplay-user');
 				return deferred.promise;
 			}else{
 				return Stamplay.makeAPromise({
