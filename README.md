@@ -2,16 +2,16 @@ Stamplay JavaScript SDK
 ===============
 [![Build Status](https://travis-ci.org/Stamplay/stamplay-js-sdk.svg?branch=master)](https://travis-ci.org/Stamplay/stamplay-js-sdk)
 [![Production version](http://img.shields.io/badge/download-38%20kB-blue.svg)](https://raw.githubusercontent.com/Stamplay/stamplay-js-sdk/master/dist/stamplay.min.js)
-[![Bower version](https://badge.fury.io/bo/stamplay-sdk.svg)](http://badge.fury.io/bo/stamplay-sdk)
+[![Bower version](https://badge.fury.io/bo/stamplay-js-sdk.svg)](http://badge.fury.io/bo/stamplay-js-sdk)
 
 ##Getting Started
 The Stamplay JavaScript SDK provides a JavaScript library making it even easier to access the Stamplay cloud platform. On this initial release the SDK let you work with the most important and flexible components of our platform: `User` , `Custom Objects` and `Webhook`.To enable support for Stamplay-related functions in your web app, you'll need to include `stamplay.min.js` in your app. 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.9/stamplay.min.js"></script>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.12/stamplay.min.js"></script>
 ```
-For use inside browsers, a window scoped variable called `Stamplay` is created.
+To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
 If you use the SDK on a different domain from *.stamplayapp.com, remember to call this method to initialize the SDK,
 it's really IMPORTANT:
@@ -83,18 +83,18 @@ The following example shows how to create a new instance of a User model ( model
 
 ```javascript
 var registrationData = {
-	email : 'user@provider.com',
-	password: 'mySecret'
+  email : 'user@provider.com',
+  password: 'mySecret'
 };
 var newUser = new Stamplay.User().Model;
 newUser.signup(registrationData)
 .then(function(){
-	// User is now registered
-	newUser.set('phoneNumber', '020 123 4567' );
-	return newUser.save();
+  // User is now registered
+  newUser.set('phoneNumber', '020 123 4567' );
+  return newUser.save();
 }).then(function(){
-	// User is saved server side
-	var number = newUser.get('phoneNumber'); // number value is 020 123 4567 
+  // User is saved server side
+  var number = newUser.get('phoneNumber'); // number value is 020 123 4567 
 })
 ```
 
@@ -126,8 +126,8 @@ Some models have built-in social actions and the SDK provides a fast way to ```r
 var tag = new Stamplay.Cobject('tag').Model;
 tag.rate(4)
 .then(function(){
-	var actions = tag.get('actions');
-	console.log(actions.ratings); // You can see the ratings, the average rate and the users who rate
+  var actions = tag.get('actions');
+  console.log(actions.ratings); // You can see the ratings, the average rate and the users who rate
 });
 ```
 
@@ -277,7 +277,7 @@ If you want create a more complex params you could use all methods, check this e
 ```javascript
 var coll = new Stamplay.Cobject('tag').Collection
 coll.equalTo('name','foo').limit(10).sort('description');
-coll.fetch(function(){
+coll.fetch().then(function(){
   //Now coll is a Collection with 10 tags with the name 'foo', sorted by description  
 })
 
@@ -312,6 +312,7 @@ Please remember to running the query use the method exec(), it returns a promise
   * <a href="#Query.greaterThanOrEqual"><code>greaterThanOrEqual()</code></a>
   * <a href="#Query.lessThan"><code>lessThan()</code></a>
   * <a href="#Query.lessThanOrEqual"><code>lessThanOrEqual()</code></a>
+  * <a href="#Query.between"><code>between()</code></a>
   * <a href="#Query.equalTo"><code>equalTo()</code></a>
   * <a href="#Query.exists"><code>exists()</code></a>
   * <a href="#Query.notExists"><code>notExists()</code></a>
@@ -337,6 +338,10 @@ This method take two arguments. The query returns all documents that have the at
 <a name="Query.lessThanOrEqual"></a>
 ### lessThanOrEqual(attr, value)
 This method take two arguments. The query returns all documents that have the attribute less or equal than the given value.
+
+<a name="Query.between"></a>
+### between(attr, value1, value2)
+This method take three arguments. The query returns all documents that have the attribute between value1 and value2.
 
 <a name="Query.equalTo"></a>
 ### equalTo(attr,value)
@@ -415,10 +420,10 @@ A Stamplay.User Model instance inherits all the [Model](#model) methods.
 ```javascript
 user.fetch(id)
 .then(function(){
-	user.set('displayName', 'New display name');
-	user.save().then(function(){
-		user.get('displayName'); //returns New display name
-	});
+  user.set('displayName', 'New display name');
+  user.save().then(function(){
+    user.get('displayName'); //returns New display name
+  });
 });
 ```
 
@@ -427,8 +432,8 @@ A Stamplay.User.Collection instance inherits all the [Collection](#collection) m
 ```javascript
 users.fetch()
 .then(function(){
-	var firstUser = users.at(0);
-	firstUser.get('displayName');
+  var firstUser = users.at(0);
+  firstUser.get('displayName');
 })
 ```
 
@@ -451,7 +456,7 @@ If the user is logged it populates the model with the user's data, otherwise the
 ```javascript
 user.currentUser()
 .then(function(){
-	user.get('displayName');
+  user.get('displayName');
 })
 ```
 
@@ -492,7 +497,7 @@ Authentication with email and password. you can use the login method in this way
 ```javascript
 user.login('email@provider.com', 'mySecret')
 .then(function(){
-	user.get('displayName');
+  user.get('displayName');
 });  
 ```
 Note that for this kind of login you have to [register](#signupdata) the user first. 
@@ -502,13 +507,13 @@ Register user for local authentication. ```data``` parameter must be an object c
 
 ```javascript
 var registrationData = {
-	email : 'user@provider.com',
-	password: 'mySecret',
-	displayName: 'John Stamplay'
+  email : 'user@provider.com',
+  password: 'mySecret',
+  displayName: 'John Stamplay'
 };
 user.signup(registrationData)
 .then(function(){
-	user.get('displayName');
+  user.get('displayName');
 });  
 ```
  <a name="User.logout"></a>
@@ -534,11 +539,11 @@ A Stamplay.Cobject Model instance inherits all the [Model](#model) methods.
 ```javascript
 tag.fetch(id)
 .then(function(){
-	tag.set('description', 'Description');
-	return tag.save()
-	})
+  tag.set('description', 'Description');
+  return tag.save()
+  })
 .then(function(){
-	tag.get('description'); //returns Description
+  tag.get('description'); //returns Description
 });
 ```
 
@@ -547,8 +552,8 @@ A Stamplay.Cobject.Collection instance inherits all the [Collection](#collection
 ```javascript
 tags.fetch()
 .then(function(){
-	var firstTag = tags.at(0);
-	firstTag.get('description');
+  var firstTag = tags.at(0);
+  firstTag.get('description');
 });
 ```
 ## Cobject additional methods
@@ -557,8 +562,8 @@ The Stamplay.Cobject.Model inherits all the [Action](#action-methods) methods.
 ```javascript
 tag.vote()
 .then(function(){
-	var actions = tag.get('actions');
-	console.log(actions.votes); // You can see the number of votes and who has already voted
+  var actions = tag.get('actions');
+  console.log(actions.votes); // You can see the number of votes and who has already voted
 });
 ```
 
@@ -568,23 +573,9 @@ You cannot create a Model or Collection of a WebHook.
 
 Webhook has the following additional methods.
 
-  * <a href="#Webhook.get"> <code>get()</code></a>
   * <a href="#Webhook.post"><code>post()</code></a>
-  * <a href="#Webhook.put"><code>put()</code></a>
 
 -------------------------------------------------------
-
-<a name="Webhook.get"></a>
-###Get
-
-It's a simple method to make a GET call to webhook 
-
-```javascript
-var webhook = new Stamplay.Webhook('myWebHook');
-webhook.get().then(function (response) {
-  //do what you want with the response
-});
-```
 
 <a name="Webhook.post"></a>
 ###Post
@@ -599,18 +590,6 @@ webhook.post(data).then(function (response) {
 });
 ```
 
-<a name="Webhook.put"></a>
-###Put
-
-It's a simple method to make a PUT call to webhook 
-
-```javascript
-var webhook = new Stamplay.Webhook('anotherWebHook');
-var data = { foo: 'bar2' }
-webhook.put(data).then(function (response) {
-  //do what you want with the response
-});
-```
 
 # Build
 To build a production ready library you need to have NPM and Bower installed and then run those two commands:
@@ -623,5 +602,5 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```HTML
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.9/stamplay.min.js"></script>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.12/stamplay.min.js"></script>
 ```

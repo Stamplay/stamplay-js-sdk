@@ -1,6 +1,6 @@
 {
-  "name": "stamplay-sdk",
-  "version": "0.0.9",
+  "name": "stamplay-js-sdk",
+  "version": "0.0.12",
   "homepage": "https://stamplay.com",
   "private": false,
   "author": {
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "mocha-phantomjs ./tests/tests.html"
-    },
+  },
   "dependencies": {
     "mocha-phantomjs": "^3.5.0",
     "phantomjs": "^1.9.7-15"

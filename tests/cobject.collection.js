@@ -149,7 +149,7 @@ suite('Stamplay Cobject Collection ', function () {
 
     var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
 
-    newCinstance.fetch().then(function () {
+    newCinstance.fetch(null,true).then(function () {
 
       assert.isArray(newCinstance.instance);
       assert.equal(newCinstance.instance.length, 2, 'Two instances should be present');
