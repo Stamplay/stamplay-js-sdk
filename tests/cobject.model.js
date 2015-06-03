@@ -35,7 +35,7 @@ suite('Stamplay Cobject Model ', function () {
       done();
     });
 
-    assert.equal(this.request.url, '/api/cobject/v0/cobjectId/123');
+    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
 
     this.request.respond(200, {
       "Content-Type": "application/json"
@@ -137,13 +137,21 @@ suite('Stamplay Cobject Model ', function () {
 
   });
 
-  test('underscore method exists',function(){
+  test('underscore method exists', function () {
 
-    var modelMethods = { keys: 1, values: 1, pairs: 1, invert: 1, pick: 0,
-      omit: 0, chain: 1, isEmpty: 1 }
-  
+    var modelMethods = {
+      keys: 1,
+      values: 1,
+      pairs: 1,
+      invert: 1,
+      pick: 0,
+      omit: 0,
+      chain: 1,
+      isEmpty: 1
+    }
+
     var model = {}
-    _.each(modelMethods, function(length, method) {
+    _.each(modelMethods, function (length, method) {
       assert.isFunction(cinstance[method], method);
     })
 
@@ -207,7 +215,7 @@ suite('Stamplay Cobject Model ', function () {
 
     assert.equal(this.request.method, 'POST');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/v0/cobjectId');
+    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId');
 
 
     this.request.respond(200, {
@@ -230,7 +238,7 @@ suite('Stamplay Cobject Model ', function () {
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestBody, JSON.stringify(oldInstance.instance));
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/v0/cobjectId/1');
+    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/1');
 
 
     this.request.respond(200, {
@@ -257,7 +265,7 @@ suite('Stamplay Cobject Model ', function () {
 
     assert.equal(this.request.method, 'PATCH');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/v0/cobjectId/1');
+    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/1');
 
     //Patch should send only changed attributes but right now PATCH = PUT
     assert.equal(this.request.requestBody, JSON.stringify(oldInstance.instance));
@@ -284,7 +292,7 @@ suite('Stamplay Cobject Model ', function () {
 
     assert.equal(this.request.method, 'DELETE');
     assert.notEqual(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/v0/cobjectId/1');
+    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/1');
 
     assert.isUndefined(this.request.requestBody);
 
@@ -322,7 +330,7 @@ suite('Stamplay Cobject Model ', function () {
     assert.equal(this.request.requestBody, JSON.stringify({
       type: 'upvote'
     }));
-    assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/vote');
+    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/' + cinstance.get('_id') + '/vote');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(cinstance.instance));
@@ -356,7 +364,7 @@ suite('Stamplay Cobject Model ', function () {
     assert.equal(this.request.requestBody, JSON.stringify({
       type: 'downvote'
     }));
-    assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/vote');
+    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/' + cinstance.get('_id') + '/vote');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(cinstance.instance));
@@ -390,7 +398,7 @@ suite('Stamplay Cobject Model ', function () {
       rate: 1
     }));
 
-    assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/rate');
+    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/' + cinstance.get('_id') + '/rate');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(cinstance.instance));
@@ -429,7 +437,7 @@ suite('Stamplay Cobject Model ', function () {
 
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/comment');
+    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/' + cinstance.get('_id') + '/comment');
     assert.equal(this.request.requestBody, JSON.stringify(data));
 
     this.request.respond(200, {
@@ -457,7 +465,7 @@ suite('Stamplay Cobject Model ', function () {
 
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/twitter_share');
+    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/' + cinstance.get('_id') + '/twitter_share');
 
     this.request.respond(200, {
       "Content-Type": "application/json"
@@ -485,7 +493,7 @@ suite('Stamplay Cobject Model ', function () {
 
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/v0/cobjectId/' + cinstance.get('_id') + '/facebook_share');
+    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/' + cinstance.get('_id') + '/facebook_share');
 
     this.request.respond(200, {
       "Content-Type": "application/json"
