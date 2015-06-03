@@ -9,7 +9,7 @@ The Stamplay JavaScript SDK provides a JavaScript library making it even easier 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/0.0.12/stamplay.min.js"></script>
+<script src="//drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.0.0/stamplay.min.js"></script>
 ```
 To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
