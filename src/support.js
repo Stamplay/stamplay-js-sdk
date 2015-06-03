@@ -1,5 +1,5 @@
 /* Add Support function to Stamplay
- * it use for handling some funcctionality
+ * it use for handling some functionality
  * very easy to use : Stamplay.Support.redirect('http://stamplay.com')
  */
 (function (root) {
@@ -10,7 +10,7 @@
 		// function to redirect to specified url
 		this.redirect = function (url) {
 			window.location.href = url;
-		},
+		};
 
 		// function for check if you have user with a specific email 
 		this.validateEmail = function (email) {

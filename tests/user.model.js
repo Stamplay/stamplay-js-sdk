@@ -78,7 +78,7 @@ suite('Stamplay User Model ', function () {
 		});
 
 		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, '/api/user/v0/getStatus');
+		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/getStatus');
 
 		this.request.respond(200, {
 			"Content-Type": "application/json"
@@ -94,7 +94,7 @@ suite('Stamplay User Model ', function () {
 		});
 
 		assert.equal(this.request.method, 'POST');
-		assert.equal(this.request.url, '/auth/v0/local/login');
+		assert.equal(this.request.url, '/auth/' + Stamplay.VERSION + '/local/login');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(onSignup));
@@ -128,7 +128,7 @@ suite('Stamplay User Model ', function () {
 		});
 
 		assert.equal(this.request.method, 'POST');
-		assert.equal(this.request.url, '/auth/v0/local/login');
+		assert.equal(this.request.url, '/auth/' + Stamplay.VERSION + '/local/login');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(onSignup));
@@ -145,11 +145,12 @@ suite('Stamplay User Model ', function () {
 			assert.equal(user.get('email'), data.email);
 			assert.equal(user.get('password'), data.password);
 			assert.equal(user.get('property'), data.property);
+
 			done();
 		});
 
 		assert.equal(this.request.method, 'POST');
-		assert.equal(this.request.url, '/api/user/v0/users');
+		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(data));
@@ -175,7 +176,7 @@ suite('Stamplay User Model ', function () {
 		Stamplay.Support.redirect.restore(); // Unwraps the spy
 
 		var url = arr[0] || '';
-		assert.equal(url, location.protocol + '//' + document.domain + '/auth/v0/logout');
+		assert.equal(url, '/auth/' + Stamplay.VERSION + '/logout');
 	});
 
 	// constructor, get, set, unset tested in cobject.model.js
@@ -191,7 +192,7 @@ suite('Stamplay User Model ', function () {
 			done();
 		});
 
-		assert.equal(this.request.url, '/api/user/v0/users/123');
+		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123');
 
 
 		this.request.respond(200, {
@@ -212,7 +213,7 @@ suite('Stamplay User Model ', function () {
 		assert.equal(this.request.method, 'POST');
 		assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
 		assert.equal(this.request.requestBody, JSON.stringify(newUser.instance));
-		assert.equal(this.request.url, '/api/user/v0/users');
+		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users');
 
 		this.request.respond(200, {
 			"Content-Type": "application/json"
@@ -232,7 +233,7 @@ suite('Stamplay User Model ', function () {
 		assert.equal(this.request.method, 'PUT');
 		assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
 		assert.equal(this.request.requestBody, JSON.stringify(newUser.instance));
-		assert.equal(this.request.url, '/api/user/v0/users/123');
+		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123');
 
 		this.request.respond(200, {
 			"Content-Type": "application/json"
@@ -255,7 +256,7 @@ suite('Stamplay User Model ', function () {
 		assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
 		//Patch should send only changed attributes but right now PATCH = PUT
 		assert.equal(this.request.requestBody, JSON.stringify(newUser.instance));
-		assert.equal(this.request.url, '/api/user/v0/users/123');
+		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123');
 
 		this.request.respond(200, {
 			"Content-Type": "application/json"
@@ -277,7 +278,7 @@ suite('Stamplay User Model ', function () {
 		});
 
 		assert.equal(this.request.method, 'DELETE');
-		assert.equal(this.request.url, '/api/user/v0/users/123');
+		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123');
 		//Patch should send only changed attributes but right now PATCH = PUT
 		assert.isUndefined(this.request.requestBody);
 
