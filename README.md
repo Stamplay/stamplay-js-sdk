@@ -453,5 +453,5 @@ To load the Stamplay SDK from the Amazon's Cloudfront content distribution netwo
 ```
 
 # One more thing
-Go to [API Reference](https://stamplay.com/docs/jssdk) to see full api reference and a lot of examples
+Go to [API Reference](https://stamplay.com/docs/jssdk) to see a lot of examples
 Enjoy!
