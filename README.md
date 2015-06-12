@@ -4,6 +4,9 @@ Stamplay JavaScript SDK API v1
 [![Production version](http://img.shields.io/badge/download-38%20kB-blue.svg)](https://raw.githubusercontent.com/Stamplay/stamplay-js-sdk/master/dist/stamplay.min.js)
 [![Bower version](https://badge.fury.io/bo/stamplay-js-sdk.svg)](http://badge.fury.io/bo/stamplay-js-sdk)
 
+##Full API Reference
+[API Reference](https://stamplay.com/docs/jssdk)
+
 ## API v0 support 
 If you're using Stamplay API v0 you should use the javascript sdk in the [apis-v0 branch](https://github.com/Stamplay/stamplay-js-sdk/tree/apis-v0) 
 
@@ -117,13 +120,9 @@ Some models have built-in social actions and the SDK provides a fast way to ```r
   * <a href="#Action.downVote"><code>downVote()</code></a>
   * <a href="#Action.rate"><code>rate()</code></a>
   * <a href="#Action.comment"><code>comment()</code></a>
-  * <a href="#Action.twitterShare"><code>twitterShare()</code></a>
-  * <a href="#Action.facebookShare"><code>facebookShare()</code></a>
   * <a href="#Action.getComments"><code>getComments()</code></a>
   * <a href="#Action.getVotes"><code>getVotes()</code></a>
   * <a href="#Action.getRatings"><code>getRatings()</code></a>
-  * <a href="#Action.getTwitterShares"><code>getTwitterShares()</code></a>
-  * <a href="#Action.getFacebookShares"><code>getFacebookShares()</code></a>
 
 ```javascript
 var tag = new Stamplay.Cobject('tag').Model;
@@ -135,65 +134,8 @@ tag.rate(4)
 ```
 
 -------------------------------------------------------
-  
-<a name="Model.get"></a>
-### get(property)
-Returns the value of the property
-<a name="Model.set"></a>
-### set(property, value)
-Sets the value of the property
-<a name="Model.unset"></a>
-### unset(property)
-Delete the property from the object
-<a name="Model.fetch"></a>
-### fetch(id)
-Resets the model's state from the server. Useful if the model has never been populated with data, or if you'd like to ensure that you have the latest server state. 
-<a name="Model.destroy"></a>
-###destroy()
-Deletes the object from the server by making a DELETE request. If the model is new, false is returned.
-<a name="Model.save"></a>
-###save(options)
-Saves the model to the database. If the model is new a POST request is made, otherwise, unless specified a PUT request is sent.
-#### options 
-An object with the following properties: 
 
-* patch : default false, if true an HTTP PATCH is sent to the server instead of PUT for updating the model 
-
-<a name="Action.upVote"></a>
-###upVote() 
-Vote up the resource.
-<a name="Action.downVote"></a>
-###downVote() 
-Vote down the resource.
-<a name="Action.rate"></a>
-###rate(rating)
-Rate the resource, only integer values as parameter.
-<a name="Action.comment"></a>
-###comment(text)
-Comment the resource with the text.
-<a name="Action.twitterShare"></a>
-###twitterShare()
-Calls the Twitter share endpoint. Note that this method updates the twitter_share counter but it is not responsible for sharing the resource on Twitter.
-<a name="Action.facebookShare"></a>  
-###facebookShare()
-Calls the Facebook share endpoint. Note that this method updates the facebook_share counter but it is not responsible for sharing the resource on Facebook.
-<a name="Action.getComments"></a>  
-###getComments()
-Get all comments of this resource. Return an Array   
-<a name="Action.getVotes"></a>  
-###getVotes()
-Get all userId of voters. If you want the only down vote or up vote, call getVotes('down') or getVotes('up'). Return an Array
-<a name="Action.getRatings"></a>  
-###getRatings()
-Get all Users's ratings. Return an Array
-<a name="Action.getTwitterShares"></a>  
-###getTwitterShares()
-Get all Users's twitter shares. Return an Array
-<a name="Action.getFacebookShares"></a>  
-###getFacebookShares()
-Get all Users's facebook shares. Return an Array
-
-
+ 
 # Collection
 Collections are sets of models. You can ```fetch``` the collection from the server and a set of Underscore methods.   
 
@@ -206,30 +148,6 @@ Collections are sets of models. You can ```fetch``` the collection from the serv
   * <a href="#Collection.pop"><code>pop()</code></a>
   * <a href="#Collection.shift"><code>shift()</code></a>
   * <a href="#Collection.add"><code>add()</code></a> 
-
--------------------------------------------------------
-<a name="Collection.fetch"></a>
-### fetch()
-Populate the collection with all the available models. If no [FetchParams](#FetchParams) are passed the collection is populated with the first 20 models ordered by id. 
-<a name="Collection.remove"></a>
-### remove(id)
-Remove the model with the specified id from the collection. 
-You can pass an array of ids to remove from the collection. 
-<a name="Collection.get"></a>
-### get(id)
-Get a model from a collection, specified by an id.
-<a name="Collection.at"></a>
-### at(index)
-Get a model from a collection, specified by index. In this moment collection aren't sorted so **at** will still retrieve models in insertion order.
-<a name="Collection.pop"></a>
-### pop()
-Remove and return the last model from a collection, if collection is empty return false. 
-<a name="Collection.shift"></a>
-### shift()
-Remove and return the first model from a collection, if collection is empty return false.
-<a name="Collection.add"></a>
-### add(model)
-Add a model at the end of the collection.
 
 -------------------------------------------------------
 
@@ -247,31 +165,6 @@ These help you to create a more flexible and complex fetch object.
   * <a href="#FetchParams.pagination"> <code>pagination()</code></a>
 
 -------------------------------------------------------
-<a name="FetchParams.equalTo"></a>
-### equalTo(attr,value)
-This method take two arguments, the attribute equal to the given value.
-
-<a name="FetchParams.limit"></a>
-### limit(n)
-This method take an argument, the number of maximum results return to you 
-
-<a name="FetchParams.select"></a>
-### select('attr')
-This method take an argument, the name of attribute you want to select.
-If you need more than one argument you can set an array of attributes  
-
-<a name="FetchParams.sortAscending"></a>
-### sortAscending('attr')
-This method take an argument, the name of attribute you want to sorting
-
-<a name="FetchParams.sortDiscending"></a>
-### sortDiscending('attr')
-This method take an argument, the name of attribute you want to sorting
-
-<a name="FetchParams.pagination"></a>
-### pagination(page, per_page)
-This method return the 'per_page' element from the 'page'. 
-
 
 ##Pipeline
 
@@ -323,56 +216,7 @@ Please remember to running the query use the method exec(), it returns a promise
   * <a href="#Query.sortDescending"><code>sortDescending()</code></a>
   * <a href="#Query.or"><code>or()</code></a>
   * <a href="#Query.exec"> <code>exec()</code></a>
-
--------------------------------------------------------
-
-<a name="Query.greaterThan"></a>
-### greaterThan(attr,value)
-This method take two arguments. The query returns all documents that have the attribute greater than the given value.
-
-<a name="Query.greaterThanOrEqual"></a>
-### greaterThanOrEqual(attr,value)
-This method take two arguments. The query returns all documents that have the attribute greater or equal than the given value.
-
-<a name="Query.lessThan"></a>
-### lessThan(attr, value)
-This method take two arguments. The query returns all documents that have the attribute less than the given value.
-
-<a name="Query.lessThanOrEqual"></a>
-### lessThanOrEqual(attr, value)
-This method take two arguments. The query returns all documents that have the attribute less or equal than the given value.
-
-<a name="Query.between"></a>
-### between(attr, value1, value2)
-This method take three arguments. The query returns all documents that have the attribute between value1 and value2.
-
-<a name="Query.equalTo"></a>
-### equalTo(attr,value)
-This method take two arguments. The query returns all documents that have the attribute equal to the given value.
-
-<a name="Query.exists"></a>
-### exists(attr)
-This method take one argument. The query returns all documents that have the attribute.
-
-<a name="Query.notExists"></a>
-### notExists(attr)
-This method take one argument. The query returns all documents that don't have the attribute.
-
-<a name="Query.sortAscending"></a>
-### sortAscending(attr)
-This method take one argument. The query returns the documents sorted ascending on attr.
-
-<a name="Query.sortDescending"></a>
-### sortDescending(attr)
-This method take one argument. The query returns the documents sorted descending on attr.
-
-<a name="Query.or"></a>
-### or(query,query,...)
-This method take n Stamplay.Query object. The query returns all documents that match at least a query.
-
-<a name="Query.exec"></a>
-### exec()
-This method runs the query and return a promise
+  
 
 ##Pipeline
 
