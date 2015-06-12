@@ -106,23 +106,23 @@ newUser.signup(registrationData)
 
 ##Model methods
 
-  * <a href="#Model.get"> <code>get()</code></a>
-  * <a href="#Model.set"><code>set()</code></a>
-  * <a href="#Model.unset"><code>unset</code></a>
-  * <a href="#Model.fetch"><code>fetch()</code></a>
-  * <a href="#Model.destroy"><code>destroy()</code></a>
-  * <a href="#Model.save"><code>save()</code></a>
+  * <code>get()</code>
+  * <code>set()</code>
+  * <code>unset</code>
+  * <code>fetch()</code>
+  * <code>destroy()</code>
+  * <code>save()</code>
 
 ###Action methods
 Some models have built-in social actions and the SDK provides a fast way to ```rate```, ```upvote```, ```downvote``` and ```comment``` a resource. Models with social actions also give you a way to track how many times they have been shared on Twitter and Facebook. All these methods return a promise.
 
-  * <a href="#Action.upVote"><code>upVote()</code></a>
-  * <a href="#Action.downVote"><code>downVote()</code></a>
-  * <a href="#Action.rate"><code>rate()</code></a>
-  * <a href="#Action.comment"><code>comment()</code></a>
-  * <a href="#Action.getComments"><code>getComments()</code></a>
-  * <a href="#Action.getVotes"><code>getVotes()</code></a>
-  * <a href="#Action.getRatings"><code>getRatings()</code></a>
+  * <code>upVote()</code>
+  * <code>downVote()</code>
+  * <code>rate()</code>
+  * <code>comment()</code>
+  * <code>getComments()</code>
+  * <code>getVotes()</code>
+  * <code>getRatings()</code>
 
 ```javascript
 var tag = new Stamplay.Cobject('tag').Model;
@@ -141,13 +141,13 @@ Collections are sets of models. You can ```fetch``` the collection from the serv
 
 ##Methods
 
-  * <a href="#Collection.fetch"> <code>fetch()</code></a>
-  * <a href="#Collection.remove"><code>remove()</code></a>
-  * <a href="#Collection.get"><code>get()</code></a>
-  * <a href="#Collection.at"><code>at()</code></a>
-  * <a href="#Collection.pop"><code>pop()</code></a>
-  * <a href="#Collection.shift"><code>shift()</code></a>
-  * <a href="#Collection.add"><code>add()</code></a> 
+  * <code>fetch()</code>
+  * <code>remove()</code>
+  * <code>get()</code>
+  * <code>at()</code>
+  * <code>pop()</code>
+  * <code>shift()</code>
+  * <code>add()</code>
 
 -------------------------------------------------------
 
@@ -157,12 +157,12 @@ These help you to create a more flexible and complex fetch object.
 
 ##FetchParams
 
-  * <a href="#FetchParams.equalTo"><code>equalTo()</code></a>
-  * <a href="#FetchParams.limit"><code>limit()</code></a>
-  * <a href="#FetchParams.select"><code>select()</code></a>
-  * <a href="#FetchParams.sortAscending"><code>sortAscending()</code></a>
-  * <a href="#FetchParams.sortDescending"><code>sortDescending()</code></a>
-  * <a href="#FetchParams.pagination"> <code>pagination()</code></a>
+  * <code>equalTo()</code>
+  * <code>limit()</code>
+  * <code>select()</code>
+  * <code>sortAscending()</code>
+  * <code>sortDescending()</code>
+  * <code>pagination()</code>
 
 -------------------------------------------------------
 
@@ -204,18 +204,18 @@ Please remember to running the query use the method exec(), it returns a promise
 
 ##Methods
 
-  * <a href="#Query.greaterThan"><code>greaterThan()</code></a>
-  * <a href="#Query.greaterThanOrEqual"><code>greaterThanOrEqual()</code></a>
-  * <a href="#Query.lessThan"><code>lessThan()</code></a>
-  * <a href="#Query.lessThanOrEqual"><code>lessThanOrEqual()</code></a>
-  * <a href="#Query.between"><code>between()</code></a>
-  * <a href="#Query.equalTo"><code>equalTo()</code></a>
-  * <a href="#Query.exists"><code>exists()</code></a>
-  * <a href="#Query.notExists"><code>notExists()</code></a>
-  * <a href="#Query.sortAscending"><code>sortAscending()</code></a>
-  * <a href="#Query.sortDescending"><code>sortDescending()</code></a>
-  * <a href="#Query.or"><code>or()</code></a>
-  * <a href="#Query.exec"> <code>exec()</code></a>
+  * <code>greaterThan()</code>
+  * <code>greaterThanOrEqual()</code>
+  * <code>lessThan()</code>
+  * <code>lessThanOrEqual()</code>
+  * <code>between()</code>
+  * <code>equalTo()</code>
+  * <code>exists()</code>
+  * <code>notExists()</code>
+  * <code>sortAscending()</code>
+  * <code>sortDescending()</code>
+  * <code>or()</code>
+  *<code>exec()</code>
   
 
 ##Pipeline
@@ -453,5 +453,5 @@ To load the Stamplay SDK from the Amazon's Cloudfront content distribution netwo
 ```
 
 # One more thing
-Go to [API Reference](https://stamplay.com/docs/jssdk) to see a lot of examples
+Go to [API Reference](https://stamplay.com/docs/jssdk) to see a lot of examples.
 Enjoy!
