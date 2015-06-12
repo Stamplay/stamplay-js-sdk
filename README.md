@@ -451,3 +451,7 @@ To load the Stamplay SDK from the Amazon's Cloudfront content distribution netwo
 ```HTML
 <script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.0.0/stamplay.min.js"></script>
 ```
+
+# One more thing
+Go to [API Reference](https://stamplay.com/docs/jssdk) to see full api reference and a lot of examples
+Enjoy!
