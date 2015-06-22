@@ -1,10 +1,10 @@
 /* Brick : User 
- 	GET    '/api/user/v0/users'
-  GET    '/api/user/v0/users/:id'
-  POST   '/api/user/v0/users'
-  PUT    '/api/user/v0/users/:id'
-  DELETE '/api/user/v0/users/:id'
-  GET    '/api/user/v0/getStatus'
+ 	GET    '/api/user/VERSION/users'
+  GET    '/api/user/VERSION/users/:id'
+  POST   '/api/user/VERSION/users'
+  PUT    '/api/user/VERSION/users/:id'
+  DELETE '/api/user/VERSION/users/:id'
+  GET    '/api/user/VERSION/getStatus'
 */
 
 (function (root) {

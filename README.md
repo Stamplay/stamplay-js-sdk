@@ -1,21 +1,21 @@
-Stamplay JavaScript SDK API v1 
+Stamplay JavaScript SDK API v1.x 
 ===============
 [![Build Status](https://travis-ci.org/Stamplay/stamplay-js-sdk.svg?branch=master)](https://travis-ci.org/Stamplay/stamplay-js-sdk)
 [![Production version](http://img.shields.io/badge/download-38%20kB-blue.svg)](https://raw.githubusercontent.com/Stamplay/stamplay-js-sdk/master/dist/stamplay.min.js)
 [![Bower version](https://badge.fury.io/bo/stamplay-js-sdk.svg)](http://badge.fury.io/bo/stamplay-js-sdk)
 
 ##Full API Reference
-[API Reference](https://stamplay.com/docs/jssdk)
+[API Reference](https://stamplay.com/docs/sdkreference)
 
 ## API v0 support 
 If you're using Stamplay API v0 you should use the javascript sdk in the [apis-v0 branch](https://github.com/Stamplay/stamplay-js-sdk/tree/apis-v0) 
 
 ##Getting Started
-The Stamplay JavaScript SDK provides a JavaScript library making it even easier to access the Stamplay cloud platform. On this initial release the SDK let you work with the most important and flexible components of our platform: `User` , `Custom Objects` and `Webhook`.To enable support for Stamplay-related functions in your web app, you'll need to include `stamplay.min.js` in your app. 
+The Stamplay JavaScript SDK provides a JavaScript library making it even easier to access the Stamplay cloud platform. On this initial release the SDK let you work with the most important and flexible components of our platform: `User` , `Custom Objects` , `Webhook` and `Stripe` .To enable support for Stamplay-related functions in your web app, you'll need to include `stamplay.min.js` in your app. 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.0.0/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.1.0/stamplay.min.js"></script>
 ```
 To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
@@ -72,6 +72,8 @@ This JavaScript SDK expose through the Stamplay variable the following component
 * [User](#user)
 * [Custom Object](#custom-object)
 * [WebHook](#webhook)
+* [Stripe](#stripe)
+
 
 Every component can expose two main classes:
 
@@ -437,6 +439,52 @@ webhook.post(data).then(function (response) {
 });
 ```
 
+#Stripe
+
+You cannot create a Model or Collection of a Stripe.
+IMPORTANT: You must import Stripe javascript library if you want use Stripe component [Stripe js](https://stripe.com/docs/stripe.js).
+Stripe has the following additional methods.
+
+  * <a href="#Stripe.createCustomer"><code>createCustomer()</code></a>
+  * <a href="#Stripe.createCreditCard"><code>createCreditCard()</code></a>
+  * <a href="#Stripe.charge"><code>charge()</code></a>
+
+-------------------------------------------------------
+
+<a name="Stripe.createCustomer"></a>
+###Post
+
+It's a simple method to make a POST call to create customer 
+
+```javascript
+var customerStripe = new Stamplay.Stripe();
+customerStripe.createCustomer('_ID of user').then(function (response) {
+  //do what you want with the response
+});
+```
+<a name="Stripe.createCreditCard"></a>
+###Post
+
+It's a simple method to make a POST call to create CreditCard 
+
+```javascript
+var customerStripe = new Stamplay.Stripe();
+customerStripe.createCreditCard('_ID of user', 'TOKEN from stripe js').then(function (response) {
+  //do what you want with the response
+});
+```
+<a name="Stripe.charge"></a>
+###Post
+
+It's a simple method to make a POST call to charge customer 
+
+```javascript
+var customerStripe = new Stamplay.Stripe();
+// Four parameters: id of user, token from stripe, amount of charge , currency 
+customerStripe.charge('_ID of user', 'TOKEN from stripe js', 3000, 'GBP').then(function (response) {
+  //do what you want with the response
+});
+```
 
 # Build
 To build a production ready library you need to have NPM and Bower installed and then run those two commands:
@@ -449,9 +497,9 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.0.0/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.1.0/stamplay.min.js"></script>
 ```
 
 # One more thing
-Go to [API Reference](https://stamplay.com/docs/jssdk) to see a lot of examples.
+Go to [API Reference](https://stamplay.com/docs/sdkreference) to see a lot of examples.
 Enjoy!

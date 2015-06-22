@@ -1,5 +1,17 @@
 # Stamplay JS SDK Changelog
 
+1.1.0  / 22-06-2015
+=================
+
+* Added Stripe integration
+
+1.0.0  / 3-06-2015
+=================
+
+* Fix bugs
+* Improve stability
+* Added JWT 
+
 0.0.12  / 21-04-2015
 =================
 

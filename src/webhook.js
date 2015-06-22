@@ -1,4 +1,5 @@
 /* Brick : Webhook 
+ *  POST   '/api/webhook/VERSION/:webhookId/catch'
  */
 (function (root) {
 
