@@ -452,7 +452,7 @@ Stripe has the following additional methods.
 -------------------------------------------------------
 
 <a name="Stripe.createCustomer"></a>
-###Post
+###createCustomer
 
 It's a simple method to make a POST call to create customer 
 
@@ -463,7 +463,7 @@ customerStripe.createCustomer('_ID of user').then(function (response) {
 });
 ```
 <a name="Stripe.createCreditCard"></a>
-###Post
+###createCreditCard
 
 It's a simple method to make a POST call to create CreditCard 
 
@@ -474,7 +474,7 @@ customerStripe.createCreditCard('_ID of user', 'TOKEN from stripe js').then(func
 });
 ```
 <a name="Stripe.charge"></a>
-###Post
+###charge
 
 It's a simple method to make a POST call to charge customer 
 
