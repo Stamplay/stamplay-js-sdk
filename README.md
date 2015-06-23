@@ -5,7 +5,7 @@ Stamplay JavaScript SDK API v1.x
 [![Bower version](https://badge.fury.io/bo/stamplay-js-sdk.svg)](http://badge.fury.io/bo/stamplay-js-sdk)
 
 ##Full API Reference
-[API Reference](https://stamplay.com/docs/sdkreference)
+[API Reference](https://stamplay.com/docs/jssdk)
 
 ## API v0 support 
 If you're using Stamplay API v0 you should use the javascript sdk in the [apis-v0 branch](https://github.com/Stamplay/stamplay-js-sdk/tree/apis-v0) 
@@ -501,5 +501,5 @@ To load the Stamplay SDK from the Amazon's Cloudfront content distribution netwo
 ```
 
 # One more thing
-Go to [API Reference](https://stamplay.com/docs/sdkreference) to see a lot of examples.
+Go to [API Reference](https://stamplay.com/docs/jssdk) to see a lot of examples.
 Enjoy!
