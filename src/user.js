@@ -96,6 +96,53 @@
 					root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
 				}
 
+				this.Model.activities = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/activities'
+					}).then(function (response) {
+						return response
+					});
+				}
+
+				this.Model.following = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/following'
+					}).then(function (response) {
+						return response
+					});
+				}
+
+				this.Model.followedBy = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/followed_by'
+					}).then(function (response) {
+						return response
+					});
+				}
+
+				this.Model.follow = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'PUT',
+						data: {'userId': id},
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/follow'
+					}).then(function (response) {
+						return response
+					});
+				}
+
+				this.Model.unfollow = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'PUT',
+						data: {'userId': id},
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/unfollow'
+					}).then(function (response) {
+						return response
+					});
+				}
+
 		}
 		//Added User to Stamplay 
 	root.Stamplay.User = User;

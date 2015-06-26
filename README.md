@@ -15,7 +15,7 @@ The Stamplay JavaScript SDK provides a JavaScript library making it even easier 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.1.0/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.0/stamplay.min.js"></script>
 ```
 To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
@@ -296,6 +296,12 @@ User model has the following additional methods.
   * <a href="#User.signup"><code>signup()</code></a>
   * <a href="#User.logout"><code>logout()</code></a>
 
+  * <a href="#User.follow"><code>follow()</code></a>
+  * <a href="#User.unfollow"><code>unfollow()</code></a>
+  * <a href="#User.followedBy"><code>followedBy()</code></a>
+  * <a href="#User.following"><code>following()</code></a>
+  * <a href="#User.activities"><code>activities()</code></a>
+
 -------------------------------------------------------
 
 <a name="User.currentUser"></a>
@@ -371,6 +377,52 @@ Redirect the browser to the logout url.
 
 ```javascript
 user.logout();
+```
+ <a name="User.follow"></a>
+###follow()
+Create relation between logged user and other user
+
+```javascript
+user.follow(_ID_OF_OTHER_USER).then(function(otherUser){
+  console.log(otherUser)
+});
+```
+<a name="User.unfollow"></a>
+###unfollow()
+Delete relation between logged user and other user
+
+```javascript
+user.unfollow(_ID_OF_OTHER_USER).then(function(otherUser){
+  console.log(otherUser)
+});
+```
+
+<a name="User.followedBy"></a>
+###followedBy()
+Return the users that follow the user with the specified userId.
+
+```javascript
+user.followedBy(_ID_OF_USER).then(function(users){
+  console.log(users)
+});
+```
+<a name="User.following"></a>
+###following()
+Return the users that the user with the specified userId is following.
+
+```javascript
+user.following(_ID_OF_USER).then(function(users){
+  console.log(users)
+});
+```
+<a name="User.activities"></a>
+###activities()
+Return all activities of a user
+
+```javascript
+user.activities(_ID_OF_USER).then(function(activities){
+  console.log(activities)
+});
 ```
 
 #Custom Object
@@ -497,7 +549,7 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.1.0/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.0/stamplay.min.js"></script>
 ```
 
 # One more thing

@@ -1,5 +1,15 @@
 # Stamplay JS SDK Changelog
 
+1.2.0  / 26-06-2015
+=================
+
+* Added Follow method on User
+* Added Unfollow method on User
+* Added Activities method on User
+* Added Following method on User
+* Added FollowedBy method on User
+
+
 1.1.0  / 22-06-2015
 =================
 
