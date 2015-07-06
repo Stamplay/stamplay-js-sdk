@@ -53,4 +53,8 @@ suite('Stamplay Object ', function () {
 	test('expose Webhook constructor', function () {
 		assert.typeOf(window.Stamplay.Webhook, 'function', 'window.Stamplay.Webhook constructor exists');
 	});
+
+	test('expose Stripe constructor', function () {
+		assert.typeOf(window.Stamplay.Stripe, 'function', 'window.Stamplay.Stripe constructor exists');
+	});
 })

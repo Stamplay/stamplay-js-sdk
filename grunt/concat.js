@@ -14,11 +14,12 @@ module.exports = {
                   'src/stamplay.js',
                   'src/promise.js',
                   'src/baseComponent.js',
+                  'src/support.js',
                   'src/query.js',
                   'src/user.js',
                   'src/cobject.js',
                   'src/webhook.js',
-                  'src/support.js'
+                  'src/stripe.js'
                 ],
 		dest: 'dist/stamplay.js'
 	}

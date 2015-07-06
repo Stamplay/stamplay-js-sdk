@@ -1,10 +1,10 @@
 /* Brick : User 
- 	GET    '/api/user/v0/users'
-  GET    '/api/user/v0/users/:id'
-  POST   '/api/user/v0/users'
-  PUT    '/api/user/v0/users/:id'
-  DELETE '/api/user/v0/users/:id'
-  GET    '/api/user/v0/getStatus'
+ 	GET    '/api/user/VERSION/users'
+  GET    '/api/user/VERSION/users/:id'
+  POST   '/api/user/VERSION/users'
+  PUT    '/api/user/VERSION/users/:id'
+  DELETE '/api/user/VERSION/users/:id'
+  GET    '/api/user/VERSION/getStatus'
 */
 
 (function (root) {
@@ -94,6 +94,53 @@
 						store.remove(window.location.origin + '-jwt');
 					}
 					root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
+				}
+
+				this.Model.activities = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/activities'
+					}).then(function (response) {
+						return response
+					});
+				}
+
+				this.Model.following = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/following'
+					}).then(function (response) {
+						return response
+					});
+				}
+
+				this.Model.followedBy = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/followed_by'
+					}).then(function (response) {
+						return response
+					});
+				}
+
+				this.Model.follow = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'PUT',
+						data: {'userId': id},
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/follow'
+					}).then(function (response) {
+						return response
+					});
+				}
+
+				this.Model.unfollow = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'PUT',
+						data: {'userId': id},
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/unfollow'
+					}).then(function (response) {
+						return response
+					});
 				}
 
 		}

@@ -60,6 +60,11 @@ suite('Stamplay User Model ', function () {
 		assert.isFunction(user.login, 'login status exists');
 		assert.isFunction(user.logout, 'logout status exists');
 		assert.isFunction(user.signup, 'signup status exists');
+		assert.isFunction(user.follow, 'follow status exists');
+		assert.isFunction(user.unfollow, 'unfollow status exists');
+		assert.isFunction(user.activities, 'activities status exists');
+		assert.isFunction(user.following, 'following status exists');
+		assert.isFunction(user.followedBy, 'followedBy status exists');
 
 	});
 
@@ -178,6 +183,67 @@ suite('Stamplay User Model ', function () {
 		var url = arr[0] || '';
 		assert.equal(url, '/auth/' + Stamplay.VERSION + '/logout');
 	});
+
+
+	test('user follow function', function () {
+
+		user.follow('123').then(function () {
+			done();
+		});
+		assert.equal(this.request.method, 'PUT');
+		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/follow');
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, JSON.stringify({}));
+	});
+
+	test('user unfollow function', function () {
+
+		user.unfollow('123').then(function () {
+			done();
+		});
+		assert.equal(this.request.method, 'PUT');
+		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/unfollow');
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, JSON.stringify({}));
+	});		
+
+	test('user activities function', function () {
+
+		user.activities('123').then(function () {
+			done();
+		});
+		assert.equal(this.request.method, 'GET');
+		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123/activities');
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, JSON.stringify({}));
+	});		
+
+	test('user following function', function () {
+
+		user.following('123').then(function () {
+			done();
+		});
+		assert.equal(this.request.method, 'GET');
+		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123/following');
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, JSON.stringify({}));
+	});		
+
+		test('user followedBy function', function () {
+
+		user.followedBy('123').then(function () {
+			done();
+		});
+		assert.equal(this.request.method, 'GET');
+		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123/followed_by');
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, JSON.stringify({}));
+	});		
 
 	// constructor, get, set, unset tested in cobject.model.js
 	// model methods
