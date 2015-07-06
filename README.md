@@ -590,6 +590,119 @@ webhook.post(data).then(function (response) {
 });
 ```
 
+#Stripe
+
+You cannot create a Model or Collection of a Stripe.
+IMPORTANT: You must import Stripe javascript library if you want use Stripe component [Stripe js](https://stripe.com/docs/stripe.js).
+Stripe has the following additional methods.
+
+  * <a href="#Stripe.createCustomer"><code>createCustomer()</code></a>
+  * <a href="#Stripe.createCreditCard"><code>createCreditCard()</code></a>
+  * <a href="#Stripe.charge"><code>charge()</code></a>
+
+-------------------------------------------------------
+
+<a name="Stripe.createCustomer"></a>
+###createCustomer
+
+It's a simple method to make a POST call to create customer 
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+stamplayStripe.createCustomer('_ID of user').then(function (response) {
+  //do what you want with the response
+});
+```
+<a name="Stripe.createCreditCard"></a>
+###createCreditCard
+
+It's a simple method to make a POST call to create CreditCard 
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+stamplayStripe.createCreditCard('_ID of user', 'TOKEN from stripe js').then(function (response) {
+  //do what you want with the response
+});
+```
+<a name="Stripe.charge"></a>
+###charge
+
+It's a simple method to make a POST call to charge customer 
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+// Four parameters: id of user, token from stripe, amount of charge , currency 
+stamplayStripe.charge('_ID of user', 'TOKEN from stripe js', 3000, 'GBP').then(function (response) {
+  //do what you want with the response
+});
+```
+
+<a name="Stripe.createSubscription"></a>
+###createSubscription
+
+It's a simple method to make a POST call to create a subscription. 
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+// Two parameters: id of user, plan id
+stamplayStripe.createSubscription('_ID of user', 'planId').then(function (response) {
+  //do what you want with the response
+});
+```
+
+<a name="Stripe.getSubscriptions"></a>
+###getSubscriptions
+
+It's a simple method to make a GET call to get user's subscriptions. 
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+// Two parameters: id of user, [options]
+stamplayStripe.getSubscriptions('_ID of user').then(function (response) {
+  //do what you want with the response
+});
+```
+
+<a name="Stripe.getSubscription"></a>
+###getSubscription
+
+It's a simple method to make a GET call to get an user's subscription. 
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+// Two parameters: id of user, id of the subscription
+stamplayStripe.getSubscription('_ID of user','_ID of the subscription').then(function (response) {
+  //do what you want with the response
+});
+```
+
+<a name="Stripe.updateSubscription"></a>
+###updateSubscription
+
+It's a simple method to make a PUT call to update an existing user's subscription.
+Options are [Stripe's options](https://stripe.com/docs/api/node#update_subscription)
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+// Three parameters: id of user, id of the subscription, [options]
+stamplayStripe.updateSubscription('_ID of user','_ID of the subscription').then(function (response) {
+  //do what you want with the response
+});
+```
+
+<a name="Stripe.deleteSubscription"></a>
+###deleteSubscription
+
+It's a simple method to make a DELETE call to remove an existing user's subscription.
+Options are [Stripe's options](https://stripe.com/docs/api/node#cancel_subscription)
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+// Three parameters: id of user, id of the subscription, [options]
+stamplayStripe.deleteSubscription('_ID of user','_ID of the subscription').then(function (response) {
+  //do what you want with the response
+});
+```
 
 # Build
 To build a production ready library you need to have NPM and Bower installed and then run those two commands:
