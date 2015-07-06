@@ -66,6 +66,7 @@ This JavaScript SDK expose through the Stamplay variable the following component
 * [User](#user)
 * [Custom Object](#custom-object)
 * [WebHook](#webhook)
+* [Stripe](#stripe)
 
 Every component can expose two main classes:
 
