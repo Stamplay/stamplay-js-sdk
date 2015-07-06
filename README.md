@@ -600,6 +600,11 @@ Stripe has the following additional methods.
   * <a href="#Stripe.createCustomer"><code>createCustomer()</code></a>
   * <a href="#Stripe.createCreditCard"><code>createCreditCard()</code></a>
   * <a href="#Stripe.charge"><code>charge()</code></a>
+  * <a href="#Stripe.createSubscription"><code>createSubscription()</code></a>
+  * <a href="#Stripe.getSubscriptions"><code>getSubscriptions()</code></a>
+  * <a href="#Stripe.getSubscription"><code>getSubscription()</code></a>
+  * <a href="#Stripe.updateSubscription"><code>updateSubscription()</code></a>
+  * <a href="#Stripe.deleteSubscription"><code>deleteSubscription()</code></a>
 
 -------------------------------------------------------
 
