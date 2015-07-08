@@ -23,7 +23,6 @@
 
 	if (getURLParameter('jwt')) {
 		if (Stamplay.USESTORAGE) {
-			console.log('aaaa', getURLParameter('jwt'));
 			store.set(window.location.origin + '-jwt', getURLParameter('jwt'));
 		}
 	}

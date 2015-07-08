@@ -1,4 +1,4 @@
-/*! Stamplay v0.2.0 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
+/*! Stamplay v1.2.0 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -2252,7 +2252,6 @@ return Q;
 
 	if (getURLParameter('jwt')) {
 		if (Stamplay.USESTORAGE) {
-			console.log('aaaa', getURLParameter('jwt'));
 			store.set(window.location.origin + '-jwt', getURLParameter('jwt'));
 		}
 	}
@@ -2336,9 +2335,7 @@ return Q;
 			req.setRequestHeader(key, options.headers[key]);
 		});
 		// Default content-Type  
-		if (options.method && options.method !== 'DELETE') {
-			req.setRequestHeader('Content-Type', 'application/json');
-		}
+		req.setRequestHeader('Content-Type', 'application/json');
 
 		req.setRequestHeader('stamplay-app', headerStamplay);
 
@@ -3083,6 +3080,45 @@ return Q;
 }(this));
 /* ---- STAMPLAY JS SDK ---- */
 (function (root) {
+
+	// constructor for Support Object
+	function Support() {
+
+		// function to redirect to specified url
+		this.redirect = function (url) {
+			window.location.href = url;
+		};
+
+		// function for check if you have user with a specific email 
+		this.validateEmail = function (email) {
+			return Stamplay.makeAPromise({
+				method: 'POST',
+				data: {
+					email: email
+				},
+				url: '/api/auth/' + Stamplay.VERSION + '/validate/email'
+			})
+		}
+
+		this.checkMongoId = function(mongoId){
+			var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+			return syntaxValid = (((typeof mongoId) === 'string') && checkForHexRegExp.test(mongoId));
+		}
+
+		this.errorSender = function(status, message){
+			var deferred = Q.defer();
+			deferred.reject({"status":status, "message":message});
+			return deferred.promise
+		}
+
+	};
+	var support = new Support();
+	// Added Support Object to Stamplay
+	root.Stamplay.Support = support;
+
+})(this);
+/* ---- STAMPLAY JS SDK ---- */
+(function (root) {
 	// constructor for Query Object
 	// model is required ever
 	function Query(model, instance) {
@@ -3296,6 +3332,53 @@ return Q;
 					root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
 				}
 
+				this.Model.activities = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/activities'
+					}).then(function (response) {
+						return response
+					});
+				}
+
+				this.Model.following = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/following'
+					}).then(function (response) {
+						return response
+					});
+				}
+
+				this.Model.followedBy = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/followed_by'
+					}).then(function (response) {
+						return response
+					});
+				}
+
+				this.Model.follow = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'PUT',
+						data: {'userId': id},
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/follow'
+					}).then(function (response) {
+						return response
+					});
+				}
+
+				this.Model.unfollow = function (id) {
+					return Stamplay.makeAPromise({
+						method: 'PUT',
+						data: {'userId': id},
+						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/unfollow'
+					}).then(function (response) {
+						return response
+					});
+				}
+
 		}
 		//Added User to Stamplay 
 	root.Stamplay.User = User;
@@ -3365,28 +3448,156 @@ return Q;
 /* ---- STAMPLAY JS SDK ---- */
 (function (root) {
 
-	// constructor for Support Object
-	function Support() {
+	/*
+		Stripe component : Stamplay.Stripe 
+		This class rappresent the Stripe Object component on Stamplay platform
+		It very easy to use: Stamplay.Stripe()
+	*/
 
-		// function to redirect to specified url
-		this.redirect = function (url) {
-			window.location.href = url;
-		};
+	//constructor
+	function Stripe() {
 
-		// function for check if you have user with a specific email 
-		this.validateEmail = function (email) {
-			return Stamplay.makeAPromise({
-				method: 'POST',
-				data: {
-					email: email
-				},
-				url: '/api/auth/' + Stamplay.VERSION + '/validate/email'
-			})
+		this.url = '/api/stripe/' + Stamplay.VERSION + '/';
+
+		this.createCustomer = function (userId) {
+			if (Stamplay.Support.checkMongoId(userId))
+				return Stamplay.makeAPromise({
+					method: 'POST',
+					data: {
+						'userId': userId
+					},
+					url: this.url + 'customers'
+				})
+			else
+				return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
 		}
 
-	};
-	var support = new Support();
-	// Added Support Object to Stamplay
-	root.Stamplay.Support = support;
+		this.createCreditCard = function (userId, token) {
+			if (arguments.length == 2) {
+				if (Stamplay.Support.checkMongoId(userId))
+					return Stamplay.makeAPromise({
+						method: 'POST',
+						data: {
+							'token': token
+						},
+						url: this.url + 'customers/' + userId + '/cards'
+					})
+				else
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in createCreditCard methods")
+			}
+		}
+
+		this.charge = function (userId, token, amount, currency) {
+			if (arguments.length == 4) {
+				if (Stamplay.Support.checkMongoId(userId))
+					return Stamplay.makeAPromise({
+						method: 'POST',
+						data: {
+							'userId': userId,
+							'token': token,
+							'amount': amount,
+							'currency': currency
+						},
+						url: this.url + 'charges'
+					})
+				else
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in charge methods")
+			}
+		}
+
+
+		this.createSubscription = function (userId, planId) {
+			if (arguments.length == 2) {
+				if (Stamplay.Support.checkMongoId(userId)) {
+					return Stamplay.makeAPromise({
+						method: 'POST',
+						data: {
+							'planId': planId
+						},
+						url: this.url + 'customers/' + userId + '/subscriptions'
+					})
+				} else {
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+				}
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in createSubscription methods")
+			}
+		}
+
+		this.getSubscriptions = function (userId, options) {
+			if (arguments.length >= 1) {
+				if (Stamplay.Support.checkMongoId(userId)) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: this.url + 'customers/' + userId + '/subscriptions',
+						thisParams: options
+					});
+				} else {
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+				}
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscriptions methods")
+			}
+		}
+
+		this.getSubscription = function (userId, subscriptionId) {
+			if (arguments.length <= 2) {
+				if (Stamplay.Support.checkMongoId(userId)) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
+					});
+				} else {
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+				}
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscription methods")
+			}
+		}
+
+
+		this.deleteSubscription = function (userId, subscriptionId, options) {
+			if (arguments.length == 2) {
+				if (Stamplay.Support.checkMongoId(userId)) {
+					return Stamplay.makeAPromise({
+						method: 'DELETE',
+						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
+						data: options || {}
+					});
+				} else {
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+				}
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in deleteSubscription methods")
+			}
+		}
+
+		this.updateSubscription = function (userId, subscriptionId, options) {
+			if (arguments.length >= 2) {
+				if (Stamplay.Support.checkMongoId(userId)) {
+					options = options || {};
+					return Stamplay.makeAPromise({
+						method: 'PUT',
+						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
+						data: {
+							options: options
+						}
+					});
+				} else {
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+				}
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in updateSubscription methods")
+			}
+		}
+
+
+	}
+
+	root.Stamplay.Stripe = Stripe;
 
 })(this);

@@ -69,6 +69,7 @@
 			}
 		}
 
+
 		this.createSubscription = function (userId, planId) {
 			if (arguments.length == 2) {
 				if (Stamplay.Support.checkMongoId(userId)) {
@@ -124,7 +125,8 @@
 				if (Stamplay.Support.checkMongoId(userId)) {
 					return Stamplay.makeAPromise({
 						method: 'DELETE',
-						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId
+						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
+						data: options || {}
 					});
 				} else {
 					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
@@ -156,7 +158,6 @@
 
 	}
 
-	//Added Stripe to Stamplay 
 	root.Stamplay.Stripe = Stripe;
 
 })(this);

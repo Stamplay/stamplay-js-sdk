@@ -68,9 +68,7 @@
 			req.setRequestHeader(key, options.headers[key]);
 		});
 		// Default content-Type  
-		if (options.method && options.method !== 'DELETE') {
-			req.setRequestHeader('Content-Type', 'application/json');
-		}
+		req.setRequestHeader('Content-Type', 'application/json');
 
 		req.setRequestHeader('stamplay-app', headerStamplay);
 

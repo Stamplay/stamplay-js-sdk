@@ -1,15 +1,15 @@
 /* Brick : Cobject 
-	GET     '/api/cobject/v0/:cobjectId 
-	GET     '/api/cobject/v0/:cobjectId/:id   
-	PUT     '/api/cobject/v0/:cobjectId/:id   
-	PATCH   '/api/cobject/v0/:cobjectId/:id 
-	POST    '/api/cobject/v0/:cobjectId       
-	DELETE  '/api/cobject/v0/:cobjectId/:id
-	PUT			'/api/cobject/v0/:cobjectId/:id/rate
-	PUT     '/api/cobject/v0/:cobjectId/:id/comment
-	PUT     '/api/cobject/v0/:cobjectId/:id/vote
-	PUT     '/api/cobject/v0/:cobjectId/:id/facebook_share
-	PUT     '/api/cobject/v0/:cobjectId/:id/twitter_share 
+	GET     '/api/cobject/VERSION/:cobjectId 
+	GET     '/api/cobject/VERSION/:cobjectId/:id   
+	PUT     '/api/cobject/VERSION/:cobjectId/:id   
+	PATCH   '/api/cobject/VERSION/:cobjectId/:id 
+	POST    '/api/cobject/VERSION/:cobjectId       
+	DELETE  '/api/cobject/VERSION/:cobjectId/:id
+	PUT			'/api/cobject/VERSION/:cobjectId/:id/rate
+	PUT     '/api/cobject/VERSION/:cobjectId/:id/comment
+	PUT     '/api/cobject/VERSION/:cobjectId/:id/vote
+	PUT     '/api/cobject/VERSION/:cobjectId/:id/facebook_share
+	PUT     '/api/cobject/VERSION/:cobjectId/:id/twitter_share 
 */
 (function (root) {
 

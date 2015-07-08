@@ -107,7 +107,7 @@
     });
 
     test('charge post request', function (done) {
-      stripe.charge('123451234512345123451234', 'token', 1234, 'eur').then(function (response) {
+      stripe.charge('123451234512345123451234', 'token', 1234, 'EUR').then(function (response) {
         done();
       });
 
@@ -127,10 +127,19 @@
       });
     });
 
-    test('charge post request missing parameters', function (done) {
-      stripe.charge('123451234512345123451234', 1234, 'eur').then(function (response) {}, function (err) {
+    test('charge post request with userid and no token', function (done) {
+      stripe.charge('123451234512345123451234', null, 1234, 'eur').then(function (response) {
         done();
       });
+
+      assert.equal(this.request.method, 'POST');
+      assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/charges');
+
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
+
     });
 
     test('createSubscription post request', function (done) {
@@ -262,7 +271,8 @@
 
       var expectedBody = {
         options: stripeOptions
-      };
+      }
+
       stripe.updateSubscription('123451234512345123451234', 'subscriptionId', stripeOptions).then(function (response) {
         done();
       }, function (err) {
