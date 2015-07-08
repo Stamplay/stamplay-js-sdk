@@ -131,10 +131,11 @@ Some models have built-in social actions and the SDK provides a fast way to ```r
 
 ```javascript
 var tag = new Stamplay.Cobject('tag').Model;
-tag.rate(4)
-.then(function(){
+tag.fetch(validId).then(function(){
+  return tag.rate(4)
+}).then(function(){
   var actions = tag.get('actions');
-  console.log(actions.ratings); // You can see the ratings, the average rate and the users who rate
+  console.log(actions.ratings); // You can see the ratings, the average rate and the users who rated
 });
 ```
 
