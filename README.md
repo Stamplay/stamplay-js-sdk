@@ -19,8 +19,7 @@ To do this, add the following to the head block of your HTML:
 ```
 To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
-If you use the SDK on a different domain from *.stamplayapp.com, remember to call this method to initialize the SDK,
-it's really IMPORTANT:
+To initialize the SDK make sure to call the `init` function with your appId. 
 
 ```javascript
 //APPID is the appid of your app on Stamplay's Editor
