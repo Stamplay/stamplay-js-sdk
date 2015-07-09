@@ -1,5 +1,14 @@
 # Stamplay JS SDK Changelog
 
+1.2.1  / 09-07-2015
+* Added createSubscription method on Stripe
+* Added getSubscriptions method on Stripe
+* Added getSubscription method on Stripe
+* Added deleteSubscription method on Stripe
+* Added updateSubscription method on Stripe
+* All xhr requests use application/json content type
+* When a user is destroyed logs out 
+
 1.2.0  / 26-06-2015
 =================
 

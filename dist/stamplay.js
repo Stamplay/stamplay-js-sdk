@@ -1,4 +1,4 @@
-/*! Stamplay v1.2.0 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
+/*! Stamplay v1.2.1 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -2335,9 +2335,7 @@ return Q;
 			req.setRequestHeader(key, options.headers[key]);
 		});
 		// Default content-Type  
-		if (options.method && options.method !== 'DELETE') {
-			req.setRequestHeader('Content-Type', 'application/json');
-		}
+		req.setRequestHeader('Content-Type', 'application/json');
 
 		req.setRequestHeader('stamplay-app', headerStamplay);
 
@@ -2756,11 +2754,23 @@ return Q;
 			// destroy function 
 			// Delete Model to Stamplay's db
 			this.destroy = function () {
+				var isUser = (this.brickId == 'user')
 				if (this.get('_id')) {
 
 					return Stamplay.makeAPromise({
 						method: 'DELETE',
 						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.get('_id')
+					}).then(function (response) {
+
+						if (isUser && Stamplay.USESTORAGE) {
+							var jwt = store.get(window.location.origin + '-jwt');
+							if (jwt) {
+								store.remove(window.location.origin + '-jwt');
+							}
+						}
+
+						return response;
+
 					});
 
 				} else {
@@ -2776,298 +2786,298 @@ return Q;
 	 */
 	function Collection(brickId, resourceId) {
 
-			//Collection variable
-			// data from server
-			this.instance = []
-				// name of baseComponent
-			this.brickId = brickId;
-			// name of subresource
-			this.resourceId = resourceId;
-			//length of Collection
-			this.length = this.instance.length
-				//total element 
-			this.totalElement = 0;
-			//links for pagination
-			this.link = {};
-			//the fetchParameters
-			this.currentQuery = {};
+		//Collection variable
+		// data from server
+		this.instance = []
+			// name of baseComponent
+		this.brickId = brickId;
+		// name of subresource
+		this.resourceId = resourceId;
+		//length of Collection
+		this.length = this.instance.length
+			//total element 
+		this.totalElement = 0;
+		//links for pagination
+		this.link = {};
+		//the fetchParameters
+		this.currentQuery = {};
 
-			//method for parsing the currentquery 
-			var parseCurrentQuery = function (currentQuery) {
-				var query = {}
-				for (var key in currentQuery) {
-					if (key == 'find') {
-						for (attr in currentQuery[key]) {
-							query[attr] = currentQuery[key][attr]
-						}
-					} else if (key == 'limit') {
-						query['n'] = currentQuery[key]
-					} else if (key == 'select') {
-						query['select'] = currentQuery[key].join(",")
-					} else if (key == 'sort') {
-						query['sort'] = currentQuery[key]
-					} else if (key == 'pagination') {
-						query['page'] = currentQuery[key][0]
-						query['per_page'] = currentQuery[key][1]
+		//method for parsing the currentquery 
+		var parseCurrentQuery = function (currentQuery) {
+			var query = {}
+			for (var key in currentQuery) {
+				if (key == 'find') {
+					for (attr in currentQuery[key]) {
+						query[attr] = currentQuery[key][attr]
 					}
+				} else if (key == 'limit') {
+					query['n'] = currentQuery[key]
+				} else if (key == 'select') {
+					query['select'] = currentQuery[key].join(",")
+				} else if (key == 'sort') {
+					query['sort'] = currentQuery[key]
+				} else if (key == 'pagination') {
+					query['page'] = currentQuery[key][0]
+					query['per_page'] = currentQuery[key][1]
 				}
-				return query;
 			}
+			return query;
+		}
 
-			//method to compile the params
-			this.compile = function () {
-				return parseCurrentQuery(this.currentQuery)
-			}
+		//method to compile the params
+		this.compile = function () {
+			return parseCurrentQuery(this.currentQuery)
+		}
 
-			//method to set the pagination
-			this.pagination = function (page, perPage) {
-					if (page && perPage) {
-						this.currentQuery.pagination = [page, perPage];
-					} else {
-						throw new Error('Pagination want two parameters');
-					}
-					return this;
+		//method to set the pagination
+		this.pagination = function (page, perPage) {
+				if (page && perPage) {
+					this.currentQuery.pagination = [page, perPage];
+				} else {
+					throw new Error('Pagination want two parameters');
 				}
-				//method to set an attribute must be equal to given value
-			this.equalTo = function (attr, value) {
-				if (!this.currentQuery.find)
-					this.currentQuery.find = {}
-				if (typeof attr == "object")
-					for (key in attr) {
-						this.currentQuery.find[key] = attr[key]
-					} else
-						this.currentQuery.find[attr] = value
 				return this;
-			};
-			//method to limit the results of query
-			this.limit = function (limit) {
-					this.currentQuery.limit = limit
-					return this;
-				}
-				//method to select only the attrs do you want to see
-			this.select = function (attr) {
-					if (!this.currentQuery.select)
-						this.currentQuery.select = []
-					if (attr instanceof Array)
-						for (var i = 0; i < attr.length; i++) {
-							this.currentQuery.select.push(attr[i])
-						} else
-							this.currentQuery.select.push(attr)
-					return this
-				}
-				//method to sort ascending
-			this.sortAscending = function (attr) {
-					this.currentQuery.sort = attr
-					return this
-				}
-				//method to sort descending
-			this.sortDescending = function (attr) {
-				this.currentQuery.sort = '-' + attr
+			}
+			//method to set an attribute must be equal to given value
+		this.equalTo = function (attr, value) {
+			if (!this.currentQuery.find)
+				this.currentQuery.find = {}
+			if (typeof attr == "object")
+				for (key in attr) {
+					this.currentQuery.find[key] = attr[key]
+				} else
+					this.currentQuery.find[attr] = value
+			return this;
+		};
+		//method to limit the results of query
+		this.limit = function (limit) {
+				this.currentQuery.limit = limit
+				return this;
+			}
+			//method to select only the attrs do you want to see
+		this.select = function (attr) {
+				if (!this.currentQuery.select)
+					this.currentQuery.select = []
+				if (attr instanceof Array)
+					for (var i = 0; i < attr.length; i++) {
+						this.currentQuery.select.push(attr[i])
+					} else
+						this.currentQuery.select.push(attr)
 				return this
 			}
-
-			var collectionMethods = {
-				forEach: 3,
-				each: 3,
-				map: 3,
-				collect: 3,
-				reduce: 4,
-				foldl: 4,
-				inject: 4,
-				reduceRight: 4,
-				foldr: 4,
-				find: 3,
-				detect: 3,
-				filter: 3,
-				reject: 3,
-				every: 3,
-				all: 3,
-				some: 3,
-				any: 3,
-				include: 2,
-				contains: 2,
-				invoke: 2,
-				max: 3,
-				min: 3,
-				toArray: 1,
-				size: 1,
-				first: 3,
-				head: 3,
-				take: 3,
-				initial: 3,
-				rest: 3,
-				tail: 3,
-				drop: 3,
-				last: 3,
-				without: 0,
-				difference: 0,
-				indexOf: 3,
-				shuffle: 1,
-				lastIndexOf: 3,
-				isEmpty: 1,
-				chain: 1,
-				sample: 3,
-				partition: 3
+			//method to sort ascending
+		this.sortAscending = function (attr) {
+				this.currentQuery.sort = attr
+				return this
 			}
+			//method to sort descending
+		this.sortDescending = function (attr) {
+			this.currentQuery.sort = '-' + attr
+			return this
+		}
 
-			// Mix in each Underscore method as a proxy to `Collection`.
-			addUnderscoreMethods(this, collectionMethods, 'instance');
+		var collectionMethods = {
+			forEach: 3,
+			each: 3,
+			map: 3,
+			collect: 3,
+			reduce: 4,
+			foldl: 4,
+			inject: 4,
+			reduceRight: 4,
+			foldr: 4,
+			find: 3,
+			detect: 3,
+			filter: 3,
+			reject: 3,
+			every: 3,
+			all: 3,
+			some: 3,
+			any: 3,
+			include: 2,
+			contains: 2,
+			invoke: 2,
+			max: 3,
+			min: 3,
+			toArray: 1,
+			size: 1,
+			first: 3,
+			head: 3,
+			take: 3,
+			initial: 3,
+			rest: 3,
+			tail: 3,
+			drop: 3,
+			last: 3,
+			without: 0,
+			difference: 0,
+			indexOf: 3,
+			shuffle: 1,
+			lastIndexOf: 3,
+			isEmpty: 1,
+			chain: 1,
+			sample: 3,
+			partition: 3
+		}
 
-			// get function, it takes _id 
-			// Return Model with _id
-			this.get = function (_id) {
-					for (var i = 0, j = this.instance.length; i < j; i++) {
-						if (this.instance[i].get('_id') == _id) {
-							return this.instance[i]
-						}
+		// Mix in each Underscore method as a proxy to `Collection`.
+		addUnderscoreMethods(this, collectionMethods, 'instance');
+
+		// get function, it takes _id 
+		// Return Model with _id
+		this.get = function (_id) {
+				for (var i = 0, j = this.instance.length; i < j; i++) {
+					if (this.instance[i].get('_id') == _id) {
+						return this.instance[i]
 					}
-				},
+				}
+			},
 
-				// at function, it takes index
-				// Return Model at index 
-				this.at = function (index) {
-					return this.instance[index]
-				},
+			// at function, it takes index
+			// Return Model at index 
+			this.at = function (index) {
+				return this.instance[index]
+			},
 
-				// pop function
-				// Remove the last Model and return it
-				this.pop = function () {
-					var last = this.instance[this.instance.length - 1]
-					if (this.instance.length != 0) {
-						this.remove(last.get('_id'))
-						return last
-					} else
-						return false
-				},
+			// pop function
+			// Remove the last Model and return it
+			this.pop = function () {
+				var last = this.instance[this.instance.length - 1]
+				if (this.instance.length != 0) {
+					this.remove(last.get('_id'))
+					return last
+				} else
+					return false
+			},
 
-				// shift function
-				// Remove the first Model and return it
-				this.shift = function () {
-					var first = this.instance[0]
-					if (first) {
-						this.remove(first.get('_id'))
-						return first
-					} else
-						return false;
-				},
+			// shift function
+			// Remove the first Model and return it
+			this.shift = function () {
+				var first = this.instance[0]
+				if (first) {
+					this.remove(first.get('_id'))
+					return first
+				} else
+					return false;
+			},
 
-				// add function
-				// Add a Model 
-				this.add = function (model) {
-					if (model instanceof Object && model.brickId == this.brickId && model.get('_id')) {
-						if (model.brickId == 'cobject') {
-							if (model.resourceId == this.resourceId) {
-								this.instance.push(model)
-								this.length = this.instance.length
-							}
-						} else {
+			// add function
+			// Add a Model 
+			this.add = function (model) {
+				if (model instanceof Object && model.brickId == this.brickId && model.get('_id')) {
+					if (model.brickId == 'cobject') {
+						if (model.resourceId == this.resourceId) {
 							this.instance.push(model)
 							this.length = this.instance.length
 						}
+					} else {
+						this.instance.push(model)
+						this.length = this.instance.length
 					}
-				},
-
-				//return the number of entries on Stamplay's db
-				this.count = function () {
-					return this.totalElements;
 				}
+			},
 
-			//set collection with an array of model 
-			this.set = function (models) {
-
-				if (models instanceof Array) {
-					var _this = this;
-					models.forEach(function (singleInstance) {
-						if (singleInstance instanceof Object) {
-							var instanceModel;
-							//cobject has a particular constructor
-							if (_this.brickId == 'cobject') {
-								instanceModel = new root.Stamplay.Cobject(_this.resourceId)
-								instanceModel = instanceModel.Model.constructor(singleInstance);
-							} else {
-								//capitalize resource for implement dynamic inizialization of model
-								var dynamicModel = _this.brickId.charAt(0).toUpperCase() + _this.brickId.slice(1);
-								instanceModel = new root.Stamplay[dynamicModel]
-								instanceModel = instanceModel.Model.constructor(singleInstance);
-							}
-							_this.instance.push(instanceModel);
-						}
-					})
-					_this.length = _this.instance.length
-				} else {
-					throw new Error('Set method on Collection wants an Array');
-				}
-
+			//return the number of entries on Stamplay's db
+			this.count = function () {
+				return this.totalElements;
 			}
 
-			// fetch function, it takes thisParams
-			// Return a promise. Modify the instance with the data from Stamplay Server
-			this.fetch = function (thisParams) {
+		//set collection with an array of model 
+		this.set = function (models) {
 
-					thisParams = thisParams || this.compile();
-					var _this = this;
-
-					if (_this.brickId == 'cobject') {
-						var headers = true;
-					}
-
-					return Stamplay.makeAPromise({
-						method: 'GET',
-						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId,
-						thisParams: thisParams
-					}, headers).then(function (response) {
-						//set two attributes to collection
-						if (response.totalElements && response.pagination) {
-							_this.totalElements = parseInt(response.totalElements);
-							_this.pagination = response.pagination;
+			if (models instanceof Array) {
+				var _this = this;
+				models.forEach(function (singleInstance) {
+					if (singleInstance instanceof Object) {
+						var instanceModel;
+						//cobject has a particular constructor
+						if (_this.brickId == 'cobject') {
+							instanceModel = new root.Stamplay.Cobject(_this.resourceId)
+							instanceModel = instanceModel.Model.constructor(singleInstance);
+						} else {
+							//capitalize resource for implement dynamic inizialization of model
+							var dynamicModel = _this.brickId.charAt(0).toUpperCase() + _this.brickId.slice(1);
+							instanceModel = new root.Stamplay[dynamicModel]
+							instanceModel = instanceModel.Model.constructor(singleInstance);
 						}
-						_this.instance = [];
-						//iterate on data and instance a new Model with the prototype functions
-						response.data.forEach(function (singleInstance) {
-							var instanceModel;
-							//cobject has a particular constructor
-							if (_this.brickId == 'cobject') {
-								instanceModel = new root.Stamplay.Cobject(_this.resourceId)
-								instanceModel = instanceModel.Model.constructor(singleInstance);
-							} else {
-								//capitalize resource for implement dynamic inizialization of model
-								var dynamicModel = _this.brickId.charAt(0).toUpperCase() + _this.brickId.slice(1);
-								instanceModel = new root.Stamplay[dynamicModel]
-								instanceModel = instanceModel.Model.constructor(singleInstance);
-							}
-							_this.instance.push(instanceModel);
-						})
-						_this.length = _this.instance.length
-					});
-				},
+						_this.instance.push(instanceModel);
+					}
+				})
+				_this.length = _this.instance.length
+			} else {
+				throw new Error('Set method on Collection wants an Array');
+			}
 
-				//remove function, it takes a array of id o just one id 
-				// Remove Model with _id
-				this.remove = function (_id) {
+		}
 
-					if (_id instanceof Array) {
-						this.instance = _.reject(this.instance, function (model) {
-							for (indexId in _id) {
-								if (model.get('_id') == _id[indexId]) {
-									return true
-								}
-							}
-						}, this);
-						this.length = this.instance.length
-					} else {
+		// fetch function, it takes thisParams
+		// Return a promise. Modify the instance with the data from Stamplay Server
+		this.fetch = function (thisParams) {
 
-						this.instance = _.reject(this.instance, function (model) {
-							if (model.get('_id') == _id) {
+				thisParams = thisParams || this.compile();
+				var _this = this;
+
+				if (_this.brickId == 'cobject') {
+					var headers = true;
+				}
+
+				return Stamplay.makeAPromise({
+					method: 'GET',
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId,
+					thisParams: thisParams
+				}, headers).then(function (response) {
+					//set two attributes to collection
+					if (response.totalElements && response.pagination) {
+						_this.totalElements = parseInt(response.totalElements);
+						_this.pagination = response.pagination;
+					}
+					_this.instance = [];
+					//iterate on data and instance a new Model with the prototype functions
+					response.data.forEach(function (singleInstance) {
+						var instanceModel;
+						//cobject has a particular constructor
+						if (_this.brickId == 'cobject') {
+							instanceModel = new root.Stamplay.Cobject(_this.resourceId)
+							instanceModel = instanceModel.Model.constructor(singleInstance);
+						} else {
+							//capitalize resource for implement dynamic inizialization of model
+							var dynamicModel = _this.brickId.charAt(0).toUpperCase() + _this.brickId.slice(1);
+							instanceModel = new root.Stamplay[dynamicModel]
+							instanceModel = instanceModel.Model.constructor(singleInstance);
+						}
+						_this.instance.push(instanceModel);
+					})
+					_this.length = _this.instance.length
+				});
+			},
+
+			//remove function, it takes a array of id o just one id 
+			// Remove Model with _id
+			this.remove = function (_id) {
+
+				if (_id instanceof Array) {
+					this.instance = _.reject(this.instance, function (model) {
+						for (indexId in _id) {
+							if (model.get('_id') == _id[indexId]) {
 								return true
 							}
-						}, this);
-						this.length = this.instance.length
-					}
+						}
+					}, this);
+					this.length = this.instance.length
+				} else {
+
+					this.instance = _.reject(this.instance, function (model) {
+						if (model.get('_id') == _id) {
+							return true
+						}
+					}, this);
+					this.length = this.instance.length
 				}
-		}
-		/* BaseComponent constructor, it takes brickId, resourceId and hasAction
-		 *  If hasAction is true, Model extends Action
-		 */
+			}
+	}
+	/* BaseComponent constructor, it takes brickId, resourceId and hasAction
+	 *  If hasAction is true, Model extends Action
+	 */
 	function BaseComponent(brickId, resourceId, hasAction) {
 		//variable
 		this.Model = {};
@@ -3462,48 +3472,144 @@ return Q;
 		this.url = '/api/stripe/' + Stamplay.VERSION + '/';
 
 		this.createCustomer = function (userId) {
-			if(Stamplay.Support.checkMongoId(userId))
+			if (Stamplay.Support.checkMongoId(userId))
 				return Stamplay.makeAPromise({
 					method: 'POST',
-					data: { 'userId': userId },
-					url: this.url+'customers'
+					data: {
+						'userId': userId
+					},
+					url: this.url + 'customers'
 				})
 			else
-				return Stamplay.Support.errorSender(403,"Invalid userId isn't mongoid")
+				return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
 		}
 
-		this.createCreditCard = function(userId, token) {
-			if(arguments.length==2){
-				if(Stamplay.Support.checkMongoId(userId))
+		this.createCreditCard = function (userId, token) {
+			if (arguments.length == 2) {
+				if (Stamplay.Support.checkMongoId(userId))
 					return Stamplay.makeAPromise({
 						method: 'POST',
-						data: { 'token': token },
-						url: this.url+'customers/'+userId+'/cards'
+						data: {
+							'token': token
+						},
+						url: this.url + 'customers/' + userId + '/cards'
 					})
 				else
-					return Stamplay.Support.errorSender(403,"Invalid userId isn't mongoid")
-			}else{
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in createCreditCard methods")
 			}
 		}
 
-		this.charge = function(userId, token, amount, currency){
-			if(arguments.length==4){
-				if(Stamplay.Support.checkMongoId(userId))
+		this.charge = function (userId, token, amount, currency) {
+			if (arguments.length == 4) {
+				if (Stamplay.Support.checkMongoId(userId))
 					return Stamplay.makeAPromise({
 						method: 'POST',
-						data: {'userId': userId, 'token': token, 'amount': amount, 'currency': currency },
-						url: this.url+'charges'
+						data: {
+							'userId': userId,
+							'token': token,
+							'amount': amount,
+							'currency': currency
+						},
+						url: this.url + 'charges'
 					})
 				else
-					return Stamplay.Support.errorSender(403,"Invalid userId isn't mongoid") 
-			}else{
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in charge methods")
 			}
 		}
 
+
+		this.createSubscription = function (userId, planId) {
+			if (arguments.length == 2) {
+				if (Stamplay.Support.checkMongoId(userId)) {
+					return Stamplay.makeAPromise({
+						method: 'POST',
+						data: {
+							'planId': planId
+						},
+						url: this.url + 'customers/' + userId + '/subscriptions'
+					})
+				} else {
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+				}
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in createSubscription methods")
+			}
+		}
+
+		this.getSubscriptions = function (userId, options) {
+			if (arguments.length >= 1) {
+				if (Stamplay.Support.checkMongoId(userId)) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: this.url + 'customers/' + userId + '/subscriptions',
+						thisParams: options
+					});
+				} else {
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+				}
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscriptions methods")
+			}
+		}
+
+		this.getSubscription = function (userId, subscriptionId) {
+			if (arguments.length <= 2) {
+				if (Stamplay.Support.checkMongoId(userId)) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
+					});
+				} else {
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+				}
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscription methods")
+			}
+		}
+
+
+		this.deleteSubscription = function (userId, subscriptionId, options) {
+			if (arguments.length == 2) {
+				if (Stamplay.Support.checkMongoId(userId)) {
+					return Stamplay.makeAPromise({
+						method: 'DELETE',
+						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
+						data: options || {}
+					});
+				} else {
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+				}
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in deleteSubscription methods")
+			}
+		}
+
+		this.updateSubscription = function (userId, subscriptionId, options) {
+			if (arguments.length >= 2) {
+				if (Stamplay.Support.checkMongoId(userId)) {
+					options = options || {};
+					return Stamplay.makeAPromise({
+						method: 'PUT',
+						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
+						data: {
+							options: options
+						}
+					});
+				} else {
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+				}
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in updateSubscription methods")
+			}
+		}
+
+
 	}
-		//Added Stripe to Stamplay 
+
 	root.Stamplay.Stripe = Stripe;
 
 })(this);
