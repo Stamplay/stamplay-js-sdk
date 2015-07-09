@@ -1,7 +1,7 @@
 Stamplay JavaScript SDK API v1.x 
 ===============
 [![Build Status](https://travis-ci.org/Stamplay/stamplay-js-sdk.svg?branch=master)](https://travis-ci.org/Stamplay/stamplay-js-sdk)
-[![Production version](http://img.shields.io/badge/download-38%20kB-blue.svg)](https://raw.githubusercontent.com/Stamplay/stamplay-js-sdk/master/dist/stamplay.min.js)
+[![Production version](http://img.shields.io/badge/download-52%20kB-blue.svg)](https://raw.githubusercontent.com/Stamplay/stamplay-js-sdk/master/dist/stamplay.min.js)
 [![Bower version](https://badge.fury.io/bo/stamplay-js-sdk.svg)](http://badge.fury.io/bo/stamplay-js-sdk)
 
 ##Full API Reference
@@ -15,7 +15,7 @@ The Stamplay JavaScript SDK provides a JavaScript library making it even easier 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.0/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.1/stamplay.min.js"></script>
 ```
 To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
@@ -73,7 +73,10 @@ This JavaScript SDK expose through the Stamplay variable the following component
 * [Custom Object](#custom-object)
 * [WebHook](#webhook)
 * [Stripe](#stripe)
+<<<<<<< HEAD
+=======
 
+>>>>>>> development
 
 Every component can expose two main classes:
 
@@ -128,10 +131,11 @@ Some models have built-in social actions and the SDK provides a fast way to ```r
 
 ```javascript
 var tag = new Stamplay.Cobject('tag').Model;
-tag.rate(4)
-.then(function(){
+tag.fetch(validId).then(function(){
+  return tag.rate(4)
+}).then(function(){
   var actions = tag.get('actions');
-  console.log(actions.ratings); // You can see the ratings, the average rate and the users who rate
+  console.log(actions.ratings); // You can see the ratings, the average rate and the users who rated
 });
 ```
 
@@ -500,6 +504,11 @@ Stripe has the following additional methods.
   * <a href="#Stripe.createCustomer"><code>createCustomer()</code></a>
   * <a href="#Stripe.createCreditCard"><code>createCreditCard()</code></a>
   * <a href="#Stripe.charge"><code>charge()</code></a>
+  * <a href="#Stripe.createSubscription"><code>createSubscription()</code></a>
+  * <a href="#Stripe.getSubscriptions"><code>getSubscriptions()</code></a>
+  * <a href="#Stripe.getSubscription"><code>getSubscription()</code></a>
+  * <a href="#Stripe.updateSubscription"><code>updateSubscription()</code></a>
+  * <a href="#Stripe.deleteSubscription"><code>deleteSubscription()</code></a>
 
 -------------------------------------------------------
 
@@ -509,8 +518,8 @@ Stripe has the following additional methods.
 It's a simple method to make a POST call to create customer 
 
 ```javascript
-var customerStripe = new Stamplay.Stripe();
-customerStripe.createCustomer('_ID of user').then(function (response) {
+var stamplayStripe = new Stamplay.Stripe();
+stamplayStripe.createCustomer('_ID of user').then(function (response) {
   //do what you want with the response
 });
 ```
@@ -520,8 +529,8 @@ customerStripe.createCustomer('_ID of user').then(function (response) {
 It's a simple method to make a POST call to create CreditCard 
 
 ```javascript
-var customerStripe = new Stamplay.Stripe();
-customerStripe.createCreditCard('_ID of user', 'TOKEN from stripe js').then(function (response) {
+var stamplayStripe = new Stamplay.Stripe();
+stamplayStripe.createCreditCard('_ID of user', 'TOKEN from stripe js').then(function (response) {
   //do what you want with the response
 });
 ```
@@ -531,12 +540,76 @@ customerStripe.createCreditCard('_ID of user', 'TOKEN from stripe js').then(func
 It's a simple method to make a POST call to charge customer 
 
 ```javascript
-var customerStripe = new Stamplay.Stripe();
+var stamplayStripe = new Stamplay.Stripe();
 // Four parameters: id of user, token from stripe, amount of charge , currency 
-customerStripe.charge('_ID of user', 'TOKEN from stripe js', 3000, 'GBP').then(function (response) {
+stamplayStripe.charge('_ID of user', 'TOKEN from stripe js', 3000, 'GBP').then(function (response) {
   //do what you want with the response
 });
 ```
+
+<a name="Stripe.createSubscription"></a>
+###createSubscription
+
+It's a simple method to make a POST call to create a subscription. 
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+// Two parameters: id of user, plan id
+stamplayStripe.createSubscription('_ID of user', 'planId').then(function (response) {
+  //do what you want with the response
+});
+```
+
+<a name="Stripe.getSubscriptions"></a>
+###getSubscriptions
+
+It's a simple method to make a GET call to get user's subscriptions. 
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+// Two parameters: id of user, [options]
+stamplayStripe.getSubscriptions('_ID of user').then(function (response) {
+  //do what you want with the response
+});
+```
+
+<a name="Stripe.getSubscription"></a>
+###getSubscription
+
+It's a simple method to make a GET call to get an user's subscription. 
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+// Two parameters: id of user, id of the subscription
+stamplayStripe.getSubscription('_ID of user','_ID of the subscription').then(function (response) {
+  //do what you want with the response
+});
+```
+
+<a name="Stripe.updateSubscription"></a>
+###updateSubscription
+
+It's a simple method to make a PUT call to update an existing user's subscription.
+Options are [Stripe's options](https://stripe.com/docs/api/node#update_subscription)
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+// Three parameters: id of user, id of the subscription, [options]
+stamplayStripe.updateSubscription('_ID of user','_ID of the subscription').then(function (response) {
+  //do what you want with the response
+});
+```
+
+<a name="Stripe.deleteSubscription"></a>
+###deleteSubscription
+
+It's a simple method to make a DELETE call to remove an existing user's subscription.
+Options are [Stripe's options](https://stripe.com/docs/api/node#cancel_subscription)
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+// Three parameters: id of user, id of the subscription, [options]
+stamplayStripe.deleteSubscription('_ID of user','_ID of the subscription').then(function (response) {
 
 # Build
 To build a production ready library you need to have NPM and Bower installed and then run those two commands:
@@ -549,7 +622,7 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.0/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.1/stamplay.min.js"></script>
 ```
 
 # One more thing

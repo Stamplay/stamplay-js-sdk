@@ -291,7 +291,7 @@ suite('Stamplay Cobject Model ', function () {
 
 
     assert.equal(this.request.method, 'DELETE');
-    assert.notEqual(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
     assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/1');
 
     assert.isUndefined(this.request.requestBody);
