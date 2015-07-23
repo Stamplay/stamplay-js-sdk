@@ -79,6 +79,13 @@ suite('Stamplay Query ', function () {
     assert.isArray(query.currentQuery[0].$or)
     assert.equal(query.currentQuery[0].$or[0].b.$exists, false)
     assert.equal(query.currentQuery[0].$or[1].c, 'c')
+
+    var c = new Stamplay.Query('cobject', 'tag').notExists('d')
+    var d = new Stamplay.Query('cobject', 'tag').equalTo('e', 'e')
+    var queryWithArray = new Stamplay.Query('cobject', 'tag').or([c, d])
+    assert.isArray(queryWithArray.currentQuery[0].$or)
+    assert.equal(queryWithArray.currentQuery[0].$or[0].d.$exists, false)
+    assert.equal(queryWithArray.currentQuery[0].$or[1].e, 'e')
   })
 
   test('has exec method', function () {
@@ -125,6 +132,19 @@ suite('Stamplay Query ', function () {
     var query1 = new Stamplay.Query('cobject', 'tag').notExists('b')
     var query2 = new Stamplay.Query('cobject', 'tag').equalTo('c', 'c')
     var query = new Stamplay.Query('cobject', 'tag').or(query1, query2)
+
+    query.exec().then(function () {})
+    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"$or":[{"b":{"$exists":false}},{"c":"c"}]}');
+    this.request.respond(200, {
+      "Content-Type": "application/json"
+    }, '{}');
+  })
+
+  test('exec() $or works with array', function () {
+    var query1 = new Stamplay.Query('cobject', 'tag').notExists('b')
+    var query2 = new Stamplay.Query('cobject', 'tag').equalTo('c', 'c')
+    var query = new Stamplay.Query('cobject', 'tag').or([query1, query2])
+
     query.exec().then(function () {})
     assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"$or":[{"b":{"$exists":false}},{"c":"c"}]}');
     this.request.respond(200, {
