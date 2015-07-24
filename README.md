@@ -216,7 +216,7 @@ Please remember to running the query use the method exec(), it returns a promise
   * <code>sortAscending()</code>
   * <code>sortDescending()</code>
   * <code>or()</code>
-  *<code>exec()</code>
+  * <code>exec()</code>
   
 
 ##Pipeline
