@@ -2310,7 +2310,7 @@ return Q;
 					page : 1,
 					per_page : 10
 				}
-			}
+			} 
 		*/
 		// parsing this parameter
 		if (options.thisParams) {
@@ -2334,12 +2334,12 @@ return Q;
 		Object.keys(options.headers || {}).forEach(function (key) {
 			req.setRequestHeader(key, options.headers[key]);
 		});
-		// Default content-Type
+		// Default content-Type  
 		req.setRequestHeader('Content-Type', 'application/json');
 
 		req.setRequestHeader('stamplay-app', headerStamplay);
 
-		// V1
+		// V1 
 		if (Stamplay.USESTORAGE) {
 			var jwt = store.get(window.location.origin + '-jwt');
 			if (jwt) {
@@ -2350,7 +2350,6 @@ return Q;
 				}
 			}
 		}
-
 
 		req.onreadystatechange = function (e) {
 			if (req.readyState !== 4) {
@@ -2365,7 +2364,8 @@ return Q;
 
 				_handleJWT(req);
 
-				if (wantHeaders) {
+				//where statment doesn't return link in header
+				if (wantHeaders && req.getResponseHeader('link')) {
 					//parse headers
 					var parts = req.getResponseHeader('link').split(',');
 					response.pagination = {};
@@ -2565,7 +2565,7 @@ return Q;
 			return makeActionPromise.call(this, 'vote', 'downvote')
 		};
 
-		// rate function, it takes a vote parameter.
+		// rate function, it takes a vote parameter. 
 		// Modifies instance of model and return a promise
 		this.rate = function (vote) {
 			// vote must be integer
@@ -2585,7 +2585,7 @@ return Q;
 			}
 		};
 
-		// comment function, it takes a text parameter.
+		// comment function, it takes a text parameter. 
 		// Modifies instance of model and return a promise
 		this.comment = function (text) {
 			var _this = this;
@@ -2667,7 +2667,7 @@ return Q;
 		// Mix in each Underscore method as a proxy to `Model#attributes`.
 		addUnderscoreMethods(this, modelMethods, 'instance');
 
-		// if baseComponent hasAction add some methods to Model
+		// if baseComponent hasAction add some methods to Model 
 		if (hasAction) {
 			Action.call(this)
 		}
@@ -2684,8 +2684,8 @@ return Q;
 			return this;
 		};
 
-		// get function, it takes a key
-		// Return the key if exist
+		// get function, it takes a key 
+		// Return the key if exist 
 		this.get = function (key) {
 			return this.instance[key];
 		};
@@ -2719,7 +2719,7 @@ return Q;
 			},
 
 			// save function, it takes options
-			// Saves Model to Stamplay's db, if the Model already exists an update request is made
+			// Saves Model to Stamplay's db, if the Model already exists an update request is made    
 			this.save = function (options) {
 
 				options = options || {};
@@ -2751,7 +2751,7 @@ return Q;
 				});
 			},
 
-			// destroy function
+			// destroy function 
 			// Delete Model to Stamplay's db
 			this.destroy = function () {
 				var isUser = (this.brickId == 'user')
@@ -2782,7 +2782,7 @@ return Q;
 
 	}
 
-	/* Collection constructor, it takes brickId, resourceId
+	/* Collection constructor, it takes brickId, resourceId 
 	 */
 	function Collection(brickId, resourceId) {
 
@@ -2795,14 +2795,14 @@ return Q;
 		this.resourceId = resourceId;
 		//length of Collection
 		this.length = this.instance.length
-			//total element
+			//total element 
 		this.totalElement = 0;
 		//links for pagination
 		this.link = {};
 		//the fetchParameters
 		this.currentQuery = {};
 
-		//method for parsing the currentquery
+		//method for parsing the currentquery 
 		var parseCurrentQuery = function (currentQuery) {
 			var query = {}
 			for (var key in currentQuery) {
@@ -2923,7 +2923,7 @@ return Q;
 		// Mix in each Underscore method as a proxy to `Collection`.
 		addUnderscoreMethods(this, collectionMethods, 'instance');
 
-		// get function, it takes _id
+		// get function, it takes _id 
 		// Return Model with _id
 		this.get = function (_id) {
 				for (var i = 0, j = this.instance.length; i < j; i++) {
@@ -2934,7 +2934,7 @@ return Q;
 			},
 
 			// at function, it takes index
-			// Return Model at index
+			// Return Model at index 
 			this.at = function (index) {
 				return this.instance[index]
 			},
@@ -2962,7 +2962,7 @@ return Q;
 			},
 
 			// add function
-			// Add a Model
+			// Add a Model 
 			this.add = function (model) {
 				if (model instanceof Object && model.brickId == this.brickId && model.get('_id')) {
 					if (model.brickId == 'cobject') {
@@ -2982,7 +2982,7 @@ return Q;
 				return this.totalElements;
 			}
 
-		//set collection with an array of model
+		//set collection with an array of model 
 		this.set = function (models) {
 
 			if (models instanceof Array) {
@@ -3051,7 +3051,7 @@ return Q;
 				});
 			},
 
-			//remove function, it takes a array of id o just one id
+			//remove function, it takes a array of id o just one id 
 			// Remove Model with _id
 			this.remove = function (_id) {
 
@@ -3101,7 +3101,7 @@ return Q;
 			window.location.href = url;
 		};
 
-		// function for check if you have user with a specific email
+		// function for check if you have user with a specific email 
 		this.validateEmail = function (email) {
 			return Stamplay.makeAPromise({
 				method: 'POST',
@@ -3134,24 +3134,24 @@ return Q;
 	// constructor for Query Object
 	// model is required ever
 	function Query(model, instance) {
-
+		
 		this.model = model;
 		this.instance = instance;
 		this.currentQuery = [];
 		this.executable = '';
-
+	
 		this.or = function(){
 			var obj = { $or : []}
 
 			if (arguments[0] instanceof Array) {
 				arguments = arguments[0]
 			}
-
+			
 			for(var i=0; i<arguments.length; i++){
 				if(arguments[i] instanceof root.Stamplay.Query)
 					obj.$or.push(arguments[i].currentQuery[0])
 				else
-					throw new Error('Please Or function take only Query object')
+					throw new Error('Please Or function take only Query object')	
 			}
 			this.currentQuery.push(obj)
 			return this;
@@ -3169,7 +3169,7 @@ return Q;
 			obj[attr] = {"$gt":value}
 			this.currentQuery.push(obj)
 			return this
-		}
+		}	
 
 		this.greaterThanOrEqual = function(attr, value){
 			var obj = {}
@@ -3183,7 +3183,7 @@ return Q;
 			obj[attr] = {"$lt":value}
 			this.currentQuery.push(obj)
 			return this
-		}
+		}	
 
 		this.lessThanOrEqual = function(attr, value){
 			var obj = {}
@@ -3233,7 +3233,7 @@ return Q;
 
 		this.exec = function(){
 			//build query
-			for(var i=0;i<this.currentQuery.length;i++){
+			for(var i=0;i<this.currentQuery.length;i++){	
 				var partial = JSON.stringify(this.currentQuery[i]);
 				partial = partial.substring(1, partial.length-1)
 				if(i==0)
@@ -3242,7 +3242,7 @@ return Q;
 					this.executable += ','+partial
 			}
 			if(!this.instance)
-				this.instance = this.model+'s';
+				this.instance = this.model+'s'; 
 				var thisParams = this.executable;
 			return Stamplay.makeAPromise({
 				method: 'GET',
@@ -3259,12 +3259,11 @@ return Q;
 	root.Stamplay.Query = Query;
 
 })(this);
-
 /* ---- STAMPLAY JS SDK ---- */
 (function (root) {
 
 	/**
-		User component : Stamplay.User
+		User component : Stamplay.User 
 		This class rappresent the User component on Stamplay platform
 		It very easy to use: Stamplay.User()
 	*/
@@ -3274,7 +3273,7 @@ return Q;
 			Stamplay.BaseComponent.call(this, 'user', 'users');
 
 			// currentUser function
-			// Modifies the instance of User
+			// Modifies the instance of User 
 			this.Model.currentUser = function () {
 					var _this = this;
 					return Stamplay.makeAPromise({
@@ -3322,7 +3321,7 @@ return Q;
 
 				// signup function, it takes objcet data
 				// If data.email and data.password doesn't exists return error
-				// any other attributes in data was save to User
+				// any other attributes in data was save to User  
 				this.Model.signup = function (data) {
 
 					if (data.email && data.password) {
@@ -3398,7 +3397,7 @@ return Q;
 				}
 
 		}
-		//Added User to Stamplay
+		//Added User to Stamplay 
 	root.Stamplay.User = User;
 
 })(this);
@@ -3406,7 +3405,7 @@ return Q;
 (function (root) {
 
 	/**
-		Custom object component : Stamplay.Cobject
+		Custom object component : Stamplay.Cobject 
 		This class rappresent the Custom Object component on Stamplay platform
 		It very easy to use: Stamplay.Cobject([customObjectid])
 	*/
@@ -3415,7 +3414,7 @@ return Q;
 	function Cobject(resourceId) {
 		Stamplay.BaseComponent.call(this, 'cobject', resourceId, true);
 	}
-	//Added Cobject to Stamplay
+	//Added Cobject to Stamplay 
 	root.Stamplay.Cobject = Cobject;
 
 })(this);
@@ -3423,7 +3422,7 @@ return Q;
 (function (root) {
 
 	/*
-		Webhook component : Stamplay.Webhook
+		Webhook component : Stamplay.Webhook 
 		This class rappresent the Webhook Object component on Stamplay platform
 		It very easy to use: Stamplay.Webhook([WebhookName])
 	*/
@@ -3459,7 +3458,7 @@ return Q;
 			}
 
 		}
-		//Added Webhook to Stamplay
+		//Added Webhook to Stamplay 
 	root.Stamplay.Webhook = Webhook;
 
 })(this);
@@ -3467,7 +3466,7 @@ return Q;
 (function (root) {
 
 	/*
-		Stripe component : Stamplay.Stripe
+		Stripe component : Stamplay.Stripe 
 		This class rappresent the Stripe Object component on Stamplay platform
 		It very easy to use: Stamplay.Stripe()
 	*/
