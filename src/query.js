@@ -14,6 +14,11 @@
 	
 		this.or = function(){
 			var obj = { $or : []}
+
+			if (arguments[0] instanceof Array) {
+				arguments = arguments[0]
+			}
+			
 			for(var i=0; i<arguments.length; i++){
 				if(arguments[i] instanceof root.Stamplay.Query)
 					obj.$or.push(arguments[i].currentQuery[0])
