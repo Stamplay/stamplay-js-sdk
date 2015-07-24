@@ -98,7 +98,7 @@
 
 				_handleJWT(req);
 
-				if (wantHeaders) {
+				if (wantHeaders && req.getResponseHeader('link')) {
 					//parse headers
 					var parts = req.getResponseHeader('link').split(',');
 					response.pagination = {};
