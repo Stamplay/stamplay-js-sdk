@@ -10,8 +10,8 @@
     "test": "mocha-phantomjs ./tests/tests.html"
   },
   "dependencies": {
-    "mocha-phantomjs": "^3.5.0",
-    "phantomjs": "^1.9.7-15"
+    "mocha-phantomjs": "3.5.0",
+    "phantomjs": "1.9.7-15"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
