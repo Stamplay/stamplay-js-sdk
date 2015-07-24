@@ -84,7 +84,6 @@
 			}
 		}
 
-
 		req.onreadystatechange = function (e) {
 			if (req.readyState !== 4) {
 				return;
@@ -98,6 +97,7 @@
 
 				_handleJWT(req);
 
+				//where statment doesn't return link in header
 				if (wantHeaders && req.getResponseHeader('link')) {
 					//parse headers
 					var parts = req.getResponseHeader('link').split(',');
