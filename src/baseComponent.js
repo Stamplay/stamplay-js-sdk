@@ -370,13 +370,16 @@
 			}
 			//method to set an attribute must be equal to given value
 		this.equalTo = function (attr, value) {
-			if (!this.currentQuery.find)
-				this.currentQuery.find = {}
-			if (typeof attr == "object")
+			if (!this.currentQuery.find) this.currentQuery.find = {}
+
+			if (typeof attr == "object") {
 				for (key in attr) {
 					this.currentQuery.find[key] = attr[key]
-				} else
-					this.currentQuery.find[attr] = value
+				}
+			} else {
+				this.currentQuery.find[attr] = value
+			}
+
 			return this;
 		};
 		//method to limit the results of query
