@@ -319,6 +319,7 @@
 		var parseCurrentQuery = function (currentQuery) {
 			var query = {}
 			for (var key in currentQuery) {
+				
 				if (key == 'find') {
 					for (attr in currentQuery[key]) {
 						query[attr] = currentQuery[key][attr]
@@ -332,6 +333,10 @@
 				} else if (key == 'pagination') {
 					query['page'] = currentQuery[key][0]
 					query['per_page'] = currentQuery[key][1]
+				}else if (key == 'populate') {
+					query['populate'] = true
+				}else if (key == 'populateOwner') {
+					query['populate_owner'] = true
 				}
 			}
 			return query;
@@ -340,6 +345,18 @@
 		//method to compile the params
 		this.compile = function () {
 			return parseCurrentQuery(this.currentQuery)
+		}
+
+		//method to set populate in queryparams
+		this.populate = function(){
+			this.currentQuery.populate = true
+			return this;
+		}
+
+		//method to set populate owner in queryparams
+		this.populateOwner = function(){
+			this.currentQuery.populateOwner = true
+			return this;
 		}
 
 		//method to set the pagination

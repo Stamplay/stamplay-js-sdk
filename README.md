@@ -15,7 +15,7 @@ The Stamplay JavaScript SDK provides a JavaScript library making it even easier 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.2/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.3/stamplay.min.js"></script>
 ```
 To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
@@ -164,6 +164,9 @@ These help you to create a more flexible and complex fetch object.
   * <code>sortAscending()</code>
   * <code>sortDescending()</code>
   * <code>pagination()</code>
+  * <code>populate()</code>
+  * <code>populateOwner()</code>
+
 
 -------------------------------------------------------
 
@@ -294,6 +297,7 @@ User model has the following additional methods.
   * <a href="#User.login"><code>login()</code></a>
   * <a href="#User.signup"><code>signup()</code></a>
   * <a href="#User.logout"><code>logout()</code></a>
+  * <a href="#User.resetPassword"><code>resetPassword()</code></a>
 
   * <a href="#User.follow"><code>follow()</code></a>
   * <a href="#User.unfollow"><code>unfollow()</code></a>
@@ -376,6 +380,15 @@ Redirect the browser to the logout url.
 
 ```javascript
 user.logout();
+```
+ <a name="User.resetPassword"></a>
+###resetPassword()()
+Reset the password of User
+
+```javascript
+user.resetPassword('john@stamplay.com','1234').then(function(){
+  //success callback
+})
 ```
  <a name="User.follow"></a>
 ###follow()

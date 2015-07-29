@@ -419,6 +419,11 @@ suite('Stamplay Cobject Collection ', function () {
       assert.equal(ParamsBuilder.name, 'pippo')
       assert.equal(ParamsBuilder.n, 5)
       assert.equal(ParamsBuilder.sort, 'name')
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('name', 'pippo').limit(5).sortAscending('name').populateOwner().compile()
+      assert.equal(ParamsBuilder.name, 'pippo')
+      assert.equal(ParamsBuilder.n, 5)
+      assert.equal(ParamsBuilder.sort, 'name')
+      assert.equal(ParamsBuilder.populate_owner, true)
 
     })
 
@@ -485,6 +490,27 @@ suite('Stamplay Cobject Collection ', function () {
       assert.equal(new Stamplay.Cobject('cobjectId').Collection.sortDescending('a').currentQuery.sort, '-a')
       var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.sortDescending('b')
       assert.equal(ParamsBuilder.sortDescending('c').currentQuery.sort, '-c')
+
+    })
+
+    test('has the populate method', function () {
+
+      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.populate)
+      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.populate())
+      assert.equal(new Stamplay.Cobject('cobjectId').Collection.populate().currentQuery.populate, true)
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.populate()
+      assert.equal(ParamsBuilder.populate().currentQuery.populate, true)
+
+    })
+
+
+    test('has the populateOwner method', function () {
+
+      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.populateOwner)
+      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.populateOwner())
+      assert.equal(new Stamplay.Cobject('cobjectId').Collection.populateOwner().currentQuery.populateOwner, true)
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.populateOwner()
+      assert.equal(ParamsBuilder.populateOwner().currentQuery.populateOwner, true)
 
     })
 

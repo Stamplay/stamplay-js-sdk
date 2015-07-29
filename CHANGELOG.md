@@ -1,11 +1,21 @@
 # Stamplay JS SDK Changelog
 
+1.2.3  / 29-07-2015
+===================
+
+* Added resetPassword method on user
+* Added populate method for queryParams
+* Added populateOwner method for queryParams
+
 1.2.2  / 09-07-2015
+===================
+
 * Query.or method accept also array
 * Fix
 
-
 1.2.1  / 09-07-2015
+===================
+
 * Added createSubscription method on Stripe
 * Added getSubscriptions method on Stripe
 * Added getSubscription method on Stripe

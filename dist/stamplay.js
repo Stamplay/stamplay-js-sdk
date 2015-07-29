@@ -1,4 +1,4 @@
-/*! Stamplay v1.2.2 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
+/*! Stamplay v1.2.3 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -2806,6 +2806,7 @@ return Q;
 		var parseCurrentQuery = function (currentQuery) {
 			var query = {}
 			for (var key in currentQuery) {
+				
 				if (key == 'find') {
 					for (attr in currentQuery[key]) {
 						query[attr] = currentQuery[key][attr]
@@ -2819,6 +2820,10 @@ return Q;
 				} else if (key == 'pagination') {
 					query['page'] = currentQuery[key][0]
 					query['per_page'] = currentQuery[key][1]
+				}else if (key == 'populate') {
+					query['populate'] = true
+				}else if (key == 'populateOwner') {
+					query['populate_owner'] = true
 				}
 			}
 			return query;
@@ -2827,6 +2832,18 @@ return Q;
 		//method to compile the params
 		this.compile = function () {
 			return parseCurrentQuery(this.currentQuery)
+		}
+
+		//method to set populate in queryparams
+		this.populate = function(){
+			this.currentQuery.populate = true
+			return this;
+		}
+
+		//method to set populate owner in queryparams
+		this.populateOwner = function(){
+			this.currentQuery.populateOwner = true
+			return this;
 		}
 
 		//method to set the pagination
@@ -3347,6 +3364,19 @@ return Q;
 						store.remove(window.location.origin + '-jwt');
 					}
 					root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
+				}
+
+				this.Model.resetPassword = function(email, newPassword){
+					if(email && newPassword)
+						return Stamplay.makeAPromise({
+							method: 'POST',
+							data: {email: email, newPassword:newPassword },
+							url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/resetpassword'
+						}).then(function (response) {
+							return response
+						});
+					else
+						return Stamplay.Support.errorSender(403, "Missing parameters in resetPassword method")
 				}
 
 				this.Model.activities = function (id) {
