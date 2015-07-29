@@ -96,6 +96,19 @@
 					root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
 				}
 
+				this.Model.resetPassword = function(email, newPassword){
+					if(email && newPassword)
+						return Stamplay.makeAPromise({
+							method: 'POST',
+							data: {email: email, newPassword:newPassword },
+							url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/resetpassword'
+						}).then(function (response) {
+							return response
+						});
+					else
+						return Stamplay.Support.errorSender(403, "Missing parameters in resetPassword method")
+				}
+
 				this.Model.activities = function (id) {
 					return Stamplay.makeAPromise({
 						method: 'GET',

@@ -185,6 +185,26 @@ suite('Stamplay User Model ', function () {
 	});
 
 
+	test('user resetPassword function', function () {
+	
+		var data = {
+			email:'a@a.it',
+			newPassword:'12234'
+		}
+
+		user.resetPassword('a@a.it','12234').then(function () {
+			done();
+		});
+
+		assert.equal(this.request.method, 'POST');
+		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/resetpassword');
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, JSON.stringify(data));
+		
+	});
+
+
 	test('user follow function', function () {
 
 		user.follow('123').then(function () {
