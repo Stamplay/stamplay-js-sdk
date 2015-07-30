@@ -547,7 +547,7 @@
 		// Return a promise. Modify the instance with the data from Stamplay Server
 		this.fetch = function (thisParams) {
 
-				thisParams = thisParams && _.extend(thisParams, this.compile()) || thisParams;
+				thisParams = thisParams && _.extend(thisParams, this.compile()) || this.compile();
 				var _this = this;
 
 				if (_this.brickId == 'cobject') {
