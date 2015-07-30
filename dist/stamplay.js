@@ -1,4 +1,4 @@
-/*! Stamplay v1.2.4 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
+/*! Stamplay v1.2.5 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -3034,7 +3034,7 @@ return Q;
 		// Return a promise. Modify the instance with the data from Stamplay Server
 		this.fetch = function (thisParams) {
 
-				thisParams = thisParams && _.extend(thisParams, this.compile()) || thisParams;
+				thisParams = thisParams && _.extend(thisParams, this.compile()) || this.compile();
 				var _this = this;
 
 				if (_this.brickId == 'cobject') {

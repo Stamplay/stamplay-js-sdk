@@ -15,7 +15,7 @@ The Stamplay JavaScript SDK provides a JavaScript library making it even easier 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.4/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.5/stamplay.min.js"></script>
 ```
 To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
@@ -298,7 +298,6 @@ User model has the following additional methods.
   * <a href="#User.signup"><code>signup()</code></a>
   * <a href="#User.logout"><code>logout()</code></a>
   * <a href="#User.resetPassword"><code>resetPassword()</code></a>
-
   * <a href="#User.follow"><code>follow()</code></a>
   * <a href="#User.unfollow"><code>unfollow()</code></a>
   * <a href="#User.followedBy"><code>followedBy()</code></a>
@@ -630,7 +629,7 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.4/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.5/stamplay.min.js"></script>
 ```
 
 # One more thing
