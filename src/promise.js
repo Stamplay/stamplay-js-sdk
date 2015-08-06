@@ -56,8 +56,8 @@
 			headerStamplay = root.Stamplay.APPID;
 		} else {
 			headerStamplay = location.host;
-			headerStamplay = headerStamplay.replace(/^www\./, '')
-			headerStamplay = headerStamplay.replace(/:[0-9]*$/g, '')
+			headerStamplay = headerStamplay.replace(/^www\./, '');
+			headerStamplay = headerStamplay.replace(/:[0-9]*$/g, '');
 		}
 
 		var deferred = Q.defer(),
@@ -84,7 +84,7 @@
 			}
 		}
 
-		req.onreadystatechange = function (e) {
+		req.onreadystatechange = function () {
 			if (req.readyState !== 4) {
 				return;
 			}
@@ -93,17 +93,15 @@
 			} else {
 
 				//parse the JSON response from the server
-				var response = JSON.parse(req.responseText)
-
+				var response = JSON.parse(req.responseText);
 				_handleJWT(req);
-
 				//where statment doesn't return link in header
 				if (wantHeaders && req.getResponseHeader('link')) {
 					//parse headers
 					var parts = req.getResponseHeader('link').split(',');
 					response.pagination = {};
 					parseLink(parts, response.pagination);
-					response.totalElements = req.getResponseHeader('x-total-elements')
+					response.totalElements = req.getResponseHeader('x-total-elements');
 					deferred.resolve(response);
 				} else
 					deferred.resolve(response);

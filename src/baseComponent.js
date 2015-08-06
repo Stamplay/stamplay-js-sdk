@@ -3,7 +3,6 @@
  */
 (function (root) {
 
-
 	//method to add underscore function
 	var addMethod = function (length, method, attribute) {
 		switch (length) {
@@ -69,13 +68,13 @@
 		// upVote function
 		// Modifies instance of model and return a promise
 		this.upVote = function () {
-			return makeActionPromise.call(this, 'vote', 'upvote')
+			return makeActionPromise.call(this, 'vote', 'upvote');
 		};
 
 		// upVote function
 		// Modifies instance of model and return a promise
 		this.downVote = function () {
-			return makeActionPromise.call(this, 'vote', 'downvote')
+			return makeActionPromise.call(this, 'vote', 'downvote');
 		};
 
 		// rate function, it takes a vote parameter. 
@@ -116,13 +115,13 @@
 		// twitterShare function
 		// Modifies instance of model and return a promise
 		this.twitterShare = function () {
-			return makeActionPromise.call(this, 'twitter_share')
+			return makeActionPromise.call(this, 'twitter_share');
 		};
 
 		// facebookShare function
 		// Modifies instance of model and return a promise
 		this.facebookShare = function () {
-			return makeActionPromise.call(this, 'facebook_share')
+			return makeActionPromise.call(this, 'facebook_share');
 		};
 
 		// simplest methods for get Actions
@@ -132,7 +131,7 @@
 		};
 
 		this.getVotes = function (type) {
-			if (type && (type == 'up' || type == 'down')) {
+			if (type && (type === 'up' || type === 'down')) {
 				return this.get('actions').votes['users_' + type + 'vote'];
 			} else {
 				return this.get('actions').votes.users;
@@ -140,15 +139,15 @@
 		};
 
 		this.getRatings = function (type) {
-			return this.get('actions').ratings.users
+			return this.get('actions').ratings.users;
 		};
 
 		this.getTwitterShares = function () {
-			return this.get('actions').twitter_shares.users
+			return this.get('actions').twitter_shares.users;
 		};
 
 		this.getFacebookShares = function () {
-			return this.get('actions').facebook_shares.users
+			return this.get('actions').facebook_shares.users;
 		};
 
 	}
@@ -182,7 +181,7 @@
 
 		// if baseComponent hasAction add some methods to Model 
 		if (hasAction) {
-			Action.call(this)
+			Action.call(this);
 		}
 
 		// constructor
@@ -251,7 +250,7 @@
 
 				if (method === 'PATCH' || method === 'PUT') {
 					url = url + '/' + this.get('_id');
-					Stamplay.removeAttributes(this.brickId, this.instance)
+					Stamplay.removeAttributes(this.brickId, this.instance);
 				}
 
 				var _this = this;
@@ -301,13 +300,13 @@
 
 		//Collection variable
 		// data from server
-		this.instance = []
+		this.instance = [];
 			// name of baseComponent
 		this.brickId = brickId;
 		// name of subresource
 		this.resourceId = resourceId;
 		//length of Collection
-		this.length = this.instance.length
+		this.length = this.instance.length;
 			//total element 
 		this.totalElement = 0;
 		//links for pagination
@@ -325,18 +324,18 @@
 						query[attr] = currentQuery[key][attr]
 					}
 				} else if (key == 'limit') {
-					query['n'] = currentQuery[key]
+					query.n = currentQuery[key]
 				} else if (key == 'select') {
-					query['select'] = currentQuery[key].join(",")
+					query.select = currentQuery[key].join(",")
 				} else if (key == 'sort') {
-					query['sort'] = currentQuery[key]
+					query.sort = currentQuery[key]
 				} else if (key == 'pagination') {
-					query['page'] = currentQuery[key][0]
-					query['per_page'] = currentQuery[key][1]
+					query.page = currentQuery[key][0]
+					query.per_page = currentQuery[key][1]
 				}else if (key == 'populate') {
-					query['populate'] = true
+					query.populate = true
 				}else if (key == 'populateOwner') {
-					query['populate_owner'] = true
+					query.populate_owner = true
 				}
 			}
 			return query;
@@ -344,18 +343,18 @@
 
 		//method to compile the params
 		this.compile = function () {
-			return parseCurrentQuery(this.currentQuery)
+			return parseCurrentQuery(this.currentQuery);
 		}
 
 		//method to set populate in queryparams
 		this.populate = function(){
-			this.currentQuery.populate = true
+			this.currentQuery.populate = true;
 			return this;
 		}
 
 		//method to set populate owner in queryparams
 		this.populateOwner = function(){
-			this.currentQuery.populateOwner = true
+			this.currentQuery.populateOwner = true;
 			return this;
 		}
 
@@ -374,39 +373,39 @@
 
 			if (typeof attr == "object") {
 				for (key in attr) {
-					this.currentQuery.find[key] = attr[key]
+					this.currentQuery.find[key] = attr[key];
 				}
 			} else {
-				this.currentQuery.find[attr] = value
+				this.currentQuery.find[attr] = value;
 			}
 
 			return this;
 		};
 		//method to limit the results of query
 		this.limit = function (limit) {
-				this.currentQuery.limit = limit
+				this.currentQuery.limit = limit;
 				return this;
 			}
 			//method to select only the attrs do you want to see
 		this.select = function (attr) {
 				if (!this.currentQuery.select)
-					this.currentQuery.select = []
+					this.currentQuery.select = [];
 				if (attr instanceof Array)
 					for (var i = 0; i < attr.length; i++) {
-						this.currentQuery.select.push(attr[i])
+						this.currentQuery.select.push(attr[i]);
 					} else
-						this.currentQuery.select.push(attr)
+						this.currentQuery.select.push(attr);
 				return this
 			}
 			//method to sort ascending
 		this.sortAscending = function (attr) {
-				this.currentQuery.sort = attr
-				return this
+				this.currentQuery.sort = attr;
+				return this;
 			}
 			//method to sort descending
 		this.sortDescending = function (attr) {
-			this.currentQuery.sort = '-' + attr
-			return this
+			this.currentQuery.sort = '-' + attr;
+			return this;
 		}
 
 		var collectionMethods = {
@@ -461,7 +460,7 @@
 		this.get = function (_id) {
 				for (var i = 0, j = this.instance.length; i < j; i++) {
 					if (this.instance[i].get('_id') == _id) {
-						return this.instance[i]
+						return this.instance[i];
 					}
 				}
 			},
@@ -469,27 +468,27 @@
 			// at function, it takes index
 			// Return Model at index 
 			this.at = function (index) {
-				return this.instance[index]
+				return this.instance[index];
 			},
 
 			// pop function
 			// Remove the last Model and return it
 			this.pop = function () {
-				var last = this.instance[this.instance.length - 1]
+				var last = this.instance[this.instance.length - 1];
 				if (this.instance.length != 0) {
-					this.remove(last.get('_id'))
-					return last
+					this.remove(last.get('_id'));
+					return last;
 				} else
-					return false
+					return false;
 			},
 
 			// shift function
 			// Remove the first Model and return it
 			this.shift = function () {
-				var first = this.instance[0]
+				var first = this.instance[0];
 				if (first) {
-					this.remove(first.get('_id'))
-					return first
+					this.remove(first.get('_id'));
+					return first;
 				} else
 					return false;
 			},
@@ -500,12 +499,12 @@
 				if (model instanceof Object && model.brickId == this.brickId && model.get('_id')) {
 					if (model.brickId == 'cobject') {
 						if (model.resourceId == this.resourceId) {
-							this.instance.push(model)
-							this.length = this.instance.length
+							this.instance.push(model);
+							this.length = this.instance.length;
 						}
 					} else {
-						this.instance.push(model)
-						this.length = this.instance.length
+						this.instance.push(model);
+						this.length = this.instance.length;
 					}
 				}
 			},
@@ -530,13 +529,13 @@
 						} else {
 							//capitalize resource for implement dynamic inizialization of model
 							var dynamicModel = _this.brickId.charAt(0).toUpperCase() + _this.brickId.slice(1);
-							instanceModel = new root.Stamplay[dynamicModel]
+							instanceModel = new root.Stamplay[dynamicModel];
 							instanceModel = instanceModel.Model.constructor(singleInstance);
 						}
 						_this.instance.push(instanceModel);
 					}
 				})
-				_this.length = _this.instance.length
+				_this.length = _this.instance.length;
 			} else {
 				throw new Error('Set method on Collection wants an Array');
 			}
@@ -570,17 +569,17 @@
 						var instanceModel;
 						//cobject has a particular constructor
 						if (_this.brickId == 'cobject') {
-							instanceModel = new root.Stamplay.Cobject(_this.resourceId)
+							instanceModel = new root.Stamplay.Cobject(_this.resourceId);
 							instanceModel = instanceModel.Model.constructor(singleInstance);
 						} else {
 							//capitalize resource for implement dynamic inizialization of model
 							var dynamicModel = _this.brickId.charAt(0).toUpperCase() + _this.brickId.slice(1);
-							instanceModel = new root.Stamplay[dynamicModel]
+							instanceModel = new root.Stamplay[dynamicModel];
 							instanceModel = instanceModel.Model.constructor(singleInstance);
 						}
 						_this.instance.push(instanceModel);
 					})
-					_this.length = _this.instance.length
+					_this.length = _this.instance.length;
 				});
 			},
 
@@ -592,19 +591,19 @@
 					this.instance = _.reject(this.instance, function (model) {
 						for (indexId in _id) {
 							if (model.get('_id') == _id[indexId]) {
-								return true
+								return true;
 							}
 						}
 					}, this);
-					this.length = this.instance.length
+					this.length = this.instance.length;
 				} else {
 
 					this.instance = _.reject(this.instance, function (model) {
 						if (model.get('_id') == _id) {
-							return true
+							return true;
 						}
 					}, this);
-					this.length = this.instance.length
+					this.length = this.instance.length;
 				}
 			}
 	}

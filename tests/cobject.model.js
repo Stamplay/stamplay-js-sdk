@@ -321,8 +321,8 @@ suite('Stamplay Cobject Model ', function () {
     });
 
     cinstance.instance.actions.votes.total++;
-    cinstance.instance.actions.votes.users.push('userId')
-    cinstance.instance.actions.votes.users_upvote.push('userId')
+    cinstance.instance.actions.votes.users.push('userId');
+    cinstance.instance.actions.votes.users_upvote.push('userId');
 
 
     assert.equal(this.request.method, 'PUT');
@@ -354,9 +354,9 @@ suite('Stamplay Cobject Model ', function () {
       done();
     });
 
-    cinstance.instance.actions.votes.total++;
-    cinstance.instance.actions.votes.users.push('userId')
-    cinstance.instance.actions.votes.users_downvote.push('userId')
+    cinstance.instance.actions.votes.total++;;
+    cinstance.instance.actions.votes.users.push('userId');
+    cinstance.instance.actions.votes.users_downvote.push('userId');
 
 
     assert.equal(this.request.method, 'PUT');
@@ -422,7 +422,7 @@ suite('Stamplay Cobject Model ', function () {
     var text = 'My comment';
     var data = {
       text: text
-    }
+    };
     cinstance.comment(text).then(function () {
       assert.equal(cinstance.get('actions').comments.length, 1);
       done();
@@ -572,7 +572,7 @@ suite('Stamplay Cobject Model ', function () {
       }
     };
     assert.equal(cinstance.getTwitterShares().length, 1);
-    assert.equal(cinstance.getTwitterShares()[0], '123');;
+    assert.equal(cinstance.getTwitterShares()[0], '123');
 
   });
 

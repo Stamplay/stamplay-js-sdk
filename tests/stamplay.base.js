@@ -2,14 +2,14 @@ suite('Stamplay functions ', function () {
 
 	suite('init',function(){
 		test('works fine', function () {		
-			assert.equal(window.Stamplay.BASEURL, '')
-			assert.equal(window.Stamplay.APPID, '' )
-			window.Stamplay.init('test')
-			assert.equal(window.Stamplay.BASEURL, 'https://test.stamplayapp.com')
-			assert.equal(window.Stamplay.APPID, 'test' )
-			window.Stamplay.init('')
+			assert.equal(window.Stamplay.BASEURL, '');
+			assert.equal(window.Stamplay.APPID, '' );
+			window.Stamplay.init('test');
+			assert.equal(window.Stamplay.BASEURL, 'https://test.stamplayapp.com');
+			assert.equal(window.Stamplay.APPID, 'test' );
+			window.Stamplay.init('');
 		});
-	})	
+	});	
 
 	suite('removeAttributes', function(){
 		var instanceCobj;
@@ -33,7 +33,7 @@ suite('Stamplay functions ', function () {
 				appId: '1234',
 				id:'1234',
 				attribute : 'immortal'
-			}
+			};
 			
 			instanceUser = {
 				__v:0,
@@ -42,7 +42,7 @@ suite('Stamplay functions ', function () {
 				id:'1234',
 				attribute : 'immortal',
 				name :'stamplay'
-			}
+			};
 
 			instanceAnother = {
 				__v:0,
@@ -50,7 +50,7 @@ suite('Stamplay functions ', function () {
 				appId: '1234',
 				id:'1234',
 				attribute : 'immortal'
-			}
+			};
 
 		})
 

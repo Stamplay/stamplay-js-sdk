@@ -76,8 +76,8 @@ suite('Stamplay Cobject Collection ', function () {
   });
 
   test('has the instance property which is an array', function () {
-    assert.isArray(coll_cinstance.instance, 'instance property is an array')
-    assert.equal(coll_cinstance.instance.length, 2, 'instance property is an array')
+    assert.isArray(coll_cinstance.instance, 'instance property is an array');
+    assert.equal(coll_cinstance.instance.length, 2, 'instance property is an array');
   });
 
   test('set function with no element', function (done) {
@@ -85,7 +85,7 @@ suite('Stamplay Cobject Collection ', function () {
     var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
 
     var array = [];
-    newCinstance.set(array)
+    newCinstance.set(array);
     assert.isArray(newCinstance.instance);
     assert.equal(newCinstance.instance.length, 0, '0 instances should be present');
     done();
@@ -102,7 +102,7 @@ suite('Stamplay Cobject Collection ', function () {
       '_id': 124,
       'comment': 'Hey there you'
     }];
-    newCinstance.set(array)
+    newCinstance.set(array);
     assert.isArray(newCinstance.instance);
     assert.equal(newCinstance.instance.length, 2, 'Two instances should be present');
     assert.equal(newCinstance.instance[0].get('_id'), 123);
@@ -120,7 +120,7 @@ suite('Stamplay Cobject Collection ', function () {
       '_id': 123,
       'comment': 'Hey there'
     }, 'a'];
-    newCinstance.set(array)
+    newCinstance.set(array);
     assert.isArray(newCinstance.instance);
     assert.equal(newCinstance.instance.length, 1, 'One instances should be present');
     assert.equal(newCinstance.instance[0].get('_id'), 123);
@@ -275,9 +275,9 @@ suite('Stamplay Cobject Collection ', function () {
       chain: 1,
       sample: 3,
       partition: 3
-    }
+    };
 
-    var model = {}
+    var model = {};
     _.each(collectionMethods, function (length, method) {
       assert.isFunction(coll_cinstance[method], method);
     })
@@ -400,134 +400,134 @@ suite('Stamplay Cobject Collection ', function () {
 
     test('has own functions', function () {
 
-      assert.isObject(new Stamplay.Cobject('cobjectId').Collection)
-      var coll = new Stamplay.Cobject('cobjectId').Collection
-      assert.isFunction(coll.equalTo)
-      assert.isFunction(coll.limit)
-      assert.isFunction(coll.select)
-      assert.isFunction(coll.sortAscending)
-      assert.isFunction(coll.sortDescending)
+      assert.isObject(new Stamplay.Cobject('cobjectId').Collection);
+      var coll = new Stamplay.Cobject('cobjectId').Collection;
+      assert.isFunction(coll.equalTo);
+      assert.isFunction(coll.limit);
+      assert.isFunction(coll.select);
+      assert.isFunction(coll.sortAscending);
+      assert.isFunction(coll.sortDescending);
 
-    })
+    });
 
     test('has the compile method', function () {
 
-      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.compile)
-      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('name', 'pippo').compile()
-      assert.equal(ParamsBuilder.name, 'pippo')
-      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('name', 'pippo').limit(5).sortAscending('name').compile()
-      assert.equal(ParamsBuilder.name, 'pippo')
-      assert.equal(ParamsBuilder.n, 5)
-      assert.equal(ParamsBuilder.sort, 'name')
-      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('name', 'pippo').limit(5).sortAscending('name').populateOwner().compile()
-      assert.equal(ParamsBuilder.name, 'pippo')
-      assert.equal(ParamsBuilder.n, 5)
-      assert.equal(ParamsBuilder.sort, 'name')
-      assert.equal(ParamsBuilder.populate_owner, true)
+      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.compile);
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('name', 'pippo').compile();
+      assert.equal(ParamsBuilder.name, 'pippo');
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('name', 'pippo').limit(5).sortAscending('name').compile();
+      assert.equal(ParamsBuilder.name, 'pippo');
+      assert.equal(ParamsBuilder.n, 5);
+      assert.equal(ParamsBuilder.sort, 'name');
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('name', 'pippo').limit(5).sortAscending('name').populateOwner().compile();
+      assert.equal(ParamsBuilder.name, 'pippo');
+      assert.equal(ParamsBuilder.n, 5);
+      assert.equal(ParamsBuilder.sort, 'name');
+      assert.equal(ParamsBuilder.populate_owner, true);
 
-    })
+    });
 
     test('has the pagination method', function () {
 
-      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.pagination)
-      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.pagination(1, 20).compile()
-      assert.equal(ParamsBuilder.page, 1)
-      assert.equal(ParamsBuilder.per_page, 20)
-    })
+      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.pagination);
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.pagination(1, 20).compile();
+      assert.equal(ParamsBuilder.page, 1);
+      assert.equal(ParamsBuilder.per_page, 20);
+    });
 
     test('has the equalTo method', function () {
 
-      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.equalTo)
-      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.equalTo('a', 'b'))
-      assert.equal(new Stamplay.Cobject('cobjectId').Collection.equalTo('a', 'b').currentQuery.find.a, 'b')
-      assert.equal(new Stamplay.Cobject('cobjectId').Collection.equalTo('b', 'b').currentQuery.find.a, undefined)
-      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('a', 'b')
-      assert.equal(Object.keys(ParamsBuilder.equalTo('b', 'c').currentQuery.find).length, 2)
-      assert.equal(ParamsBuilder.currentQuery.find.b, 'c')
+      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.equalTo);
+      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.equalTo('a', 'b'));
+      assert.equal(new Stamplay.Cobject('cobjectId').Collection.equalTo('a', 'b').currentQuery.find.a, 'b');
+      assert.equal(new Stamplay.Cobject('cobjectId').Collection.equalTo('b', 'b').currentQuery.find.a, undefined);
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('a', 'b');
+      assert.equal(Object.keys(ParamsBuilder.equalTo('b', 'c').currentQuery.find).length, 2);
+      assert.equal(ParamsBuilder.currentQuery.find.b, 'c');
       assert.equal(new Stamplay.Cobject('cobjectId').Collection.equalTo({
         a: 'a',
         b: 'b'
-      }).currentQuery.find.a, 'a')
+      }).currentQuery.find.a, 'a');
 
-    })
+    });
 
     test('has the limit method', function () {
 
-      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.limit)
-      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.limit(10))
-      assert.equal(new Stamplay.Cobject('cobjectId').Collection.limit(20).currentQuery.limit, 20)
-      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.limit(30)
-      assert.equal(ParamsBuilder.limit(40).currentQuery.limit, 40)
+      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.limit);
+      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.limit(10));
+      assert.equal(new Stamplay.Cobject('cobjectId').Collection.limit(20).currentQuery.limit, 20);
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.limit(30);
+      assert.equal(ParamsBuilder.limit(40).currentQuery.limit, 40);
 
     })
 
     test('has the select method', function () {
 
-      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.select)
-      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.select('a'))
-      assert.equal(new Stamplay.Cobject('cobjectId').Collection.select('a').currentQuery.select[0], 'a')
-      assert.equal(new Stamplay.Cobject('cobjectId').Collection.select('b').currentQuery.select[1], undefined)
-      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.select('a')
-      assert.equal(ParamsBuilder.select('b').currentQuery.select.length, 2)
-      assert.equal(new Stamplay.Cobject('cobjectId').Collection.select(['a', 'b']).currentQuery.select.length, 2)
+      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.select);
+      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.select('a'));
+      assert.equal(new Stamplay.Cobject('cobjectId').Collection.select('a').currentQuery.select[0], 'a');
+      assert.equal(new Stamplay.Cobject('cobjectId').Collection.select('b').currentQuery.select[1], undefined);
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.select('a');
+      assert.equal(ParamsBuilder.select('b').currentQuery.select.length, 2);
+      assert.equal(new Stamplay.Cobject('cobjectId').Collection.select(['a', 'b']).currentQuery.select.length, 2);
 
     })
 
     test('has the sortAscending method', function () {
 
-      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.sortAscending)
-      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.sortAscending('a'))
-      assert.equal(new Stamplay.Cobject('cobjectId').Collection.sortAscending('a').currentQuery.sort, 'a')
-      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.sortAscending('b')
-      assert.equal(ParamsBuilder.sortAscending('c').currentQuery.sort, 'c')
+      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.sortAscending);
+      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.sortAscending('a'));
+      assert.equal(new Stamplay.Cobject('cobjectId').Collection.sortAscending('a').currentQuery.sort, 'a');
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.sortAscending('b');
+      assert.equal(ParamsBuilder.sortAscending('c').currentQuery.sort, 'c');
 
     })
 
     test('has the sortDescending method', function () {
 
-      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.sortDescending)
-      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.sortDescending('a'))
-      assert.equal(new Stamplay.Cobject('cobjectId').Collection.sortDescending('a').currentQuery.sort, '-a')
-      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.sortDescending('b')
-      assert.equal(ParamsBuilder.sortDescending('c').currentQuery.sort, '-c')
+      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.sortDescending);
+      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.sortDescending('a'));
+      assert.equal(new Stamplay.Cobject('cobjectId').Collection.sortDescending('a').currentQuery.sort, '-a');
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.sortDescending('b');
+      assert.equal(ParamsBuilder.sortDescending('c').currentQuery.sort, '-c');
 
     })
 
     test('has the populate method', function () {
 
-      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.populate)
-      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.populate())
-      assert.equal(new Stamplay.Cobject('cobjectId').Collection.populate().currentQuery.populate, true)
-      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.populate()
-      assert.equal(ParamsBuilder.populate().currentQuery.populate, true)
+      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.populate);
+      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.populate());
+      assert.equal(new Stamplay.Cobject('cobjectId').Collection.populate().currentQuery.populate, true);
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.populate();
+      assert.equal(ParamsBuilder.populate().currentQuery.populate, true);
 
     })
 
 
     test('has the populateOwner method', function () {
 
-      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.populateOwner)
-      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.populateOwner())
-      assert.equal(new Stamplay.Cobject('cobjectId').Collection.populateOwner().currentQuery.populateOwner, true)
-      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.populateOwner()
-      assert.equal(ParamsBuilder.populateOwner().currentQuery.populateOwner, true)
+      assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.populateOwner);
+      assert.isObject(new Stamplay.Cobject('cobjectId').Collection.populateOwner());
+      assert.equal(new Stamplay.Cobject('cobjectId').Collection.populateOwner().currentQuery.populateOwner, true);
+      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.populateOwner();
+      assert.equal(ParamsBuilder.populateOwner().currentQuery.populateOwner, true);
 
     })
 
     test('has fetchParams pipeline possibility', function () {
 
-      var ParamsBuilder = new Stamplay.Cobject('tag').Collection.equalTo('a', 'b')
-      assert.isObject(ParamsBuilder)
-      assert.equal(ParamsBuilder.currentQuery.find.a, 'b')
-      ParamsBuilder = ParamsBuilder.limit(10)
-      assert.isObject(ParamsBuilder)
-      assert.equal(ParamsBuilder.currentQuery.limit, 10)
-      ParamsBuilder = ParamsBuilder.select('name')
-      assert.isObject(ParamsBuilder)
-      assert.equal(ParamsBuilder.currentQuery.select, 'name')
-      ParamsBuilder = ParamsBuilder.equalTo('name', 'pippo')
-      assert.isObject(ParamsBuilder)
-      assert.equal(ParamsBuilder.currentQuery.find.name, 'pippo')
+      var ParamsBuilder = new Stamplay.Cobject('tag').Collection.equalTo('a', 'b');
+      assert.isObject(ParamsBuilder);
+      assert.equal(ParamsBuilder.currentQuery.find.a, 'b');
+      ParamsBuilder = ParamsBuilder.limit(10);
+      assert.isObject(ParamsBuilder);
+      assert.equal(ParamsBuilder.currentQuery.limit, 10);
+      ParamsBuilder = ParamsBuilder.select('name');
+      assert.isObject(ParamsBuilder);
+      assert.equal(ParamsBuilder.currentQuery.select, 'name');
+      ParamsBuilder = ParamsBuilder.equalTo('name', 'pippo');
+      assert.isObject(ParamsBuilder);
+      assert.equal(ParamsBuilder.currentQuery.find.name, 'pippo');
 
     })
 

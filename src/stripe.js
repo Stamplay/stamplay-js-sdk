@@ -29,7 +29,7 @@
 					url: this.url + 'customers'
 				})
 			else
-				return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+				return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 		}
 
 		this.createCreditCard = function (userId, token) {
@@ -43,9 +43,9 @@
 						url: this.url + 'customers/' + userId + '/cards'
 					})
 				else
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in createCreditCard methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in createCreditCard methods");
 			}
 		}
 
@@ -63,9 +63,9 @@
 						url: this.url + 'charges'
 					})
 				else
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in charge methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in charge methods");
 			}
 		}
 
@@ -81,10 +81,10 @@
 						url: this.url + 'customers/' + userId + '/subscriptions'
 					})
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 				}
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in createSubscription methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in createSubscription methods");
 			}
 		}
 
@@ -97,10 +97,10 @@
 						thisParams: options
 					});
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 				}
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscriptions methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscriptions methods");
 			}
 		}
 
@@ -112,10 +112,10 @@
 						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
 					});
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 				}
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscription methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscription methods");
 			}
 		}
 
@@ -129,10 +129,10 @@
 						data: options || {}
 					});
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 				}
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in deleteSubscription methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in deleteSubscription methods");
 			}
 		}
 
@@ -148,10 +148,10 @@
 						}
 					});
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 				}
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in updateSubscription methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in updateSubscription methods");
 			}
 		}
 
