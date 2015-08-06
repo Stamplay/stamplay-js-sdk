@@ -28,49 +28,49 @@
 			}
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.between = function(attr,value1,value2){
 			var obj = {};
 			obj[attr] = {"$gte":value1, "$lte":value2};
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.greaterThan = function(attr, value){
 			var obj = {};
 			obj[attr] = {"$gt":value};
 			this.currentQuery.push(obj);
 			return this;
-		}	
+		};	
 
 		this.greaterThanOrEqual = function(attr, value){
 			var obj = {};
 			obj[attr] = {"$gte":value};
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.lessThan = function(attr, value){
 			var obj = {};
 			obj[attr] = {"$lt":value};
 			this.currentQuery.push(obj);
 			return this;
-		}	
+		};	
 
 		this.lessThanOrEqual = function(attr, value){
 			var obj = {};
 			obj[attr] = {"$lte":value};
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.equalTo = function(attr, value){
 			var obj = {};
 			obj[attr] = value;
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.sortAscending = function(value){
 			var obj = {
@@ -79,7 +79,7 @@
 			obj.$sort[value] = 1;
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.sortDescending = function(value){
 			var obj = {
@@ -88,21 +88,21 @@
 			obj.$sort[value] = -1;
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.exists = function(attr){
 			var obj = {};
 			obj[attr] = {"$exists":true};
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.notExists = function(attr){
 			var obj = {};
 			obj[attr] = {"$exists":false};
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.exec = function(){
 			//build query
@@ -123,10 +123,9 @@
 			}).then(function (response) {
 				return response.data;
 			})
-		}
+		};
 
-
-	};
+	}
 
 	// Added Query Object to Stamplay
 	root.Stamplay.Query = Query;

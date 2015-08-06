@@ -24,7 +24,7 @@
 					data: data,
 					url: this.url
 				})
-			}
+			};
 
 			this.put = function (data) {
 				return Stamplay.makeAPromise({
@@ -32,14 +32,14 @@
 					data: data,
 					url: this.url
 				})
-			}
+			};
 
 			this.get = function () {
 				return Stamplay.makeAPromise({
 					method: 'GET',
 					url: this.url
 				})
-			}
+			};
 
 		}
 		//Added Webhook to Stamplay 

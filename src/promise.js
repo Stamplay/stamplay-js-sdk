@@ -1,4 +1,4 @@
-/* globals  Stamplay,store */
+/* globals  Stamplay,store,Q */
 
 /* Add function to handle ajax calls, returning a promise
  * Very simple to use: Stamplay.makePromise({options})
@@ -13,7 +13,7 @@
 			var key = keys[i];
 			options.url = options.url + conjunction + key + '=' + options.thisParams[key];
 		}
-	}
+	};
 
 	/* private function for parse link's header */
 	var parseLink = function (parts, link) {
@@ -29,7 +29,7 @@
 			}
 			link[name] = url;
 		}
-	}
+	};
 
 	/* function for handling any calls to Stamplay Platform */
 	/* Options parameter is an object  */
@@ -111,7 +111,7 @@
 		};
 		req.send(JSON.stringify(options.data) || void 0);
 		return deferred.promise;
-	}
+	};
 
 	/* function to remove attributes from model before send the request to server*/
 	root.Stamplay.removeAttributes = function (brick, instance) {
@@ -132,7 +132,7 @@
 			break;
 
 		}
-	}
+	};
 
 	function _handleJWT(req) {
 		var jwt = req.getResponseHeader('x-stamplay-jwt');
@@ -163,7 +163,7 @@
 			claims: claims,
 			signature: signature
 		};
-	};
+	}
 
 	/*
 	 * Decode base64
@@ -200,7 +200,7 @@
 			}
 		}
 		return r;
-	};
+	}
 
 	function _jwtIsValidTimestamp(token) {
 		var claims = _decodeJWT(token).claims,
@@ -217,6 +217,6 @@
 			}
 		}
 		return now && validSince && validUntil && now >= validSince && now <= validUntil;
-	};
+	}
 
 }(this));

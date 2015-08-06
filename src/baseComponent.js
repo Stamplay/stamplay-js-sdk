@@ -64,7 +64,7 @@
 					_this.instance = response;
 				});
 			}
-		}
+		};
 
 		// upVote function
 		// Modifies instance of model and return a promise
@@ -227,7 +227,7 @@
 					thisParams: thisParams
 				}).then(function (response) {
 					_this.instance = response;
-				})
+				});
 
 			},
 
@@ -239,11 +239,11 @@
 
 				var getUpdateMethod = function () {
 					return (options.patch) ? 'PATCH' : 'PUT';
-				}
+				};
 
 				if (!this.instance) {
 					return;
-				}
+				};
 
 				var method = (!this.instance._id) ? 'POST' : getUpdateMethod();
 
@@ -290,8 +290,8 @@
 
 					return false;
 
-				}
-			}
+				};
+			};
 
 	}
 
@@ -317,47 +317,47 @@
 
 		//method for parsing the currentquery 
 		var parseCurrentQuery = function (currentQuery) {
-			var query = {}
+			var query = {};
 			for (var key in currentQuery) {
 				
-				if (key == 'find') {
-					for (attr in currentQuery[key]) {
-						query[attr] = currentQuery[key][attr]
+				if (key === 'find') {
+					for (var attr in currentQuery[key]) {
+						query[attr] = currentQuery[key][attr];
 					}
-				} else if (key == 'limit') {
-					query.n = currentQuery[key]
-				} else if (key == 'select') {
-					query.select = currentQuery[key].join(",")
-				} else if (key == 'sort') {
-					query.sort = currentQuery[key]
-				} else if (key == 'pagination') {
-					query.page = currentQuery[key][0]
-					query.per_page = currentQuery[key][1]
-				}else if (key == 'populate') {
-					query.populate = true
-				}else if (key == 'populateOwner') {
-					query.populate_owner = true
+				} else if (key === 'limit') {
+					query.n = currentQuery[key];
+				} else if (key === 'select') {
+					query.select = currentQuery[key].join(",");
+				} else if (key === 'sort') {
+					query.sort = currentQuery[key];
+				} else if (key === 'pagination') {
+					query.page = currentQuery[key][0];
+					query.per_page = currentQuery[key][1];
+				}else if (key === 'populate') {
+					query.populate = true;
+				}else if (key === 'populateOwner') {
+					query.populate_owner = true;
 				}
 			}
 			return query;
-		}
+		};
 
 		//method to compile the params
 		this.compile = function () {
 			return parseCurrentQuery(this.currentQuery);
-		}
+		};
 
 		//method to set populate in queryparams
 		this.populate = function(){
 			this.currentQuery.populate = true;
 			return this;
-		}
+		};
 
 		//method to set populate owner in queryparams
 		this.populateOwner = function(){
 			this.currentQuery.populateOwner = true;
 			return this;
-		}
+		};
 
 		//method to set the pagination
 		this.pagination = function (page, perPage) {
@@ -367,18 +367,19 @@
 					throw new Error('Pagination want two parameters');
 				}
 				return this;
-			}
-			//method to set an attribute must be equal to given value
+		};
+		//method to set an attribute must be equal to given value
 		this.equalTo = function (attr, value) {
-			if (!this.currentQuery.find) this.currentQuery.find = {}
-
+			if (!this.currentQuery.find){ 
+				this.currentQuery.find = {}
+			};
 			if (typeof attr == "object") {
 				for (key in attr) {
 					this.currentQuery.find[key] = attr[key];
 				}
 			} else {
 				this.currentQuery.find[attr] = value;
-			}
+			};
 
 			return this;
 		};
@@ -386,28 +387,29 @@
 		this.limit = function (limit) {
 				this.currentQuery.limit = limit;
 				return this;
-			}
-			//method to select only the attrs do you want to see
+		};
+		//method to select only the attrs do you want to see
 		this.select = function (attr) {
 				if (!this.currentQuery.select)
 					this.currentQuery.select = [];
-				if (attr instanceof Array)
+				if (attr instanceof Array){
 					for (var i = 0; i < attr.length; i++) {
 						this.currentQuery.select.push(attr[i]);
-					} else
-						this.currentQuery.select.push(attr);
-				return this
-			}
+					} 
+				}else
+					this.currentQuery.select.push(attr);
+				return this;
+		};
 			//method to sort ascending
 		this.sortAscending = function (attr) {
-				this.currentQuery.sort = attr;
-				return this;
-			}
+			this.currentQuery.sort = attr;
+			return this;
+		};
 			//method to sort descending
 		this.sortDescending = function (attr) {
 			this.currentQuery.sort = '-' + attr;
 			return this;
-		}
+		};
 
 		var collectionMethods = {
 			forEach: 3,
@@ -525,7 +527,7 @@
 						var instanceModel;
 						//cobject has a particular constructor
 						if (_this.brickId == 'cobject') {
-							instanceModel = new root.Stamplay.Cobject(_this.resourceId)
+							instanceModel = new root.Stamplay.Cobject(_this.resourceId);
 							instanceModel = instanceModel.Model.constructor(singleInstance);
 						} else {
 							//capitalize resource for implement dynamic inizialization of model

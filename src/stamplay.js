@@ -6,7 +6,7 @@
 */
 /* Initizialize library */
 (function (root) {
-
+	
 	/*  Inizialization of Stamplay Object */
 	root.Stamplay = root.Stamplay || {};
 	/* setting attribute API Version */

@@ -23,20 +23,20 @@
 				},
 				url: '/api/auth/' + Stamplay.VERSION + '/validate/email'
 			})
-		}
+		};
 
 		this.checkMongoId = function(mongoId){
 			var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
 			return syntaxValid = (((typeof mongoId) === 'string') && checkForHexRegExp.test(mongoId));
-		}
+		};
 
 		this.errorSender = function(status, message){
 			var deferred = Q.defer();
 			deferred.reject({"status":status, "message":message});
 			return deferred.promise
-		}
+		};
 
-	};
+	}
 	var support = new Support();
 	// Added Support Object to Stamplay
 	root.Stamplay.Support = support;

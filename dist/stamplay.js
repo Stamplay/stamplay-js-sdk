@@ -2232,9 +2232,14 @@ return Q;
 })(Function('return this')());
 
 /* ---- STAMPLAY JS SDK ---- */
+/**
+@author Stamplay
+@version 1.0
+@description an awesome javascript sdk for Stamplay 
+*/
 /* Initizialize library */
 (function (root) {
-
+	
 	/*  Inizialization of Stamplay Object */
 	root.Stamplay = root.Stamplay || {};
 	/* setting attribute API Version */
@@ -2268,6 +2273,9 @@ return Q;
 
 }(this));
 /* ---- STAMPLAY JS SDK ---- */
+/* Add function to handle ajax calls, returning a promise
+ * Very simple to use: Stamplay.makePromise({options})
+ */
 (function (root) {
 
 	/* private function for handling this parameters */
@@ -2278,7 +2286,7 @@ return Q;
 			var key = keys[i];
 			options.url = options.url + conjunction + key + '=' + options.thisParams[key];
 		}
-	}
+	};
 
 	/* private function for parse link's header */
 	var parseLink = function (parts, link) {
@@ -2294,7 +2302,7 @@ return Q;
 			}
 			link[name] = url;
 		}
-	}
+	};
 
 	/* function for handling any calls to Stamplay Platform */
 	/* Options parameter is an object  */
@@ -2376,7 +2384,7 @@ return Q;
 		};
 		req.send(JSON.stringify(options.data) || void 0);
 		return deferred.promise;
-	}
+	};
 
 	/* function to remove attributes from model before send the request to server*/
 	root.Stamplay.removeAttributes = function (brick, instance) {
@@ -2397,7 +2405,7 @@ return Q;
 			break;
 
 		}
-	}
+	};
 
 	function _handleJWT(req) {
 		var jwt = req.getResponseHeader('x-stamplay-jwt');
@@ -2428,7 +2436,7 @@ return Q;
 			claims: claims,
 			signature: signature
 		};
-	};
+	}
 
 	/*
 	 * Decode base64
@@ -2465,7 +2473,7 @@ return Q;
 			}
 		}
 		return r;
-	};
+	}
 
 	function _jwtIsValidTimestamp(token) {
 		var claims = _decodeJWT(token).claims,
@@ -2482,14 +2490,10 @@ return Q;
 			}
 		}
 		return now && validSince && validUntil && now >= validSince && now <= validUntil;
-	};
+	}
 
 }(this));
 /* ---- STAMPLAY JS SDK ---- */
-/* 
- * Exspose BaseComponent the super class of all components on Stamplay.
- *  It extends Model and Collection.
- */
 (function (root) {
 
 	//method to add underscore function
@@ -2552,7 +2556,7 @@ return Q;
 					_this.instance = response;
 				});
 			}
-		}
+		};
 
 		// upVote function
 		// Modifies instance of model and return a promise
@@ -2715,7 +2719,7 @@ return Q;
 					thisParams: thisParams
 				}).then(function (response) {
 					_this.instance = response;
-				})
+				});
 
 			},
 
@@ -2727,11 +2731,11 @@ return Q;
 
 				var getUpdateMethod = function () {
 					return (options.patch) ? 'PATCH' : 'PUT';
-				}
+				};
 
 				if (!this.instance) {
 					return;
-				}
+				};
 
 				var method = (!this.instance._id) ? 'POST' : getUpdateMethod();
 
@@ -2778,8 +2782,8 @@ return Q;
 
 					return false;
 
-				}
-			}
+				};
+			};
 
 	}
 
@@ -2805,47 +2809,47 @@ return Q;
 
 		//method for parsing the currentquery 
 		var parseCurrentQuery = function (currentQuery) {
-			var query = {}
+			var query = {};
 			for (var key in currentQuery) {
 				
-				if (key == 'find') {
-					for (attr in currentQuery[key]) {
-						query[attr] = currentQuery[key][attr]
+				if (key === 'find') {
+					for (var attr in currentQuery[key]) {
+						query[attr] = currentQuery[key][attr];
 					}
-				} else if (key == 'limit') {
-					query.n = currentQuery[key]
-				} else if (key == 'select') {
-					query.select = currentQuery[key].join(",")
-				} else if (key == 'sort') {
-					query.sort = currentQuery[key]
-				} else if (key == 'pagination') {
-					query.page = currentQuery[key][0]
-					query.per_page = currentQuery[key][1]
-				}else if (key == 'populate') {
-					query.populate = true
-				}else if (key == 'populateOwner') {
-					query.populate_owner = true
+				} else if (key === 'limit') {
+					query.n = currentQuery[key];
+				} else if (key === 'select') {
+					query.select = currentQuery[key].join(",");
+				} else if (key === 'sort') {
+					query.sort = currentQuery[key];
+				} else if (key === 'pagination') {
+					query.page = currentQuery[key][0];
+					query.per_page = currentQuery[key][1];
+				}else if (key === 'populate') {
+					query.populate = true;
+				}else if (key === 'populateOwner') {
+					query.populate_owner = true;
 				}
 			}
 			return query;
-		}
+		};
 
 		//method to compile the params
 		this.compile = function () {
 			return parseCurrentQuery(this.currentQuery);
-		}
+		};
 
 		//method to set populate in queryparams
 		this.populate = function(){
 			this.currentQuery.populate = true;
 			return this;
-		}
+		};
 
 		//method to set populate owner in queryparams
 		this.populateOwner = function(){
 			this.currentQuery.populateOwner = true;
 			return this;
-		}
+		};
 
 		//method to set the pagination
 		this.pagination = function (page, perPage) {
@@ -2855,18 +2859,19 @@ return Q;
 					throw new Error('Pagination want two parameters');
 				}
 				return this;
-			}
-			//method to set an attribute must be equal to given value
+		};
+		//method to set an attribute must be equal to given value
 		this.equalTo = function (attr, value) {
-			if (!this.currentQuery.find) this.currentQuery.find = {}
-
+			if (!this.currentQuery.find){ 
+				this.currentQuery.find = {}
+			};
 			if (typeof attr == "object") {
 				for (key in attr) {
 					this.currentQuery.find[key] = attr[key];
 				}
 			} else {
 				this.currentQuery.find[attr] = value;
-			}
+			};
 
 			return this;
 		};
@@ -2874,28 +2879,29 @@ return Q;
 		this.limit = function (limit) {
 				this.currentQuery.limit = limit;
 				return this;
-			}
-			//method to select only the attrs do you want to see
+		};
+		//method to select only the attrs do you want to see
 		this.select = function (attr) {
 				if (!this.currentQuery.select)
 					this.currentQuery.select = [];
-				if (attr instanceof Array)
+				if (attr instanceof Array){
 					for (var i = 0; i < attr.length; i++) {
 						this.currentQuery.select.push(attr[i]);
-					} else
-						this.currentQuery.select.push(attr);
-				return this
-			}
+					} 
+				}else
+					this.currentQuery.select.push(attr);
+				return this;
+		};
 			//method to sort ascending
 		this.sortAscending = function (attr) {
-				this.currentQuery.sort = attr;
-				return this;
-			}
+			this.currentQuery.sort = attr;
+			return this;
+		};
 			//method to sort descending
 		this.sortDescending = function (attr) {
 			this.currentQuery.sort = '-' + attr;
 			return this;
-		}
+		};
 
 		var collectionMethods = {
 			forEach: 3,
@@ -3013,7 +3019,7 @@ return Q;
 						var instanceModel;
 						//cobject has a particular constructor
 						if (_this.brickId == 'cobject') {
-							instanceModel = new root.Stamplay.Cobject(_this.resourceId)
+							instanceModel = new root.Stamplay.Cobject(_this.resourceId);
 							instanceModel = instanceModel.Model.constructor(singleInstance);
 						} else {
 							//capitalize resource for implement dynamic inizialization of model
@@ -3112,6 +3118,10 @@ return Q;
 
 }(this));
 /* ---- STAMPLAY JS SDK ---- */
+/* Add Support function to Stamplay
+ * it use for handling some functionality
+ * very easy to use : Stamplay.Support.redirect('http://stamplay.com')
+ */
 (function (root) {
 
 	// constructor for Support Object
@@ -3131,20 +3141,20 @@ return Q;
 				},
 				url: '/api/auth/' + Stamplay.VERSION + '/validate/email'
 			})
-		}
+		};
 
 		this.checkMongoId = function(mongoId){
 			var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
 			return syntaxValid = (((typeof mongoId) === 'string') && checkForHexRegExp.test(mongoId));
-		}
+		};
 
 		this.errorSender = function(status, message){
 			var deferred = Q.defer();
 			deferred.reject({"status":status, "message":message});
 			return deferred.promise
-		}
+		};
 
-	};
+	}
 	var support = new Support();
 	// Added Support Object to Stamplay
 	root.Stamplay.Support = support;
@@ -3180,49 +3190,49 @@ return Q;
 			}
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.between = function(attr,value1,value2){
 			var obj = {};
 			obj[attr] = {"$gte":value1, "$lte":value2};
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.greaterThan = function(attr, value){
 			var obj = {};
 			obj[attr] = {"$gt":value};
 			this.currentQuery.push(obj);
 			return this;
-		}	
+		};	
 
 		this.greaterThanOrEqual = function(attr, value){
 			var obj = {};
 			obj[attr] = {"$gte":value};
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.lessThan = function(attr, value){
 			var obj = {};
 			obj[attr] = {"$lt":value};
 			this.currentQuery.push(obj);
 			return this;
-		}	
+		};	
 
 		this.lessThanOrEqual = function(attr, value){
 			var obj = {};
 			obj[attr] = {"$lte":value};
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.equalTo = function(attr, value){
 			var obj = {};
 			obj[attr] = value;
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.sortAscending = function(value){
 			var obj = {
@@ -3231,7 +3241,7 @@ return Q;
 			obj.$sort[value] = 1;
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.sortDescending = function(value){
 			var obj = {
@@ -3240,21 +3250,21 @@ return Q;
 			obj.$sort[value] = -1;
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.exists = function(attr){
 			var obj = {};
 			obj[attr] = {"$exists":true};
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.notExists = function(attr){
 			var obj = {};
 			obj[attr] = {"$exists":false};
 			this.currentQuery.push(obj);
 			return this;
-		}
+		};
 
 		this.exec = function(){
 			//build query
@@ -3275,16 +3285,24 @@ return Q;
 			}).then(function (response) {
 				return response.data;
 			})
-		}
+		};
 
-
-	};
+	}
 
 	// Added Query Object to Stamplay
 	root.Stamplay.Query = Query;
 
 })(this);
 /* ---- STAMPLAY JS SDK ---- */
+/* Brick : User 
+ 	GET    '/api/user/VERSION/users'
+  GET    '/api/user/VERSION/users/:id'
+  POST   '/api/user/VERSION/users'
+  PUT    '/api/user/VERSION/users/:id'
+  DELETE '/api/user/VERSION/users/:id'
+  GET    '/api/user/VERSION/getStatus'
+*/
+
 (function (root) {
 
 	/**
@@ -3457,6 +3475,9 @@ return Q;
 
 })(this);
 /* ---- STAMPLAY JS SDK ---- */
+/* Brick : Webhook 
+ *  POST   '/api/webhook/VERSION/:webhookId/catch'
+ */
 (function (root) {
 
 	/*
@@ -3478,7 +3499,7 @@ return Q;
 					data: data,
 					url: this.url
 				})
-			}
+			};
 
 			this.put = function (data) {
 				return Stamplay.makeAPromise({
@@ -3486,14 +3507,14 @@ return Q;
 					data: data,
 					url: this.url
 				})
-			}
+			};
 
 			this.get = function () {
 				return Stamplay.makeAPromise({
 					method: 'GET',
 					url: this.url
 				})
-			}
+			};
 
 		}
 		//Added Webhook to Stamplay 
@@ -3501,6 +3522,14 @@ return Q;
 
 })(this);
 /* ---- STAMPLAY JS SDK ---- */
+/* Brick : stripe 
+ * POST  'api/stripe/VERSION/customers'
+ * POST  'api/stripe/VERSION/customers/:userId/cards'
+ * POST  'api/stripe/VERSION/charges'
+ * POST  'api/stripe/VERSION/customers/:userId/subscriptions'
+ * GET   'api/stripe/VERSION/customers/:userId/subscriptions'
+ */
+
 (function (root) {
 
 	/*
@@ -3522,10 +3551,10 @@ return Q;
 						'userId': userId
 					},
 					url: this.url + 'customers'
-				})
+				});
 			else
 				return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
-		}
+		};
 
 		this.createCreditCard = function (userId, token) {
 			if (arguments.length == 2) {
@@ -3542,7 +3571,7 @@ return Q;
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in createCreditCard methods");
 			}
-		}
+		};
 
 		this.charge = function (userId, token, amount, currency) {
 			if (arguments.length == 4) {
@@ -3562,7 +3591,7 @@ return Q;
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in charge methods");
 			}
-		}
+		};
 
 
 		this.createSubscription = function (userId, planId) {
@@ -3581,7 +3610,7 @@ return Q;
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in createSubscription methods");
 			}
-		}
+		};
 
 		this.getSubscriptions = function (userId, options) {
 			if (arguments.length >= 1) {
@@ -3597,7 +3626,7 @@ return Q;
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscriptions methods");
 			}
-		}
+		};
 
 		this.getSubscription = function (userId, subscriptionId) {
 			if (arguments.length <= 2) {
@@ -3612,7 +3641,7 @@ return Q;
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscription methods");
 			}
-		}
+		};
 
 
 		this.deleteSubscription = function (userId, subscriptionId, options) {
@@ -3629,7 +3658,7 @@ return Q;
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in deleteSubscription methods");
 			}
-		}
+		};
 
 		this.updateSubscription = function (userId, subscriptionId, options) {
 			if (arguments.length >= 2) {
@@ -3648,8 +3677,7 @@ return Q;
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in updateSubscription methods");
 			}
-		}
-
+		};
 
 	}
 
