@@ -1,5 +1,11 @@
 # Stamplay JS SDK Changelog
 
+1.2.6 / 06-08-2015
+===================
+
+* Added code climate
+* Added findByAttr method on Custom Object Collection
+
 1.2.5 / 30-07-2015
 ===================
 

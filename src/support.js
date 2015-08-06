@@ -27,7 +27,8 @@
 
 		this.checkMongoId = function(mongoId){
 			var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
-			return var syntaxValid = (((typeof mongoId) === 'string') && checkForHexRegExp.test(mongoId));
+			var syntaxValid = (((typeof mongoId) === 'string') && checkForHexRegExp.test(mongoId));
+			return syntaxValid;
 		};
 
 		this.errorSender = function(status, message){

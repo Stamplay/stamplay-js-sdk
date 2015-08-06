@@ -76,6 +76,10 @@ suite('Stamplay Cobject Collection ', function () {
     assert.isFunction(coll_cinstance.set, 'set method exists');
   });
 
+  test('has the set method', function () {
+    assert.isFunction(coll_cinstance.findByAttr, 'findByAttr method exists');
+  });
+
   test('has the instance property which is an array', function () {
     assert.isArray(coll_cinstance.instance, 'instance property is an array');
     assert.equal(coll_cinstance.instance.length, 2, 'instance property is an array');
@@ -181,6 +185,32 @@ suite('Stamplay Cobject Collection ', function () {
       "x-total-elements": "2",
       "link": '<https://test.stamplayapp.com/api/cobject/v0/coinstances?page=1&per_page=10&cobjectId=cobjectId>; rel="last",<https://test.stamplayapp.com/api/cobject/v0/coinstances?&cobjectId=cobjectId>; rel="generic"'
     }, '{"data": [{ "_id": 123, "comment": "Hey there" }, { "_id": 124, "comment": "Hey there you" }]}');
+  });
+
+  test('findByAttr function', function () {
+    var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
+   
+    newCinstance.findByAttr('owner').then(function () {
+      console.log(newCinstance)
+      assert.isArray(newCinstance.instance);
+      assert.equal(newCinstance.instance.length, 2, 'Two instances should be present');
+
+      assert.equal(newCinstance.instance[0].get('_id'), 123);
+      assert.equal(newCinstance.instance[0].get('comment'), 'Hey there');
+
+      assert.equal(newCinstance.instance[1].get('_id'), 124);
+      assert.equal(newCinstance.instance[1].get('comment'), 'Hey there you');
+
+      assert.equal(newCinstance.totalElements, 2);
+      done();
+    });
+
+    this.request.respond(200, {
+      "Content-Type": "application/json",
+      "x-total-elements": "2",
+      "link": '<https://test.stamplayapp.com/api/cobject/v0/coinstances/find/owner>; rel="last",<https://test.stamplayapp.com/api/cobject/v0/coinstances?&cobjectId=cobjectId>; rel="generic"'
+    }, '{"data": [{ "_id": 123, "comment": "Hey there" }, { "_id": 124, "comment": "Hey there you" }]}');
+
   });
 
   test('remove function with single _id', function () {

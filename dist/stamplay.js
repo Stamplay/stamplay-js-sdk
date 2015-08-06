@@ -2494,6 +2494,10 @@ return Q;
 
 }(this));
 /* ---- STAMPLAY JS SDK ---- */
+/* 
+ * Exspose BaseComponent the super class of all components on Stamplay.
+ *  It extends Model and Collection.
+ */
 (function (root) {
 
 	//method to add underscore function
@@ -2631,7 +2635,7 @@ return Q;
 			}
 		};
 
-		this.getRatings = function (type) {
+		this.getRatings = function () {
 			return this.get('actions').ratings.users;
 		};
 
@@ -2735,7 +2739,7 @@ return Q;
 
 				if (!this.instance) {
 					return;
-				};
+				}
 
 				var method = (!this.instance._id) ? 'POST' : getUpdateMethod();
 
@@ -2759,7 +2763,7 @@ return Q;
 			// destroy function 
 			// Delete Model to Stamplay's db
 			this.destroy = function () {
-				var isUser = (this.brickId == 'user')
+				var isUser = (this.brickId === 'user');
 				if (this.get('_id')) {
 
 					return Stamplay.makeAPromise({
@@ -2779,10 +2783,8 @@ return Q;
 					});
 
 				} else {
-
 					return false;
-
-				};
+				}
 			};
 
 	}
@@ -2865,14 +2867,13 @@ return Q;
 			if (!this.currentQuery.find){ 
 				this.currentQuery.find = {}
 			};
-			if (typeof attr == "object") {
-				for (key in attr) {
+			if (typeof attr === "object") {
+				for (var key in attr) {
 					this.currentQuery.find[key] = attr[key];
 				}
 			} else {
 				this.currentQuery.find[attr] = value;
-			};
-
+			}
 			return this;
 		};
 		//method to limit the results of query
@@ -2945,7 +2946,7 @@ return Q;
 			chain: 1,
 			sample: 3,
 			partition: 3
-		}
+		};
 
 		// Mix in each Underscore method as a proxy to `Collection`.
 		addUnderscoreMethods(this, collectionMethods, 'instance');
@@ -3007,7 +3008,7 @@ return Q;
 			//return the number of entries on Stamplay's db
 			this.count = function () {
 				return this.totalElements;
-			}
+			};
 
 		//set collection with an array of model 
 		this.set = function (models) {
@@ -3029,13 +3030,13 @@ return Q;
 						}
 						_this.instance.push(instanceModel);
 					}
-				})
+				});
 				_this.length = _this.instance.length;
 			} else {
 				throw new Error('Set method on Collection wants an Array');
 			}
 
-		}
+		};
 
 		// fetch function, it takes thisParams
 		// Return a promise. Modify the instance with the data from Stamplay Server
@@ -3044,7 +3045,7 @@ return Q;
 				thisParams = thisParams && _.extend(thisParams, this.compile()) || this.compile();
 				var _this = this;
 
-				if (_this.brickId == 'cobject') {
+				if (_this.brickId === 'cobject') {
 					var headers = true;
 				}
 
@@ -3063,7 +3064,7 @@ return Q;
 					response.data.forEach(function (singleInstance) {
 						var instanceModel;
 						//cobject has a particular constructor
-						if (_this.brickId == 'cobject') {
+						if (_this.brickId === 'cobject') {
 							instanceModel = new root.Stamplay.Cobject(_this.resourceId);
 							instanceModel = instanceModel.Model.constructor(singleInstance);
 						} else {
@@ -3073,7 +3074,7 @@ return Q;
 							instanceModel = instanceModel.Model.constructor(singleInstance);
 						}
 						_this.instance.push(instanceModel);
-					})
+					});
 					_this.length = _this.instance.length;
 				});
 			},
@@ -3084,7 +3085,7 @@ return Q;
 
 				if (_id instanceof Array) {
 					this.instance = _.reject(this.instance, function (model) {
-						for (indexId in _id) {
+						for (var indexId in _id) {
 							if (model.get('_id') == _id[indexId]) {
 								return true;
 							}
@@ -3092,7 +3093,6 @@ return Q;
 					}, this);
 					this.length = this.instance.length;
 				} else {
-
 					this.instance = _.reject(this.instance, function (model) {
 						if (model.get('_id') == _id) {
 							return true;
@@ -3100,8 +3100,8 @@ return Q;
 					}, this);
 					this.length = this.instance.length;
 				}
-			}
-	}
+			};
+	};
 	/* BaseComponent constructor, it takes brickId, resourceId and hasAction
 	 *  If hasAction is true, Model extends Action
 	 */
@@ -3140,18 +3140,19 @@ return Q;
 					email: email
 				},
 				url: '/api/auth/' + Stamplay.VERSION + '/validate/email'
-			})
+			});
 		};
 
 		this.checkMongoId = function(mongoId){
 			var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
-			return syntaxValid = (((typeof mongoId) === 'string') && checkForHexRegExp.test(mongoId));
+			var syntaxValid = (((typeof mongoId) === 'string') && checkForHexRegExp.test(mongoId));
+			return syntaxValid;
 		};
 
 		this.errorSender = function(status, message){
 			var deferred = Q.defer();
 			deferred.reject({"status":status, "message":message});
-			return deferred.promise
+			return deferred.promise;
 		};
 
 	}
@@ -3271,7 +3272,7 @@ return Q;
 			for(var i=0;i<this.currentQuery.length;i++){	
 				var partial = JSON.stringify(this.currentQuery[i]);
 				partial = partial.substring(1, partial.length-1);
-				if(i==0)
+				if(i===0)
 					this.executable += partial;
 				else
 					this.executable += ','+partial;
@@ -3284,7 +3285,7 @@ return Q;
 				url: '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance +'?where={'+this.executable+'}' ,
 			}).then(function (response) {
 				return response.data;
-			})
+			});
 		};
 
 	}
@@ -3332,7 +3333,7 @@ return Q;
 					if (this.instance._id)
 						return true;
 					return false;
-				}
+				};
 
 			// login function, it takes serviceOrEmail and password
 			// if exists password parameter, login strategy is local Authentication
@@ -3390,7 +3391,7 @@ return Q;
 						store.remove(window.location.origin + '-jwt');
 					}
 					root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
-				}
+				};
 
 				this.Model.resetPassword = function(email, newPassword){
 					if(email && newPassword)
@@ -3403,7 +3404,7 @@ return Q;
 						});
 					else
 						return Stamplay.Support.errorSender(403, "Missing parameters in resetPassword method");
-				}
+				};
 
 				this.Model.activities = function (id) {
 					return Stamplay.makeAPromise({
@@ -3412,7 +3413,7 @@ return Q;
 					}).then(function (response) {
 						return response;
 					});
-				}
+				};
 
 				this.Model.following = function (id) {
 					return Stamplay.makeAPromise({
@@ -3421,7 +3422,7 @@ return Q;
 					}).then(function (response) {
 						return response;
 					});
-				}
+				};
 
 				this.Model.followedBy = function (id) {
 					return Stamplay.makeAPromise({
@@ -3430,7 +3431,7 @@ return Q;
 					}).then(function (response) {
 						return response;
 					});
-				}
+				};
 
 				this.Model.follow = function (id) {
 					return Stamplay.makeAPromise({
@@ -3440,7 +3441,7 @@ return Q;
 					}).then(function (response) {
 						return response;
 					});
-				}
+				};
 
 				this.Model.unfollow = function (id) {
 					return Stamplay.makeAPromise({
@@ -3450,7 +3451,7 @@ return Q;
 					}).then(function (response) {
 						return response;
 					});
-				}
+				};
 
 		}
 		//Added User to Stamplay 
@@ -3458,6 +3459,19 @@ return Q;
 
 })(this);
 /* ---- STAMPLAY JS SDK ---- */
+/* Brick : Cobject 
+	GET     '/api/cobject/VERSION/:cobjectId 
+	GET     '/api/cobject/VERSION/:cobjectId/:id   
+	PUT     '/api/cobject/VERSION/:cobjectId/:id   
+	PATCH   '/api/cobject/VERSION/:cobjectId/:id 
+	POST    '/api/cobject/VERSION/:cobjectId       
+	DELETE  '/api/cobject/VERSION/:cobjectId/:id
+	PUT			'/api/cobject/VERSION/:cobjectId/:id/rate
+	PUT     '/api/cobject/VERSION/:cobjectId/:id/comment
+	PUT     '/api/cobject/VERSION/:cobjectId/:id/vote
+	PUT     '/api/cobject/VERSION/:cobjectId/:id/facebook_share
+	PUT     '/api/cobject/VERSION/:cobjectId/:id/twitter_share 
+*/
 (function (root) {
 
 	/**
@@ -3469,6 +3483,31 @@ return Q;
 	//constructor
 	function Cobject(resourceId) {
 		Stamplay.BaseComponent.call(this, 'cobject', resourceId, true);
+
+		this.Collection.findByAttr = function (attr) {
+			if(attr){
+				var _this = this;
+				return Stamplay.makeAPromise({
+					method: 'GET',
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/find/'+attr
+				}).then(function (response) {
+					if (response.totalElements && response.pagination) {
+							_this.totalElements = parseInt(response.totalElements);
+							_this.pagination = response.pagination;
+						}
+						_this.instance = [];
+						//iterate on data and instance a new Model with the prototype functions
+						response.data.forEach(function (singleInstance) {
+							var instanceModel = new root.Stamplay.Cobject(_this.resourceId);
+							instanceModel = instanceModel.Model.constructor(singleInstance);
+							_this.instance.push(instanceModel);
+						});
+						_this.length = _this.instance.length;
+				});
+			}else{
+				return Stamplay.Support.errorSender(403, "Missing parameter in findByAttr method");
+			}
+		}
 	}
 	//Added Cobject to Stamplay 
 	root.Stamplay.Cobject = Cobject;
@@ -3498,7 +3537,7 @@ return Q;
 					method: 'POST',
 					data: data,
 					url: this.url
-				})
+				});
 			};
 
 			this.put = function (data) {
@@ -3506,14 +3545,14 @@ return Q;
 					method: 'PUT',
 					data: data,
 					url: this.url
-				})
+				});
 			};
 
 			this.get = function () {
 				return Stamplay.makeAPromise({
 					method: 'GET',
 					url: this.url
-				})
+				});
 			};
 
 		}
@@ -3565,7 +3604,7 @@ return Q;
 							'token': token
 						},
 						url: this.url + 'customers/' + userId + '/cards'
-					})
+					});
 				else
 					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 			} else {
@@ -3585,7 +3624,7 @@ return Q;
 							'currency': currency
 						},
 						url: this.url + 'charges'
-					})
+					});
 				else
 					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 			} else {
@@ -3595,7 +3634,7 @@ return Q;
 
 
 		this.createSubscription = function (userId, planId) {
-			if (arguments.length == 2) {
+			if (arguments.length === 2) {
 				if (Stamplay.Support.checkMongoId(userId)) {
 					return Stamplay.makeAPromise({
 						method: 'POST',
@@ -3603,7 +3642,7 @@ return Q;
 							'planId': planId
 						},
 						url: this.url + 'customers/' + userId + '/subscriptions'
-					})
+					});
 				} else {
 					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 				}
@@ -3645,7 +3684,7 @@ return Q;
 
 
 		this.deleteSubscription = function (userId, subscriptionId, options) {
-			if (arguments.length == 2) {
+			if (arguments.length === 2) {
 				if (Stamplay.Support.checkMongoId(userId)) {
 					return Stamplay.makeAPromise({
 						method: 'DELETE',

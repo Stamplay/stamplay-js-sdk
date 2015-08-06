@@ -24,6 +24,31 @@
 	//constructor
 	function Cobject(resourceId) {
 		Stamplay.BaseComponent.call(this, 'cobject', resourceId, true);
+
+		this.Collection.findByAttr = function (attr) {
+			if(attr){
+				var _this = this;
+				return Stamplay.makeAPromise({
+					method: 'GET',
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/find/'+attr
+				}).then(function (response) {
+					if (response.totalElements && response.pagination) {
+							_this.totalElements = parseInt(response.totalElements);
+							_this.pagination = response.pagination;
+						}
+						_this.instance = [];
+						//iterate on data and instance a new Model with the prototype functions
+						response.data.forEach(function (singleInstance) {
+							var instanceModel = new root.Stamplay.Cobject(_this.resourceId);
+							instanceModel = instanceModel.Model.constructor(singleInstance);
+							_this.instance.push(instanceModel);
+						});
+						_this.length = _this.instance.length;
+				});
+			}else{
+				return Stamplay.Support.errorSender(403, "Missing parameter in findByAttr method");
+			}
+		}
 	}
 	//Added Cobject to Stamplay 
 	root.Stamplay.Cobject = Cobject;
