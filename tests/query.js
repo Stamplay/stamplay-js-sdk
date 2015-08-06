@@ -1,3 +1,4 @@
+/* globals suite,Stamplay,setup,sinon,teardown,test,assert,_ */
 suite('Stamplay Query ', function () {
 
   //For each test

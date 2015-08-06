@@ -1,3 +1,4 @@
+/* globals suite,Stamplay,setup,sinon,teardown,test,assert,_ */
 suite('Webhook', function () {
 
   var webhook;

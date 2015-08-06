@@ -1,9 +1,8 @@
+/* globals suite,Stamplay,setup,sinon,teardown,test,assert,_ */
 /*   
-
 	How to run this test
 	- Go to the root of the project
 	- Launch mocha-phantomjs ./tests/tests.html
-
 */
 suite('Stamplay User Model ', function () {
 

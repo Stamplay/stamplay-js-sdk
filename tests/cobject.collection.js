@@ -1,4 +1,4 @@
-/* globals suite,Stamplay,setup,sinon,teardown,test,assert */
+/* globals suite,Stamplay,setup,sinon,teardown,test,assert,_ */
 suite('Stamplay Cobject Collection ', function () {
 
   var coll_cinstance;
@@ -278,7 +278,6 @@ suite('Stamplay Cobject Collection ', function () {
       partition: 3
     };
 
-    var model = {};
     _.each(collectionMethods, function (length, method) {
       assert.isFunction(coll_cinstance[method], method);
     })
@@ -363,7 +362,6 @@ suite('Stamplay Cobject Collection ', function () {
     assert.isFalse(lastElem);
     assert.equal(coll_cinstance.length, 0);
 
-    var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
     lastElem = coll_cinstance.pop();
     assert.isFalse(lastElem);
   });
@@ -382,7 +380,6 @@ suite('Stamplay Cobject Collection ', function () {
     assert.isFalse(lastElem);
     assert.equal(coll_cinstance.length, 0);
 
-    var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
     lastElem = coll_cinstance.shift();
     assert.isFalse(lastElem);
   });

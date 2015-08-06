@@ -1,3 +1,5 @@
+  /* globals suite,Stamplay,setup,sinon,teardown,test,assert,_ */
+
   suite('Stripe', function () {
 
     setup('Creating a new Stripe', function () {
