@@ -1,4 +1,6 @@
-/* Exspose BaseComponent the super class of all components on Stamplay.
+/* globals -BAD_LIB */
+/* 
+ * Exspose BaseComponent the super class of all components on Stamplay.
  *  It extends Model and Collection.
  */
 (function (root) {

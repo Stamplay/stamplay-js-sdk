@@ -2486,6 +2486,10 @@ return Q;
 
 }(this));
 /* ---- STAMPLAY JS SDK ---- */
+/* 
+ * Exspose BaseComponent the super class of all components on Stamplay.
+ *  It extends Model and Collection.
+ */
 (function (root) {
 
 	//method to add underscore function

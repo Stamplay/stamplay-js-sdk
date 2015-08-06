@@ -1,3 +1,4 @@
+/* globals suite,Stamplay,setup,sinon,teardown,test,assert */
 suite('Stamplay Cobject Collection ', function () {
 
   var coll_cinstance;
