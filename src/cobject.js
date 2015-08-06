@@ -1,3 +1,5 @@
+/* globals  Stamplay */
+
 /* Brick : Cobject 
 	GET     '/api/cobject/VERSION/:cobjectId 
 	GET     '/api/cobject/VERSION/:cobjectId/:id   

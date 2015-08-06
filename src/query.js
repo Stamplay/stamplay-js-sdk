@@ -109,7 +109,7 @@
 			for(var i=0;i<this.currentQuery.length;i++){	
 				var partial = JSON.stringify(this.currentQuery[i]);
 				partial = partial.substring(1, partial.length-1);
-				if(i==0)
+				if(i===0)
 					this.executable += partial;
 				else
 					this.executable += ','+partial;
@@ -122,7 +122,7 @@
 				url: '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance +'?where={'+this.executable+'}' ,
 			}).then(function (response) {
 				return response.data;
-			})
+			});
 		};
 
 	}

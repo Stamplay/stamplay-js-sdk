@@ -38,7 +38,7 @@ suite('Stamplay User Model ', function () {
 		if (this.xhr) {
 			this.xhr.restore();
 		}
-	})
+	});
 
 
 	test('has the model methods', function () {
@@ -69,15 +69,15 @@ suite('Stamplay User Model ', function () {
 
 	test('has the instance property which is an object', function () {
 
-		assert.isObject(user.instance, 'instance property is an object')
+		assert.isObject(user.instance, 'instance property is an object');
 
 	});
 
 	test('user currentUser method', function (done) {
-		assert.equal(user.isLogged(), false)
+		assert.equal(user.isLogged(), false);
 
 		user.currentUser().then(function () {
-			assert.equal(user.isLogged(), true)
+			assert.equal(user.isLogged(), true);
 			done();
 		});
 
@@ -143,7 +143,7 @@ suite('Stamplay User Model ', function () {
 			email: 'email@email.com',
 			password: 'my_password',
 			property: 123
-		}
+		};
 
 		user.signup(data).then(function () {
 			assert.equal(user.get('email'), data.email);
@@ -163,7 +163,7 @@ suite('Stamplay User Model ', function () {
 	test('user failed signup because of invalid data throws an error ', function () {
 		var spy = sinon.spy(user, "signup");
 		try {
-			user.signup({})
+			user.signup({});
 		} catch (err) {
 			assert.isTrue(spy.threw());
 		}
@@ -184,12 +184,12 @@ suite('Stamplay User Model ', function () {
 	});
 
 
-	test('user resetPassword function', function () {
+	test('user resetPassword function', function (done) {
 	
 		var data = {
 			email:'a@a.it',
 			newPassword:'12234'
-		}
+		};
 
 		user.resetPassword('a@a.it','12234').then(function () {
 			done();
@@ -204,7 +204,7 @@ suite('Stamplay User Model ', function () {
 	});
 
 
-	test('user follow function', function () {
+	test('user follow function', function (done) {
 
 		user.follow('123').then(function () {
 			done();
@@ -216,7 +216,7 @@ suite('Stamplay User Model ', function () {
 		}, JSON.stringify({}));
 	});
 
-	test('user unfollow function', function () {
+	test('user unfollow function', function (done) {
 
 		user.unfollow('123').then(function () {
 			done();
@@ -228,7 +228,7 @@ suite('Stamplay User Model ', function () {
 		}, JSON.stringify({}));
 	});		
 
-	test('user activities function', function () {
+	test('user activities function', function (done) {
 
 		user.activities('123').then(function () {
 			done();
@@ -240,7 +240,7 @@ suite('Stamplay User Model ', function () {
 		}, JSON.stringify({}));
 	});		
 
-	test('user following function', function () {
+	test('user following function', function (done) {
 
 		user.following('123').then(function () {
 			done();
@@ -252,7 +252,7 @@ suite('Stamplay User Model ', function () {
 		}, JSON.stringify({}));
 	});		
 
-		test('user followedBy function', function () {
+		test('user followedBy function', function (done) {
 
 		user.followedBy('123').then(function () {
 			done();

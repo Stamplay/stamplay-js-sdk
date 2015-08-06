@@ -1,3 +1,5 @@
+/* globals  Stamplay, _ */
+
 /* 
  * Exspose BaseComponent the super class of all components on Stamplay.
  *  It extends Model and Collection.
@@ -243,7 +245,7 @@
 
 				if (!this.instance) {
 					return;
-				};
+				}
 
 				var method = (!this.instance._id) ? 'POST' : getUpdateMethod();
 
@@ -267,7 +269,7 @@
 			// destroy function 
 			// Delete Model to Stamplay's db
 			this.destroy = function () {
-				var isUser = (this.brickId == 'user')
+				var isUser = (this.brickId === 'user')
 				if (this.get('_id')) {
 
 					return Stamplay.makeAPromise({
@@ -287,10 +289,8 @@
 					});
 
 				} else {
-
 					return false;
-
-				};
+				}
 			};
 
 	}
@@ -373,14 +373,13 @@
 			if (!this.currentQuery.find){ 
 				this.currentQuery.find = {}
 			};
-			if (typeof attr == "object") {
-				for (key in attr) {
+			if (typeof attr === "object") {
+				for (var key in attr) {
 					this.currentQuery.find[key] = attr[key];
 				}
 			} else {
 				this.currentQuery.find[attr] = value;
-			};
-
+			}
 			return this;
 		};
 		//method to limit the results of query
@@ -453,7 +452,7 @@
 			chain: 1,
 			sample: 3,
 			partition: 3
-		}
+		};
 
 		// Mix in each Underscore method as a proxy to `Collection`.
 		addUnderscoreMethods(this, collectionMethods, 'instance');
@@ -515,7 +514,7 @@
 			//return the number of entries on Stamplay's db
 			this.count = function () {
 				return this.totalElements;
-			}
+			};
 
 		//set collection with an array of model 
 		this.set = function (models) {
@@ -537,13 +536,13 @@
 						}
 						_this.instance.push(instanceModel);
 					}
-				})
+				});
 				_this.length = _this.instance.length;
 			} else {
 				throw new Error('Set method on Collection wants an Array');
 			}
 
-		}
+		};
 
 		// fetch function, it takes thisParams
 		// Return a promise. Modify the instance with the data from Stamplay Server
@@ -552,7 +551,7 @@
 				thisParams = thisParams && _.extend(thisParams, this.compile()) || this.compile();
 				var _this = this;
 
-				if (_this.brickId == 'cobject') {
+				if (_this.brickId === 'cobject') {
 					var headers = true;
 				}
 
@@ -571,7 +570,7 @@
 					response.data.forEach(function (singleInstance) {
 						var instanceModel;
 						//cobject has a particular constructor
-						if (_this.brickId == 'cobject') {
+						if (_this.brickId === 'cobject') {
 							instanceModel = new root.Stamplay.Cobject(_this.resourceId);
 							instanceModel = instanceModel.Model.constructor(singleInstance);
 						} else {
@@ -581,7 +580,7 @@
 							instanceModel = instanceModel.Model.constructor(singleInstance);
 						}
 						_this.instance.push(instanceModel);
-					})
+					});
 					_this.length = _this.instance.length;
 				});
 			},
@@ -592,7 +591,7 @@
 
 				if (_id instanceof Array) {
 					this.instance = _.reject(this.instance, function (model) {
-						for (indexId in _id) {
+						for (var indexId in _id) {
 							if (model.get('_id') == _id[indexId]) {
 								return true;
 							}
@@ -600,7 +599,6 @@
 					}, this);
 					this.length = this.instance.length;
 				} else {
-
 					this.instance = _.reject(this.instance, function (model) {
 						if (model.get('_id') == _id) {
 							return true;
@@ -608,8 +606,8 @@
 					}, this);
 					this.length = this.instance.length;
 				}
-			}
-	}
+			};
+	};
 	/* BaseComponent constructor, it takes brickId, resourceId and hasAction
 	 *  If hasAction is true, Model extends Action
 	 */

@@ -38,7 +38,7 @@ suite('Stamplay Cobject Collection ', function () {
     if (this.xhr) {
       this.xhr.restore();
     }
-  })
+  });
 
   test('has the fetch method', function () {
     assert.isFunction(coll_cinstance.fetch, 'fetch method exists');
@@ -174,7 +174,7 @@ suite('Stamplay Cobject Collection ', function () {
       assert.equal(newCinstance.pagination.last, 'https://test.stamplayapp.com/api/cobject/v0/coinstances?page=1&per_page=10&cobjectId=cobjectId&sort=-dt_create');
 
       done();
-    })
+    });
 
     this.request.respond(200, {
       "Content-Type": "application/json",
@@ -280,9 +280,9 @@ suite('Stamplay Cobject Collection ', function () {
 
     _.each(collectionMethods, function (length, method) {
       assert.isFunction(coll_cinstance[method], method);
-    })
+    });
 
-  })
+  });
 
   test('at function', function () {
     var first = coll_cinstance.at(0);
@@ -413,11 +413,11 @@ suite('Stamplay Cobject Collection ', function () {
       assert.isFunction(new Stamplay.Cobject('cobjectId').Collection.compile);
       var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('name', 'pippo').compile();
       assert.equal(ParamsBuilder.name, 'pippo');
-      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('name', 'pippo').limit(5).sortAscending('name').compile();
+      ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('name', 'pippo').limit(5).sortAscending('name').compile();
       assert.equal(ParamsBuilder.name, 'pippo');
       assert.equal(ParamsBuilder.n, 5);
       assert.equal(ParamsBuilder.sort, 'name');
-      var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('name', 'pippo').limit(5).sortAscending('name').populateOwner().compile();
+      ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.equalTo('name', 'pippo').limit(5).sortAscending('name').populateOwner().compile();
       assert.equal(ParamsBuilder.name, 'pippo');
       assert.equal(ParamsBuilder.n, 5);
       assert.equal(ParamsBuilder.sort, 'name');
@@ -457,7 +457,7 @@ suite('Stamplay Cobject Collection ', function () {
       var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.limit(30);
       assert.equal(ParamsBuilder.limit(40).currentQuery.limit, 40);
 
-    })
+    });
 
     test('has the select method', function () {
 
@@ -469,7 +469,7 @@ suite('Stamplay Cobject Collection ', function () {
       assert.equal(ParamsBuilder.select('b').currentQuery.select.length, 2);
       assert.equal(new Stamplay.Cobject('cobjectId').Collection.select(['a', 'b']).currentQuery.select.length, 2);
 
-    })
+    });
 
     test('has the sortAscending method', function () {
 
@@ -479,7 +479,7 @@ suite('Stamplay Cobject Collection ', function () {
       var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.sortAscending('b');
       assert.equal(ParamsBuilder.sortAscending('c').currentQuery.sort, 'c');
 
-    })
+    });
 
     test('has the sortDescending method', function () {
 
@@ -489,7 +489,7 @@ suite('Stamplay Cobject Collection ', function () {
       var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.sortDescending('b');
       assert.equal(ParamsBuilder.sortDescending('c').currentQuery.sort, '-c');
 
-    })
+    });
 
     test('has the populate method', function () {
 
@@ -499,7 +499,7 @@ suite('Stamplay Cobject Collection ', function () {
       var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.populate();
       assert.equal(ParamsBuilder.populate().currentQuery.populate, true);
 
-    })
+    });
 
 
     test('has the populateOwner method', function () {
@@ -510,7 +510,7 @@ suite('Stamplay Cobject Collection ', function () {
       var ParamsBuilder = new Stamplay.Cobject('cobjectId').Collection.populateOwner();
       assert.equal(ParamsBuilder.populateOwner().currentQuery.populateOwner, true);
 
-    })
+    });
 
     test('has fetchParams pipeline possibility', function () {
 
@@ -527,7 +527,7 @@ suite('Stamplay Cobject Collection ', function () {
       assert.isObject(ParamsBuilder);
       assert.equal(ParamsBuilder.currentQuery.find.name, 'pippo');
 
-    })
+    });
 
 
   });

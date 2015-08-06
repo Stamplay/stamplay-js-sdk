@@ -1,4 +1,4 @@
-  /* globals suite,Stamplay,setup,sinon,teardown,test,assert,_ */
+  /* globals suite,Stamplay,setup,sinon,teardown,test,assert,stripe,response */
 
   suite('Stripe', function () {
 

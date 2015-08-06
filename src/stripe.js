@@ -42,7 +42,7 @@
 							'token': token
 						},
 						url: this.url + 'customers/' + userId + '/cards'
-					})
+					});
 				else
 					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 			} else {
@@ -62,7 +62,7 @@
 							'currency': currency
 						},
 						url: this.url + 'charges'
-					})
+					});
 				else
 					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 			} else {
@@ -72,7 +72,7 @@
 
 
 		this.createSubscription = function (userId, planId) {
-			if (arguments.length == 2) {
+			if (arguments.length === 2) {
 				if (Stamplay.Support.checkMongoId(userId)) {
 					return Stamplay.makeAPromise({
 						method: 'POST',
@@ -80,7 +80,7 @@
 							'planId': planId
 						},
 						url: this.url + 'customers/' + userId + '/subscriptions'
-					})
+					});
 				} else {
 					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 				}
@@ -122,7 +122,7 @@
 
 
 		this.deleteSubscription = function (userId, subscriptionId, options) {
-			if (arguments.length == 2) {
+			if (arguments.length === 2) {
 				if (Stamplay.Support.checkMongoId(userId)) {
 					return Stamplay.makeAPromise({
 						method: 'DELETE',

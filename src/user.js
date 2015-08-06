@@ -38,7 +38,7 @@
 					if (this.instance._id)
 						return true;
 					return false;
-				}
+				};
 
 			// login function, it takes serviceOrEmail and password
 			// if exists password parameter, login strategy is local Authentication
@@ -96,7 +96,7 @@
 						store.remove(window.location.origin + '-jwt');
 					}
 					root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
-				}
+				};
 
 				this.Model.resetPassword = function(email, newPassword){
 					if(email && newPassword)
@@ -109,7 +109,7 @@
 						});
 					else
 						return Stamplay.Support.errorSender(403, "Missing parameters in resetPassword method");
-				}
+				};
 
 				this.Model.activities = function (id) {
 					return Stamplay.makeAPromise({
@@ -127,7 +127,7 @@
 					}).then(function (response) {
 						return response;
 					});
-				}
+				};
 
 				this.Model.followedBy = function (id) {
 					return Stamplay.makeAPromise({
@@ -136,7 +136,7 @@
 					}).then(function (response) {
 						return response;
 					});
-				}
+				};
 
 				this.Model.follow = function (id) {
 					return Stamplay.makeAPromise({
@@ -146,7 +146,7 @@
 					}).then(function (response) {
 						return response;
 					});
-				}
+				};
 
 				this.Model.unfollow = function (id) {
 					return Stamplay.makeAPromise({
@@ -156,7 +156,7 @@
 					}).then(function (response) {
 						return response;
 					});
-				}
+				};
 
 		}
 		//Added User to Stamplay 

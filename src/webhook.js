@@ -23,7 +23,7 @@
 					method: 'POST',
 					data: data,
 					url: this.url
-				})
+				});
 			};
 
 			this.put = function (data) {
@@ -31,14 +31,14 @@
 					method: 'PUT',
 					data: data,
 					url: this.url
-				})
+				});
 			};
 
 			this.get = function () {
 				return Stamplay.makeAPromise({
 					method: 'GET',
 					url: this.url
-				})
+				});
 			};
 
 		}

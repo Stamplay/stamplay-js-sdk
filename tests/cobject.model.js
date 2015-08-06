@@ -18,7 +18,7 @@ suite('Stamplay Cobject Model ', function () {
 
     this.xhr = sinon.useFakeXMLHttpRequest();
     this.request;
-    _this = this;
+    var _this = this;
     this.xhr.onCreate = function (xhr) {
       _this.request = xhr;
     };
@@ -106,7 +106,7 @@ suite('Stamplay Cobject Model ', function () {
   });
 
   test('has the instance property which is an object', function () {
-    assert.isObject(cinstance.instance, 'instance property is an object')
+    assert.isObject(cinstance.instance, 'instance property is an object');
   });
 
   test('constructor method', function () {
@@ -131,7 +131,7 @@ suite('Stamplay Cobject Model ', function () {
       first: {
         nested_first: undefined
       }
-    }
+    };
     newCinstance.constructor(newObject);
 
     assert.deepEqual(newCinstance.instance, newObject);
@@ -149,7 +149,7 @@ suite('Stamplay Cobject Model ', function () {
       omit: 0,
       chain: 1,
       isEmpty: 1
-    }
+    };
     _.each(modelMethods, function (length, method) {
       assert.isFunction(cinstance[method], method);
     })
@@ -275,7 +275,7 @@ suite('Stamplay Cobject Model ', function () {
       _id: 1
     }));
 
-  })
+  });
 
   test('destroy method', function (done) {
     cinstance.set('_id', 1);
@@ -353,7 +353,7 @@ suite('Stamplay Cobject Model ', function () {
       done();
     });
 
-    cinstance.instance.actions.votes.total++;;
+    cinstance.instance.actions.votes.total++;
     cinstance.instance.actions.votes.users.push('userId');
     cinstance.instance.actions.votes.users_downvote.push('userId');
 
@@ -497,7 +497,7 @@ suite('Stamplay Cobject Model ', function () {
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(cinstance.instance));
-  })
+  });
 
 
   test('getComments method', function () {
