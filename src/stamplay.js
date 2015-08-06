@@ -1,3 +1,4 @@
+/* globals  Stamplay,store,Q */
 /**
 @author Stamplay
 @version 1.0

@@ -1,3 +1,5 @@
+/* globals  Stamplay,store */
+
 /* Add function to handle ajax calls, returning a promise
  * Very simple to use: Stamplay.makePromise({options})
  */

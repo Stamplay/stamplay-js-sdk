@@ -1,3 +1,5 @@
+/* globals  Stamplay */
+
 /* Brick : Webhook 
  *  POST   '/api/webhook/VERSION/:webhookId/catch'
  */

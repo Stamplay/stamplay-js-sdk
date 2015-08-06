@@ -1,3 +1,4 @@
+/* globals Stamplay */
 /* Add Query function to Stamplay
  * it use for handling some funcctionality
  * very easy to use : Stamplay.Query('user').equalTo('name':'john')
@@ -115,7 +116,7 @@
 			}
 			if(!this.instance)
 				this.instance = this.model+'s'; 
-				var thisParams = this.executable;
+
 			return Stamplay.makeAPromise({
 				method: 'GET',
 				url: '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance +'?where={'+this.executable+'}' ,

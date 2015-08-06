@@ -1,4 +1,4 @@
-/* globals suite,Stamplay,setup,sinon,teardown,test,assert,_ */
+/* globals suite,window,setup,test,assert */
 suite('Stamplay functions ', function () {
 
 	suite('init',function(){

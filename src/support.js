@@ -1,3 +1,5 @@
+/* globals  Stamplay, Q */
+
 /* Add Support function to Stamplay
  * it use for handling some functionality
  * very easy to use : Stamplay.Support.redirect('http://stamplay.com')

@@ -1,3 +1,5 @@
+/* globals  Stamplay, store */
+
 /* Brick : User 
  	GET    '/api/user/VERSION/users'
   GET    '/api/user/VERSION/users/:id'

@@ -1,3 +1,4 @@
+/* globals  Stamplay */
 /* Brick : stripe 
  * POST  'api/stripe/VERSION/customers'
  * POST  'api/stripe/VERSION/customers/:userId/cards'

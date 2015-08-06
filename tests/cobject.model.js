@@ -150,8 +150,6 @@ suite('Stamplay Cobject Model ', function () {
       chain: 1,
       isEmpty: 1
     }
-
-    var model = {}
     _.each(modelMethods, function (length, method) {
       assert.isFunction(cinstance[method], method);
     })
@@ -182,8 +180,8 @@ suite('Stamplay Cobject Model ', function () {
     assert.deepEqual(cinstance.instance.object_property, new_object_value);
 
     var new_array_value = ['a', 'b', 'c'];
-    cinstance.set('array_property', new_object_value);
-    assert.deepEqual(cinstance.instance.array_property, new_object_value);
+    cinstance.set('array_property', new_array_value);
+    assert.deepEqual(cinstance.instance.array_property, new_array_value);
 
   });
 

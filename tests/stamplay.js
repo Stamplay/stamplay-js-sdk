@@ -1,4 +1,4 @@
-/* globals suite,Stamplay,setup,sinon,teardown,test,assert,_ */
+/* globals suite,window,test,assert */
 suite('Stamplay Object ', function () {
 
 	test('exists as window property', function () {
