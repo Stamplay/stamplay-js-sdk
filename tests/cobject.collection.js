@@ -188,6 +188,7 @@ suite('Stamplay Cobject Collection ', function () {
   });
 
   test('findByAttr function', function (done) {
+   
     var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
 
     newCinstance.findByAttr("owner").then(function () {
@@ -197,14 +198,12 @@ suite('Stamplay Cobject Collection ', function () {
       assert.equal(newCinstance.instance[0].get('comment'), 'Hey there');
       assert.equal(newCinstance.instance[1].get('_id'), 124);
       assert.equal(newCinstance.instance[1].get('comment'), 'Hey there you');
-      assert.equal(newCinstance.totalElements, 2);
       done();
     });
 
     this.request.respond(200, {
       "Content-Type": "application/json",
-      "x-total-elements": "2",
-      "link": '<https://test.stamplayapp.com/api/cobject/v0/coinstances/find/owner>; rel="last",<https://test.stamplayapp.com/api/cobject/v0/coinstances?&cobjectId=cobjectId>; rel="generic"'
+      "x-total-elements": "2"
     }, '{"data": [{ "_id": 123, "comment": "Hey there" }, { "_id": 124, "comment": "Hey there you" }]}');
 
   });
