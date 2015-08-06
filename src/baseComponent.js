@@ -1,4 +1,4 @@
-/* globals  Stamplay, _ */
+/* globals  Stamplay, _, store */
 
 /* 
  * Exspose BaseComponent the super class of all components on Stamplay.
@@ -141,7 +141,7 @@
 			}
 		};
 
-		this.getRatings = function (type) {
+		this.getRatings = function () {
 			return this.get('actions').ratings.users;
 		};
 
@@ -269,7 +269,7 @@
 			// destroy function 
 			// Delete Model to Stamplay's db
 			this.destroy = function () {
-				var isUser = (this.brickId === 'user')
+				var isUser = (this.brickId === 'user');
 				if (this.get('_id')) {
 
 					return Stamplay.makeAPromise({

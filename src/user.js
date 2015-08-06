@@ -118,7 +118,7 @@
 					}).then(function (response) {
 						return response;
 					});
-				}
+				};
 
 				this.Model.following = function (id) {
 					return Stamplay.makeAPromise({

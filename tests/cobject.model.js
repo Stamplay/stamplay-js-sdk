@@ -49,7 +49,7 @@ suite('Stamplay Cobject Model ', function () {
     if (this.xhr) {
       this.xhr.restore();
     }
-  })
+  });
 
   test('has the constructor method', function () {
     assert.isFunction(cinstance.constructor, 'constructor method exists');
@@ -152,7 +152,7 @@ suite('Stamplay Cobject Model ', function () {
     };
     _.each(modelMethods, function (length, method) {
       assert.isFunction(cinstance[method], method);
-    })
+    });
 
   });
 
