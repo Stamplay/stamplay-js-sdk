@@ -2,4 +2,4 @@ engines:
   eslint:
     enabled: true
 exclude_paths:
-	- "dist/**/*"
+- dist/**/*
