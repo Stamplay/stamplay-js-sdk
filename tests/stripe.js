@@ -60,7 +60,7 @@
 
 
     test('createCustomer post request', function (done) {
-      stripe.createCustomer('123451234512345123451234').then(function (response) {
+      stripe.createCustomer('123451234512345123451234').then(function () {
         done();
       });
 
@@ -75,14 +75,14 @@
     });
 
     test('createCustomer post request invalid mongoid', function (done) {
-      stripe.createCustomer('1224').then(function (response) {}, function (err) {
+      stripe.createCustomer('1224').then(function () {}, function () {
         done();
       });
 
     });
 
     test('createCreditCard post request', function (done) {
-      stripe.createCreditCard('123451234512345123451234', 'token').then(function (response) {
+      stripe.createCreditCard('123451234512345123451234', 'token').then(function () {
         done();
       });
 
@@ -97,19 +97,19 @@
     });
 
     test('createCreditCard post request invalid mongoid', function (done) {
-      stripe.createCreditCard('1224', 'token').then(function (response) {}, function (err) {
+      stripe.createCreditCard('1224', 'token').then(function () {}, function () {
         done();
       });
     });
 
     test('createCreditCard post request missing parameters', function (done) {
-      stripe.createCreditCard('123451234512345123451234').then(function (response) {}, function (err) {
+      stripe.createCreditCard('123451234512345123451234').then(function () {}, function () {
         done();
       });
     });
 
     test('charge post request', function (done) {
-      stripe.charge('123451234512345123451234', 'token', 1234, 'EUR').then(function (response) {
+      stripe.charge('123451234512345123451234', 'token', 1234, 'EUR').then(function () {
         done();
       });
 
@@ -124,13 +124,13 @@
     });
 
     test('charge post request invalid mongoid', function (done) {
-      stripe.charge('1224', 'token', 1234, 'eur').then(function (response) {}, function (err) {
+      stripe.charge('1224', 'token', 1234, 'eur').then(function () {}, function () {
         done();
       });
     });
 
     test('charge post request with userid and no token', function (done) {
-      stripe.charge('123451234512345123451234', null, 1234, 'eur').then(function (response) {
+      stripe.charge('123451234512345123451234', null, 1234, 'eur').then(function () {
         done();
       });
 
@@ -145,7 +145,7 @@
     });
 
     test('createSubscription post request', function (done) {
-      stripe.createSubscription('123451234512345123451234', 'planId').then(function (response) {
+      stripe.createSubscription('123451234512345123451234', 'planId').then(function () {
         done();
       });
 
@@ -160,19 +160,19 @@
     });
 
     test('createSubscription post request invalid mongoid', function (done) {
-      stripe.createSubscription('1224', 'planId').then(function (response) {}, function (err) {
+      stripe.createSubscription('1224', 'planId').then(function () {}, function () {
         done();
       });
     });
 
     test('createSubscription post request missing parameters', function (done) {
-      stripe.createSubscription('123').then(function (response) {}, function (err) {
+      stripe.createSubscription('123').then(function () {}, function () {
         done();
       });
     });
 
     test('getSubscriptions get request', function (done) {
-      stripe.getSubscriptions('123451234512345123451234').then(function (response) {
+      stripe.getSubscriptions('123451234512345123451234').then(function () {
         done();
       });
 
@@ -187,19 +187,19 @@
     });
 
     test('getSubscriptions get request invalid mongoid', function (done) {
-      stripe.getSubscriptions('1224').then(function (response) {}, function (err) {
+      stripe.getSubscriptions('1224').then(function () {}, function () {
         done();
       });
     });
 
     test('getSubscriptions post request missing parameters', function (done) {
-      stripe.getSubscriptions().then(function (response) {}, function (err) {
+      stripe.getSubscriptions().then(function () {}, function () {
         done();
       });
     });
 
     test('getSubscription get request', function (done) {
-      stripe.getSubscription('123451234512345123451234', 'subscriptionId').then(function (response) {
+      stripe.getSubscription('123451234512345123451234', 'subscriptionId').then(function () {
         done();
       });
 
@@ -214,18 +214,18 @@
     });
 
     test('getSubscription get request invalid mongoid', function (done) {
-      stripe.getSubscriptions('1224', 'subscriptionId').then(function (response) {}, function (err) {
+      stripe.getSubscriptions('1224', 'subscriptionId').then(function () {}, function () {
         done();
       });
     });
     test('getSubscription post request missing parameters', function (done) {
-      stripe.getSubscription().then(function (response) {}, function (err) {
+      stripe.getSubscription().then(function () {}, function () {
         done();
       });
     });
 
     test('deleteSubscription delete request', function (done) {
-      stripe.deleteSubscription('123451234512345123451234', 'subscriptionId').then(function (response) {
+      stripe.deleteSubscription('123451234512345123451234', 'subscriptionId').then(function () {
         done();
       }, function (err) {
         console.log(err);
@@ -240,19 +240,19 @@
     });
 
     test('deleteSubscription delete request invalid mongoid', function (done) {
-      stripe.deleteSubscription('1224', 'subscriptionId').then(function (response) {}, function (err) {
+      stripe.deleteSubscription('1224', 'subscriptionId').then(function () {}, function () {
         done();
       });
     });
 
     test('deleteSubscription delete request missing parameters', function (done) {
-      stripe.deleteSubscription().then(function (response) {}, function (err) {
+      stripe.deleteSubscription().then(function () {}, function () {
         done();
       });
     });
 
     test('updateSubscription put request', function (done) {
-      stripe.updateSubscription('123451234512345123451234', 'subscriptionId').then(function (response) {
+      stripe.updateSubscription('123451234512345123451234', 'subscriptionId').then(function () {
         done();
       }, function (err) {
         console.log(err);
@@ -275,7 +275,7 @@
         options: stripeOptions
       }
 
-      stripe.updateSubscription('123451234512345123451234', 'subscriptionId', stripeOptions).then(function (response) {
+      stripe.updateSubscription('123451234512345123451234', 'subscriptionId', stripeOptions).then(function () {
         done();
       }, function (err) {
         console.log(err);
@@ -290,13 +290,13 @@
     });
 
     test('updateSubscription get request invalid mongoid', function (done) {
-      stripe.updateSubscription('1224', 'subscriptionId').then(function (response) {}, function (err) {
+      stripe.updateSubscription('1224', 'subscriptionId').then(function () {}, function () {
         done();
       });
     });
 
     test('updateSubscription post request missing parameters', function (done) {
-      stripe.updateSubscription().then(function (response) {}, function (err) {
+      stripe.updateSubscription().then(function () {}, function () {
         done();
       });
     });

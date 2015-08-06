@@ -1,4 +1,4 @@
-/* globals suite,Stamplay,setup,sinon,teardown,test,assert,_ */
+/* globals suite,Stamplay,setup,sinon,teardown,test,assert */
 /*   
 	How to run this test
 	- Go to the root of the project
