@@ -187,20 +187,16 @@ suite('Stamplay Cobject Collection ', function () {
     }, '{"data": [{ "_id": 123, "comment": "Hey there" }, { "_id": 124, "comment": "Hey there you" }]}');
   });
 
-  test('findByAttr function', function () {
+  test('findByAttr function', function (done) {
     var newCinstance = new Stamplay.Cobject('cobjectId').Collection;
-   
-    newCinstance.findByAttr('owner').then(function () {
-      console.log(newCinstance)
+
+    newCinstance.findByAttr("owner").then(function () {
       assert.isArray(newCinstance.instance);
       assert.equal(newCinstance.instance.length, 2, 'Two instances should be present');
-
       assert.equal(newCinstance.instance[0].get('_id'), 123);
       assert.equal(newCinstance.instance[0].get('comment'), 'Hey there');
-
       assert.equal(newCinstance.instance[1].get('_id'), 124);
       assert.equal(newCinstance.instance[1].get('comment'), 'Hey there you');
-
       assert.equal(newCinstance.totalElements, 2);
       done();
     });
