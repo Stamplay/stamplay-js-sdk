@@ -2323,8 +2323,8 @@ return Q;
 			headerStamplay = root.Stamplay.APPID;
 		} else {
 			headerStamplay = location.host;
-			headerStamplay = headerStamplay.replace(/^www\./, '')
-			headerStamplay = headerStamplay.replace(/:[0-9]*$/g, '')
+			headerStamplay = headerStamplay.replace(/^www\./, '');
+			headerStamplay = headerStamplay.replace(/:[0-9]*$/g, '');
 		}
 
 		var deferred = Q.defer(),
@@ -2351,7 +2351,7 @@ return Q;
 			}
 		}
 
-		req.onreadystatechange = function (e) {
+		req.onreadystatechange = function () {
 			if (req.readyState !== 4) {
 				return;
 			}
@@ -2360,17 +2360,15 @@ return Q;
 			} else {
 
 				//parse the JSON response from the server
-				var response = JSON.parse(req.responseText)
-
+				var response = JSON.parse(req.responseText);
 				_handleJWT(req);
-
 				//where statment doesn't return link in header
 				if (wantHeaders && req.getResponseHeader('link')) {
 					//parse headers
 					var parts = req.getResponseHeader('link').split(',');
 					response.pagination = {};
 					parseLink(parts, response.pagination);
-					response.totalElements = req.getResponseHeader('x-total-elements')
+					response.totalElements = req.getResponseHeader('x-total-elements');
 					deferred.resolve(response);
 				} else
 					deferred.resolve(response);
@@ -2490,7 +2488,6 @@ return Q;
 /* ---- STAMPLAY JS SDK ---- */
 (function (root) {
 
-
 	//method to add underscore function
 	var addMethod = function (length, method, attribute) {
 		switch (length) {
@@ -2556,13 +2553,13 @@ return Q;
 		// upVote function
 		// Modifies instance of model and return a promise
 		this.upVote = function () {
-			return makeActionPromise.call(this, 'vote', 'upvote')
+			return makeActionPromise.call(this, 'vote', 'upvote');
 		};
 
 		// upVote function
 		// Modifies instance of model and return a promise
 		this.downVote = function () {
-			return makeActionPromise.call(this, 'vote', 'downvote')
+			return makeActionPromise.call(this, 'vote', 'downvote');
 		};
 
 		// rate function, it takes a vote parameter. 
@@ -2603,13 +2600,13 @@ return Q;
 		// twitterShare function
 		// Modifies instance of model and return a promise
 		this.twitterShare = function () {
-			return makeActionPromise.call(this, 'twitter_share')
+			return makeActionPromise.call(this, 'twitter_share');
 		};
 
 		// facebookShare function
 		// Modifies instance of model and return a promise
 		this.facebookShare = function () {
-			return makeActionPromise.call(this, 'facebook_share')
+			return makeActionPromise.call(this, 'facebook_share');
 		};
 
 		// simplest methods for get Actions
@@ -2619,7 +2616,7 @@ return Q;
 		};
 
 		this.getVotes = function (type) {
-			if (type && (type == 'up' || type == 'down')) {
+			if (type && (type === 'up' || type === 'down')) {
 				return this.get('actions').votes['users_' + type + 'vote'];
 			} else {
 				return this.get('actions').votes.users;
@@ -2627,15 +2624,15 @@ return Q;
 		};
 
 		this.getRatings = function (type) {
-			return this.get('actions').ratings.users
+			return this.get('actions').ratings.users;
 		};
 
 		this.getTwitterShares = function () {
-			return this.get('actions').twitter_shares.users
+			return this.get('actions').twitter_shares.users;
 		};
 
 		this.getFacebookShares = function () {
-			return this.get('actions').facebook_shares.users
+			return this.get('actions').facebook_shares.users;
 		};
 
 	}
@@ -2669,7 +2666,7 @@ return Q;
 
 		// if baseComponent hasAction add some methods to Model 
 		if (hasAction) {
-			Action.call(this)
+			Action.call(this);
 		}
 
 		// constructor
@@ -2738,7 +2735,7 @@ return Q;
 
 				if (method === 'PATCH' || method === 'PUT') {
 					url = url + '/' + this.get('_id');
-					Stamplay.removeAttributes(this.brickId, this.instance)
+					Stamplay.removeAttributes(this.brickId, this.instance);
 				}
 
 				var _this = this;
@@ -2788,13 +2785,13 @@ return Q;
 
 		//Collection variable
 		// data from server
-		this.instance = []
+		this.instance = [];
 			// name of baseComponent
 		this.brickId = brickId;
 		// name of subresource
 		this.resourceId = resourceId;
 		//length of Collection
-		this.length = this.instance.length
+		this.length = this.instance.length;
 			//total element 
 		this.totalElement = 0;
 		//links for pagination
@@ -2812,18 +2809,18 @@ return Q;
 						query[attr] = currentQuery[key][attr]
 					}
 				} else if (key == 'limit') {
-					query['n'] = currentQuery[key]
+					query.n = currentQuery[key]
 				} else if (key == 'select') {
-					query['select'] = currentQuery[key].join(",")
+					query.select = currentQuery[key].join(",")
 				} else if (key == 'sort') {
-					query['sort'] = currentQuery[key]
+					query.sort = currentQuery[key]
 				} else if (key == 'pagination') {
-					query['page'] = currentQuery[key][0]
-					query['per_page'] = currentQuery[key][1]
+					query.page = currentQuery[key][0]
+					query.per_page = currentQuery[key][1]
 				}else if (key == 'populate') {
-					query['populate'] = true
+					query.populate = true
 				}else if (key == 'populateOwner') {
-					query['populate_owner'] = true
+					query.populate_owner = true
 				}
 			}
 			return query;
@@ -2831,18 +2828,18 @@ return Q;
 
 		//method to compile the params
 		this.compile = function () {
-			return parseCurrentQuery(this.currentQuery)
+			return parseCurrentQuery(this.currentQuery);
 		}
 
 		//method to set populate in queryparams
 		this.populate = function(){
-			this.currentQuery.populate = true
+			this.currentQuery.populate = true;
 			return this;
 		}
 
 		//method to set populate owner in queryparams
 		this.populateOwner = function(){
-			this.currentQuery.populateOwner = true
+			this.currentQuery.populateOwner = true;
 			return this;
 		}
 
@@ -2861,39 +2858,39 @@ return Q;
 
 			if (typeof attr == "object") {
 				for (key in attr) {
-					this.currentQuery.find[key] = attr[key]
+					this.currentQuery.find[key] = attr[key];
 				}
 			} else {
-				this.currentQuery.find[attr] = value
+				this.currentQuery.find[attr] = value;
 			}
 
 			return this;
 		};
 		//method to limit the results of query
 		this.limit = function (limit) {
-				this.currentQuery.limit = limit
+				this.currentQuery.limit = limit;
 				return this;
 			}
 			//method to select only the attrs do you want to see
 		this.select = function (attr) {
 				if (!this.currentQuery.select)
-					this.currentQuery.select = []
+					this.currentQuery.select = [];
 				if (attr instanceof Array)
 					for (var i = 0; i < attr.length; i++) {
-						this.currentQuery.select.push(attr[i])
+						this.currentQuery.select.push(attr[i]);
 					} else
-						this.currentQuery.select.push(attr)
+						this.currentQuery.select.push(attr);
 				return this
 			}
 			//method to sort ascending
 		this.sortAscending = function (attr) {
-				this.currentQuery.sort = attr
-				return this
+				this.currentQuery.sort = attr;
+				return this;
 			}
 			//method to sort descending
 		this.sortDescending = function (attr) {
-			this.currentQuery.sort = '-' + attr
-			return this
+			this.currentQuery.sort = '-' + attr;
+			return this;
 		}
 
 		var collectionMethods = {
@@ -2948,7 +2945,7 @@ return Q;
 		this.get = function (_id) {
 				for (var i = 0, j = this.instance.length; i < j; i++) {
 					if (this.instance[i].get('_id') == _id) {
-						return this.instance[i]
+						return this.instance[i];
 					}
 				}
 			},
@@ -2956,27 +2953,27 @@ return Q;
 			// at function, it takes index
 			// Return Model at index 
 			this.at = function (index) {
-				return this.instance[index]
+				return this.instance[index];
 			},
 
 			// pop function
 			// Remove the last Model and return it
 			this.pop = function () {
-				var last = this.instance[this.instance.length - 1]
+				var last = this.instance[this.instance.length - 1];
 				if (this.instance.length != 0) {
-					this.remove(last.get('_id'))
-					return last
+					this.remove(last.get('_id'));
+					return last;
 				} else
-					return false
+					return false;
 			},
 
 			// shift function
 			// Remove the first Model and return it
 			this.shift = function () {
-				var first = this.instance[0]
+				var first = this.instance[0];
 				if (first) {
-					this.remove(first.get('_id'))
-					return first
+					this.remove(first.get('_id'));
+					return first;
 				} else
 					return false;
 			},
@@ -2987,12 +2984,12 @@ return Q;
 				if (model instanceof Object && model.brickId == this.brickId && model.get('_id')) {
 					if (model.brickId == 'cobject') {
 						if (model.resourceId == this.resourceId) {
-							this.instance.push(model)
-							this.length = this.instance.length
+							this.instance.push(model);
+							this.length = this.instance.length;
 						}
 					} else {
-						this.instance.push(model)
-						this.length = this.instance.length
+						this.instance.push(model);
+						this.length = this.instance.length;
 					}
 				}
 			},
@@ -3017,13 +3014,13 @@ return Q;
 						} else {
 							//capitalize resource for implement dynamic inizialization of model
 							var dynamicModel = _this.brickId.charAt(0).toUpperCase() + _this.brickId.slice(1);
-							instanceModel = new root.Stamplay[dynamicModel]
+							instanceModel = new root.Stamplay[dynamicModel];
 							instanceModel = instanceModel.Model.constructor(singleInstance);
 						}
 						_this.instance.push(instanceModel);
 					}
 				})
-				_this.length = _this.instance.length
+				_this.length = _this.instance.length;
 			} else {
 				throw new Error('Set method on Collection wants an Array');
 			}
@@ -3057,17 +3054,17 @@ return Q;
 						var instanceModel;
 						//cobject has a particular constructor
 						if (_this.brickId == 'cobject') {
-							instanceModel = new root.Stamplay.Cobject(_this.resourceId)
+							instanceModel = new root.Stamplay.Cobject(_this.resourceId);
 							instanceModel = instanceModel.Model.constructor(singleInstance);
 						} else {
 							//capitalize resource for implement dynamic inizialization of model
 							var dynamicModel = _this.brickId.charAt(0).toUpperCase() + _this.brickId.slice(1);
-							instanceModel = new root.Stamplay[dynamicModel]
+							instanceModel = new root.Stamplay[dynamicModel];
 							instanceModel = instanceModel.Model.constructor(singleInstance);
 						}
 						_this.instance.push(instanceModel);
 					})
-					_this.length = _this.instance.length
+					_this.length = _this.instance.length;
 				});
 			},
 
@@ -3079,19 +3076,19 @@ return Q;
 					this.instance = _.reject(this.instance, function (model) {
 						for (indexId in _id) {
 							if (model.get('_id') == _id[indexId]) {
-								return true
+								return true;
 							}
 						}
 					}, this);
-					this.length = this.instance.length
+					this.length = this.instance.length;
 				} else {
 
 					this.instance = _.reject(this.instance, function (model) {
 						if (model.get('_id') == _id) {
-							return true
+							return true;
 						}
 					}, this);
-					this.length = this.instance.length
+					this.length = this.instance.length;
 				}
 			}
 	}
@@ -3161,105 +3158,105 @@ return Q;
 		this.executable = '';
 	
 		this.or = function(){
-			var obj = { $or : []}
+			var obj = { $or : []};
 
 			if (arguments[0] instanceof Array) {
-				arguments = arguments[0]
+				arguments = arguments[0];
 			}
 			
 			for(var i=0; i<arguments.length; i++){
 				if(arguments[i] instanceof root.Stamplay.Query)
-					obj.$or.push(arguments[i].currentQuery[0])
+					obj.$or.push(arguments[i].currentQuery[0]);
 				else
-					throw new Error('Please Or function take only Query object')	
+					throw new Error('Please Or function take only Query object');	
 			}
-			this.currentQuery.push(obj)
+			this.currentQuery.push(obj);
 			return this;
 		}
 
 		this.between = function(attr,value1,value2){
-			var obj = {}
-			obj[attr] = {"$gte":value1, "$lte":value2}
-			this.currentQuery.push(obj)
-			return this
+			var obj = {};
+			obj[attr] = {"$gte":value1, "$lte":value2};
+			this.currentQuery.push(obj);
+			return this;
 		}
 
 		this.greaterThan = function(attr, value){
-			var obj = {}
-			obj[attr] = {"$gt":value}
-			this.currentQuery.push(obj)
-			return this
+			var obj = {};
+			obj[attr] = {"$gt":value};
+			this.currentQuery.push(obj);
+			return this;
 		}	
 
 		this.greaterThanOrEqual = function(attr, value){
-			var obj = {}
-			obj[attr] = {"$gte":value}
-			this.currentQuery.push(obj)
-			return this
+			var obj = {};
+			obj[attr] = {"$gte":value};
+			this.currentQuery.push(obj);
+			return this;
 		}
 
 		this.lessThan = function(attr, value){
-			var obj = {}
-			obj[attr] = {"$lt":value}
-			this.currentQuery.push(obj)
-			return this
+			var obj = {};
+			obj[attr] = {"$lt":value};
+			this.currentQuery.push(obj);
+			return this;
 		}	
 
 		this.lessThanOrEqual = function(attr, value){
-			var obj = {}
-			obj[attr] = {"$lte":value}
-			this.currentQuery.push(obj)
-			return this
+			var obj = {};
+			obj[attr] = {"$lte":value};
+			this.currentQuery.push(obj);
+			return this;
 		}
 
 		this.equalTo = function(attr, value){
-			var obj = {}
-			obj[attr] = value
-			this.currentQuery.push(obj)
-			return this
+			var obj = {};
+			obj[attr] = value;
+			this.currentQuery.push(obj);
+			return this;
 		}
 
 		this.sortAscending = function(value){
 			var obj = {
 				$sort: {}
-			}
-			obj.$sort[value] = 1
-			this.currentQuery.push(obj)
-			return this
+			};
+			obj.$sort[value] = 1;
+			this.currentQuery.push(obj);
+			return this;
 		}
 
 		this.sortDescending = function(value){
 			var obj = {
 				$sort: {}
-			}
-			obj.$sort[value] = -1
-			this.currentQuery.push(obj)
-			return this
+			};
+			obj.$sort[value] = -1;
+			this.currentQuery.push(obj);
+			return this;
 		}
 
 		this.exists = function(attr){
-			var obj = {}
-			obj[attr] = {"$exists":true}
-			this.currentQuery.push(obj)
-			return this
+			var obj = {};
+			obj[attr] = {"$exists":true};
+			this.currentQuery.push(obj);
+			return this;
 		}
 
 		this.notExists = function(attr){
-			var obj = {}
-			obj[attr] = {"$exists":false}
-			this.currentQuery.push(obj)
-			return this
+			var obj = {};
+			obj[attr] = {"$exists":false};
+			this.currentQuery.push(obj);
+			return this;
 		}
 
 		this.exec = function(){
 			//build query
 			for(var i=0;i<this.currentQuery.length;i++){	
 				var partial = JSON.stringify(this.currentQuery[i]);
-				partial = partial.substring(1, partial.length-1)
+				partial = partial.substring(1, partial.length-1);
 				if(i==0)
-					this.executable += partial
+					this.executable += partial;
 				else
-					this.executable += ','+partial
+					this.executable += ','+partial;
 			}
 			if(!this.instance)
 				this.instance = this.model+'s'; 
@@ -3268,7 +3265,7 @@ return Q;
 				method: 'GET',
 				url: '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance +'?where={'+this.executable+'}' ,
 			}).then(function (response) {
-				return response.data
+				return response.data;
 			})
 		}
 
@@ -3334,7 +3331,7 @@ return Q;
 						});
 
 					} else {
-						var url = '/auth/' + Stamplay.VERSION + '/' + serviceOrEmail + '/connect'
+						var url = '/auth/' + Stamplay.VERSION + '/' + serviceOrEmail + '/connect';
 						root.Stamplay.Support.redirect(location.protocol + '//' + document.domain + url);
 					}
 				},
@@ -3376,10 +3373,10 @@ return Q;
 							data: {email: email, newPassword:newPassword },
 							url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/resetpassword'
 						}).then(function (response) {
-							return response
+							return response;
 						});
 					else
-						return Stamplay.Support.errorSender(403, "Missing parameters in resetPassword method")
+						return Stamplay.Support.errorSender(403, "Missing parameters in resetPassword method");
 				}
 
 				this.Model.activities = function (id) {
@@ -3387,7 +3384,7 @@ return Q;
 						method: 'GET',
 						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/activities'
 					}).then(function (response) {
-						return response
+						return response;
 					});
 				}
 
@@ -3396,7 +3393,7 @@ return Q;
 						method: 'GET',
 						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/following'
 					}).then(function (response) {
-						return response
+						return response;
 					});
 				}
 
@@ -3405,7 +3402,7 @@ return Q;
 						method: 'GET',
 						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/followed_by'
 					}).then(function (response) {
-						return response
+						return response;
 					});
 				}
 
@@ -3415,7 +3412,7 @@ return Q;
 						data: {'userId': id},
 						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/follow'
 					}).then(function (response) {
-						return response
+						return response;
 					});
 				}
 
@@ -3425,7 +3422,7 @@ return Q;
 						data: {'userId': id},
 						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/unfollow'
 					}).then(function (response) {
-						return response
+						return response;
 					});
 				}
 
@@ -3519,7 +3516,7 @@ return Q;
 					url: this.url + 'customers'
 				})
 			else
-				return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+				return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 		}
 
 		this.createCreditCard = function (userId, token) {
@@ -3533,9 +3530,9 @@ return Q;
 						url: this.url + 'customers/' + userId + '/cards'
 					})
 				else
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in createCreditCard methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in createCreditCard methods");
 			}
 		}
 
@@ -3553,9 +3550,9 @@ return Q;
 						url: this.url + 'charges'
 					})
 				else
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in charge methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in charge methods");
 			}
 		}
 
@@ -3571,10 +3568,10 @@ return Q;
 						url: this.url + 'customers/' + userId + '/subscriptions'
 					})
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 				}
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in createSubscription methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in createSubscription methods");
 			}
 		}
 
@@ -3587,10 +3584,10 @@ return Q;
 						thisParams: options
 					});
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 				}
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscriptions methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscriptions methods");
 			}
 		}
 
@@ -3602,10 +3599,10 @@ return Q;
 						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
 					});
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 				}
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscription methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscription methods");
 			}
 		}
 
@@ -3619,10 +3616,10 @@ return Q;
 						data: options || {}
 					});
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 				}
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in deleteSubscription methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in deleteSubscription methods");
 			}
 		}
 
@@ -3638,10 +3635,10 @@ return Q;
 						}
 					});
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid")
+					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
 				}
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in updateSubscription methods")
+				return Stamplay.Support.errorSender(403, "Missing parameters in updateSubscription methods");
 			}
 		}
 
