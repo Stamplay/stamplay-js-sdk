@@ -511,6 +511,7 @@ Stripe has the following additional methods.
 
   * <a href="#Stripe.createCustomer"><code>createCustomer()</code></a>
   * <a href="#Stripe.createCreditCard"><code>createCreditCard()</code></a>
+  * <a href="#Stripe.getCreditCard"><code>getCreditCard()</code></a>
   * <a href="#Stripe.charge"><code>charge()</code></a>
   * <a href="#Stripe.createSubscription"><code>createSubscription()</code></a>
   * <a href="#Stripe.getSubscriptions"><code>getSubscriptions()</code></a>
@@ -539,6 +540,17 @@ It's a simple method to make a POST call to create CreditCard
 ```javascript
 var stamplayStripe = new Stamplay.Stripe();
 stamplayStripe.createCreditCard('_ID of user', 'TOKEN from stripe js').then(function (response) {
+  //do what you want with the response
+});
+```
+<a name="Stripe.getCreditCard"></a>
+###getCreditCard
+
+It's a simple method to make a GET call to get user's credit card. Note that you can get only the credit card of the logged user.
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+stamplayStripe.getCreditCard('_ID of user').then(function (response) {
   //do what you want with the response
 });
 ```
