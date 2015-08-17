@@ -1,5 +1,10 @@
 # Stamplay JS SDK Changelog
 
+1.2.7 / 17-08-2015
+===================
+
+* Added stripe.getCreditCard method 
+
 1.2.6 / 06-08-2015
 ===================
 

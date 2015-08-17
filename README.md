@@ -16,7 +16,7 @@ The Stamplay JavaScript SDK provides a JavaScript library making it even easier 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.6/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.7/stamplay.min.js"></script>
 ```
 To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
@@ -511,6 +511,7 @@ Stripe has the following additional methods.
 
   * <a href="#Stripe.createCustomer"><code>createCustomer()</code></a>
   * <a href="#Stripe.createCreditCard"><code>createCreditCard()</code></a>
+  * <a href="#Stripe.getCreditCard"><code>getCreditCard()</code></a>
   * <a href="#Stripe.charge"><code>charge()</code></a>
   * <a href="#Stripe.createSubscription"><code>createSubscription()</code></a>
   * <a href="#Stripe.getSubscriptions"><code>getSubscriptions()</code></a>
@@ -539,6 +540,17 @@ It's a simple method to make a POST call to create CreditCard
 ```javascript
 var stamplayStripe = new Stamplay.Stripe();
 stamplayStripe.createCreditCard('_ID of user', 'TOKEN from stripe js').then(function (response) {
+  //do what you want with the response
+});
+```
+<a name="Stripe.getCreditCard"></a>
+###getCreditCard
+
+It's a simple method to make a GET call to get user's credit card. Note that you can get only the credit card of the logged user.
+
+```javascript
+var stamplayStripe = new Stamplay.Stripe();
+stamplayStripe.getCreditCard('_ID of user').then(function (response) {
   //do what you want with the response
 });
 ```
@@ -630,7 +642,7 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.6/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.7/stamplay.min.js"></script>
 ```
 
 # One more thing

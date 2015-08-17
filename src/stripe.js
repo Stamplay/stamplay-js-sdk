@@ -30,7 +30,7 @@
 					url: this.url + 'customers'
 				});
 			else
-				return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
+				return Stamplay.Support.errorSender(403, "Invalid userId");
 		};
 
 		this.createCreditCard = function (userId, token) {
@@ -44,7 +44,7 @@
 						url: this.url + 'customers/' + userId + '/cards'
 					});
 				else
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
+					return Stamplay.Support.errorSender(403, "Invalid userId");
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in createCreditCard methods");
 			}
@@ -64,7 +64,7 @@
 						url: this.url + 'charges'
 					});
 				else
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
+					return Stamplay.Support.errorSender(403, "Invalid userId");
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in charge methods");
 			}
@@ -82,7 +82,7 @@
 						url: this.url + 'customers/' + userId + '/subscriptions'
 					});
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
+					return Stamplay.Support.errorSender(403, "Invalid userId");
 				}
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in createSubscription methods");
@@ -98,7 +98,7 @@
 						thisParams: options
 					});
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
+					return Stamplay.Support.errorSender(403, "Invalid userId");
 				}
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscriptions methods");
@@ -113,13 +113,27 @@
 						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
 					});
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
+					return Stamplay.Support.errorSender(403, "Invalid userId");
 				}
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscription methods");
 			}
 		};
 
+		this.getCreditCard = function (userId) {
+			if (arguments.length == 1) {
+				if (Stamplay.Support.checkMongoId(userId)) {
+					return Stamplay.makeAPromise({
+						method: 'GET',
+						url: this.url + 'customers/' + userId + '/cards',
+					});
+				} else {
+					return Stamplay.Support.errorSender(403, "Invalid userId");
+				}
+			} else {
+				return Stamplay.Support.errorSender(403, "Invalid parameter in getCreditCard method");
+			}
+		};
 
 		this.deleteSubscription = function (userId, subscriptionId, options) {
 			if (arguments.length === 2) {
@@ -130,7 +144,7 @@
 						data: options || {}
 					});
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
+					return Stamplay.Support.errorSender(403, "Invalid userId");
 				}
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in deleteSubscription methods");
@@ -149,7 +163,7 @@
 						}
 					});
 				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId isn't mongoid");
+					return Stamplay.Support.errorSender(403, "Invalid userId");
 				}
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in updateSubscription methods");
