@@ -58,6 +58,9 @@
       assert.isFunction(stripe.updateSubscription, 'updateSubscription method exists');
     });
 
+    test('has the getCreditCard method', function () {
+      assert.isFunction(stripe.getCreditCard, 'getCreditCard method exists');
+    });
 
     test('createCustomer post request', function (done) {
       stripe.createCustomer('123451234512345123451234').then(function () {
@@ -297,6 +300,33 @@
 
     test('updateSubscription post request missing parameters', function (done) {
       stripe.updateSubscription().then(function () {}, function () {
+        done();
+      });
+    });
+
+    test('getCreditCard get request', function (done) {
+      stripe.getCreditCard('123451234512345123451234').then(function () {
+        done();
+      });
+
+      assert.equal(this.request.method, 'GET');
+      assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
+
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
+
+    });
+
+    test('getCreditCard get request invalid mongoid', function (done) {
+      stripe.getCreditCard('1224').then(function () {}, function () {
+        done();
+      });
+    });
+
+    test('getCreditCard post request missing parameters', function (done) {
+      stripe.getCreditCard().then(function () {}, function () {
         done();
       });
     });
