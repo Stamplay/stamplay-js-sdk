@@ -1,12 +1,12 @@
-engines:
-  eslint:
-    enabled: true
-    checks:
-      quotes:
+engines: 
+  eslint: 
+    checks: 
+      quotes: 
         enabled: false
-ratings:
-   paths:
-   - src/**
-   - tests/**
-exclude_paths:
-- dist/**/*
+    enabled: true
+exclude_paths: 
+  - dist/**/*
+  - tests/**/*
+ratings: 
+  paths: 
+    - src/**
