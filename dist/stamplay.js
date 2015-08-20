@@ -1,4 +1,4 @@
-/*! Stamplay v1.2.7 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
+/*! Stamplay v1.2.8 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -3609,6 +3609,23 @@ return Q;
 					return Stamplay.Support.errorSender(403, "Invalid userId");
 			} else {
 				return Stamplay.Support.errorSender(403, "Missing parameters in createCreditCard methods");
+			}
+		};
+
+		this.updateCreditCard = function (userId, token) {
+			if (arguments.length == 2) {
+				if (Stamplay.Support.checkMongoId(userId))
+					return Stamplay.makeAPromise({
+						method: 'PUT',
+						data: {
+							'token': token
+						},
+						url: this.url + 'customers/' + userId + '/cards'
+					});
+				else
+					return Stamplay.Support.errorSender(403, "Invalid userId");
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in updateCreditCard methods");
 			}
 		};
 

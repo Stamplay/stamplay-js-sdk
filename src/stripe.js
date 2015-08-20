@@ -50,6 +50,23 @@
 			}
 		};
 
+		this.updateCreditCard = function (userId, token) {
+			if (arguments.length == 2) {
+				if (Stamplay.Support.checkMongoId(userId))
+					return Stamplay.makeAPromise({
+						method: 'PUT',
+						data: {
+							'token': token
+						},
+						url: this.url + 'customers/' + userId + '/cards'
+					});
+				else
+					return Stamplay.Support.errorSender(403, "Invalid userId");
+			} else {
+				return Stamplay.Support.errorSender(403, "Missing parameters in updateCreditCard methods");
+			}
+		};
+
 		this.charge = function (userId, token, amount, currency) {
 			if (arguments.length == 4) {
 				if (Stamplay.Support.checkMongoId(userId))

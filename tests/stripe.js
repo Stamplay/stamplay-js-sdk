@@ -34,6 +34,10 @@
       assert.isFunction(stripe.createCreditCard, 'createCreditCard method exists');
     });
 
+    test('has the updateCreditCard method', function () {
+      assert.isFunction(stripe.updateCreditCard, 'updateCreditCard method exists');
+    });
+
     test('has the charge method', function () {
       assert.isFunction(stripe.charge, 'charge method exists');
     });
@@ -107,6 +111,33 @@
 
     test('createCreditCard post request missing parameters', function (done) {
       stripe.createCreditCard('123451234512345123451234').then(function () {}, function () {
+        done();
+      });
+    });
+
+    test('updateCreditCard put request', function (done) {
+      stripe.updateCreditCard('123451234512345123451234', 'token').then(function () {
+        done();
+      });
+
+      assert.equal(this.request.method, 'PUT');
+      assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
+
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
+
+    });
+
+    test('updateCreditCard put request invalid mongoid', function (done) {
+      stripe.updateCreditCard('1224', 'token').then(function () {}, function () {
+        done();
+      });
+    });
+
+    test('updateCreditCard put request missing parameters', function (done) {
+      stripe.updateCreditCard('123451234512345123451234').then(function () {}, function () {
         done();
       });
     });
