@@ -1,5 +1,10 @@
 # Stamplay JS SDK Changelog
 
+1.2.9 / 09-09-2015
+===================
+
+* Redirect for social login in local environment now have the port 
+
 1.2.8 / 20-08-2015
 ===================
 
