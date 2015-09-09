@@ -64,7 +64,8 @@
 
 					} else {
 						var url = '/auth/' + Stamplay.VERSION + '/' + serviceOrEmail + '/connect';
-						root.Stamplay.Support.redirect(location.protocol + '//' + document.domain + url);
+						var port = (window.location.port) ? ':'+window.location.port : '';
+						root.Stamplay.Support.redirect(location.protocol + '//' + document.domain +port+ url);
 					}
 				},
 
