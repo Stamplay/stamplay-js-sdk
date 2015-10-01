@@ -154,7 +154,7 @@ Collections are sets of models. You can ```fetch``` the collection from the serv
 -------------------------------------------------------
 
 <a name="FetchParams"></a>
-The Collection have some other methods, we call those FetchParams
+The Collection has some other methods, we call those FetchParams
 These help you to create a more flexible and complex fetch object.
 
 ##FetchParams
@@ -260,7 +260,7 @@ newUser.signup(registrationData)
 
 #User
 
-You can create both Model and Collection of a Stamplay.User.
+You can assign both a Model and a Collection to Stamplay.User.
 
 ```javascript
 var user = new Stamplay.User().Model;
