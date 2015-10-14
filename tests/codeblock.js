@@ -62,7 +62,7 @@ suite('Codeblock', function () {
         b2: 2
       }
 
-      codeblock.run('POST', body).then(function (response) {
+      codeblock.run(body).then(function (response) {
         done();
       });
 
@@ -88,7 +88,7 @@ suite('Codeblock', function () {
         p2: 2
       }
 
-      codeblock.run('POST', body, queryParams).then(function (response) {
+      codeblock.run(body, queryParams).then(function (response) {
         done();
       });
 
@@ -104,7 +104,7 @@ suite('Codeblock', function () {
   });
 
   /** PATCH **/
-  suite('PATCH method', function () {
+  suite.skip('PATCH method', function () {
     test('that run method with method arguments make PATCH api call without body nor query params', function (done) {
 
       codeblock.run('PATCH').then(function (response) {
@@ -169,7 +169,7 @@ suite('Codeblock', function () {
   });
 
   /** PUT **/
-  suite('PUT method', function () {
+  suite.skip('PUT method', function () {
     test('that run method with method arguments make PUT api call without body nor query params', function (done) {
 
       codeblock.run('PUT').then(function (response) {
@@ -234,7 +234,7 @@ suite('Codeblock', function () {
   });
 
   /** GET **/
-  suite('GET method', function () {
+  suite.skip('GET method', function () {
 
     test('that run method with method arguments make GET api call without body nor query params', function (done) {
 
@@ -320,7 +320,7 @@ suite('Codeblock', function () {
   });
 
   /** DELETE **/
-  suite('DELETE method', function () {
+  suite.skip('DELETE method', function () {
 
     test('that run method with method arguments make DELETE api call without body nor query params', function (done) {
 
