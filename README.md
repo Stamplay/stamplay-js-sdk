@@ -544,6 +544,7 @@ var data = { foo: 'bar' }
 webhook.put(data).then(function (response) {
   //do what you want with the response
 });
+```
 <a name="Webhook.get"></a>
 ###Get
 
@@ -554,6 +555,8 @@ var webhook = new Stamplay.Webhook('myWebHook2');
 webhook.get(data).then(function (response) {
   //do what you want with the response
 });
+```
+
 #Stripe
 
 You cannot create a Model or Collection of a Stripe.
@@ -584,6 +587,7 @@ stamplayStripe.createCustomer('_ID of user').then(function (response) {
   //do what you want with the response
 });
 ```
+
 <a name="Stripe.createCreditCard"></a>
 ###createCreditCard
 
@@ -617,6 +621,7 @@ stamplayStripe.getCreditCard('_ID of user').then(function (response) {
   //do what you want with the response
 });
 ```
+
 <a name="Stripe.charge"></a>
 ###charge
 
