@@ -3811,15 +3811,15 @@ return Q;
 			return result;
 		}
 
-		this.run = function (method, data, queryParams) {
+		this.run = function (data, queryParams) {
 			/*
 				args 0
 															->  	POST			no body		no query params   
 				args 3 
 				 	method data queryParams -> 	method 		data 			queryParams	
 			*/
-			var finalMethod = _parseMethod(method)
-			var finalData = _parseData(method, data);
+			var finalMethod = _parseMethod('POST');
+			var finalData = _parseData('POST', data);
 			var finalQuery = queryParams;
 
 			return Stamplay.makeAPromise({
