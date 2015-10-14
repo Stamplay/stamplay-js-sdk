@@ -486,14 +486,13 @@ You cannot create a Model or Collection of a Codeblock.
 
 Codeblock has the following method:
 
-  * <a href="#Codeblock.run"><code>run(httpVerb, body, queryParameters)</code></a>
+  * <a href="#Codeblock.run"><code>run(body, queryParameters)</code></a>
 
 <a name="Codeblock.run"></a>
 ###Run
 
-It's a method to make an api call in order to execute a Codeblock.
-It takes three arguments : 
-  * method : HTTP verb of the request, can be GET, POST (default), PUT, PATCH, DELETE
+It's a method to make an API call in order to execute a Codeblock.
+It takes two arguments : 
   * body : an Object that has to be sent 
   * queryParameters : query parameters
 
@@ -505,7 +504,7 @@ var body = {
 var queryParameter = {
   q1 : "q1"
 };
-codeblock.run('POST', body, queryParameter).then(function (response) {
+codeblock.run(body, queryParameter).then(function (response) {
   //do what you want with the response
 });
 ```
