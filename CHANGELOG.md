@@ -1,5 +1,11 @@
 # Stamplay JS SDK Changelog
 
+1.3.0 / TODO
+===================
+
+* Added Codeblock integration
+* Webhooks can handle query parameters
+
 1.2.9 / 09-09-2015
 ===================
 

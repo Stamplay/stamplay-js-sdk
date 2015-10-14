@@ -71,6 +71,7 @@ This JavaScript SDK expose through the Stamplay variable the following component
  
 * [User](#user)
 * [Custom Object](#custom-object)
+* [Codeblock](#code-block)
 * [WebHook](#webhook)
 * [Stripe](#stripe)
 
@@ -479,14 +480,45 @@ tag.vote()
   console.log(actions.votes); // You can see the number of votes and who has already voted
 });
 ```
+#Codeblock
+
+You cannot create a Model or Collection of a Codeblock.
+
+Codeblock has the following method:
+
+  * <a href="#Codeblock.run"><code>run(httpVerb, body, queryParameters)</code></a>
+
+<a name="Codeblock.run"></a>
+###Run
+
+It's a method to make an api call in order to execute a Codeblock.
+It takes three arguments : 
+  * method : HTTP verb of the request, can be GET, POST (default), PUT, PATCH, DELETE
+  * body : an Object that has to be sent 
+  * queryParameters : query parameters
+
+```javascript
+var codeblock = new Stamplay.Codeblock('codeblockId');
+var body = {
+  bodyProp : "bodyProp"
+};
+var queryParameter = {
+  q1 : "q1"
+};
+codeblock.run('POST', body, queryParameter).then(function (response) {
+  //do what you want with the response
+});
+```
 
 #Webhook
 
 You cannot create a Model or Collection of a WebHook.
 
-Webhook has the following additional methods.
+Webhook has the following methods:
 
   * <a href="#Webhook.post"><code>post()</code></a>
+  * <a href="#Webhook.put"><code>put()</code></a>
+  * <a href="#Webhook.get"><code>get()</code></a>
 
 -------------------------------------------------------
 
@@ -502,7 +534,27 @@ webhook.post(data).then(function (response) {
   //do what you want with the response
 });
 ```
+<a name="Webhook.put"></a>
+###Put
 
+It's a simple method to make a PUT call to webhook 
+
+```javascript
+var webhook = new Stamplay.Webhook('myWebHook2');
+var data = { foo: 'bar' }
+webhook.put(data).then(function (response) {
+  //do what you want with the response
+});
+<a name="Webhook.get"></a>
+###Get
+
+It's a simple method to make a GET call to webhook 
+
+```javascript
+var webhook = new Stamplay.Webhook('myWebHook2');
+webhook.get(data).then(function (response) {
+  //do what you want with the response
+});
 #Stripe
 
 You cannot create a Model or Collection of a Stripe.

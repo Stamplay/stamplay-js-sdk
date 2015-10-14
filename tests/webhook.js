@@ -71,7 +71,28 @@ suite('Webhook', function () {
 
   });
 
-  test('that get method will send a post request', function (done) {
+  test('that get method will send a get request with query parameter', function (done) {
+
+
+    webhook.get({
+      firstQueryParam: 1,
+      secondQueryParam: 2
+    }).then(function (response) {
+      done();
+    });
+
+    assert.equal(this.request.method, 'GET');
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
+    assert.equal(this.request.url, '/api/webhook/' + Stamplay.VERSION + '/mywebhook/catch?firstQueryParam=1&secondQueryParam=2');
+
+    this.request.respond(200, {
+      "Content-Type": "application/json"
+    }, JSON.stringify(response));
+
+  });
+
+
+  test('that post method will send a post request', function (done) {
     webhook.post().then(function (response) {
       done();
     });
@@ -86,7 +107,25 @@ suite('Webhook', function () {
 
   });
 
-  test('that get method will send a put request', function (done) {
+  test('that post method will send a post request with query parameter', function (done) {
+    webhook.post({}, {
+      firstQueryParam: 1,
+      secondQueryParam: 2
+    }).then(function (response) {
+      done();
+    });
+
+    assert.equal(this.request.method, 'POST');
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+    assert.equal(this.request.url, '/api/webhook/' + Stamplay.VERSION + '/mywebhook/catch?firstQueryParam=1&secondQueryParam=2');
+
+    this.request.respond(200, {
+      "Content-Type": "application/json"
+    }, JSON.stringify(response));
+
+  });
+
+  test('that put method will send a put request', function (done) {
     webhook.put().then(function (response) {
       done();
     });
@@ -101,4 +140,21 @@ suite('Webhook', function () {
 
   });
 
+  test('that put method will send a put request with query parameter', function (done) {
+    webhook.put({}, {
+      firstQueryParam: 1,
+      secondQueryParam: 2
+    }).then(function (response) {
+      done();
+    });
+
+    assert.equal(this.request.method, 'PUT');
+    assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+    assert.equal(this.request.url, '/api/webhook/' + Stamplay.VERSION + '/mywebhook/catch?firstQueryParam=1&secondQueryParam=2');
+
+    this.request.respond(200, {
+      "Content-Type": "application/json"
+    }, JSON.stringify(response));
+
+  });
 });

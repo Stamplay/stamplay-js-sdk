@@ -1,4 +1,4 @@
-/*! Stamplay v1.2.9 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
+/*! Stamplay v1.3.0 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -3529,35 +3529,38 @@ return Q;
 	//constructor
 	function Webhook(resourceId) {
 
-			var resource = resourceId.replace(/[^\w\s]/gi, '').trim().toLowerCase().replace(/\s+/g, '_');
+		var resource = resourceId.replace(/[^\w\s]/gi, '').trim().toLowerCase().replace(/\s+/g, '_');
 
-			this.url = '/api/webhook/' + Stamplay.VERSION + '/' + resource + '/catch';
+		this.url = '/api/webhook/' + Stamplay.VERSION + '/' + resource + '/catch';
 
-			this.post = function (data) {
-				return Stamplay.makeAPromise({
-					method: 'POST',
-					data: data,
-					url: this.url
-				});
-			};
+		this.post = function (data, queryParams) {
+			return Stamplay.makeAPromise({
+				method: 'POST',
+				data: data,
+				url: this.url,
+				thisParams: queryParams
+			});
+		};
 
-			this.put = function (data) {
-				return Stamplay.makeAPromise({
-					method: 'PUT',
-					data: data,
-					url: this.url
-				});
-			};
+		this.put = function (data, queryParams) {
+			return Stamplay.makeAPromise({
+				method: 'PUT',
+				data: data,
+				url: this.url,
+				thisParams: queryParams
+			});
+		};
 
-			this.get = function () {
-				return Stamplay.makeAPromise({
-					method: 'GET',
-					url: this.url
-				});
-			};
+		this.get = function (queryParams) {
+			return Stamplay.makeAPromise({
+				method: 'GET',
+				url: this.url,
+				thisParams: queryParams
+			});
+		};
 
-		}
-		//Added Webhook to Stamplay 
+	}
+	//Added Webhook to Stamplay 
 	root.Stamplay.Webhook = Webhook;
 
 })(this);
@@ -3753,5 +3756,82 @@ return Q;
 	}
 
 	root.Stamplay.Stripe = Stripe;
+
+})(this);
+/* ---- STAMPLAY JS SDK ---- */
+/* Brick : Codeblock 
+ *  POST   '/api/codeblock/VERSION/:CodeblockId/catch'
+ */
+(function (root) {
+
+
+	/*
+		Codeblock component : Stamplay.Codeblock 
+		This class rappresent the Codeblock Object component on Stamplay platform
+		Stamplay.Codeblock(codeblockId)
+	*/
+
+	//constructor
+	function Codeblock(resourceId) {
+
+		var resource = resourceId.replace(/[^\w\s]/gi, '').trim().toLowerCase().replace(/\s+/g, '_');
+
+		this.url = '/api/codeblock/' + Stamplay.VERSION + '/run/' + resource;
+
+		function _parseMethod(method) {
+			var result = 'POST';
+			if (typeof method === 'string') {
+				switch (method) {
+				case 'GET':
+				case 'POST':
+				case 'PUT':
+				case 'PATCH':
+				case 'DELETE':
+					result = method;
+					break;
+				default:
+					return Stamplay.Support.errorSender(403, "Invalid HTTP verb: available verbs are GET,POST,PUT,PATCH and DELETE");
+					break;
+				}
+			}
+			return result;
+		}
+
+		function _parseData(method, data) {
+			var result = (data == null || data == undefined) ? undefined : data;
+			switch (method) {
+			case 'POST':
+			case 'PUT':
+			case 'PATCH':
+				break;
+			default:
+				result = undefined;
+				break;
+			}
+			return result;
+		}
+
+		this.run = function (method, data, queryParams) {
+			/*
+				args 0
+															->  	POST			no body		no query params   
+				args 3 
+				 	method data queryParams -> 	method 		data 			queryParams	
+			*/
+			var finalMethod = _parseMethod(method)
+			var finalData = _parseData(method, data);
+			var finalQuery = queryParams;
+
+			return Stamplay.makeAPromise({
+				method: finalMethod,
+				data: finalData,
+				url: this.url,
+				thisParams: queryParams
+			});
+		};
+
+	}
+	//Added Webhook to Stamplay 
+	root.Stamplay.Codeblock = Codeblock;
 
 })(this);
