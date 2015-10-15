@@ -71,7 +71,7 @@ This JavaScript SDK expose through the Stamplay variable the following component
  
 * [User](#user)
 * [Custom Object](#custom-object)
-* [Codeblock](#code-block)
+* [Codeblock](#codeblock)
 * [WebHook](#webhook)
 * [Stripe](#stripe)
 
