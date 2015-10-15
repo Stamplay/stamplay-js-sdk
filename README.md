@@ -383,7 +383,7 @@ Redirect the browser to the logout url.
 user.logout();
 ```
  <a name="User.resetPassword"></a>
-###resetPassword()()
+###resetPassword()
 Reset the password of User
 
 ```javascript
@@ -698,6 +698,9 @@ Options are [Stripe's options](https://stripe.com/docs/api/node#cancel_subscript
 var stamplayStripe = new Stamplay.Stripe();
 // Three parameters: id of user, id of the subscription, [options]
 stamplayStripe.deleteSubscription('_ID of user','_ID of the subscription').then(function (response) {
+  //do what you want with the response
+});
+```
 
 # Build
 To build a production ready library you need to have NPM and Bower installed and then run those two commands:
