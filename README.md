@@ -16,7 +16,7 @@ The Stamplay JavaScript SDK provides a JavaScript library making it even easier 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.9/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.3.0/stamplay.min.js"></script>
 ```
 To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
@@ -71,6 +71,7 @@ This JavaScript SDK expose through the Stamplay variable the following component
  
 * [User](#user)
 * [Custom Object](#custom-object)
+* [Codeblock](#codeblock)
 * [WebHook](#webhook)
 * [Stripe](#stripe)
 
@@ -382,7 +383,7 @@ Redirect the browser to the logout url.
 user.logout();
 ```
  <a name="User.resetPassword"></a>
-###resetPassword()()
+###resetPassword()
 Reset the password of User
 
 ```javascript
@@ -479,14 +480,44 @@ tag.vote()
   console.log(actions.votes); // You can see the number of votes and who has already voted
 });
 ```
+#Codeblock
+
+You cannot create a Model or Collection of a Codeblock.
+
+Codeblock has the following method:
+
+  * <a href="#Codeblock.run"><code>run(body, queryParameters)</code></a>
+
+<a name="Codeblock.run"></a>
+###Run
+
+It's a method to make an API call in order to execute a Codeblock.
+It takes two arguments : 
+  * body : an Object that has to be sent 
+  * queryParameters : query parameters
+
+```javascript
+var codeblock = new Stamplay.Codeblock('codeblockId');
+var body = {
+  bodyProp : "bodyProp"
+};
+var queryParameter = {
+  q1 : "q1"
+};
+codeblock.run(body, queryParameter).then(function (response) {
+  //do what you want with the response
+});
+```
 
 #Webhook
 
 You cannot create a Model or Collection of a WebHook.
 
-Webhook has the following additional methods.
+Webhook has the following methods:
 
   * <a href="#Webhook.post"><code>post()</code></a>
+  * <a href="#Webhook.put"><code>put()</code></a>
+  * <a href="#Webhook.get"><code>get()</code></a>
 
 -------------------------------------------------------
 
@@ -499,6 +530,29 @@ It's a simple method to make a POST call to webhook
 var webhook = new Stamplay.Webhook('myWebHook2');
 var data = { foo: 'bar' }
 webhook.post(data).then(function (response) {
+  //do what you want with the response
+});
+```
+<a name="Webhook.put"></a>
+###Put
+
+It's a simple method to make a PUT call to webhook 
+
+```javascript
+var webhook = new Stamplay.Webhook('myWebHook2');
+var data = { foo: 'bar' }
+webhook.put(data).then(function (response) {
+  //do what you want with the response
+});
+```
+<a name="Webhook.get"></a>
+###Get
+
+It's a simple method to make a GET call to webhook 
+
+```javascript
+var webhook = new Stamplay.Webhook('myWebHook2');
+webhook.get(data).then(function (response) {
   //do what you want with the response
 });
 ```
@@ -533,6 +587,7 @@ stamplayStripe.createCustomer('_ID of user').then(function (response) {
   //do what you want with the response
 });
 ```
+
 <a name="Stripe.createCreditCard"></a>
 ###createCreditCard
 
@@ -566,6 +621,7 @@ stamplayStripe.getCreditCard('_ID of user').then(function (response) {
   //do what you want with the response
 });
 ```
+
 <a name="Stripe.charge"></a>
 ###charge
 
@@ -642,6 +698,9 @@ Options are [Stripe's options](https://stripe.com/docs/api/node#cancel_subscript
 var stamplayStripe = new Stamplay.Stripe();
 // Three parameters: id of user, id of the subscription, [options]
 stamplayStripe.deleteSubscription('_ID of user','_ID of the subscription').then(function (response) {
+  //do what you want with the response
+});
+```
 
 # Build
 To build a production ready library you need to have NPM and Bower installed and then run those two commands:
@@ -654,7 +713,7 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.2.9/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.3.0/stamplay.min.js"></script>
 ```
 
 # One more thing

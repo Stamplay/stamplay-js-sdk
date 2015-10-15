@@ -14,35 +14,38 @@
 	//constructor
 	function Webhook(resourceId) {
 
-			var resource = resourceId.replace(/[^\w\s]/gi, '').trim().toLowerCase().replace(/\s+/g, '_');
+		var resource = resourceId.replace(/[^\w\s]/gi, '').trim().toLowerCase().replace(/\s+/g, '_');
 
-			this.url = '/api/webhook/' + Stamplay.VERSION + '/' + resource + '/catch';
+		this.url = '/api/webhook/' + Stamplay.VERSION + '/' + resource + '/catch';
 
-			this.post = function (data) {
-				return Stamplay.makeAPromise({
-					method: 'POST',
-					data: data,
-					url: this.url
-				});
-			};
+		this.post = function (data, queryParams) {
+			return Stamplay.makeAPromise({
+				method: 'POST',
+				data: data,
+				url: this.url,
+				thisParams: queryParams
+			});
+		};
 
-			this.put = function (data) {
-				return Stamplay.makeAPromise({
-					method: 'PUT',
-					data: data,
-					url: this.url
-				});
-			};
+		this.put = function (data, queryParams) {
+			return Stamplay.makeAPromise({
+				method: 'PUT',
+				data: data,
+				url: this.url,
+				thisParams: queryParams
+			});
+		};
 
-			this.get = function () {
-				return Stamplay.makeAPromise({
-					method: 'GET',
-					url: this.url
-				});
-			};
+		this.get = function (queryParams) {
+			return Stamplay.makeAPromise({
+				method: 'GET',
+				url: this.url,
+				thisParams: queryParams
+			});
+		};
 
-		}
-		//Added Webhook to Stamplay 
+	}
+	//Added Webhook to Stamplay 
 	root.Stamplay.Webhook = Webhook;
 
 })(this);

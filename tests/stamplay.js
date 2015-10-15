@@ -17,7 +17,7 @@ suite('Stamplay Object ', function () {
 		assert.typeOf(window.Stamplay.APPID, 'String', 'window.Stamplay.APPID exists');
 	});
 
-	if(window.localStorage && store.enabled){
+	if (window.localStorage && store.enabled) {
 		test('exists as Stamplay USESTORAGE property', function () {
 			assert.typeOf(window.Stamplay.USESTORAGE, 'Boolean', 'window.Stamplay.USESTORAGE exists');
 		});
@@ -57,5 +57,9 @@ suite('Stamplay Object ', function () {
 
 	test('expose Stripe constructor', function () {
 		assert.typeOf(window.Stamplay.Stripe, 'function', 'window.Stamplay.Stripe constructor exists');
+	});
+
+	test('expose Codeblock constructor', function () {
+		assert.typeOf(window.Stamplay.Codeblock, 'function', 'window.Stamplay.Codeblock constructor exists');
 	});
 })
