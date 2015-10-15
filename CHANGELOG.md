@@ -1,6 +1,6 @@
 # Stamplay JS SDK Changelog
 
-1.3.0 / TODO
+1.3.0 / 
 ===================
 
 * Added Codeblock integration
