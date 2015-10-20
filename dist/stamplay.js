@@ -1,4 +1,4 @@
-/*! Stamplay v1.3.0 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
+/*! Stamplay v1.3.1 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
