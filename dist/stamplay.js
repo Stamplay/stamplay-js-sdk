@@ -1,4 +1,4 @@
-/*! Stamplay v1.3.0 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
+/*! Stamplay v1.3.1 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -3358,6 +3358,13 @@ return Q;
 						});
 
 					} else {
+						var jwt = store.get(window.location.origin + '-jwt');
+						if (jwt) {
+							// Store temporary cookie to permit user aggregation
+						  var date = new Date();
+			        date.setTime(date.getTime() + 5 * 60 * 1000);
+							document.cookie = 'stamplay.jwt='+jwt+'; expires=' + date.toGMTString() + '; path=/'
+						}
 						var url = '/auth/' + Stamplay.VERSION + '/' + serviceOrEmail + '/connect';
 						var port = (window.location.port) ? ':'+window.location.port : '';
 						root.Stamplay.Support.redirect(location.protocol + '//' + document.domain +port+ url);
