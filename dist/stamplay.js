@@ -1,4 +1,4 @@
-/*! Stamplay v1.3.1 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
+/*! Stamplay v1.3.2 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -2482,6 +2482,15 @@ return Q;
 		if (typeof claims === "object") {
 			if (claims.hasOwnProperty("iat")) {
 				validSince = claims.iat;
+
+				/*
+				 * We are allowing a grace period of 30 seconds in order to avoid 
+				 * premature deletion of the token due to time sync  
+				 */
+				var thirtySeconds = 30 * 1000;
+				var validSinceToDate = new Date(validSince * 1000);
+				var dateSince = new Date(validSinceToDate - thirtySeconds);
+				validSince = dateSince.getTime() / 1E3;
 			}
 			if (claims.hasOwnProperty("exp")) {
 				validUntil = claims.exp;
