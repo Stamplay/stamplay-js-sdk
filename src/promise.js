@@ -209,6 +209,15 @@
 		if (typeof claims === "object") {
 			if (claims.hasOwnProperty("iat")) {
 				validSince = claims.iat;
+
+				/*
+				 * We are allowing a grace period of 30 seconds in order to avoid 
+				 * premature deletion of the token due to time sync  
+				 */
+				var thirtySeconds = 30 * 1000;
+				var validSinceToDate = new Date(validSince * 1000);
+				var dateSince = new Date(validSinceToDate - thirtySeconds);
+				validSince = dateSince.getTime() / 1E3;
 			}
 			if (claims.hasOwnProperty("exp")) {
 				validUntil = claims.exp;
