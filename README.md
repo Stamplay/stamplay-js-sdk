@@ -729,7 +729,7 @@ roles.getRoles().then(function (response) {
 <a name="Role.getRole"></a>
 ###getRole
 
-It's a simple method to make a GET call to retrieve the role 
+It's a simple method to make a GET call to retrieve role with a specified id
 
 ```javascript
 var roles = new Stamplay.Role();
