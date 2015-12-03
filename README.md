@@ -16,7 +16,7 @@ The Stamplay JavaScript SDK provides a JavaScript library making it even easier 
 To do this, add the following to the head block of your HTML:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.3.2/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.3.3/stamplay.min.js"></script>
 ```
 To use its functionalities inside browsers, a window scoped variable called `Stamplay` is created.
 
@@ -74,6 +74,8 @@ This JavaScript SDK expose through the Stamplay variable the following component
 * [Codeblock](#codeblock)
 * [WebHook](#webhook)
 * [Stripe](#stripe)
+* [Role](#role)
+
 
 Every component can expose two main classes:
 
@@ -702,6 +704,41 @@ stamplayStripe.deleteSubscription('_ID of user','_ID of the subscription').then(
 });
 ```
 
+#Role
+
+You cannot create a Model or Collection of a Role.
+
+Role has the following methods:
+
+  * <a href="#Role.getRoles"><code>getRoles()</code></a>
+  * <a href="#Role.getRole"><code>getRole()</code></a>
+
+-------------------------------------------------------
+
+<a name="Role.getRoles"></a>
+###getRoles
+
+It's a simple method to make a GET call to retrieve all roles 
+
+```javascript
+var roles = new Stamplay.Role();
+roles.getRoles().then(function (response) {
+  //do what you want with the response
+});
+```
+<a name="Role.getRole"></a>
+###getRole
+
+It's a simple method to make a GET call to retrieve role with a specified id
+
+```javascript
+var roles = new Stamplay.Role();
+roles.getRole(id).then(function (response) {
+  //do what you want with the response
+});
+```
+
+
 # Build
 To build a production ready library you need to have NPM and Bower installed and then run those two commands:
 
@@ -713,7 +750,7 @@ grunt build
 To load the Stamplay SDK from the Amazon's Cloudfront content distribution network just include the following in your page:
 
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.3.2/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.3.3/stamplay.min.js"></script>
 ```
 
 # One more thing

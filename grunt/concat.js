@@ -20,7 +20,8 @@ module.exports = {
                   'src/cobject.js',
                   'src/webhook.js',
                   'src/stripe.js',
-                  'src/codeblock.js'
+                  'src/codeblock.js',
+                  'src/role.js'
                 ],
             dest: 'dist/stamplay.js'
       }
