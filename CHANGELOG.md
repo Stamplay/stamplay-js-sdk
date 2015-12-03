@@ -1,5 +1,10 @@
 # Stamplay JS SDK Changelog
 
+1.3.3 / 03-12-2015
+===================
+
+* Added Role Component
+
 1.3.2 / 24-11-2015
 ===================
 
