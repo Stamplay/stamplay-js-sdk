@@ -1,4 +1,4 @@
-/* globals  Stamplay */
+/* globals  Stamplay,_ */
 
 /* Brick : Cobject 
 	GET     '/api/cobject/VERSION/:cobjectId 
@@ -20,37 +20,49 @@
 		This class rappresent the Custom Object component on Stamplay platform
 		It very easy to use: Stamplay.Cobject([customObjectid])
 	*/
-
+	var makeActionPromise = function (id, action, data, callbackObject) {
+		return Stamplay.makeAPromise({
+			method: 'PUT',
+			data: (data) ? data : {},
+			url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + id + '/' + action
+		}, callbackObject)
+	};
 	//constructor
 	function Cobject(resourceId) {
-		Stamplay.BaseComponent.call(this, 'cobject', resourceId, true);
-
-		this.Collection.findByAttr = function (attr) {
-			if(attr){
-				var _this = this;
-				return Stamplay.makeAPromise({
-					method: 'GET',
-					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/find/'+attr
-				}).then(function (response) {
-					if (response.totalElements && response.pagination) {
-							_this.totalElements = parseInt(response.totalElements);
-							_this.pagination = response.pagination;
-						}
-						_this.instance = [];
-						//iterate on data and instance a new Model with the prototype functions
-						response.data.forEach(function (singleInstance) {
-							var instanceModel = new root.Stamplay.Cobject(_this.resourceId);
-							instanceModel = instanceModel.Model.constructor(singleInstance);
-							_this.instance.push(instanceModel);
-						});
-						_this.length = _this.instance.length;
-				});
-			}else{
-				return Stamplay.Support.errorSender(403, "Missing parameter in findByAttr method");
-			}
+		if(resourceId){
+			return _.extend({
+				brickId:'cobject',
+				resourceId:resourceId,				
+				findByCurrentUser : function (attr, callbackObject) {
+					if( (arguments.length==1 && _.isFunction(arguments[0])) || arguments.length==0){
+						return Stamplay.makeAPromise({
+							method: 'GET',
+							url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/find/owner'
+						},arguments[0])
+					}else{
+						return Stamplay.makeAPromise({
+							method: 'GET',
+							url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/find/'+attr
+						},callbackObject)
+					}
+				},
+				upVote : function (id, callbackObject) {
+				 	return makeActionPromise.call(this, id, 'vote', {type:'upvote'}, callbackObject);
+				},
+				downVote: function (id, callbackObject) {
+					return makeActionPromise.call(this, id, 'vote', {type:'downvote'},callbackObject);
+				},
+				rate: function (id, vote, callbackObject) {
+					return makeActionPromise.call(this, id, 'rate', {rate: vote}, callbackObject);
+				},
+				comment: function (id, text, callbackObject) {
+					return makeActionPromise.call(this, id, 'comment', {text: text}, callbackObject);
+				}
+			}, root.Stamplay.BaseComponent('cobject', resourceId))
+		}else{
+			throw new Error('Stamplay.Cobject(cobjecId) needs a cobjectId');
 		}
 	}
 	//Added Cobject to Stamplay 
 	root.Stamplay.Cobject = Cobject;
-
 })(this);

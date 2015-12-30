@@ -9,7 +9,6 @@
 ===================
 
 * Added grace period of 30 seconds to the iat claim in jwt token in order to allow little time sync problems between client and server.  
-
 1.3.1 / 20-10-2015
 ===================
 

@@ -6,21 +6,17 @@
     <meta name="description" content="Stamplay JS SDK tests">
     <meta name="author" content="Stamplay developers">
     <link href="../bower_components/mocha/mocha.css" rel="stylesheet">
-
-    <title>Stamplay | An awesome new app</title>
+		<link rel="icon" href="https://drrjhlchpvi7e.cloudfront.net/editor/a1debe3/img/favicon32.png" sizes="32x32">
+    <title>Stamplay | TEST all the things</title>
   </head>
 
   <body>
    	<div id="mocha"></div>
    	<!-- Phantom JS doesn't have xmlhttprequest -->
 	  <script src="./xmlhttprequest.js"></script>
-
  	 	<script src="../dist/stamplay.js"></script>
-
-	  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 	  <script src="../bower_components/mocha/mocha.js"></script>
 	  <script src="../bower_components/chai/chai.js"></script>
-
 	  <script src="../bower_components/sinon/lib/sinon.js"></script>
 	  <script src="../bower_components/sinon/lib/sinon/util/event.js"></script>
 	  <script src="../bower_components/sinon/lib/sinon/util/fake_xml_http_request.js"></script>
@@ -33,29 +29,23 @@
 			if (navigator.userAgent.indexOf('PhantomJS') !== -1) {
       window.ProgressEvent = function (type, params) {
         params = params || {};
-
         this.lengthComputable = params.lengthComputable || false;
         this.loaded = params.loaded || 0;
         this.total = params.total || 0;
-      };
-    }
-		</script>
-	  <script>
-	    mocha.setup('tdd');
+      	};
+   		}
+    	mocha.setup('tdd');
 	    var assert = chai.assert;
-	  </script>
+		</script>
 	  
 	  <script src="stamplay.js"></script>
-	  <script src="stamplay.base.js"></script>
-	  <script src="query.js"></script>
 	  <script src="support.js"></script>
-	  <script src="cobject.model.js"></script>
-	  <script src="cobject.collection.js"></script>
-	  <script src="user.model.js"></script>
+	  <script src="query.js"></script>
+	  <script src="user.js"></script>
+	  <script src="cobject.js"></script>
 	  <script src="webhook.js"></script>
-	  <script src="stripe.js"></script>
+	  <script src="stripe.js"></script> 
 	  <script src="codeblock.js"></script>
-	  <script src="role.js"></script>
 
 	  <script>
 	    if (window.mochaPhantomJS) { mochaPhantomJS.run(); }

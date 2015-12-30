@@ -1,11 +1,9 @@
-/*! Stamplay v1.3.3 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
+/*! Stamplay v1.3.3 | (c) 2015 Stamplay *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
 (function(){function n(n){function t(t,r,e,u,i,o){for(;i>=0&&o>i;i+=n){var a=u?u[i]:i;e=r(e,t[a],a,t)}return e}return function(r,e,u,i){e=b(e,i,4);var o=!k(r)&&m.keys(r),a=(o||r).length,c=n>0?0:a-1;return arguments.length<3&&(u=r[o?o[c]:c],c+=n),t(r,e,u,o,c,a)}}function t(n){return function(t,r,e){r=x(r,e);for(var u=O(t),i=n>0?0:u-1;i>=0&&u>i;i+=n)if(r(t[i],i,t))return i;return-1}}function r(n,t,r){return function(e,u,i){var o=0,a=O(e);if("number"==typeof i)n>0?o=i>=0?i:Math.max(i+a,o):a=i>=0?Math.min(i+1,a):i+a+1;else if(r&&i&&a)return i=r(e,u),e[i]===u?i:-1;if(u!==u)return i=t(l.call(e,o,a),m.isNaN),i>=0?i+o:-1;for(i=n>0?o:a-1;i>=0&&a>i;i+=n)if(e[i]===u)return i;return-1}}function e(n,t){var r=I.length,e=n.constructor,u=m.isFunction(e)&&e.prototype||a,i="constructor";for(m.has(n,i)&&!m.contains(t,i)&&t.push(i);r--;)i=I[r],i in n&&n[i]!==u[i]&&!m.contains(t,i)&&t.push(i)}var u=this,i=u._,o=Array.prototype,a=Object.prototype,c=Function.prototype,f=o.push,l=o.slice,s=a.toString,p=a.hasOwnProperty,h=Array.isArray,v=Object.keys,g=c.bind,y=Object.create,d=function(){},m=function(n){return n instanceof m?n:this instanceof m?void(this._wrapped=n):new m(n)};"undefined"!=typeof exports?("undefined"!=typeof module&&module.exports&&(exports=module.exports=m),exports._=m):u._=m,m.VERSION="1.8.3";var b=function(n,t,r){if(t===void 0)return n;switch(null==r?3:r){case 1:return function(r){return n.call(t,r)};case 2:return function(r,e){return n.call(t,r,e)};case 3:return function(r,e,u){return n.call(t,r,e,u)};case 4:return function(r,e,u,i){return n.call(t,r,e,u,i)}}return function(){return n.apply(t,arguments)}},x=function(n,t,r){return null==n?m.identity:m.isFunction(n)?b(n,t,r):m.isObject(n)?m.matcher(n):m.property(n)};m.iteratee=function(n,t){return x(n,t,1/0)};var _=function(n,t){return function(r){var e=arguments.length;if(2>e||null==r)return r;for(var u=1;e>u;u++)for(var i=arguments[u],o=n(i),a=o.length,c=0;a>c;c++){var f=o[c];t&&r[f]!==void 0||(r[f]=i[f])}return r}},j=function(n){if(!m.isObject(n))return{};if(y)return y(n);d.prototype=n;var t=new d;return d.prototype=null,t},w=function(n){return function(t){return null==t?void 0:t[n]}},A=Math.pow(2,53)-1,O=w("length"),k=function(n){var t=O(n);return"number"==typeof t&&t>=0&&A>=t};m.each=m.forEach=function(n,t,r){t=b(t,r);var e,u;if(k(n))for(e=0,u=n.length;u>e;e++)t(n[e],e,n);else{var i=m.keys(n);for(e=0,u=i.length;u>e;e++)t(n[i[e]],i[e],n)}return n},m.map=m.collect=function(n,t,r){t=x(t,r);for(var e=!k(n)&&m.keys(n),u=(e||n).length,i=Array(u),o=0;u>o;o++){var a=e?e[o]:o;i[o]=t(n[a],a,n)}return i},m.reduce=m.foldl=m.inject=n(1),m.reduceRight=m.foldr=n(-1),m.find=m.detect=function(n,t,r){var e;return e=k(n)?m.findIndex(n,t,r):m.findKey(n,t,r),e!==void 0&&e!==-1?n[e]:void 0},m.filter=m.select=function(n,t,r){var e=[];return t=x(t,r),m.each(n,function(n,r,u){t(n,r,u)&&e.push(n)}),e},m.reject=function(n,t,r){return m.filter(n,m.negate(x(t)),r)},m.every=m.all=function(n,t,r){t=x(t,r);for(var e=!k(n)&&m.keys(n),u=(e||n).length,i=0;u>i;i++){var o=e?e[i]:i;if(!t(n[o],o,n))return!1}return!0},m.some=m.any=function(n,t,r){t=x(t,r);for(var e=!k(n)&&m.keys(n),u=(e||n).length,i=0;u>i;i++){var o=e?e[i]:i;if(t(n[o],o,n))return!0}return!1},m.contains=m.includes=m.include=function(n,t,r,e){return k(n)||(n=m.values(n)),("number"!=typeof r||e)&&(r=0),m.indexOf(n,t,r)>=0},m.invoke=function(n,t){var r=l.call(arguments,2),e=m.isFunction(t);return m.map(n,function(n){var u=e?t:n[t];return null==u?u:u.apply(n,r)})},m.pluck=function(n,t){return m.map(n,m.property(t))},m.where=function(n,t){return m.filter(n,m.matcher(t))},m.findWhere=function(n,t){return m.find(n,m.matcher(t))},m.max=function(n,t,r){var e,u,i=-1/0,o=-1/0;if(null==t&&null!=n){n=k(n)?n:m.values(n);for(var a=0,c=n.length;c>a;a++)e=n[a],e>i&&(i=e)}else t=x(t,r),m.each(n,function(n,r,e){u=t(n,r,e),(u>o||u===-1/0&&i===-1/0)&&(i=n,o=u)});return i},m.min=function(n,t,r){var e,u,i=1/0,o=1/0;if(null==t&&null!=n){n=k(n)?n:m.values(n);for(var a=0,c=n.length;c>a;a++)e=n[a],i>e&&(i=e)}else t=x(t,r),m.each(n,function(n,r,e){u=t(n,r,e),(o>u||1/0===u&&1/0===i)&&(i=n,o=u)});return i},m.shuffle=function(n){for(var t,r=k(n)?n:m.values(n),e=r.length,u=Array(e),i=0;e>i;i++)t=m.random(0,i),t!==i&&(u[i]=u[t]),u[t]=r[i];return u},m.sample=function(n,t,r){return null==t||r?(k(n)||(n=m.values(n)),n[m.random(n.length-1)]):m.shuffle(n).slice(0,Math.max(0,t))},m.sortBy=function(n,t,r){return t=x(t,r),m.pluck(m.map(n,function(n,r,e){return{value:n,index:r,criteria:t(n,r,e)}}).sort(function(n,t){var r=n.criteria,e=t.criteria;if(r!==e){if(r>e||r===void 0)return 1;if(e>r||e===void 0)return-1}return n.index-t.index}),"value")};var F=function(n){return function(t,r,e){var u={};return r=x(r,e),m.each(t,function(e,i){var o=r(e,i,t);n(u,e,o)}),u}};m.groupBy=F(function(n,t,r){m.has(n,r)?n[r].push(t):n[r]=[t]}),m.indexBy=F(function(n,t,r){n[r]=t}),m.countBy=F(function(n,t,r){m.has(n,r)?n[r]++:n[r]=1}),m.toArray=function(n){return n?m.isArray(n)?l.call(n):k(n)?m.map(n,m.identity):m.values(n):[]},m.size=function(n){return null==n?0:k(n)?n.length:m.keys(n).length},m.partition=function(n,t,r){t=x(t,r);var e=[],u=[];return m.each(n,function(n,r,i){(t(n,r,i)?e:u).push(n)}),[e,u]},m.first=m.head=m.take=function(n,t,r){return null==n?void 0:null==t||r?n[0]:m.initial(n,n.length-t)},m.initial=function(n,t,r){return l.call(n,0,Math.max(0,n.length-(null==t||r?1:t)))},m.last=function(n,t,r){return null==n?void 0:null==t||r?n[n.length-1]:m.rest(n,Math.max(0,n.length-t))},m.rest=m.tail=m.drop=function(n,t,r){return l.call(n,null==t||r?1:t)},m.compact=function(n){return m.filter(n,m.identity)};var S=function(n,t,r,e){for(var u=[],i=0,o=e||0,a=O(n);a>o;o++){var c=n[o];if(k(c)&&(m.isArray(c)||m.isArguments(c))){t||(c=S(c,t,r));var f=0,l=c.length;for(u.length+=l;l>f;)u[i++]=c[f++]}else r||(u[i++]=c)}return u};m.flatten=function(n,t){return S(n,t,!1)},m.without=function(n){return m.difference(n,l.call(arguments,1))},m.uniq=m.unique=function(n,t,r,e){m.isBoolean(t)||(e=r,r=t,t=!1),null!=r&&(r=x(r,e));for(var u=[],i=[],o=0,a=O(n);a>o;o++){var c=n[o],f=r?r(c,o,n):c;t?(o&&i===f||u.push(c),i=f):r?m.contains(i,f)||(i.push(f),u.push(c)):m.contains(u,c)||u.push(c)}return u},m.union=function(){return m.uniq(S(arguments,!0,!0))},m.intersection=function(n){for(var t=[],r=arguments.length,e=0,u=O(n);u>e;e++){var i=n[e];if(!m.contains(t,i)){for(var o=1;r>o&&m.contains(arguments[o],i);o++);o===r&&t.push(i)}}return t},m.difference=function(n){var t=S(arguments,!0,!0,1);return m.filter(n,function(n){return!m.contains(t,n)})},m.zip=function(){return m.unzip(arguments)},m.unzip=function(n){for(var t=n&&m.max(n,O).length||0,r=Array(t),e=0;t>e;e++)r[e]=m.pluck(n,e);return r},m.object=function(n,t){for(var r={},e=0,u=O(n);u>e;e++)t?r[n[e]]=t[e]:r[n[e][0]]=n[e][1];return r},m.findIndex=t(1),m.findLastIndex=t(-1),m.sortedIndex=function(n,t,r,e){r=x(r,e,1);for(var u=r(t),i=0,o=O(n);o>i;){var a=Math.floor((i+o)/2);r(n[a])<u?i=a+1:o=a}return i},m.indexOf=r(1,m.findIndex,m.sortedIndex),m.lastIndexOf=r(-1,m.findLastIndex),m.range=function(n,t,r){null==t&&(t=n||0,n=0),r=r||1;for(var e=Math.max(Math.ceil((t-n)/r),0),u=Array(e),i=0;e>i;i++,n+=r)u[i]=n;return u};var E=function(n,t,r,e,u){if(!(e instanceof t))return n.apply(r,u);var i=j(n.prototype),o=n.apply(i,u);return m.isObject(o)?o:i};m.bind=function(n,t){if(g&&n.bind===g)return g.apply(n,l.call(arguments,1));if(!m.isFunction(n))throw new TypeError("Bind must be called on a function");var r=l.call(arguments,2),e=function(){return E(n,e,t,this,r.concat(l.call(arguments)))};return e},m.partial=function(n){var t=l.call(arguments,1),r=function(){for(var e=0,u=t.length,i=Array(u),o=0;u>o;o++)i[o]=t[o]===m?arguments[e++]:t[o];for(;e<arguments.length;)i.push(arguments[e++]);return E(n,r,this,this,i)};return r},m.bindAll=function(n){var t,r,e=arguments.length;if(1>=e)throw new Error("bindAll must be passed function names");for(t=1;e>t;t++)r=arguments[t],n[r]=m.bind(n[r],n);return n},m.memoize=function(n,t){var r=function(e){var u=r.cache,i=""+(t?t.apply(this,arguments):e);return m.has(u,i)||(u[i]=n.apply(this,arguments)),u[i]};return r.cache={},r},m.delay=function(n,t){var r=l.call(arguments,2);return setTimeout(function(){return n.apply(null,r)},t)},m.defer=m.partial(m.delay,m,1),m.throttle=function(n,t,r){var e,u,i,o=null,a=0;r||(r={});var c=function(){a=r.leading===!1?0:m.now(),o=null,i=n.apply(e,u),o||(e=u=null)};return function(){var f=m.now();a||r.leading!==!1||(a=f);var l=t-(f-a);return e=this,u=arguments,0>=l||l>t?(o&&(clearTimeout(o),o=null),a=f,i=n.apply(e,u),o||(e=u=null)):o||r.trailing===!1||(o=setTimeout(c,l)),i}},m.debounce=function(n,t,r){var e,u,i,o,a,c=function(){var f=m.now()-o;t>f&&f>=0?e=setTimeout(c,t-f):(e=null,r||(a=n.apply(i,u),e||(i=u=null)))};return function(){i=this,u=arguments,o=m.now();var f=r&&!e;return e||(e=setTimeout(c,t)),f&&(a=n.apply(i,u),i=u=null),a}},m.wrap=function(n,t){return m.partial(t,n)},m.negate=function(n){return function(){return!n.apply(this,arguments)}},m.compose=function(){var n=arguments,t=n.length-1;return function(){for(var r=t,e=n[t].apply(this,arguments);r--;)e=n[r].call(this,e);return e}},m.after=function(n,t){return function(){return--n<1?t.apply(this,arguments):void 0}},m.before=function(n,t){var r;return function(){return--n>0&&(r=t.apply(this,arguments)),1>=n&&(t=null),r}},m.once=m.partial(m.before,2);var M=!{toString:null}.propertyIsEnumerable("toString"),I=["valueOf","isPrototypeOf","toString","propertyIsEnumerable","hasOwnProperty","toLocaleString"];m.keys=function(n){if(!m.isObject(n))return[];if(v)return v(n);var t=[];for(var r in n)m.has(n,r)&&t.push(r);return M&&e(n,t),t},m.allKeys=function(n){if(!m.isObject(n))return[];var t=[];for(var r in n)t.push(r);return M&&e(n,t),t},m.values=function(n){for(var t=m.keys(n),r=t.length,e=Array(r),u=0;r>u;u++)e[u]=n[t[u]];return e},m.mapObject=function(n,t,r){t=x(t,r);for(var e,u=m.keys(n),i=u.length,o={},a=0;i>a;a++)e=u[a],o[e]=t(n[e],e,n);return o},m.pairs=function(n){for(var t=m.keys(n),r=t.length,e=Array(r),u=0;r>u;u++)e[u]=[t[u],n[t[u]]];return e},m.invert=function(n){for(var t={},r=m.keys(n),e=0,u=r.length;u>e;e++)t[n[r[e]]]=r[e];return t},m.functions=m.methods=function(n){var t=[];for(var r in n)m.isFunction(n[r])&&t.push(r);return t.sort()},m.extend=_(m.allKeys),m.extendOwn=m.assign=_(m.keys),m.findKey=function(n,t,r){t=x(t,r);for(var e,u=m.keys(n),i=0,o=u.length;o>i;i++)if(e=u[i],t(n[e],e,n))return e},m.pick=function(n,t,r){var e,u,i={},o=n;if(null==o)return i;m.isFunction(t)?(u=m.allKeys(o),e=b(t,r)):(u=S(arguments,!1,!1,1),e=function(n,t,r){return t in r},o=Object(o));for(var a=0,c=u.length;c>a;a++){var f=u[a],l=o[f];e(l,f,o)&&(i[f]=l)}return i},m.omit=function(n,t,r){if(m.isFunction(t))t=m.negate(t);else{var e=m.map(S(arguments,!1,!1,1),String);t=function(n,t){return!m.contains(e,t)}}return m.pick(n,t,r)},m.defaults=_(m.allKeys,!0),m.create=function(n,t){var r=j(n);return t&&m.extendOwn(r,t),r},m.clone=function(n){return m.isObject(n)?m.isArray(n)?n.slice():m.extend({},n):n},m.tap=function(n,t){return t(n),n},m.isMatch=function(n,t){var r=m.keys(t),e=r.length;if(null==n)return!e;for(var u=Object(n),i=0;e>i;i++){var o=r[i];if(t[o]!==u[o]||!(o in u))return!1}return!0};var N=function(n,t,r,e){if(n===t)return 0!==n||1/n===1/t;if(null==n||null==t)return n===t;n instanceof m&&(n=n._wrapped),t instanceof m&&(t=t._wrapped);var u=s.call(n);if(u!==s.call(t))return!1;switch(u){case"[object RegExp]":case"[object String]":return""+n==""+t;case"[object Number]":return+n!==+n?+t!==+t:0===+n?1/+n===1/t:+n===+t;case"[object Date]":case"[object Boolean]":return+n===+t}var i="[object Array]"===u;if(!i){if("object"!=typeof n||"object"!=typeof t)return!1;var o=n.constructor,a=t.constructor;if(o!==a&&!(m.isFunction(o)&&o instanceof o&&m.isFunction(a)&&a instanceof a)&&"constructor"in n&&"constructor"in t)return!1}r=r||[],e=e||[];for(var c=r.length;c--;)if(r[c]===n)return e[c]===t;if(r.push(n),e.push(t),i){if(c=n.length,c!==t.length)return!1;for(;c--;)if(!N(n[c],t[c],r,e))return!1}else{var f,l=m.keys(n);if(c=l.length,m.keys(t).length!==c)return!1;for(;c--;)if(f=l[c],!m.has(t,f)||!N(n[f],t[f],r,e))return!1}return r.pop(),e.pop(),!0};m.isEqual=function(n,t){return N(n,t)},m.isEmpty=function(n){return null==n?!0:k(n)&&(m.isArray(n)||m.isString(n)||m.isArguments(n))?0===n.length:0===m.keys(n).length},m.isElement=function(n){return!(!n||1!==n.nodeType)},m.isArray=h||function(n){return"[object Array]"===s.call(n)},m.isObject=function(n){var t=typeof n;return"function"===t||"object"===t&&!!n},m.each(["Arguments","Function","String","Number","Date","RegExp","Error"],function(n){m["is"+n]=function(t){return s.call(t)==="[object "+n+"]"}}),m.isArguments(arguments)||(m.isArguments=function(n){return m.has(n,"callee")}),"function"!=typeof/./&&"object"!=typeof Int8Array&&(m.isFunction=function(n){return"function"==typeof n||!1}),m.isFinite=function(n){return isFinite(n)&&!isNaN(parseFloat(n))},m.isNaN=function(n){return m.isNumber(n)&&n!==+n},m.isBoolean=function(n){return n===!0||n===!1||"[object Boolean]"===s.call(n)},m.isNull=function(n){return null===n},m.isUndefined=function(n){return n===void 0},m.has=function(n,t){return null!=n&&p.call(n,t)},m.noConflict=function(){return u._=i,this},m.identity=function(n){return n},m.constant=function(n){return function(){return n}},m.noop=function(){},m.property=w,m.propertyOf=function(n){return null==n?function(){}:function(t){return n[t]}},m.matcher=m.matches=function(n){return n=m.extendOwn({},n),function(t){return m.isMatch(t,n)}},m.times=function(n,t,r){var e=Array(Math.max(0,n));t=b(t,r,1);for(var u=0;n>u;u++)e[u]=t(u);return e},m.random=function(n,t){return null==t&&(t=n,n=0),n+Math.floor(Math.random()*(t-n+1))},m.now=Date.now||function(){return(new Date).getTime()};var B={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","`":"&#x60;"},T=m.invert(B),R=function(n){var t=function(t){return n[t]},r="(?:"+m.keys(n).join("|")+")",e=RegExp(r),u=RegExp(r,"g");return function(n){return n=null==n?"":""+n,e.test(n)?n.replace(u,t):n}};m.escape=R(B),m.unescape=R(T),m.result=function(n,t,r){var e=null==n?void 0:n[t];return e===void 0&&(e=r),m.isFunction(e)?e.call(n):e};var q=0;m.uniqueId=function(n){var t=++q+"";return n?n+t:t},m.templateSettings={evaluate:/<%([\s\S]+?)%>/g,interpolate:/<%=([\s\S]+?)%>/g,escape:/<%-([\s\S]+?)%>/g};var K=/(.)^/,z={"'":"'","\\":"\\","\r":"r","\n":"n","\u2028":"u2028","\u2029":"u2029"},D=/\\|'|\r|\n|\u2028|\u2029/g,L=function(n){return"\\"+z[n]};m.template=function(n,t,r){!t&&r&&(t=r),t=m.defaults({},t,m.templateSettings);var e=RegExp([(t.escape||K).source,(t.interpolate||K).source,(t.evaluate||K).source].join("|")+"|$","g"),u=0,i="__p+='";n.replace(e,function(t,r,e,o,a){return i+=n.slice(u,a).replace(D,L),u=a+t.length,r?i+="'+\n((__t=("+r+"))==null?'':_.escape(__t))+\n'":e?i+="'+\n((__t=("+e+"))==null?'':__t)+\n'":o&&(i+="';\n"+o+"\n__p+='"),t}),i+="';\n",t.variable||(i="with(obj||{}){\n"+i+"}\n"),i="var __t,__p='',__j=Array.prototype.join,"+"print=function(){__p+=__j.call(arguments,'');};\n"+i+"return __p;\n";try{var o=new Function(t.variable||"obj","_",i)}catch(a){throw a.source=i,a}var c=function(n){return o.call(this,n,m)},f=t.variable||"obj";return c.source="function("+f+"){\n"+i+"}",c},m.chain=function(n){var t=m(n);return t._chain=!0,t};var P=function(n,t){return n._chain?m(t).chain():t};m.mixin=function(n){m.each(m.functions(n),function(t){var r=m[t]=n[t];m.prototype[t]=function(){var n=[this._wrapped];return f.apply(n,arguments),P(this,r.apply(m,n))}})},m.mixin(m),m.each(["pop","push","reverse","shift","sort","splice","unshift"],function(n){var t=o[n];m.prototype[n]=function(){var r=this._wrapped;return t.apply(r,arguments),"shift"!==n&&"splice"!==n||0!==r.length||delete r[0],P(this,r)}}),m.each(["concat","join","slice"],function(n){var t=o[n];m.prototype[n]=function(){return P(this,t.apply(this._wrapped,arguments))}}),m.prototype.value=function(){return this._wrapped},m.prototype.valueOf=m.prototype.toJSON=m.prototype.value,m.prototype.toString=function(){return""+this._wrapped},"function"==typeof define&&define.amd&&define("underscore",[],function(){return m})}).call(this);
-//# sourceMappingURL=underscore-min.map
-/* ---- STAMPLAY JS SDK ---- */
-// vim:ts=4:sts=4:sw=4:
+//# sourceMappingURL=underscore-min.map// vim:ts=4:sts=4:sw=4:
 /*!
  *
  * Copyright 2009-2012 Kris Kowal under the terms of the MIT
@@ -2053,8 +2051,6 @@ var qEndingLine = captureLine();
 return Q;
 
 });
-
-/* ---- STAMPLAY JS SDK ---- */
 ;(function(win){
 	var store = {},
 		doc = win.document,
@@ -2230,11 +2226,9 @@ return Q;
 	else { win.store = store }
 
 })(Function('return this')());
-
-/* ---- STAMPLAY JS SDK ---- */
 /**
 @author Stamplay
-@version 1.0
+@version 2.0
 @description an awesome javascript sdk for Stamplay 
 */
 /* Initizialize library */
@@ -2244,8 +2238,6 @@ return Q;
 	root.Stamplay = root.Stamplay || {};
 	/* setting attribute API Version */
 	root.Stamplay.VERSION = "v1";
-	/* Silence Q logging */
-	Q.stopUnhandledRejectionTracking();
 	/* appId */
 	root.Stamplay.APPID = "";
 	/* baseUrl */
@@ -2254,13 +2246,11 @@ return Q;
 	if (window.localStorage && store.enabled) {
 		root.Stamplay.USESTORAGE = true;
 	}
-
 	if (getURLParameter('jwt')) {
 		if (Stamplay.USESTORAGE) {
 			store.set(window.location.origin + '-jwt', getURLParameter('jwt'));
 		}
 	}
-
 	/* init method for setup the base url */
 	root.Stamplay.init = function (appId) {
 		root.Stamplay.BASEURL = 'https://' + appId + '.stamplayapp.com';
@@ -2271,9 +2261,7 @@ return Q;
 		return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
 	}
 
-}(this));
-/* ---- STAMPLAY JS SDK ---- */
-/* Add function to handle ajax calls, returning a promise
+}(this));/* Add function to handle ajax calls, returning a promise
  * Very simple to use: Stamplay.makePromise({options})
  */
 (function (root) {
@@ -2287,45 +2275,13 @@ return Q;
 			options.url = options.url + conjunction + key + '=' + options.thisParams[key];
 		}
 	};
-
-	/* private function for parse link's header */
-	var parseLink = function (parts, link) {
-		for (var i = 0; i < parts.length; i++) {
-			var section = parts[i].split(';');
-			if (section.length != 2) {
-				throw new Error("section could not be split on ';'");
-			}
-			var url = section[0].replace(/<(.*)>/, '$1').trim();
-			var name = section[1].replace(/rel="(.*)"/, '$1').trim();
-			if (url.indexOf('&sort=') < 0) {
-				url += '&sort=-dt_create';
-			}
-			link[name] = url;
-		}
-	};
-
 	/* function for handling any calls to Stamplay Platform */
 	/* Options parameter is an object  */
-	root.Stamplay.makeAPromise = function (options, wantHeaders) {
-		/*
-			options : {
-				method: GET|POST|PUT|DELETE|PATCH
-				url: ,
-				headers: [{}],
-				data: {}
-				async: true (default) || false,
-				thisParams : {
-					page : 1,
-					per_page : 10
-				}
-			} 
-		*/
-		// parsing this parameter
+	root.Stamplay.makeAPromise = function (options, callback) {
+		var headerStamplay;
 		if (options.thisParams) {
 			parseQueryParams(options);
-		}
-
-		var headerStamplay;
+		}		
 		if (root.Stamplay.APPID != "") {
 			options.url = root.Stamplay.BASEURL + options.url;
 			headerStamplay = root.Stamplay.APPID;
@@ -2334,19 +2290,33 @@ return Q;
 			headerStamplay = headerStamplay.replace(/^www\./, '');
 			headerStamplay = headerStamplay.replace(/:[0-9]*$/g, '');
 		}
-
-		var deferred = Q.defer(),
-			req = new XMLHttpRequest();
+		var req = new XMLHttpRequest();
 		req.open(options.method || 'GET', options.url, options.async || true);
+		_manageHeaders(headerStamplay, req, options)
+		var deferred = Q.defer();
+		req.onreadystatechange = function () {
+			if (req.readyState == 4) {
+				if ([200, 304].indexOf(req.status) === -1) {
+					deferred.reject({code:req.status, message:req.responseText})
+				} else {
+					_handleJWT(req);
+					deferred.resolve(JSON.parse(req.responseText))
+				}
+				deferred.promise.nodeify(callback);
+			}
+		}
+		req.send(JSON.stringify(options.data) || void 0);
+		return deferred.promise;
+	};
+
+	function _manageHeaders(headerStamplay, req, options){
 		// Set request headers if provided.
 		Object.keys(options.headers || {}).forEach(function (key) {
 			req.setRequestHeader(key, options.headers[key]);
 		});
 		// Default content-Type  
 		req.setRequestHeader('Content-Type', 'application/json');
-
 		req.setRequestHeader('stamplay-app', headerStamplay);
-
 		// V1 
 		if (Stamplay.USESTORAGE) {
 			var jwt = store.get(window.location.origin + '-jwt');
@@ -2358,55 +2328,7 @@ return Q;
 				}
 			}
 		}
-
-		req.onreadystatechange = function () {
-			if (req.readyState !== 4) {
-				return;
-			}
-			if ([200, 304].indexOf(req.status) === -1) {
-				deferred.reject(req);
-			} else {
-
-				//parse the JSON response from the server
-				var response = JSON.parse(req.responseText);
-				_handleJWT(req);
-				//where statment doesn't return link in header
-				if (wantHeaders && req.getResponseHeader('link')) {
-					//parse headers
-					var parts = req.getResponseHeader('link').split(',');
-					response.pagination = {};
-					parseLink(parts, response.pagination);
-					response.totalElements = req.getResponseHeader('x-total-elements');
-					deferred.resolve(response);
-				} else
-					deferred.resolve(response);
-			}
-		};
-		req.send(JSON.stringify(options.data) || void 0);
-		return deferred.promise;
-	};
-
-	/* function to remove attributes from model before send the request to server*/
-	root.Stamplay.removeAttributes = function (brick, instance) {
-		switch (brick) {
-		case 'cobject':
-			delete instance.__v;
-			delete instance.cobjectId;
-			delete instance.actions;
-			delete instance.appId;
-			delete instance.id;
-			break;
-		case 'user':
-			delete instance._id;
-			delete instance.id;
-			delete instance.__v;
-			break;
-		default:
-			break;
-
-		}
-	};
-
+	}
 	function _handleJWT(req) {
 		var jwt = req.getResponseHeader('x-stamplay-jwt');
 		if (jwt) {
@@ -2417,31 +2339,23 @@ return Q;
 		}
 		return decodedJWT;
 	}
-
-
 	function _decodeJWT(token) {
 		var header = {},
-			claims = {},
-			signature = "";
+				claims = {},
+				signature = "";
 		try {
 			var parts = token.split(".");
 			header = JSON.parse(_base64Decode((parts[0] || "{}")));
 			claims = JSON.parse(_base64Decode((parts[1] || "{}")));
 			signature = parts[2];
-		} catch (e) {
-
-		}
+		} catch (e) {}
 		return {
 			header: header,
 			claims: claims,
 			signature: signature
 		};
 	}
-
-	/*
-	 * Decode base64
-	 */
-
+	/* Decode base64 */
 	function _base64Decode(str) {
 		if (typeof atob !== "undefined") {
 			return atob(str);
@@ -2449,10 +2363,7 @@ return Q;
 			return _base64DecodeBackward(str);
 		}
 	}
-
-	/*
-	 * Backward compatibility for IE 8 and IE 9
-	 */
+	/* Backward compatibility for IE 8 and IE 9 */
 	function _base64DecodeBackward(s) {
 		var e = {},
 			i, b = 0,
@@ -2474,15 +2385,13 @@ return Q;
 		}
 		return r;
 	}
-
 	function _jwtIsValidTimestamp(token) {
 		var claims = _decodeJWT(token).claims,
-			now = Math.floor((new Date).getTime() / 1E3),
-			validSince, validUntil;
+				now = Math.floor((new Date).getTime() / 1E3),
+				validSince, validUntil;
 		if (typeof claims === "object") {
 			if (claims.hasOwnProperty("iat")) {
 				validSince = claims.iat;
-
 				/*
 				 * We are allowing a grace period of 30 seconds in order to avoid 
 				 * premature deletion of the token due to time sync  
@@ -2501,633 +2410,73 @@ return Q;
 		return now && validSince && validUntil && now >= validSince && now <= validUntil;
 	}
 
-}(this));
-/* ---- STAMPLAY JS SDK ---- */
-/* 
+}(this));/* 
  * Exspose BaseComponent the super class of all components on Stamplay.
  *  It extends Model and Collection.
  */
 (function (root) {
 
-	//method to add underscore function
-	var addMethod = function (length, method, attribute) {
-		switch (length) {
-		case 1:
-			return function () {
-				return _[method](this[attribute]);
-			};
-		case 2:
-			return function (value) {
-				return _[method](this[attribute], value);
-			};
-		case 3:
-			return function (iteratee, context) {
-				return _[method](this[attribute], iteratee, context);
-			};
-		case 4:
-			return function (iteratee, defaultVal, context) {
-				return _[method](this[attribute], iteratee, defaultVal, context);
-			};
-		default:
-			return function () {
-				var args = Array.prototype.slice.call(arguments);
-				args.unshift(this[attribute]);
-				return _[method].apply(_, args);
-			};
-		}
-	};
-
-	//method to add underscore method to collection or model
-	var addUnderscoreMethods = function (Class, methods, attribute) {
-		_.each(methods, function (length, method) {
-			if (_[method])
-				Class[method] = addMethod.call(Class, length, method, attribute);
-		});
-	};
-
-	/* Action constructor, it takes a instance of BaseComponent */
-	function Action() {
-
-		// private function, use for make parametric Promises
-		var makeActionPromise = function (action, type) {
-			var _this = this;
-			if (type) {
-				return Stamplay.makeAPromise({
-					method: 'PUT',
-					data: {
-						type: type
-					},
-					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/' + action
-				}).then(function (response) {
-					_this.instance = response;
-				});
-			} else {
-				return Stamplay.makeAPromise({
-					method: 'PUT',
-					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/' + action
-				}).then(function (response) {
-					_this.instance = response;
-				});
+	function BaseComponent(brickId, resourceId) {
+		
+		var removeAttributes = function (brick, instance) {
+			switch (brick) {
+			case 'cobject':
+				delete instance.__v;
+				delete instance.cobjectId;
+				delete instance.actions;
+				delete instance.appId;
+				delete instance.id;
+				break;
+			case 'user':
+				delete instance._id;
+				delete instance.id;
+				delete instance.__v;
+				break;
+			default:
+				break;
 			}
 		};
 
-		// upVote function
-		// Modifies instance of model and return a promise
-		this.upVote = function () {
-			return makeActionPromise.call(this, 'vote', 'upvote');
-		};
-
-		// upVote function
-		// Modifies instance of model and return a promise
-		this.downVote = function () {
-			return makeActionPromise.call(this, 'vote', 'downvote');
-		};
-
-		// rate function, it takes a vote parameter. 
-		// Modifies instance of model and return a promise
-		this.rate = function (vote) {
-			// vote must be integer
-			var _this = this;
-			if (parseInt(vote)) {
-				return Stamplay.makeAPromise({
-					method: 'PUT',
-					data: {
-						rate: vote
-					},
-					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/rate'
-				}).then(function (response) {
-					_this.instance = response;
-				});
-			} else {
-				throw new Error('vote parameter to rate function must be a integer');
+		var buildEndpoint = function(brickId, resourceId, method, id, data, callbackObject){
+			var options = {
+				method: method,
+				url: '/api/' + brickId + '/' + Stamplay.VERSION + '/' + resourceId
 			}
-		};
-
-		// comment function, it takes a text parameter. 
-		// Modifies instance of model and return a promise
-		this.comment = function (text) {
-			var _this = this;
-			return Stamplay.makeAPromise({
-				method: 'PUT',
-				data: {
-					text: text
-				},
-				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.instance._id + '/comment'
-			}).then(function (response) {
-				_this.instance = response;
-			});
-		};
-
-		// twitterShare function
-		// Modifies instance of model and return a promise
-		this.twitterShare = function () {
-			return makeActionPromise.call(this, 'twitter_share');
-		};
-
-		// facebookShare function
-		// Modifies instance of model and return a promise
-		this.facebookShare = function () {
-			return makeActionPromise.call(this, 'facebook_share');
-		};
-
-		// simplest methods for get Actions
-
-		this.getComments = function () {
-			return this.get('actions').comments;
-		};
-
-		this.getVotes = function (type) {
-			if (type && (type === 'up' || type === 'down')) {
-				return this.get('actions').votes['users_' + type + 'vote'];
-			} else {
-				return this.get('actions').votes.users;
-			}
-		};
-
-		this.getRatings = function () {
-			return this.get('actions').ratings.users;
-		};
-
-		this.getTwitterShares = function () {
-			return this.get('actions').twitter_shares.users;
-		};
-
-		this.getFacebookShares = function () {
-			return this.get('actions').facebook_shares.users;
-		};
-
-	}
-
-	/* Model constructor, it takes brickId, resourceId and hasAction
-	 *  If hasAction is true, Model extends Action
-	 */
-	function Model(brickId, resourceId, hasAction) {
-
-		// Model variable
-		// data from server
-		this.instance = {};
-		// name of baseComponent
-		this.brickId = brickId;
-		// name of subresource
-		this.resourceId = resourceId;
-
-		var modelMethods = {
-			keys: 1,
-			values: 1,
-			pairs: 1,
-			invert: 1,
-			pick: 0,
-			omit: 0,
-			chain: 1,
-			isEmpty: 1
-		};
-
-		// Mix in each Underscore method as a proxy to `Model#attributes`.
-		addUnderscoreMethods(this, modelMethods, 'instance');
-
-		// if baseComponent hasAction add some methods to Model 
-		if (hasAction) {
-			Action.call(this);
+			if(id)
+				options.url= options.url+'/'+id
+			if(data && method != 'GET')
+				options.data = data
+			if(method == 'GET')
+				options.thisParams = data;
+			return Stamplay.makeAPromise(options, callbackObject);
 		}
 
-		// constructor
-		this.constructor = function (instance) {
-			this.instance = {};
-			var keys = Object.keys(instance);
-			for (var i = 0, j = keys.length; i < j; i++) {
-				var key = keys[i];
-				var value = instance[key];
-				this.set(key, value);
+		return {
+			brickId : brickId,
+			resourceId : resourceId,
+			get: function(data, callbackObject){
+				return buildEndpoint(this.brickId, this.resourceId, 'GET', false, data, callbackObject)
+			},
+			save : function (data, callbackObject) {
+				return buildEndpoint(this.brickId, this.resourceId, 'POST', false, data, callbackObject)
+			},
+			patch : function(id, data, callbackObject){
+				removeAttributes(brickId, data);
+				return buildEndpoint(this.brickId, this.resourceId, 'PATCH', id, data, callbackObject)
+			},
+			update: function(id, data,  callbackObject){
+				removeAttributes(brickId, data);
+				return buildEndpoint(this.brickId, this.resourceId, 'PUT', id, data, callbackObject)
+			},
+			remove: function(id, callbackObject){
+				return buildEndpoint(this.brickId, this.resourceId, 'DELETE', id, false, callbackObject)
 			}
-			return this;
-		};
-
-		// get function, it takes a key 
-		// Return the key if exist 
-		this.get = function (key) {
-			return this.instance[key];
-		};
-
-		// set function, it takes the key and the value
-		// Set the key to the Model with the value
-		this.set = function (key, value) {
-				this.instance[key] = value;
-			},
-
-			// unset function, it takes  the key
-			// Delete the key from Model
-			this.unset = function (key) {
-				delete this.instance[key];
-			},
-
-			// fetch function, it takes _id and thisParams
-			//  Modifies instance of model with the response of Stamplay's server
-			this.fetch = function (_id, thisParams) {
-
-				thisParams = thisParams || {};
-				var _this = this;
-				return Stamplay.makeAPromise({
-					method: 'GET',
-					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + _id,
-					thisParams: thisParams
-				}).then(function (response) {
-					_this.instance = response;
-				});
-
-			},
-
-			// save function, it takes options
-			// Saves Model to Stamplay's db, if the Model already exists an update request is made    
-			this.save = function (options) {
-
-				options = options || {};
-
-				var getUpdateMethod = function () {
-					return (options.patch) ? 'PATCH' : 'PUT';
-				};
-
-				if (!this.instance) {
-					return;
-				}
-
-				var method = (!this.instance._id) ? 'POST' : getUpdateMethod();
-
-				var url = '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId;
-
-				if (method === 'PATCH' || method === 'PUT') {
-					url = url + '/' + this.get('_id');
-					Stamplay.removeAttributes(this.brickId, this.instance);
-				}
-
-				var _this = this;
-				return Stamplay.makeAPromise({
-					method: method,
-					url: url,
-					data: this.instance
-				}).then(function (response) {
-					_this.instance = response;
-				});
-			},
-
-			// destroy function 
-			// Delete Model to Stamplay's db
-			this.destroy = function () {
-				var isUser = (this.brickId === 'user');
-				if (this.get('_id')) {
-
-					return Stamplay.makeAPromise({
-						method: 'DELETE',
-						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + this.get('_id')
-					}).then(function (response) {
-
-						if (isUser && Stamplay.USESTORAGE) {
-							var jwt = store.get(window.location.origin + '-jwt');
-							if (jwt) {
-								store.remove(window.location.origin + '-jwt');
-							}
-						}
-
-						return response;
-
-					});
-
-				} else {
-					return false;
-				}
-			};
-
+		}
 	}
-
-	/* Collection constructor, it takes brickId, resourceId 
-	 */
-	function Collection(brickId, resourceId) {
-
-		//Collection variable
-		// data from server
-		this.instance = [];
-			// name of baseComponent
-		this.brickId = brickId;
-		// name of subresource
-		this.resourceId = resourceId;
-		//length of Collection
-		this.length = this.instance.length;
-			//total element 
-		this.totalElement = 0;
-		//links for pagination
-		this.link = {};
-		//the fetchParameters
-		this.currentQuery = {};
-
-		//method for parsing the currentquery 
-		var parseCurrentQuery = function (currentQuery) {
-			var query = {};
-			for (var key in currentQuery) {
-				
-				if (key === 'find') {
-					for (var attr in currentQuery[key]) {
-						query[attr] = currentQuery[key][attr];
-					}
-				} else if (key === 'limit') {
-					query.n = currentQuery[key];
-				} else if (key === 'select') {
-					query.select = currentQuery[key].join(",");
-				} else if (key === 'sort') {
-					query.sort = currentQuery[key];
-				} else if (key === 'pagination') {
-					query.page = currentQuery[key][0];
-					query.per_page = currentQuery[key][1];
-				}else if (key === 'populate') {
-					query.populate = true;
-				}else if (key === 'populateOwner') {
-					query.populate_owner = true;
-				}
-			}
-			return query;
-		};
-
-		//method to compile the params
-		this.compile = function () {
-			return parseCurrentQuery(this.currentQuery);
-		};
-
-		//method to set populate in queryparams
-		this.populate = function(){
-			this.currentQuery.populate = true;
-			return this;
-		};
-
-		//method to set populate owner in queryparams
-		this.populateOwner = function(){
-			this.currentQuery.populateOwner = true;
-			return this;
-		};
-
-		//method to set the pagination
-		this.pagination = function (page, perPage) {
-				if (page && perPage) {
-					this.currentQuery.pagination = [page, perPage];
-				} else {
-					throw new Error('Pagination want two parameters');
-				}
-				return this;
-		};
-		//method to set an attribute must be equal to given value
-		this.equalTo = function (attr, value) {
-			if (!this.currentQuery.find){ 
-				this.currentQuery.find = {}
-			};
-			if (typeof attr === "object") {
-				for (var key in attr) {
-					this.currentQuery.find[key] = attr[key];
-				}
-			} else {
-				this.currentQuery.find[attr] = value;
-			}
-			return this;
-		};
-		//method to limit the results of query
-		this.limit = function (limit) {
-				this.currentQuery.limit = limit;
-				return this;
-		};
-		//method to select only the attrs do you want to see
-		this.select = function (attr) {
-				if (!this.currentQuery.select)
-					this.currentQuery.select = [];
-				if (attr instanceof Array){
-					for (var i = 0; i < attr.length; i++) {
-						this.currentQuery.select.push(attr[i]);
-					} 
-				}else
-					this.currentQuery.select.push(attr);
-				return this;
-		};
-			//method to sort ascending
-		this.sortAscending = function (attr) {
-			this.currentQuery.sort = attr;
-			return this;
-		};
-			//method to sort descending
-		this.sortDescending = function (attr) {
-			this.currentQuery.sort = '-' + attr;
-			return this;
-		};
-
-		var collectionMethods = {
-			forEach: 3,
-			each: 3,
-			map: 3,
-			collect: 3,
-			reduce: 4,
-			foldl: 4,
-			inject: 4,
-			reduceRight: 4,
-			foldr: 4,
-			find: 3,
-			detect: 3,
-			filter: 3,
-			reject: 3,
-			every: 3,
-			all: 3,
-			some: 3,
-			any: 3,
-			include: 2,
-			contains: 2,
-			invoke: 2,
-			max: 3,
-			min: 3,
-			toArray: 1,
-			size: 1,
-			first: 3,
-			head: 3,
-			take: 3,
-			initial: 3,
-			rest: 3,
-			tail: 3,
-			drop: 3,
-			last: 3,
-			without: 0,
-			difference: 0,
-			indexOf: 3,
-			shuffle: 1,
-			lastIndexOf: 3,
-			isEmpty: 1,
-			chain: 1,
-			sample: 3,
-			partition: 3
-		};
-
-		// Mix in each Underscore method as a proxy to `Collection`.
-		addUnderscoreMethods(this, collectionMethods, 'instance');
-
-		// get function, it takes _id 
-		// Return Model with _id
-		this.get = function (_id) {
-				for (var i = 0, j = this.instance.length; i < j; i++) {
-					if (this.instance[i].get('_id') == _id) {
-						return this.instance[i];
-					}
-				}
-			},
-
-			// at function, it takes index
-			// Return Model at index 
-			this.at = function (index) {
-				return this.instance[index];
-			},
-
-			// pop function
-			// Remove the last Model and return it
-			this.pop = function () {
-				var last = this.instance[this.instance.length - 1];
-				if (this.instance.length != 0) {
-					this.remove(last.get('_id'));
-					return last;
-				} else
-					return false;
-			},
-
-			// shift function
-			// Remove the first Model and return it
-			this.shift = function () {
-				var first = this.instance[0];
-				if (first) {
-					this.remove(first.get('_id'));
-					return first;
-				} else
-					return false;
-			},
-
-			// add function
-			// Add a Model 
-			this.add = function (model) {
-				if (model instanceof Object && model.brickId == this.brickId && model.get('_id')) {
-					if (model.brickId == 'cobject') {
-						if (model.resourceId == this.resourceId) {
-							this.instance.push(model);
-							this.length = this.instance.length;
-						}
-					} else {
-						this.instance.push(model);
-						this.length = this.instance.length;
-					}
-				}
-			},
-
-			//return the number of entries on Stamplay's db
-			this.count = function () {
-				return this.totalElements;
-			};
-
-		//set collection with an array of model 
-		this.set = function (models) {
-
-			if (models instanceof Array) {
-				var _this = this;
-				models.forEach(function (singleInstance) {
-					if (singleInstance instanceof Object) {
-						var instanceModel;
-						//cobject has a particular constructor
-						if (_this.brickId == 'cobject') {
-							instanceModel = new root.Stamplay.Cobject(_this.resourceId);
-							instanceModel = instanceModel.Model.constructor(singleInstance);
-						} else {
-							//capitalize resource for implement dynamic inizialization of model
-							var dynamicModel = _this.brickId.charAt(0).toUpperCase() + _this.brickId.slice(1);
-							instanceModel = new root.Stamplay[dynamicModel];
-							instanceModel = instanceModel.Model.constructor(singleInstance);
-						}
-						_this.instance.push(instanceModel);
-					}
-				});
-				_this.length = _this.instance.length;
-			} else {
-				throw new Error('Set method on Collection wants an Array');
-			}
-
-		};
-
-		// fetch function, it takes thisParams
-		// Return a promise. Modify the instance with the data from Stamplay Server
-		this.fetch = function (thisParams) {
-
-				thisParams = thisParams && _.extend(thisParams, this.compile()) || this.compile();
-				var _this = this;
-
-				if (_this.brickId === 'cobject') {
-					var headers = true;
-				}
-
-				return Stamplay.makeAPromise({
-					method: 'GET',
-					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId,
-					thisParams: thisParams
-				}, headers).then(function (response) {
-					//set two attributes to collection
-					if (response.totalElements && response.pagination) {
-						_this.totalElements = parseInt(response.totalElements);
-						_this.pagination = response.pagination;
-					}
-					_this.instance = [];
-					//iterate on data and instance a new Model with the prototype functions
-					response.data.forEach(function (singleInstance) {
-						var instanceModel;
-						//cobject has a particular constructor
-						if (_this.brickId === 'cobject') {
-							instanceModel = new root.Stamplay.Cobject(_this.resourceId);
-							instanceModel = instanceModel.Model.constructor(singleInstance);
-						} else {
-							//capitalize resource for implement dynamic inizialization of model
-							var dynamicModel = _this.brickId.charAt(0).toUpperCase() + _this.brickId.slice(1);
-							instanceModel = new root.Stamplay[dynamicModel];
-							instanceModel = instanceModel.Model.constructor(singleInstance);
-						}
-						_this.instance.push(instanceModel);
-					});
-					_this.length = _this.instance.length;
-				});
-			},
-
-			//remove function, it takes a array of id o just one id 
-			// Remove Model with _id
-			this.remove = function (_id) {
-
-				if (_id instanceof Array) {
-					this.instance = _.reject(this.instance, function (model) {
-						for (var indexId in _id) {
-							if (model.get('_id') == _id[indexId]) {
-								return true;
-							}
-						}
-					}, this);
-					this.length = this.instance.length;
-				} else {
-					this.instance = _.reject(this.instance, function (model) {
-						if (model.get('_id') == _id) {
-							return true;
-						}
-					}, this);
-					this.length = this.instance.length;
-				}
-			};
-	};
-	/* BaseComponent constructor, it takes brickId, resourceId and hasAction
-	 *  If hasAction is true, Model extends Action
-	 */
-	function BaseComponent(brickId, resourceId, hasAction) {
-		//variable
-		this.Model = {};
-		this.Collection = {};
-		Model.call(this.Model, brickId, resourceId, hasAction);
-		Collection.call(this.Collection, brickId, resourceId);
-	}
-
 	// Added BaseComponent Object to Stamplay
 	root.Stamplay.BaseComponent = BaseComponent;
 
-}(this));
-/* ---- STAMPLAY JS SDK ---- */
-/* Add Support function to Stamplay
+}(this));/* Add Support function to Stamplay
  * it use for handling some functionality
  * very easy to use : Stamplay.Support.redirect('http://stamplay.com')
  */
@@ -3142,36 +2491,19 @@ return Q;
 		};
 
 		// function for check if you have user with a specific email 
-		this.validateEmail = function (email) {
+		this.validateEmail = function (email, callbackObject) {
 			return Stamplay.makeAPromise({
 				method: 'POST',
-				data: {
-					email: email
-				},
+				data: { email: email },
 				url: '/api/auth/' + Stamplay.VERSION + '/validate/email'
-			});
+			}, callbackObject);
 		};
-
-		this.checkMongoId = function(mongoId){
-			var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
-			var syntaxValid = (((typeof mongoId) === 'string') && checkForHexRegExp.test(mongoId));
-			return syntaxValid;
-		};
-
-		this.errorSender = function(status, message){
-			var deferred = Q.defer();
-			deferred.reject({"status":status, "message":message});
-			return deferred.promise;
-		};
-
 	}
 	var support = new Support();
 	// Added Support Object to Stamplay
 	root.Stamplay.Support = support;
 
-})(this);
-/* ---- STAMPLAY JS SDK ---- */
-/* Add Query function to Stamplay
+})(this);/* Add Query function to Stamplay
  * it use for handling some funcctionality
  * very easy to use : Stamplay.Query('user').equalTo('name':'john')
  */
@@ -3179,132 +2511,126 @@ return Q;
 	// constructor for Query Object
 	// model is required ever
 	function Query(model, instance) {
-		
-		this.model = model;
-		this.instance = instance;
-		this.currentQuery = [];
-		this.executable = '';
-	
-		this.or = function(){
-			var obj = { $or : []};
+		return {
+			model : model,
+			instance : instance,
+			currentQuery : [],
+			executable : '',
 
-			if (arguments[0] instanceof Array) {
-				arguments = arguments[0];
+			or : function(){
+				var obj = { $or : []};
+				
+				if (arguments[0] instanceof Array) {
+					arguments = arguments[0];
+				}
+				for(var i=0; i<arguments.length; i++){
+					if(arguments[i].currentQuery)	
+						obj.$or.push(arguments[i].currentQuery[0]);
+					else
+						throw new Error('Please Or function take only Query object');
+				}
+				this.currentQuery.push(obj);
+				return this
+			},
+
+			between : function(attr,value1,value2){
+				var obj = {};
+				obj[attr] = {"$gte":value1, "$lte":value2};
+				this.currentQuery.push(obj);
+				return this;
+			},
+
+			greaterThan : function(attr, value){
+				var obj = {};
+				obj[attr] = {"$gt":value};
+				this.currentQuery.push(obj);
+				return this;
+			},	
+
+			greaterThanOrEqual : function(attr, value){
+				var obj = {};
+				obj[attr] = {"$gte":value};
+				this.currentQuery.push(obj);
+				return this;
+			},
+
+			lessThan : function(attr, value){
+				var obj = {};
+				obj[attr] = {"$lt":value};
+				this.currentQuery.push(obj);
+				return this;
+			},	
+
+			lessThanOrEqual : function(attr, value){
+				var obj = {};
+				obj[attr] = {"$lte":value};
+				this.currentQuery.push(obj);
+				return this;
+			},
+
+			equalTo : function(attr, value){
+				var obj = {};
+				obj[attr] = value;
+				this.currentQuery.push(obj);
+				return this;
+			},
+
+			sortAscending : function(value){
+				var obj = {
+					$sort: {}
+				};
+				obj.$sort[value] = 1;
+				this.currentQuery.push(obj);
+				return this;
+			},
+
+			sortDescending : function(value){
+				var obj = {
+					$sort: {}
+				};
+				obj.$sort[value] = -1;
+				this.currentQuery.push(obj);
+				return this;
+			},
+
+			exists : function(attr){
+				var obj = {};
+				obj[attr] = {"$exists":true};
+				this.currentQuery.push(obj);
+				return this;
+			},
+
+			notExists : function(attr){
+				var obj = {};
+				obj[attr] = {"$exists":false};
+				this.currentQuery.push(obj);
+				return this;
+			},
+
+			exec : function(callback){
+				//build query
+				for(var i=0;i<this.currentQuery.length;i++){	
+					var partial = JSON.stringify(this.currentQuery[i]);
+					partial = partial.substring(1, partial.length-1);
+					if(i===0)
+						this.executable += partial;
+					else
+						this.executable += ','+partial;
+				}
+				if(!this.instance)
+					this.instance = this.model+'s'; 
+
+				return Stamplay.makeAPromise({
+					method: 'GET',
+					url: '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance +'?where={'+this.executable+'}' ,
+				},callback)
 			}
-			
-			for(var i=0; i<arguments.length; i++){
-				if(arguments[i] instanceof root.Stamplay.Query)
-					obj.$or.push(arguments[i].currentQuery[0]);
-				else
-					throw new Error('Please Or function take only Query object');	
-			}
-			this.currentQuery.push(obj);
-			return this;
-		};
-
-		this.between = function(attr,value1,value2){
-			var obj = {};
-			obj[attr] = {"$gte":value1, "$lte":value2};
-			this.currentQuery.push(obj);
-			return this;
-		};
-
-		this.greaterThan = function(attr, value){
-			var obj = {};
-			obj[attr] = {"$gt":value};
-			this.currentQuery.push(obj);
-			return this;
-		};	
-
-		this.greaterThanOrEqual = function(attr, value){
-			var obj = {};
-			obj[attr] = {"$gte":value};
-			this.currentQuery.push(obj);
-			return this;
-		};
-
-		this.lessThan = function(attr, value){
-			var obj = {};
-			obj[attr] = {"$lt":value};
-			this.currentQuery.push(obj);
-			return this;
-		};	
-
-		this.lessThanOrEqual = function(attr, value){
-			var obj = {};
-			obj[attr] = {"$lte":value};
-			this.currentQuery.push(obj);
-			return this;
-		};
-
-		this.equalTo = function(attr, value){
-			var obj = {};
-			obj[attr] = value;
-			this.currentQuery.push(obj);
-			return this;
-		};
-
-		this.sortAscending = function(value){
-			var obj = {
-				$sort: {}
-			};
-			obj.$sort[value] = 1;
-			this.currentQuery.push(obj);
-			return this;
-		};
-
-		this.sortDescending = function(value){
-			var obj = {
-				$sort: {}
-			};
-			obj.$sort[value] = -1;
-			this.currentQuery.push(obj);
-			return this;
-		};
-
-		this.exists = function(attr){
-			var obj = {};
-			obj[attr] = {"$exists":true};
-			this.currentQuery.push(obj);
-			return this;
-		};
-
-		this.notExists = function(attr){
-			var obj = {};
-			obj[attr] = {"$exists":false};
-			this.currentQuery.push(obj);
-			return this;
-		};
-
-		this.exec = function(){
-			//build query
-			for(var i=0;i<this.currentQuery.length;i++){	
-				var partial = JSON.stringify(this.currentQuery[i]);
-				partial = partial.substring(1, partial.length-1);
-				if(i===0)
-					this.executable += partial;
-				else
-					this.executable += ','+partial;
-			}
-			if(!this.instance)
-				this.instance = this.model+'s'; 
-
-			return Stamplay.makeAPromise({
-				method: 'GET',
-				url: '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance +'?where={'+this.executable+'}' ,
-			}).then(function (response) {
-				return response.data;
-			});
-		};
-
+		}
 	}
-
 	// Added Query Object to Stamplay
 	root.Stamplay.Query = Query;
-
-})(this);
-/* ---- STAMPLAY JS SDK ---- */
-/* Brick : User 
+})(this);/* 
+	Brick : User 
  	GET    '/api/user/VERSION/users'
   GET    '/api/user/VERSION/users/:id'
   POST   '/api/user/VERSION/users'
@@ -3314,169 +2640,126 @@ return Q;
 */
 
 (function (root) {
-
-	/**
+	/*
 		User component : Stamplay.User 
 		This class rappresent the User component on Stamplay platform
-		It very easy to use: Stamplay.User()
+		It very easy to use: Stamplay.User
 	*/
-
-	// constructor
-	function User() {
-			Stamplay.BaseComponent.call(this, 'user', 'users');
-
-			// currentUser function
-			// Modifies the instance of User 
-			this.Model.currentUser = function () {
-					var _this = this;
-					return Stamplay.makeAPromise({
-						method: 'GET',
-						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/getStatus'
-					}).then(function (response) {
-						_this.instance = response.user || {};
-					});
-				},
-				// isLoggedfunction
-				// return true if user is logged
-				this.Model.isLogged = function () {
-					if (this.instance._id)
-						return true;
-					return false;
-				};
-
-			// login function, it takes serviceOrEmail and password
-			// if exists password parameter, login strategy is local Authentication
-			// else the login strategy is service Authentication
-			// there are a lot of services : facebook, twitter
-			this.Model.login = function (serviceOrEmail, password) {
-					var _this = this;
-
-					if (password) {
-
-						var data = {
-							email: serviceOrEmail,
-							password: password
-						};
-
-						return Stamplay.makeAPromise({
-							method: 'POST',
-							data: data,
-							url: '/auth/' + Stamplay.VERSION + '/local/login',
-						}).then(function (response) {
-							_this.instance = response || {};
-						});
-
-					} else {
-						var jwt = store.get(window.location.origin + '-jwt');
-						if (jwt) {
-							// Store temporary cookie to permit user aggregation
-						  var date = new Date();
-			        date.setTime(date.getTime() + 5 * 60 * 1000);
-							document.cookie = 'stamplay.jwt='+jwt+'; expires=' + date.toGMTString() + '; path=/'
-						}
-						var url = '/auth/' + Stamplay.VERSION + '/' + serviceOrEmail + '/connect';
-						var port = (window.location.port) ? ':'+window.location.port : '';
-						root.Stamplay.Support.redirect(location.protocol + '//' + document.domain +port+ url);
-					}
-				},
-
-				// signup function, it takes objcet data
-				// If data.email and data.password doesn't exists return error
-				// any other attributes in data was save to User  
-				this.Model.signup = function (data) {
-
-					if (data.email && data.password) {
-
-						var _this = this;
-
-						return Stamplay.makeAPromise({
-							method: 'POST',
-							data: data,
-							url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId
-						}).then(function (response) {
-							_this.instance = response || {};
-						});
-
-					} else {
-						throw new Error('Stamplay.User.Model.signup(data) needs that data object has the email and password keys');
-					}
-				},
-
-				// logout function
-				this.Model.logout = function () {
-					if (Stamplay.USESTORAGE) {
-						store.remove(window.location.origin + '-jwt');
-					}
-					root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
-				};
-
-				this.Model.resetPassword = function(email, newPassword){
-					if(email && newPassword)
-						return Stamplay.makeAPromise({
-							method: 'POST',
-							data: {email: email, newPassword:newPassword },
-							url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/resetpassword'
-						}).then(function (response) {
-							return response;
-						});
-					else
-						return Stamplay.Support.errorSender(403, "Missing parameters in resetPassword method");
-				};
-
-				this.Model.activities = function (id) {
-					return Stamplay.makeAPromise({
-						method: 'GET',
-						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/activities'
-					}).then(function (response) {
-						return response;
-					});
-				};
-
-				this.Model.following = function (id) {
-					return Stamplay.makeAPromise({
-						method: 'GET',
-						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/following'
-					}).then(function (response) {
-						return response;
-					});
-				};
-
-				this.Model.followedBy = function (id) {
-					return Stamplay.makeAPromise({
-						method: 'GET',
-						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/followed_by'
-					}).then(function (response) {
-						return response;
-					});
-				};
-
-				this.Model.follow = function (id) {
-					return Stamplay.makeAPromise({
-						method: 'PUT',
-						data: {'userId': id},
-						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/follow'
-					}).then(function (response) {
-						return response;
-					});
-				};
-
-				this.Model.unfollow = function (id) {
-					return Stamplay.makeAPromise({
-						method: 'PUT',
-						data: {'userId': id},
-						url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/unfollow'
-					}).then(function (response) {
-						return response;
-					});
-				};
-
+	var  User = {
+		brickId:'user',
+		resourceId:'users',
+		currentUser : function (callbackObject){
+			return Stamplay.makeAPromise({
+				method: 'GET',
+				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/getStatus'
+			}, callbackObject)
+		},
+		login :function (data, callbackObject) {
+			return Stamplay.makeAPromise({
+				method: 'POST',
+				data: data,
+				url: '/auth/' + Stamplay.VERSION + '/local/login',
+			}, callbackObject)
+		},
+		socialLogin: function(provider){
+			if(provider){
+				var jwt = store.get(window.location.origin + '-jwt');
+				if (jwt) {
+					// Store temporary cookie to permit user aggregation
+				  var date = new Date();
+	        date.setTime(date.getTime() + 5 * 60 * 1000);
+					document.cookie = 'stamplay.jwt='+jwt+'; expires=' + date.toGMTString() + '; path=/'
+				}
+				var url = '/auth/' + Stamplay.VERSION + '/' + provider + '/connect';
+				var port = (window.location.port) ? ':'+window.location.port : '';
+				root.Stamplay.Support.redirect(location.protocol + '//' + document.domain +port+ url);
+			}else{
+				throw new Error('Stamplay.User.socialLogin needs the service name');
+			}
+		},
+		signup : function (data, callbackObject) {
+			return Stamplay.makeAPromise({
+				method: 'POST',
+				data: data,
+				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId
+			}, callbackObject)
+		},
+		logout : function () {
+			if (Stamplay.USESTORAGE) {
+				store.remove(window.location.origin + '-jwt');
+			}
+			root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
+		},
+		resetPassword: function(data, callbackObject){
+			return Stamplay.makeAPromise({
+				method: 'POST',
+				data: data,
+				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/resetpassword'
+			}, callbackObject)
+		},
+		activities : function (id, callbackObject) {
+			return Stamplay.makeAPromise({
+				method: 'GET',
+				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/activities'
+			}, callbackObject)
+		},
+		following : function (id, callbackObject) {
+			return Stamplay.makeAPromise({
+				method: 'GET',
+				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/following'
+			}, callbackObject)
+		},
+		followedBy : function (id, callbackObject) {
+				return Stamplay.makeAPromise({
+					method: 'GET',
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/followed_by'
+				}, callbackObject)
+		},
+		follow : function (id, callbackObject) {
+				return Stamplay.makeAPromise({
+					method: 'PUT',
+					data: {'userId': id},
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/follow'
+				}, callbackObject)
+		},
+		unfollow : function (id, callbackObject) {
+				return Stamplay.makeAPromise({
+					method: 'PUT',
+					data: {'userId': id},
+					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/unfollow'
+				}, callbackObject)
+		},
+		getRoles:function (callbackObject) {
+			return Stamplay.makeAPromise({
+				method: 'GET',
+				url: '/api/user/' + Stamplay.VERSION + '/roles'
+			}, callbackObject);
+		},
+		getRole:function (roleId, callbackObject) {
+				return Stamplay.makeAPromise({
+					method: 'GET',
+					url: '/api/user/' + Stamplay.VERSION + '/roles/'+ roleId
+				}, callbackObject);
 		}
-		//Added User to Stamplay 
+	}
+	_.extend(User, root.Stamplay.BaseComponent(User.brickId, User.resourceId))
+	delete User.patch
+	User.remove = function(id, callbackObject){
+		return Stamplay.makeAPromise({
+			method: 'DELETE',
+			url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + id
+		},callbackObject).then(function(resp){
+			if (Stamplay.USESTORAGE) {
+				var jwt = store.get(window.location.origin + '-jwt');
+				if (jwt) {
+					store.remove(window.location.origin + '-jwt');
+				}
+			}
+		})
+	}
+	//Added User to Stamplay 
 	root.Stamplay.User = User;
-
-})(this);
-/* ---- STAMPLAY JS SDK ---- */
-/* Brick : Cobject 
+})(this);/* Brick : Cobject 
 	GET     '/api/cobject/VERSION/:cobjectId 
 	GET     '/api/cobject/VERSION/:cobjectId/:id   
 	PUT     '/api/cobject/VERSION/:cobjectId/:id   
@@ -3496,42 +2779,52 @@ return Q;
 		This class rappresent the Custom Object component on Stamplay platform
 		It very easy to use: Stamplay.Cobject([customObjectid])
 	*/
-
+	var makeActionPromise = function (id, action, data, callbackObject) {
+		return Stamplay.makeAPromise({
+			method: 'PUT',
+			data: (data) ? data : {},
+			url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + id + '/' + action
+		}, callbackObject)
+	};
 	//constructor
 	function Cobject(resourceId) {
-		Stamplay.BaseComponent.call(this, 'cobject', resourceId, true);
-
-		this.Collection.findByAttr = function (attr) {
-			if(attr){
-				var _this = this;
-				return Stamplay.makeAPromise({
-					method: 'GET',
-					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/find/'+attr
-				}).then(function (response) {
-					if (response.totalElements && response.pagination) {
-							_this.totalElements = parseInt(response.totalElements);
-							_this.pagination = response.pagination;
-						}
-						_this.instance = [];
-						//iterate on data and instance a new Model with the prototype functions
-						response.data.forEach(function (singleInstance) {
-							var instanceModel = new root.Stamplay.Cobject(_this.resourceId);
-							instanceModel = instanceModel.Model.constructor(singleInstance);
-							_this.instance.push(instanceModel);
-						});
-						_this.length = _this.instance.length;
-				});
-			}else{
-				return Stamplay.Support.errorSender(403, "Missing parameter in findByAttr method");
-			}
+		if(resourceId){
+			return _.extend({
+				brickId:'cobject',
+				resourceId:resourceId,				
+				findByCurrentUser : function (attr, callbackObject) {
+					if( (arguments.length==1 && _.isFunction(arguments[0])) || arguments.length==0){
+						return Stamplay.makeAPromise({
+							method: 'GET',
+							url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/find/owner'
+						},arguments[0])
+					}else{
+						return Stamplay.makeAPromise({
+							method: 'GET',
+							url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/find/'+attr
+						},callbackObject)
+					}
+				},
+				upVote : function (id, callbackObject) {
+				 	return makeActionPromise.call(this, id, 'vote', {type:'upvote'}, callbackObject);
+				},
+				downVote: function (id, callbackObject) {
+					return makeActionPromise.call(this, id, 'vote', {type:'downvote'},callbackObject);
+				},
+				rate: function (id, vote, callbackObject) {
+					return makeActionPromise.call(this, id, 'rate', {rate: vote}, callbackObject);
+				},
+				comment: function (id, text, callbackObject) {
+					return makeActionPromise.call(this, id, 'comment', {text: text}, callbackObject);
+				}
+			}, root.Stamplay.BaseComponent('cobject', resourceId))
+		}else{
+			throw new Error('Stamplay.Cobject(cobjecId) needs a cobjectId');
 		}
 	}
 	//Added Cobject to Stamplay 
 	root.Stamplay.Cobject = Cobject;
-
-})(this);
-/* ---- STAMPLAY JS SDK ---- */
-/* Brick : Webhook 
+})(this);/* Brick : Webhook 
  *  POST   '/api/webhook/VERSION/:webhookId/catch'
  */
 (function (root) {
@@ -3544,51 +2837,43 @@ return Q;
 
 	//constructor
 	function Webhook(resourceId) {
-
 		var resource = resourceId.replace(/[^\w\s]/gi, '').trim().toLowerCase().replace(/\s+/g, '_');
-
-		this.url = '/api/webhook/' + Stamplay.VERSION + '/' + resource + '/catch';
-
-		this.post = function (data, queryParams) {
-			return Stamplay.makeAPromise({
-				method: 'POST',
-				data: data,
-				url: this.url,
-				thisParams: queryParams
-			});
-		};
-
-		this.put = function (data, queryParams) {
-			return Stamplay.makeAPromise({
-				method: 'PUT',
-				data: data,
-				url: this.url,
-				thisParams: queryParams
-			});
-		};
-
-		this.get = function (queryParams) {
-			return Stamplay.makeAPromise({
-				method: 'GET',
-				url: this.url,
-				thisParams: queryParams
-			});
-		};
-
+		var url = '/api/webhook/' + Stamplay.VERSION + '/' + resource + '/catch';
+		return {
+			post: function (data, callbackObject) {
+				return Stamplay.makeAPromise({
+					method: 'POST',
+					data: data,
+					url: url
+				}, callbackObject);
+			},
+			// put: function (data, queryParams, callbackObject) {
+			// 	return Stamplay.makeAPromise({
+			// 		method: 'PUT',
+			// 		data: data,
+			// 		url: url,
+			// 		thisParams: queryParams
+			// 	}, callbackObject);
+			// },
+			// get: function (queryParams, callbackObject) {
+			// 	return Stamplay.makeAPromise({
+			// 		method: 'GET',
+			// 		url: url,
+			// 		thisParams: queryParams
+			// 	}, callbackObject);
+			// }
+		}
 	}
 	//Added Webhook to Stamplay 
 	root.Stamplay.Webhook = Webhook;
 
-})(this);
-/* ---- STAMPLAY JS SDK ---- */
-/* Brick : stripe 
+})(this);/* Brick : stripe 
  * POST  'api/stripe/VERSION/customers'
  * POST  'api/stripe/VERSION/customers/:userId/cards'
  * POST  'api/stripe/VERSION/charges'
  * POST  'api/stripe/VERSION/customers/:userId/subscriptions'
  * GET   'api/stripe/VERSION/customers/:userId/subscriptions'
  */
-
 (function (root) {
 
 	/*
@@ -3596,297 +2881,183 @@ return Q;
 		This class rappresent the Stripe Object component on Stamplay platform
 		It very easy to use: Stamplay.Stripe()
 	*/
-
 	//constructor
-	function Stripe() {
-
-		this.url = '/api/stripe/' + Stamplay.VERSION + '/';
-
-		this.createCustomer = function (userId) {
-			if (Stamplay.Support.checkMongoId(userId))
+	var Stripe = {
+		url : '/api/stripe/' + Stamplay.VERSION + '/',
+		createCustomer : function (userId, callbackObject) {
+			return Stamplay.makeAPromise({
+				method: 'POST',
+				data: {'userId': userId},
+				url: this.url + 'customers'
+			}, callbackObject);
+		},
+		createCreditCard : function (userId, token, callbackObject) {
+			if (arguments.length >= 2 && (_.isString(arguments[0]) && _.isString(arguments[1]))) {
+				return Stamplay.makeAPromise({
+					method: 'POST',
+					data: {'token': token},
+					url: this.url + 'customers/' + userId + '/cards'
+				}, callbackObject);
+			} else {
+				throw new Error('Stamplay.Stripe.createCustomer:  missing parameters');
+			}
+		},
+		updateCreditCard : function (userId, token, callbackObject) {
+			if (arguments.length >= 2 && (_.isString(arguments[0]) && _.isString(arguments[1]))) {
+					return Stamplay.makeAPromise({
+						method: 'PUT',
+						data: {'token': token},
+						url: this.url + 'customers/' + userId + '/cards'
+					},callbackObject);
+			} else {
+				throw new Error('Stamplay.Stripe.updateCreditCard:  missing parameters');
+			}
+		},
+		charge : function (userId, token, amount, currency, callbackObject) {
+			if (arguments.length >= 4 && (_.isString(arguments[0]) && _.isString(arguments[1]) && _.isNumber(arguments[2]) && _.isString(arguments[3]) )){
 				return Stamplay.makeAPromise({
 					method: 'POST',
 					data: {
-						'userId': userId
+						'userId': userId,
+						'token': token,
+						'amount': amount,
+						'currency': currency
 					},
-					url: this.url + 'customers'
-				});
-			else
-				return Stamplay.Support.errorSender(403, "Invalid userId");
-		};
-
-		this.createCreditCard = function (userId, token) {
-			if (arguments.length == 2) {
-				if (Stamplay.Support.checkMongoId(userId))
-					return Stamplay.makeAPromise({
-						method: 'POST',
-						data: {
-							'token': token
-						},
-						url: this.url + 'customers/' + userId + '/cards'
-					});
-				else
-					return Stamplay.Support.errorSender(403, "Invalid userId");
+					url: this.url + 'charges'
+				}, callbackObject);
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in createCreditCard methods");
+				throw new Error('Stamplay.Stripe.charge:  missing or incorrect parameters');
 			}
-		};
-
-		this.updateCreditCard = function (userId, token) {
-			if (arguments.length == 2) {
-				if (Stamplay.Support.checkMongoId(userId))
-					return Stamplay.makeAPromise({
-						method: 'PUT',
-						data: {
-							'token': token
-						},
-						url: this.url + 'customers/' + userId + '/cards'
-					});
-				else
-					return Stamplay.Support.errorSender(403, "Invalid userId");
+		},
+		createSubscription : function (userId, planId, callbackObject) {
+			if (arguments.length >= 2 && (_.isString(arguments[0]) && _.isString(arguments[1]))) {
+				return Stamplay.makeAPromise({
+					method: 'POST',
+					data: {'planId': planId},
+					url: this.url + 'customers/' + userId + '/subscriptions'
+				}, callbackObject);
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in updateCreditCard methods");
+				throw new Error('Stamplay.Stripe.createSubscription:  missing parameters');
 			}
-		};
-
-		this.charge = function (userId, token, amount, currency) {
-			if (arguments.length == 4) {
-				if (Stamplay.Support.checkMongoId(userId))
-					return Stamplay.makeAPromise({
-						method: 'POST',
-						data: {
-							'userId': userId,
-							'token': token,
-							'amount': amount,
-							'currency': currency
-						},
-						url: this.url + 'charges'
-					});
-				else
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in charge methods");
-			}
-		};
-
-
-		this.createSubscription = function (userId, planId) {
-			if (arguments.length === 2) {
-				if (Stamplay.Support.checkMongoId(userId)) {
-					return Stamplay.makeAPromise({
-						method: 'POST',
-						data: {
-							'planId': planId
-						},
-						url: this.url + 'customers/' + userId + '/subscriptions'
-					});
-				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-				}
-			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in createSubscription methods");
-			}
-		};
-
-		this.getSubscriptions = function (userId, options) {
-			if (arguments.length >= 1) {
-				if (Stamplay.Support.checkMongoId(userId)) {
-					return Stamplay.makeAPromise({
-						method: 'GET',
-						url: this.url + 'customers/' + userId + '/subscriptions',
-						thisParams: options
-					});
-				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-				}
-			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscriptions methods");
-			}
-		};
-
-		this.getSubscription = function (userId, subscriptionId) {
-			if (arguments.length <= 2) {
-				if (Stamplay.Support.checkMongoId(userId)) {
-					return Stamplay.makeAPromise({
-						method: 'GET',
-						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
-					});
-				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-				}
-			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscription methods");
-			}
-		};
-
-		this.getCreditCard = function (userId) {
-			if (arguments.length == 1) {
-				if (Stamplay.Support.checkMongoId(userId)) {
-					return Stamplay.makeAPromise({
-						method: 'GET',
-						url: this.url + 'customers/' + userId + '/cards',
-					});
-				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-				}
-			} else {
-				return Stamplay.Support.errorSender(403, "Invalid parameter in getCreditCard method");
-			}
-		};
-
-		this.deleteSubscription = function (userId, subscriptionId, options) {
-			if (arguments.length === 2) {
-				if (Stamplay.Support.checkMongoId(userId)) {
-					return Stamplay.makeAPromise({
-						method: 'DELETE',
-						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
-						data: options || {}
-					});
-				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-				}
-			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in deleteSubscription methods");
-			}
-		};
-
-		this.updateSubscription = function (userId, subscriptionId, options) {
+		},
+		getSubscriptions : function (userId, options, callbackObject) {
 			if (arguments.length >= 2) {
-				if (Stamplay.Support.checkMongoId(userId)) {
-					options = options || {};
-					return Stamplay.makeAPromise({
-						method: 'PUT',
-						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
-						data: {
-							options: options
-						}
-					});
-				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-				}
+				return Stamplay.makeAPromise({
+					method: 'GET',
+					url: this.url + 'customers/' + userId + '/subscriptions',
+					thisParams: options
+				}, callbackObject);
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in updateSubscription methods");
+				throw new Error('Stamplay.Stripe.getSubscriptions:  missing parameters');
 			}
-		};
-
+		},
+		getSubscription : function (userId, subscriptionId, callbackObject) {
+			if (arguments.length >= 2 && (_.isString(arguments[0]) && _.isString(arguments[1]))) {
+				return Stamplay.makeAPromise({
+					method: 'GET',
+					url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
+				}, callbackObject);
+			} else {
+				throw new Error('Stamplay.Stripe.getSubscription:  missing parameters');
+			}
+		},
+		getCreditCard : function (userId, callbackObject) {
+			return Stamplay.makeAPromise({
+				method: 'GET',
+				url: this.url + 'customers/' + userId + '/cards',
+			}, callbackObject);
+		},
+		deleteSubscription : function (userId, subscriptionId, options, callbackObject) {
+			if (arguments.length >= 3) {
+				return Stamplay.makeAPromise({
+					method: 'DELETE',
+					url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
+					data: options
+				}, callbackObject);
+			} else {
+				throw new Error('Stamplay.Stripe.deleteSubscription:  missing parameters');
+			}
+		},
+		updateSubscription : function (userId, subscriptionId, options, callbackObject) {
+			if (arguments.length >= 3) {
+				return Stamplay.makeAPromise({
+					method: 'PUT',
+					url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
+					data: {
+						options: options
+					}
+				}, callbackObject);
+			} else {
+				throw new Error('Stamplay.Stripe.updateSubscription:  missing parameters');
+			}
+		}
 	}
-
 	root.Stamplay.Stripe = Stripe;
-
-})(this);
-/* ---- STAMPLAY JS SDK ---- */
-/* Brick : Codeblock 
- *  POST   '/api/codeblock/VERSION/:CodeblockId/catch'
+})(this);/* Brick : Codeblock 
+ *  POST   '/api/codeblock/VERSION/:CodeblockId/run'
  */
 (function (root) {
-
-
 	/*
 		Codeblock component : Stamplay.Codeblock 
 		This class rappresent the Codeblock Object component on Stamplay platform
 		Stamplay.Codeblock(codeblockId)
 	*/
-
-	//constructor
-	function Codeblock(resourceId) {
-
-		var resource = resourceId.replace(/[^\w\s]/gi, '').trim().toLowerCase().replace(/\s+/g, '_');
-
-		this.url = '/api/codeblock/' + Stamplay.VERSION + '/run/' + resource;
-
-		function _parseMethod(method) {
-			var result = 'POST';
-			if (typeof method === 'string') {
-				switch (method) {
-				case 'GET':
-				case 'POST':
-				case 'PUT':
-				case 'PATCH':
-				case 'DELETE':
-					result = method;
-					break;
-				default:
-					return Stamplay.Support.errorSender(403, "Invalid HTTP verb: available verbs are GET,POST,PUT,PATCH and DELETE");
-					break;
-				}
-			}
-			return result;
-		}
-
-		function _parseData(method, data) {
-			var result = (data == null || data == undefined) ? undefined : data;
+	function _parseMethod(method) {
+		var result = 'POST';
+		if (typeof method === 'string') {
 			switch (method) {
+			case 'GET':
 			case 'POST':
 			case 'PUT':
 			case 'PATCH':
+			case 'DELETE':
+				result = method;
 				break;
 			default:
-				result = undefined;
+				throw new Error('Stamplay.codeblock(): Invalid HTTP verb: available verbs are GET,POST,PUT,PATCH and DELETE');
 				break;
 			}
-			return result;
 		}
-
-		this.run = function (data, queryParams) {
-			/*
-				args 0
-															->  	POST			no body		no query params   
-				args 3 
-				 	method data queryParams -> 	method 		data 			queryParams	
-			*/
-			var finalMethod = _parseMethod('POST');
-			var finalData = _parseData('POST', data);
-			var finalQuery = queryParams;
-
-			return Stamplay.makeAPromise({
-				method: finalMethod,
-				data: finalData,
-				url: this.url,
-				thisParams: queryParams
-			});
-		};
-
+		return result;
 	}
-	//Added Webhook to Stamplay 
-	root.Stamplay.Codeblock = Codeblock;
 
-})(this);
-/* ---- STAMPLAY JS SDK ---- */
-/* Brick : Role 
- *  POST   '/api/user/VERSION/roles'
- */
-(function (root) {
-
-	/*
-		Role component : Stamplay.Role 
-		This class rappresent the Role Object component on Stamplay platform
-		It very easy to use: Stamplay.Role()
-	*/
-
+	function _parseData(method, data) {
+		var result = (data == null || data == undefined) ? undefined : data;
+		switch (method) {
+		case 'POST':
+		case 'PUT':
+		case 'PATCH':
+			break;
+		default:
+			result = undefined;
+			break;
+		}
+		return result;
+	}
 	//constructor
-	function Role() {
-
-		this.url = '/api/user/' + Stamplay.VERSION + '/roles';
-
-		this.getRoles = function () {
-			return Stamplay.makeAPromise({
-				method: 'GET',
-				url: this.url
-			});
-		};
-
-		this.getRole = function (roleId) {
-			if (Stamplay.Support.checkMongoId(roleId))
+	function Codeblock(resourceId) {
+		var resource = resourceId.replace(/[^\w\s]/gi, '').trim().toLowerCase().replace(/\s+/g, '_');
+		var url = '/api/codeblock/' + Stamplay.VERSION + '/run/' + resource;
+		return {
+			run :function (data, queryParams, callbackObject) {
+				/*
+					args 0
+																  ->  POST			no     		no query params   
+					args 3 
+					method data queryParams -> 	method 		data 			queryParams	
+				*/				
+				var finalMethod = _parseMethod('POST');
+				var finalData = _parseData('POST', data);
+				var finalQuery = queryParams;
 				return Stamplay.makeAPromise({
-					method: 'GET',
-					url: this.url + '/'+roleId
-				});
-			else
-				return Stamplay.Support.errorSender(403, "Invalid roleId");
-		};
-
+					method: finalMethod,
+					data: finalData,
+					url: url,
+					thisParams: queryParams
+				}, callbackObject);
+			}
+		}
 	}
-	//Added Role to Stamplay 
-	root.Stamplay.Role = Role;
-
+	//Added Codeblock to Stamplay 
+	root.Stamplay.Codeblock = Codeblock;
 })(this);
