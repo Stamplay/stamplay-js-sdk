@@ -35,7 +35,7 @@ var data = {
 	"description":"A description",
 	"title":"New title"
 }
-Stamplay.Cobject('foo').save(data, function(error, result){
+Stamplay.Object('foo').save(data, function(error, result){
 	//manage the result and the error
 })
 ```
@@ -45,7 +45,7 @@ var data = {
 	"description":"A description",
 	"title":"New title"
 }
-Stamplay.Cobject('foo').save(data).then(function(result){
+Stamplay.Object('foo').save(data).then(function(result){
 	//manage the result
 },function(error){
 	//manage the error
@@ -73,7 +73,7 @@ This JavaScript SDK expose the following components:
   * <a href="#User.followedBy"><code>followedBy(id, [callback])</code></a>
   * <a href="#User.following"><code>following(id, [callback])</code></a>
   * <a href="#User.activities"><code>activities(id, [callback])</code></a>
-* [Custom Object](#custom-object)
+* [Object](#custom-object)
 	* <a href="#custom-object.save"> <code>save(data, [callback])</code></a>
 	* <a href="#custom-object.get"> <code>get(data, [callback])</code></a>
 	* <a href="#custom-object.remove"> <code>remove(id, [callback])</code></a>
@@ -84,9 +84,9 @@ This JavaScript SDK expose the following components:
 	* <a href="#custom-object.downVote"> <code>downVote(id, [callback])</code></a>
 	* <a href="#custom-object.rate"> <code>rate(id, rate, [callback])</code></a>
 	* <a href="#custom-object.comment"> <code>comment(id, text, [callback])</code></a>
-* [Codeblock](#codeblock)
+* [Code Block](#codeblock)
 	* <a href="#codeblock.run"> <code>run(data, queryParams, [callback])</code></a> 
-* [WebHook](#webhook)
+* [Webhook](#webhook)
 	* <a href="#webhook.post"> <code>post(data, [callback])</code></a> 
 * [Stripe](#stripe)
 	* <a href="#stripe.charge"> <code>charge(userId, token, amount, currency, [callback])</code></a> 
@@ -117,7 +117,6 @@ Also this components the sdk have some support objects to help you in common ope
 	* <a href="#query.exec"> <code>exec([callback])</code></a> 
 
 
-  
 -------------------------------------------------------
 
 # Build

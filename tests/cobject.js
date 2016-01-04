@@ -9,7 +9,7 @@ suite('Cobject ', function () {
 
   //For each test
   setup('Creating a new Cobject model', function () {
-    cinstance = Stamplay.Cobject('cobjectId');
+    cinstance = Stamplay.Object('cobjectId');
     instance = {}
     instance.number_property = 5;
     instance.string_property = 'a_string';
@@ -43,7 +43,7 @@ suite('Cobject ', function () {
   });
 
   test('get method (callback)', function (done) {
-    var newCinstance = Stamplay.Cobject('cobjectId');
+    var newCinstance = Stamplay.Object('cobjectId');
     newCinstance.get({}, function(err,resp){
       assert.equal(resp._id, 123);
       assert.equal(resp.comment, 'Hey there');
@@ -56,7 +56,7 @@ suite('Cobject ', function () {
   });
 
   test('get method (promise)', function (done) {
-    var newCinstance = Stamplay.Cobject('cobjectId');
+    var newCinstance = Stamplay.Object('cobjectId');
     newCinstance.get({}).then(function(resp){
       assert.equal(resp._id, 123);
       assert.equal(resp.comment, 'Hey there');

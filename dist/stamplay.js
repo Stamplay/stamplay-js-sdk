@@ -1,4 +1,4 @@
-/*! Stamplay v1.3.3 | (c) 2015 Stamplay *///     Underscore.js 1.8.3
+/*! Stamplay v1.3.3 | (c) 2016 Stamplay *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -2775,9 +2775,9 @@ return Q;
 (function (root) {
 
 	/**
-		Custom object component : Stamplay.Cobject 
-		This class rappresent the Custom Object component on Stamplay platform
-		It very easy to use: Stamplay.Cobject([customObjectid])
+		Custom object component : Stamplay.Object 
+		This class rappresent the Object component on Stamplay platform
+		It very easy to use: Stamplay.Object([Objectid])
 	*/
 	var makeActionPromise = function (id, action, data, callbackObject) {
 		return Stamplay.makeAPromise({
@@ -2787,7 +2787,7 @@ return Q;
 		}, callbackObject)
 	};
 	//constructor
-	function Cobject(resourceId) {
+	function Object(resourceId) {
 		if(resourceId){
 			return _.extend({
 				brickId:'cobject',
@@ -2819,11 +2819,11 @@ return Q;
 				}
 			}, root.Stamplay.BaseComponent('cobject', resourceId))
 		}else{
-			throw new Error('Stamplay.Cobject(cobjecId) needs a cobjectId');
+			throw new Error('Stamplay.Object(objecId) needs a objectId');
 		}
 	}
 	//Added Cobject to Stamplay 
-	root.Stamplay.Cobject = Cobject;
+	root.Stamplay.Object = Object;
 })(this);/* Brick : Webhook 
  *  POST   '/api/webhook/VERSION/:webhookId/catch'
  */

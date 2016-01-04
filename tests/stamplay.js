@@ -50,7 +50,7 @@ suite('Stamplay ', function () {
 		});
 
 		test('expose Cobject constructor', function () {
-			assert.typeOf(window.Stamplay.Cobject, 'function', 'window.Stamplay.Cobject constructor exists');
+			assert.typeOf(window.Stamplay.Object, 'function', 'window.Stamplay.Object constructor exists');
 		});
 
 		test('expose User constructor', function () {
