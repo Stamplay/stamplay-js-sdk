@@ -89,6 +89,10 @@ suite('Stamplay Query ', function () {
       assert.equal(queryWithArray.currentQuery[0].$or[1].e, 'e');
     });
 
+    test('has pahination method', function () {
+      assert.isFunction( Stamplay.Query('cobject', 'tag').pagination);
+    });
+
     test('has exec method', function () {
       assert.isFunction( Stamplay.Query('cobject', 'tag').exec);
     });
@@ -158,6 +162,27 @@ suite('Stamplay Query ', function () {
         done()
       });
       assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() pagination works (callback)', function (done) {
+      var query =  Stamplay.Query('cobject', 'tag').exists('pippo').pagination(1,2);
+      query.exec(function (err, result) {done()});
+      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&page=1&per_page=2');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+
+    test('exec() pagination works (promise)', function (done) {
+      var query =  Stamplay.Query('cobject', 'tag').exists('pippo').pagination(1,2);
+      query.exec().then(function (result) {
+        done()
+      });
+      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&page=1&per_page=2');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');

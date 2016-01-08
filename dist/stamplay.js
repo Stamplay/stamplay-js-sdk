@@ -2514,6 +2514,7 @@ return Q;
 		return {
 			model : model,
 			instance : instance,
+			paginationQuery : '',
 			currentQuery : [],
 			executable : '',
 
@@ -2531,6 +2532,11 @@ return Q;
 				}
 				this.currentQuery.push(obj);
 				return this
+			},
+
+			pagination : function(page, per_page){
+				this.paginationQuery = '&page='+page+'&per_page='+per_page;
+				return this;
 			},
 
 			between : function(attr,value1,value2){
@@ -2622,7 +2628,7 @@ return Q;
 
 				return Stamplay.makeAPromise({
 					method: 'GET',
-					url: '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance +'?where={'+this.executable+'}' ,
+					url: '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance +'?where={'+this.executable+'}'+ this.paginationQuery  ,
 				},callback)
 			}
 		}
