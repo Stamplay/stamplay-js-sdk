@@ -47,7 +47,7 @@
 			this.Model.login = function (serviceOrEmail, password) {
 					var _this = this;
 
-					if (password) {
+					if (password || password === '') {
 
 						var data = {
 							email: serviceOrEmail,
