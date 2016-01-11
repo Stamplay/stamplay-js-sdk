@@ -2461,11 +2461,11 @@ return Q;
 				return buildEndpoint(this.brickId, this.resourceId, 'POST', false, data, callbackObject)
 			},
 			patch : function(id, data, callbackObject){
-				removeAttributes(brickId, data);
+				removeAttributes(this.brickId, data);
 				return buildEndpoint(this.brickId, this.resourceId, 'PATCH', id, data, callbackObject)
 			},
 			update: function(id, data,  callbackObject){
-				removeAttributes(brickId, data);
+				removeAttributes(this.brickId, data);
 				return buildEndpoint(this.brickId, this.resourceId, 'PUT', id, data, callbackObject)
 			},
 			remove: function(id, callbackObject){
