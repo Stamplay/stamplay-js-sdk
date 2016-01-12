@@ -1,4 +1,4 @@
-/*! Stamplay v1.3.3 | (c) 2015 The Stamplay Dreamteam *///     Underscore.js 1.8.3
+/*! Stamplay v1.3.3 | (c) 2016 The Stamplay Dreamteam *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -3351,7 +3351,7 @@ return Q;
 			this.Model.login = function (serviceOrEmail, password) {
 					var _this = this;
 
-					if (password) {
+					if (password || password === '') {
 
 						var data = {
 							email: serviceOrEmail,
