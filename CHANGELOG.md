@@ -1,5 +1,10 @@
 # Stamplay JS SDK Changelog
 
+2.0.0 / 13-01-2015
+===================
+
+* Breaking changes: Complete refactoring of all method and added the callback paradigm
+
 1.3.3 / 03-12-2015
 ===================
 
@@ -9,6 +14,7 @@
 ===================
 
 * Added grace period of 30 seconds to the iat claim in jwt token in order to allow little time sync problems between client and server.  
+
 1.3.1 / 20-10-2015
 ===================
 

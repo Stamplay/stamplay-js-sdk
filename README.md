@@ -12,9 +12,9 @@ This library  gives you access to the powerful Stamplay cloud platform from your
 <br>
 
 ##Getting Started
-The SDK is available for download on our website or on our CDN. To get started import the library in your project and initialize t by calling `init` function with your `appId`
+The SDK is available for download on our website or on our CDN. To get started import the library in your project and initialize it by calling `init` function with your `appId`
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/1.3.3/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.0/stamplay.min.js"></script>
 <script> Stamplay.init("APPID"); </script>
 ```
 
@@ -129,7 +129,7 @@ grunt build
 You can also download this project and using all the precompiled files in src folder
 
 # One more thing
-Go to [API Reference](https://stamplay.com/docs/jssdk) to see a lot of examples.
+Go to [API Reference](https://stamplay.com/docs/jssdk/v2/reference) to see a lot of examples.
 Enjoy!
 <img align="right" src="https://editor.stamplay.com/img/logo-robot-no-neck.png" height=60>
 
