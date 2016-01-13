@@ -1,5 +1,10 @@
 # Stamplay JS SDK Changelog
 
+2.0.0 / 13-01-2015
+===================
+
+* Breaking changes: Complete refactoring of all method and added the callback paradigm
+
 1.3.3 / 03-12-2015
 ===================
 

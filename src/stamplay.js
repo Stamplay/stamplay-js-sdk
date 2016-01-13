@@ -1,7 +1,7 @@
-/* globals  Stamplay,store,Q */
+/* globals  Stamplay,store */
 /**
 @author Stamplay
-@version 1.0
+@version 2.0
 @description an awesome javascript sdk for Stamplay 
 */
 /* Initizialize library */
@@ -11,8 +11,6 @@
 	root.Stamplay = root.Stamplay || {};
 	/* setting attribute API Version */
 	root.Stamplay.VERSION = "v1";
-	/* Silence Q logging */
-	Q.stopUnhandledRejectionTracking();
 	/* appId */
 	root.Stamplay.APPID = "";
 	/* baseUrl */
@@ -21,13 +19,11 @@
 	if (window.localStorage && store.enabled) {
 		root.Stamplay.USESTORAGE = true;
 	}
-
 	if (getURLParameter('jwt')) {
 		if (Stamplay.USESTORAGE) {
 			store.set(window.location.origin + '-jwt', getURLParameter('jwt'));
 		}
 	}
-
 	/* init method for setup the base url */
 	root.Stamplay.init = function (appId) {
 		root.Stamplay.BASEURL = 'https://' + appId + '.stamplayapp.com';
