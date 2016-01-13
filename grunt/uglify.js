@@ -7,7 +7,7 @@ module.exports = {
 	'dist': {
 		options: {
 			sourceMap: true,
-			banner: "/*! Stamplay v<%= pkg.version %> | " + "(c) " + new Date().getFullYear() + " The Stamplay Dreamteam */ \n"
+			banner: "/*! Stamplay v<%= pkg.version %> | " + "(c) " + new Date().getFullYear() + " Stamplay */"
 		},
 		files: {
 			'dist/stamplay.min.js': ['dist/stamplay.js']

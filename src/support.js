@@ -15,28 +15,13 @@
 		};
 
 		// function for check if you have user with a specific email 
-		this.validateEmail = function (email) {
+		this.validateEmail = function (email, callbackObject) {
 			return Stamplay.makeAPromise({
 				method: 'POST',
-				data: {
-					email: email
-				},
+				data: { email: email },
 				url: '/api/auth/' + Stamplay.VERSION + '/validate/email'
-			});
+			}, callbackObject);
 		};
-
-		this.checkMongoId = function(mongoId){
-			var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
-			var syntaxValid = (((typeof mongoId) === 'string') && checkForHexRegExp.test(mongoId));
-			return syntaxValid;
-		};
-
-		this.errorSender = function(status, message){
-			var deferred = Q.defer();
-			deferred.reject({"status":status, "message":message});
-			return deferred.promise;
-		};
-
 	}
 	var support = new Support();
 	// Added Support Object to Stamplay

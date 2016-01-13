@@ -1,65 +1,74 @@
 /* globals suite,window,test,assert */
-suite('Stamplay Object ', function () {
+suite('Stamplay ', function () {
 
-	test('exists as window property', function () {
-		assert.typeOf(window.Stamplay, 'object', 'window.Stamplay exists');
-	});
-
-	test('exists as Stamplay VERSION property', function () {
-		assert.typeOf(window.Stamplay.VERSION, 'String', 'window.Stamplay.VERSION exists');
-	});
-
-	test('exists as Stamplay BASEURL property', function () {
-		assert.typeOf(window.Stamplay.BASEURL, 'String', 'window.Stamplay.BASEURL exists');
-	});
-
-	test('exists as Stamplay APPID property', function () {
-		assert.typeOf(window.Stamplay.APPID, 'String', 'window.Stamplay.APPID exists');
-	});
-
-	if (window.localStorage && store.enabled) {
-		test('exists as Stamplay USESTORAGE property', function () {
-			assert.typeOf(window.Stamplay.USESTORAGE, 'Boolean', 'window.Stamplay.USESTORAGE exists');
+	suite('Property', function(){
+		test('exists as window property', function () {
+			assert.typeOf(window.Stamplay, 'object', 'window.Stamplay exists');
 		});
-	}
 
-	test('exists as Stamplay function called init', function () {
-		assert.typeOf(window.Stamplay.init, 'function', 'window.Stamplay.init exists');
-	});
+		test('exists as Stamplay VERSION property', function () {
+			assert.typeOf(window.Stamplay.VERSION, 'String', 'window.Stamplay.VERSION exists');
+		});
 
-	test('exists as Stamplay function called removeAttributes', function () {
-		assert.typeOf(window.Stamplay.removeAttributes, 'function', 'window.Stamplay.removeAttributes exists');
-	});
+		test('exists as Stamplay BASEURL property', function () {
+			assert.typeOf(window.Stamplay.BASEURL, 'String', 'window.Stamplay.BASEURL exists');
+		});
 
-	test('exists as Stamplay function called makeAPromise', function () {
-		assert.typeOf(window.Stamplay.makeAPromise, 'function', 'window.Stamplay.makeAPromise exists');
-	});
+		test('exists as Stamplay APPID property', function () {
+			assert.typeOf(window.Stamplay.APPID, 'String', 'window.Stamplay.APPID exists');
+		});
 
-	test('expose Support object', function () {
-		assert.typeOf(window.Stamplay.Support, 'object', 'window.Stamplay.Support exists');
-	});
+		if (window.localStorage && store.enabled) {
+			test('exists as Stamplay USESTORAGE property', function () {
+				assert.typeOf(window.Stamplay.USESTORAGE, 'Boolean', 'window.Stamplay.USESTORAGE exists');
+			});
+		}
+	})
 
-	test('expose Query object', function () {
-		assert.typeOf(window.Stamplay.Query, 'function', 'window.Stamplay.Query constructor exists');
-	});
+	suite('Function', function(){
+		test('exists as Stamplay function called init', function () {
+			assert.typeOf(window.Stamplay.init, 'function', 'window.Stamplay.init exists');
+		});
 
-	test('expose Cobject constructor', function () {
-		assert.typeOf(window.Stamplay.Cobject, 'function', 'window.Stamplay.Cobject constructor exists');
-	});
+		test('exists as Stamplay function called makeAPromise', function () {
+			assert.typeOf(window.Stamplay.makeAPromise, 'function', 'window.Stamplay.makeAPromise exists');
+		});
 
-	test('expose User constructor', function () {
-		assert.typeOf(window.Stamplay.User, 'function', 'window.Stamplay.User constructor exists');
-	});
+		test('init function works fine', function () {		
+			assert.equal(window.Stamplay.BASEURL, '');
+			assert.equal(window.Stamplay.APPID, '' );
+			window.Stamplay.init('test');
+			assert.equal(window.Stamplay.BASEURL, 'https://test.stamplayapp.com');
+			assert.equal(window.Stamplay.APPID, 'test' );
+			window.Stamplay.init('');
+		});
+	})
 
-	test('expose Webhook constructor', function () {
-		assert.typeOf(window.Stamplay.Webhook, 'function', 'window.Stamplay.Webhook constructor exists');
-	});
+	suite('Constructor',function(){
+		test('expose Support object', function () {
+			assert.typeOf(window.Stamplay.Support, 'object', 'window.Stamplay.Support exists');
+		});
 
-	test('expose Stripe constructor', function () {
-		assert.typeOf(window.Stamplay.Stripe, 'function', 'window.Stamplay.Stripe constructor exists');
-	});
+		test('expose Cobject constructor', function () {
+			assert.typeOf(window.Stamplay.Object, 'function', 'window.Stamplay.Object constructor exists');
+		});
 
-	test('expose Codeblock constructor', function () {
-		assert.typeOf(window.Stamplay.Codeblock, 'function', 'window.Stamplay.Codeblock constructor exists');
-	});
+		test('expose User constructor', function () {
+			assert.typeOf(window.Stamplay.User, 'object', 'window.Stamplay.User constructor exists');
+		});
+
+		test('expose Webhook constructor', function () {
+			assert.typeOf(window.Stamplay.Webhook, 'function', 'window.Stamplay.Webhook constructor exists');
+		});
+
+		test('expose Stripe constructor', function () {
+			assert.typeOf(window.Stamplay.Stripe, 'object', 'window.Stamplay.Stripe constructor exists');
+		});
+
+		test('expose Codeblock constructor', function () {
+			assert.typeOf(window.Stamplay.Codeblock, 'function', 'window.Stamplay.Codeblock constructor exists');
+		});
+	})
+	
+	
 })

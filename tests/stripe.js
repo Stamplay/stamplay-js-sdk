@@ -4,7 +4,7 @@
 
     setup('Creating a new Stripe', function () {
 
-      stripe = new Stamplay.Stripe();
+      stripe =  Stamplay.Stripe;
       response = {
         name: 'stripe'
       };
@@ -66,11 +66,10 @@
       assert.isFunction(stripe.getCreditCard, 'getCreditCard method exists');
     });
 
-    test('createCustomer post request', function (done) {
-      stripe.createCustomer('123451234512345123451234').then(function () {
+    test('createCustomer post request (callback)', function (done) {
+      stripe.createCustomer('123451234512345123451234',function(err, response) {
         done();
-      });
-
+      })
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
       assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers');
@@ -78,219 +77,226 @@
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
-
     });
 
-    test('createCustomer post request invalid mongoid', function (done) {
-      stripe.createCustomer('1224').then(function () {}, function () {
+    test('createCustomer post request (promise)', function (done) {
+      stripe.createCustomer('123451234512345123451234').then(function(response){
         done();
-      });
-
-    });
-
-    test('createCreditCard post request', function (done) {
-      stripe.createCreditCard('123451234512345123451234', 'token').then(function () {
-        done();
-      });
-
+      })
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers');
 
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
-
     });
 
-    test('createCreditCard post request invalid mongoid', function (done) {
-      stripe.createCreditCard('1224', 'token').then(function () {}, function () {
+    test('createCreditCard post request (callback)', function (done) {
+      stripe.createCreditCard('123451234512345123451234', 'token', function(err, response) {
         done();
-      });
+      })
+      assert.equal(this.request.method, 'POST');
+      assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
     });
 
-    test('createCreditCard post request missing parameters', function (done) {
-      stripe.createCreditCard('123451234512345123451234').then(function () {}, function () {
+    test('createCreditCard post request (promise)', function (done) {
+      stripe.createCreditCard('123451234512345123451234', 'token').then(function(response){
         done();
-      });
+      })
+      assert.equal(this.request.method, 'POST');
+      assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
     });
 
-    test('updateCreditCard put request', function (done) {
-      stripe.updateCreditCard('123451234512345123451234', 'token').then(function () {
+    test('updateCreditCard put request (callback)', function (done) {
+      stripe.updateCreditCard('123451234512345123451234', 'token', function(err,response){
         done();
-      });
-
+      })
       assert.equal(this.request.method, 'PUT');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
       assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
-
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
 
     });
 
-    test('updateCreditCard put request invalid mongoid', function (done) {
-      stripe.updateCreditCard('1224', 'token').then(function () {}, function () {
+    test('updateCreditCard put request (promise)', function (done) {
+      stripe.updateCreditCard('123451234512345123451234', 'token').then(function(response){
         done();
-      });
+      })
+      assert.equal(this.request.method, 'PUT');
+      assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
     });
 
-    test('updateCreditCard put request missing parameters', function (done) {
-      stripe.updateCreditCard('123451234512345123451234').then(function () {}, function () {
+    test('charge post request (callback)', function (done) {
+      stripe.charge('123451234512345123451234', 'token', 1234, 'EUR', function(err, response) {
         done();
-      });
-    });
-
-    test('charge post request', function (done) {
-      stripe.charge('123451234512345123451234', 'token', 1234, 'EUR').then(function () {
-        done();
-      });
-
+      })
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
       assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/charges');
-
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
 
     });
 
-    test('charge post request invalid mongoid', function (done) {
-      stripe.charge('1224', 'token', 1234, 'eur').then(function () {}, function () {
+    test('charge post request (promise)', function (done) {
+      stripe.charge('123451234512345123451234', 'token', 1234, 'EUR').then(function(response) {
         done();
-      });
-    });
-
-    test('charge post request with userid and no token', function (done) {
-      stripe.charge('123451234512345123451234', null, 1234, 'eur').then(function () {
-        done();
-      });
-
+      })
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
       assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/charges');
-
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
-
     });
 
-    test('createSubscription post request', function (done) {
-      stripe.createSubscription('123451234512345123451234', 'planId').then(function () {
-        done();
-      });
-
+    test('createSubscription post request (callback)', function (done) {
+      stripe.createSubscription('123451234512345123451234', 'planId', function(err, response) {
+        done()
+      })
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
       assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions');
-
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
-
     });
 
-    test('createSubscription post request invalid mongoid', function (done) {
-      stripe.createSubscription('1224', 'planId').then(function () {}, function () {
-        done();
-      });
+    test('createSubscription post request (promise)', function (done) {
+      stripe.createSubscription('123451234512345123451234', 'planId').then(function(response) {
+        done()
+      })
+      assert.equal(this.request.method, 'POST');
+      assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
     });
+   
 
-    test('createSubscription post request missing parameters', function (done) {
-      stripe.createSubscription('123').then(function () {}, function () {
-        done();
-      });
-    });
-
-    test('getSubscriptions get request', function (done) {
-      stripe.getSubscriptions('123451234512345123451234').then(function () {
-        done();
-      });
-
+    test('getSubscriptions get request no options (callback)', function (done) {
+      stripe.getSubscriptions('123451234512345123451234',null, function(err, response) {
+        done()})
       assert.equal(this.request.method, 'GET');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
       assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions');
-
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
-
     });
 
-    test('getSubscriptions get request invalid mongoid', function (done) {
-      stripe.getSubscriptions('1224').then(function () {}, function () {
-        done();
-      });
+    test('getSubscriptions get request no options (promise)', function (done) {
+      stripe.getSubscriptions('123451234512345123451234', null).then(function(response) {
+        done()})
+      assert.equal(this.request.method, 'GET');
+      assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
     });
 
-    test('getSubscriptions post request missing parameters', function (done) {
-      stripe.getSubscriptions().then(function () {}, function () {
-        done();
-      });
+    test('getSubscriptions get request with options (callback)', function (done) {
+      stripe.getSubscriptions('123451234512345123451234', {page:1,per_page:2}, function(err, response) {
+        done()})
+      assert.equal(this.request.method, 'GET');
+      assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions?page=1&per_page=2');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
     });
 
-    test('getSubscription get request', function (done) {
-      stripe.getSubscription('123451234512345123451234', 'subscriptionId').then(function () {
-        done();
-      });
+    test('getSubscriptions get request with options (promise)', function (done) {
+      stripe.getSubscriptions('123451234512345123451234', {page:1,per_page:2}).then(function(response) {
+        done()
+      })
+      assert.equal(this.request.method, 'GET');
+      assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions?page=1&per_page=2');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
+    });
 
+    test('getSubscription get request (callback)', function (done) {
+      stripe.getSubscription('123451234512345123451234', 'subscriptionId', function(err, result){
+        done();
+      })
       assert.equal(this.request.method, 'GET');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
       assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
-
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
-
     });
 
-    test('getSubscription get request invalid mongoid', function (done) {
-      stripe.getSubscriptions('1224', 'subscriptionId').then(function () {}, function () {
+    test('getSubscription get request (promise)', function (done) {
+      stripe.getSubscription('123451234512345123451234', 'subscriptionId').then(function(result){
         done();
-      });
-    });
-    test('getSubscription post request missing parameters', function (done) {
-      stripe.getSubscription().then(function () {}, function () {
-        done();
-      });
+      })
+      assert.equal(this.request.method, 'GET');
+      assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
     });
 
-    test('deleteSubscription delete request', function (done) {
-      stripe.deleteSubscription('123451234512345123451234', 'subscriptionId').then(function () {
+    test('deleteSubscription delete request (callback)', function (done) {
+      stripe.deleteSubscription('123451234512345123451234', 'subscriptionId', null, function(err, response) {
         done();
-      }, function (err) {
-        console.log(err);
-      });
-
+      })
       assert.equal(this.request.method, 'DELETE');
       assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
-
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
     });
 
-    test('deleteSubscription delete request invalid mongoid', function (done) {
-      stripe.deleteSubscription('1224', 'subscriptionId').then(function () {}, function () {
+    test('deleteSubscription delete request (promise)', function (done) {
+      stripe.deleteSubscription('123451234512345123451234', 'subscriptionId', null).then(function(response) {
         done();
-      });
+      })
+      assert.equal(this.request.method, 'DELETE');
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
     });
 
-    test('deleteSubscription delete request missing parameters', function (done) {
-      stripe.deleteSubscription().then(function () {}, function () {
-        done();
-      });
+    test('updateSubscription put request (callback)', function (done) {
+      stripe.updateSubscription('123451234512345123451234', 'subscriptionId', null, function(err, result){
+        done()
+      })
+      assert.equal(this.request.method, 'PUT');
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
     });
 
-    test('updateSubscription put request', function (done) {
-      stripe.updateSubscription('123451234512345123451234', 'subscriptionId').then(function () {
-        done();
-      }, function (err) {
-        console.log(err);
-      });
+    test('updateSubscription put request (promise)', function (done) {
+      stripe.updateSubscription('123451234512345123451234', 'subscriptionId',null).then(function(err, result){
+        done()
+      })
 
       assert.equal(this.request.method, 'PUT');
       assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
@@ -300,20 +306,16 @@
       }, JSON.stringify(response));
     });
 
-    test('updateSubscription put request with options', function (done) {
+    test('updateSubscription put request with options (callback)', function (done) {
       var stripeOptions = {
         planId: 'planId'
       };
-
       var expectedBody = {
         options: stripeOptions
       }
-
-      stripe.updateSubscription('123451234512345123451234', 'subscriptionId', stripeOptions).then(function () {
-        done();
-      }, function (err) {
-        console.log(err);
-      });
+      stripe.updateSubscription('123451234512345123451234', 'subscriptionId', stripeOptions, function(err, result){
+        done()
+      })
       assert.equal(this.request.method, 'PUT');
       assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
       assert.equal(this.request.requestBody, JSON.stringify(expectedBody));
@@ -323,22 +325,39 @@
       }, JSON.stringify(response));
     });
 
-    test('updateSubscription get request invalid mongoid', function (done) {
-      stripe.updateSubscription('1224', 'subscriptionId').then(function () {}, function () {
-        done();
-      });
+    test('updateSubscription put request with options (promise)', function (done) {
+      var stripeOptions = {
+        planId: 'planId'
+      };
+      var expectedBody = {
+        options: stripeOptions
+      }
+      stripe.updateSubscription('123451234512345123451234', 'subscriptionId', stripeOptions).then(function(result){
+        done()
+      })
+      assert.equal(this.request.method, 'PUT');
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
+      assert.equal(this.request.requestBody, JSON.stringify(expectedBody));
+
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
     });
 
-    test('updateSubscription post request missing parameters', function (done) {
-      stripe.updateSubscription().then(function () {}, function () {
-        done();
-      });
+    test('getCreditCard get request (callback)', function (done) {
+      stripe.getCreditCard('123451234512345123451234', function(err, result){done()})
+
+      assert.equal(this.request.method, 'GET');
+      assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
+      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
+
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, JSON.stringify(response));
     });
 
-    test('getCreditCard get request', function (done) {
-      stripe.getCreditCard('123451234512345123451234').then(function () {
-        done();
-      });
+    test('getCreditCard get request (promise)', function (done) {
+      stripe.getCreditCard('123451234512345123451234').then(function(result){done()})
 
       assert.equal(this.request.method, 'GET');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
@@ -348,18 +367,6 @@
         "Content-Type": "application/json"
       }, JSON.stringify(response));
 
-    });
-
-    test('getCreditCard get request invalid mongoid', function (done) {
-      stripe.getCreditCard('1224').then(function () {}, function () {
-        done();
-      });
-    });
-
-    test('getCreditCard post request missing parameters', function (done) {
-      stripe.getCreditCard().then(function () {}, function () {
-        done();
-      });
     });
 
   });

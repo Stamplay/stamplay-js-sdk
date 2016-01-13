@@ -6,7 +6,6 @@
  * POST  'api/stripe/VERSION/customers/:userId/subscriptions'
  * GET   'api/stripe/VERSION/customers/:userId/subscriptions'
  */
-
 (function (root) {
 
 	/*
@@ -14,181 +13,116 @@
 		This class rappresent the Stripe Object component on Stamplay platform
 		It very easy to use: Stamplay.Stripe()
 	*/
-
 	//constructor
-	function Stripe() {
-
-		this.url = '/api/stripe/' + Stamplay.VERSION + '/';
-
-		this.createCustomer = function (userId) {
-			if (Stamplay.Support.checkMongoId(userId))
+	var Stripe = {
+		url : '/api/stripe/' + Stamplay.VERSION + '/',
+		createCustomer : function (userId, callbackObject) {
+			return Stamplay.makeAPromise({
+				method: 'POST',
+				data: {'userId': userId},
+				url: this.url + 'customers'
+			}, callbackObject);
+		},
+		createCreditCard : function (userId, token, callbackObject) {
+			if (arguments.length >= 2 && (_.isString(arguments[0]) && _.isString(arguments[1]))) {
+				return Stamplay.makeAPromise({
+					method: 'POST',
+					data: {'token': token},
+					url: this.url + 'customers/' + userId + '/cards'
+				}, callbackObject);
+			} else {
+				throw new Error('Stamplay.Stripe.createCustomer:  missing parameters');
+			}
+		},
+		updateCreditCard : function (userId, token, callbackObject) {
+			if (arguments.length >= 2 && (_.isString(arguments[0]) && _.isString(arguments[1]))) {
+					return Stamplay.makeAPromise({
+						method: 'PUT',
+						data: {'token': token},
+						url: this.url + 'customers/' + userId + '/cards'
+					},callbackObject);
+			} else {
+				throw new Error('Stamplay.Stripe.updateCreditCard:  missing parameters');
+			}
+		},
+		charge : function (userId, token, amount, currency, callbackObject) {
+			if (arguments.length >= 4 && (_.isString(arguments[0]) && _.isString(arguments[1]) && _.isNumber(arguments[2]) && _.isString(arguments[3]) )){
 				return Stamplay.makeAPromise({
 					method: 'POST',
 					data: {
-						'userId': userId
+						'userId': userId,
+						'token': token,
+						'amount': amount,
+						'currency': currency
 					},
-					url: this.url + 'customers'
-				});
-			else
-				return Stamplay.Support.errorSender(403, "Invalid userId");
-		};
-
-		this.createCreditCard = function (userId, token) {
-			if (arguments.length == 2) {
-				if (Stamplay.Support.checkMongoId(userId))
-					return Stamplay.makeAPromise({
-						method: 'POST',
-						data: {
-							'token': token
-						},
-						url: this.url + 'customers/' + userId + '/cards'
-					});
-				else
-					return Stamplay.Support.errorSender(403, "Invalid userId");
+					url: this.url + 'charges'
+				}, callbackObject);
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in createCreditCard methods");
+				throw new Error('Stamplay.Stripe.charge:  missing or incorrect parameters');
 			}
-		};
-
-		this.updateCreditCard = function (userId, token) {
-			if (arguments.length == 2) {
-				if (Stamplay.Support.checkMongoId(userId))
-					return Stamplay.makeAPromise({
-						method: 'PUT',
-						data: {
-							'token': token
-						},
-						url: this.url + 'customers/' + userId + '/cards'
-					});
-				else
-					return Stamplay.Support.errorSender(403, "Invalid userId");
+		},
+		createSubscription : function (userId, planId, callbackObject) {
+			if (arguments.length >= 2 && (_.isString(arguments[0]) && _.isString(arguments[1]))) {
+				return Stamplay.makeAPromise({
+					method: 'POST',
+					data: {'planId': planId},
+					url: this.url + 'customers/' + userId + '/subscriptions'
+				}, callbackObject);
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in updateCreditCard methods");
+				throw new Error('Stamplay.Stripe.createSubscription:  missing parameters');
 			}
-		};
-
-		this.charge = function (userId, token, amount, currency) {
-			if (arguments.length == 4) {
-				if (Stamplay.Support.checkMongoId(userId))
-					return Stamplay.makeAPromise({
-						method: 'POST',
-						data: {
-							'userId': userId,
-							'token': token,
-							'amount': amount,
-							'currency': currency
-						},
-						url: this.url + 'charges'
-					});
-				else
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in charge methods");
-			}
-		};
-
-
-		this.createSubscription = function (userId, planId) {
-			if (arguments.length === 2) {
-				if (Stamplay.Support.checkMongoId(userId)) {
-					return Stamplay.makeAPromise({
-						method: 'POST',
-						data: {
-							'planId': planId
-						},
-						url: this.url + 'customers/' + userId + '/subscriptions'
-					});
-				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-				}
-			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in createSubscription methods");
-			}
-		};
-
-		this.getSubscriptions = function (userId, options) {
-			if (arguments.length >= 1) {
-				if (Stamplay.Support.checkMongoId(userId)) {
-					return Stamplay.makeAPromise({
-						method: 'GET',
-						url: this.url + 'customers/' + userId + '/subscriptions',
-						thisParams: options
-					});
-				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-				}
-			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscriptions methods");
-			}
-		};
-
-		this.getSubscription = function (userId, subscriptionId) {
-			if (arguments.length <= 2) {
-				if (Stamplay.Support.checkMongoId(userId)) {
-					return Stamplay.makeAPromise({
-						method: 'GET',
-						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
-					});
-				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-				}
-			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in getSubscription methods");
-			}
-		};
-
-		this.getCreditCard = function (userId) {
-			if (arguments.length == 1) {
-				if (Stamplay.Support.checkMongoId(userId)) {
-					return Stamplay.makeAPromise({
-						method: 'GET',
-						url: this.url + 'customers/' + userId + '/cards',
-					});
-				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-				}
-			} else {
-				return Stamplay.Support.errorSender(403, "Invalid parameter in getCreditCard method");
-			}
-		};
-
-		this.deleteSubscription = function (userId, subscriptionId, options) {
-			if (arguments.length === 2) {
-				if (Stamplay.Support.checkMongoId(userId)) {
-					return Stamplay.makeAPromise({
-						method: 'DELETE',
-						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
-						data: options || {}
-					});
-				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-				}
-			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in deleteSubscription methods");
-			}
-		};
-
-		this.updateSubscription = function (userId, subscriptionId, options) {
+		},
+		getSubscriptions : function (userId, options, callbackObject) {
 			if (arguments.length >= 2) {
-				if (Stamplay.Support.checkMongoId(userId)) {
-					options = options || {};
-					return Stamplay.makeAPromise({
-						method: 'PUT',
-						url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
-						data: {
-							options: options
-						}
-					});
-				} else {
-					return Stamplay.Support.errorSender(403, "Invalid userId");
-				}
+				return Stamplay.makeAPromise({
+					method: 'GET',
+					url: this.url + 'customers/' + userId + '/subscriptions',
+					thisParams: options
+				}, callbackObject);
 			} else {
-				return Stamplay.Support.errorSender(403, "Missing parameters in updateSubscription methods");
+				throw new Error('Stamplay.Stripe.getSubscriptions:  missing parameters');
 			}
-		};
-
+		},
+		getSubscription : function (userId, subscriptionId, callbackObject) {
+			if (arguments.length >= 2 && (_.isString(arguments[0]) && _.isString(arguments[1]))) {
+				return Stamplay.makeAPromise({
+					method: 'GET',
+					url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
+				}, callbackObject);
+			} else {
+				throw new Error('Stamplay.Stripe.getSubscription:  missing parameters');
+			}
+		},
+		getCreditCard : function (userId, callbackObject) {
+			return Stamplay.makeAPromise({
+				method: 'GET',
+				url: this.url + 'customers/' + userId + '/cards',
+			}, callbackObject);
+		},
+		deleteSubscription : function (userId, subscriptionId, options, callbackObject) {
+			if (arguments.length >= 3) {
+				return Stamplay.makeAPromise({
+					method: 'DELETE',
+					url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
+					data: options
+				}, callbackObject);
+			} else {
+				throw new Error('Stamplay.Stripe.deleteSubscription:  missing parameters');
+			}
+		},
+		updateSubscription : function (userId, subscriptionId, options, callbackObject) {
+			if (arguments.length >= 3) {
+				return Stamplay.makeAPromise({
+					method: 'PUT',
+					url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,
+					data: {
+						options: options
+					}
+				}, callbackObject);
+			} else {
+				throw new Error('Stamplay.Stripe.updateSubscription:  missing parameters');
+			}
+		}
 	}
-
 	root.Stamplay.Stripe = Stripe;
-
 })(this);
