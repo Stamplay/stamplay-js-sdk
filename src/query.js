@@ -119,8 +119,15 @@
 					else
 						this.executable += ','+partial;
 				}
-				if(!this.instance)
-					this.instance = this.model+'s'; 
+				
+				switch(this.model){
+					case 'object':
+						this.model = 'cobject'
+					break
+					default:
+						this.instance = 'users'
+					break
+				}
 
 				return Stamplay.makeAPromise({
 					method: 'GET',
