@@ -56,65 +56,65 @@ Stamplay.Object('foo').save(data).then(function(result){
 This JavaScript SDK expose the following components:
  
 * [User](#user)
-	* <a href="#User.save"> <code>save(data, [callback])</code></a>
-  * <a href="#User.get"> <code>get(data, [callback])</code></a>
-  * <a href="#User.remove"> <code>remove(id, [callback])</code></a>
-  * <a href="#User.update"> <code>update(id, data, [callback] )</code></a>
-  * <a href="#User.currentUser"> <code>currentUser([callback])</code></a>
-  * <a href="#User.login"><code>login(data, [callback])</code></a>
-  * <a href="#User.socialLogin"><code>socialLogin(provider)</code></a>
-  * <a href="#User.signup"><code>signup(data, [callback])</code></a>
-  * <a href="#User.logout"><code>logout()</code></a>
-  * <a href="#User.resetPassword"><code>resetPassword(data, [callback])</code></a>
-  * <a href="#User.getRoles"><code>getRoles([callback])</code></a>
-  * <a href="#User.getRole"><code>getRole(id, [callback])</code></a>
-  * <a href="#User.follow"><code>follow(id, [callback])</code></a>
-  * <a href="#User.unfollow"><code>unfollow(id, [callback])</code></a>
-  * <a href="#User.followedBy"><code>followedBy(id, [callback])</code></a>
-  * <a href="#User.following"><code>following(id, [callback])</code></a>
-  * <a href="#User.activities"><code>activities(id, [callback])</code></a>
+	* <code>save(data, [callback])</code>
+  * <code>get(data, [callback])</code>
+  * <code>remove(id, [callback])</code>
+  * <code>update(id, data, [callback] )</code>
+  * <code>currentUser([callback])</code>
+  * <code>login(data, [callback])</code>
+  * <code>socialLogin(provider)</code>
+  * <code>signup(data, [callback])</code>
+  * <code>logout()</code>
+  * <code>resetPassword(data, [callback])</code>
+  * <code>getRoles([callback])</code>
+  * <code>getRole(id, [callback])</code>
+  * <code>follow(id, [callback])</code>
+  * <code>unfollow(id, [callback])</code>
+  * <code>followedBy(id, [callback])</code>
+  * <code>following(id, [callback])</code>
+  * <code>activities(id, [callback])</code>
 * [Object](#custom-object)
-	* <a href="#custom-object.save"> <code>save(data, [callback])</code></a>
-	* <a href="#custom-object.get"> <code>get(data, [callback])</code></a>
-	* <a href="#custom-object.remove"> <code>remove(id, [callback])</code></a>
-	* <a href="#custom-object.update"> <code>update(id, data, [callback])</code></a>
-	* <a href="#custom-object.patch"> <code>patch(id, data, [callback])</code></a>
-	* <a href="#custom-object.findByCurrentUser"> <code>findByCurrentUser([attr], [callback])</code></a>
-	* <a href="#custom-object.upVote"> <code>upVote(id, [callback])</code></a>
-	* <a href="#custom-object.downVote"> <code>downVote(id, [callback])</code></a>
-	* <a href="#custom-object.rate"> <code>rate(id, rate, [callback])</code></a>
-	* <a href="#custom-object.comment"> <code>comment(id, text, [callback])</code></a>
+	* <code>save(data, [callback])</code>
+	* <code>get(data, [callback])</code>
+	* <code>remove(id, [callback])</code>
+	* <code>update(id, data, [callback])</code>
+	* <code>patch(id, data, [callback])</code>
+	* <code>findByCurrentUser([attr], [callback])</code>
+	* <code>upVote(id, [callback])</code>
+	* <code>downVote(id, [callback])</code>
+	* <code>rate(id, rate, [callback])</code>
+	* <code>comment(id, text, [callback])</code>
 * [Code Block](#codeblock)
-	* <a href="#codeblock.run"> <code>run(data, queryParams, [callback])</code></a> 
+	* <code>run(data, queryParams, [callback])</code> 
 * [Webhook](#webhook)
-	* <a href="#webhook.post"> <code>post(data, [callback])</code></a> 
+	* <code>post(data, [callback])</code> 
 * [Stripe](#stripe)
-	* <a href="#stripe.charge"> <code>charge(userId, token, amount, currency, [callback])</code></a> 
-	* <a href="#stripe.createCreditCard"> <code>createCreditCard(userId, token, [callback])</code></a> 
-	* <a href="#stripe.createCustomer"> <code>createCustomer(userId, [callback])</code></a> 
-	* <a href="#stripe.createSubscription"> <code>createSubscriptionuserId, planId, [callback])</code></a> 
-	* <a href="#stripe.deleteSubscription"> <code>deleteSubscription(userId, subscriptionId, options, [callback])</code></a> 
-	* <a href="#stripe.getCreditCard"> <code>getCreditCard(userId, [callback])</code></a> 
-	* <a href="#stripe.getSubscription"> <code>getSubscription(userId, subscriptionId, [callback])</code></a> 
-	* <a href="#stripe.getSubscriptions"> <code>getSubscriptions(userId, options, [callback])</code></a> 
-	* <a href="#stripe.updateCreditCard"> <code>updateCreditCard(userId, token, [callback])</code></a> 
-	* <a href="#stripe.updateSubscription"> <code>updateSubscription(userId, subscriptionId, options, [callback])</code></a> 
+	* <code>charge(userId, token, amount, currency, [callback])</code> 
+	* <code>createCreditCard(userId, token, [callback])</code> 
+	* <code>createCustomer(userId, [callback])</code> 
+	* <code>createSubscriptionuserId, planId, [callback])</code> 
+	* <code>deleteSubscription(userId, subscriptionId, options, [callback])</code> 
+	* <code>getCreditCard(userId, [callback])</code> 
+	* <code>getSubscription(userId, subscriptionId, [callback])</code> 
+	* <code>getSubscriptions(userId, options, [callback])</code> 
+	* <code>updateCreditCard(userId, token, [callback])</code> 
+	* <code>updateSubscription(userId, subscriptionId, options, [callback])</code> 
 
 Also this components the sdk have some support objects to help you in common operation:
 
 * [Query](#query)
-	* <a href="#query.greaterThan"> <code>greaterThan(attr, value)</code></a> 
-	* <a href="#query.greaterThanOrEqual"> <code>greaterThanOrEqual(attr, value)</code></a> 
-	* <a href="#query.lessThan"> <code>lessThan(attr, value)</code></a> 
-	* <a href="#query.lessThanOrEqual"> <code>lessThanOrEqual(attr, value)</code></a> 
-	* <a href="#query.between"> <code>between(attr, value1, value2)</code></a> 
-	* <a href="#query.equalTo"> <code>equalTo(attr, value)</code></a> 
-	* <a href="#query.exists"> <code>exists(attr)</code></a> 
-	* <a href="#query.notExists"> <code>notExists(attr)</code></a> 
-	* <a href="#query.sortAscending"> <code>sortAscending(attr)</code></a> 
-	* <a href="#query.sortDescending"> <code>sortDescending(attr)</code></a> 
-	* <a href="#query.or"> <code>or(query,..)</code></a> 
-	* <a href="#query.exec"> <code>exec([callback])</code></a> 
+	* <code>greaterThan(attr, value)</code> 
+	* <code>greaterThanOrEqual(attr, value)</code> 
+	* <code>lessThan(attr, value)</code> 
+	* <code>lessThanOrEqual(attr, value)</code> 
+	* <code>between(attr, value1, value2)</code> 
+	* <code>equalTo(attr, value)</code> 
+	* <code>exists(attr)</code> 
+	* <code>notExists(attr)</code> 
+	* <code>sortAscending(attr)</code> 
+	* <code>sortDescending(attr)</code> 
+	* <code>or(query,..)</code> 
+	* <code>exec([callback])</code> 
 
 -------------------------------------------------------
 
