@@ -1,4 +1,4 @@
-/*! Stamplay v2.0 | (c) 2016 Stamplay *///     Underscore.js 1.8.3
+/*! Stamplay v2.0.1 | (c) 2016 Stamplay *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -2515,7 +2515,11 @@ return Q;
 			model : model,
 			instance : instance,
 			paginationQuery : '',
-			currentQuery : [],
+			sortQuery:'',
+			selectionQuery:'',
+			populateQuery: '',
+			populateOwnerQuery:'',
+			whereQuery : [],
 			executable : '',
 
 			or : function(){
@@ -2525,12 +2529,12 @@ return Q;
 					arguments = arguments[0];
 				}
 				for(var i=0; i<arguments.length; i++){
-					if(arguments[i].currentQuery)	
-						obj.$or.push(arguments[i].currentQuery[0]);
+					if(arguments[i].whereQuery)	
+						obj.$or.push(arguments[i].whereQuery[0]);
 					else
 						throw new Error('Please Or function take only Query object');
 				}
-				this.currentQuery.push(obj);
+				this.whereQuery.push(obj);
 				return this
 			},
 
@@ -2542,81 +2546,95 @@ return Q;
 			between : function(attr,value1,value2){
 				var obj = {};
 				obj[attr] = {"$gte":value1, "$lte":value2};
-				this.currentQuery.push(obj);
+				this.whereQuery.push(obj);
 				return this;
 			},
 
 			greaterThan : function(attr, value){
 				var obj = {};
 				obj[attr] = {"$gt":value};
-				this.currentQuery.push(obj);
+				this.whereQuery.push(obj);
 				return this;
 			},	
 
 			greaterThanOrEqual : function(attr, value){
 				var obj = {};
 				obj[attr] = {"$gte":value};
-				this.currentQuery.push(obj);
+				this.whereQuery.push(obj);
 				return this;
 			},
 
 			lessThan : function(attr, value){
 				var obj = {};
 				obj[attr] = {"$lt":value};
-				this.currentQuery.push(obj);
+				this.whereQuery.push(obj);
 				return this;
 			},	
 
 			lessThanOrEqual : function(attr, value){
 				var obj = {};
 				obj[attr] = {"$lte":value};
-				this.currentQuery.push(obj);
+				this.whereQuery.push(obj);
 				return this;
 			},
 
 			equalTo : function(attr, value){
 				var obj = {};
 				obj[attr] = value;
-				this.currentQuery.push(obj);
+				this.whereQuery.push(obj);
 				return this;
 			},
 
 			sortAscending : function(value){
-				var obj = {
-					$sort: {}
-				};
-				obj.$sort[value] = 1;
-				this.currentQuery.push(obj);
+				this.sortQuery ='&sort='+value
 				return this;
 			},
 
 			sortDescending : function(value){
-				var obj = {
-					$sort: {}
-				};
-				obj.$sort[value] = -1;
-				this.currentQuery.push(obj);
-				return this;
+				this.sortQuery ='&sort=-'+value
+				return this
 			},
 
 			exists : function(attr){
 				var obj = {};
 				obj[attr] = {"$exists":true};
-				this.currentQuery.push(obj);
+				this.whereQuery.push(obj);
 				return this;
 			},
 
 			notExists : function(attr){
 				var obj = {};
 				obj[attr] = {"$exists":false};
-				this.currentQuery.push(obj);
+				this.whereQuery.push(obj);
 				return this;
+			},
+
+			regex: function(attr, regex, options){
+				var obj = {};
+				obj[attr] = {"$regex":regex, "$options": options};
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			populate: function(){
+				this.populateQuery ='&populate=true'
+				return this
+			},
+			
+			populateOwner: function(){
+				this.populateOwnerQuery ='&populate_owner=true'
+				return this
+			},
+
+			select: function(){
+				this.selectionQuery =  '&select='+ Array.prototype.slice.call(arguments).join(", ").replace(" ",'')
+				return this
 			},
 
 			exec : function(callback){
 				//build query
-				for(var i=0;i<this.currentQuery.length;i++){	
-					var partial = JSON.stringify(this.currentQuery[i]);
+				for(var i=0;i<this.whereQuery.length;i++){	
+					var partial = JSON.stringify(this.whereQuery[i]);
 					partial = partial.substring(1, partial.length-1);
 					if(i===0)
 						this.executable += partial;
@@ -2633,9 +2651,13 @@ return Q;
 					break
 				}
 
+				var Url = '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance 
+								+'?where={'+this.executable+'}'+ this.paginationQuery + this.selectionQuery 
+								+ this.sortQuery + this.populateQuery + this.populateOwnerQuery
+
 				return Stamplay.makeAPromise({
 					method: 'GET',
-					url: '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance +'?where={'+this.executable+'}'+ this.paginationQuery  ,
+					url:  Url,
 				},callback)
 			}
 		}

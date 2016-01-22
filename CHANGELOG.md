@@ -1,5 +1,10 @@
 # Stamplay JS SDK Changelog
 
+2.0.1 / 22-01-2015
+===================
+
+* New method to query object: select, populate, populateOwner and regex
+
 2.0.0 / 13-01-2015
 ===================
 

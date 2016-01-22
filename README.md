@@ -103,18 +103,23 @@ This JavaScript SDK expose the following components:
 Also this components the sdk have some support objects to help you in common operation:
 
 * [Query](#query)
-	* <a href="#query.greaterThan"> <code>greaterThan(attr, value)</code></a> 
-	* <a href="#query.greaterThanOrEqual"> <code>greaterThanOrEqual(attr, value)</code></a> 
-	* <a href="#query.lessThan"> <code>lessThan(attr, value)</code></a> 
-	* <a href="#query.lessThanOrEqual"> <code>lessThanOrEqual(attr, value)</code></a> 
-	* <a href="#query.between"> <code>between(attr, value1, value2)</code></a> 
-	* <a href="#query.equalTo"> <code>equalTo(attr, value)</code></a> 
-	* <a href="#query.exists"> <code>exists(attr)</code></a> 
-	* <a href="#query.notExists"> <code>notExists(attr)</code></a> 
-	* <a href="#query.sortAscending"> <code>sortAscending(attr)</code></a> 
-	* <a href="#query.sortDescending"> <code>sortDescending(attr)</code></a> 
-	* <a href="#query.or"> <code>or(query,..)</code></a> 
-	* <a href="#query.exec"> <code>exec([callback])</code></a> 
+	* <code>greaterThan(attr, value)</code> 
+	* <code>greaterThanOrEqual(attr, value)</code> 
+	* <code>lessThan(attr, value)</code> 
+	* <code>lessThanOrEqual(attr, value)</code> 
+  * <code>pagination(page, per_page)</code>
+	* <code>between(attr, value1, value2)</code> 
+	* <code>equalTo(attr, value)</code> 
+	* <code>exists(attr)</code> 
+	* <code>notExists(attr)</code> 
+	* <code>sortAscending(attr)</code> 
+	* <code>sortDescending(attr)</code>
+	* <code>populate()</code>
+	* <code>populateOwner()</code>
+	* <code>select(attr,...)</code>
+	* <code>regex(attr, regex, options)</code>
+	* <code>or(query,..)</code> 
+	* <code>exec([callback])</code> 
 
 -------------------------------------------------------
 
