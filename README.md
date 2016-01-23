@@ -127,7 +127,17 @@ grunt build
 ```
 You can also download this project and using all the precompiled files in src folder
 
-# One more thing
+
+## Contributing
+
+1. Fork it ( https://github.com/[my-github-username]/stamplay-js-sdk/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
+
+
+## One more thing
 Go to [API Reference](https://stamplay.com/docs/jssdk/v2/reference) to see a lot of examples.
 Enjoy!
 <img align="right" src="https://editor.stamplay.com/img/logo-robot-no-neck.png" height=60>
