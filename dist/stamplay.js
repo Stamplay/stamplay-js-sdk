@@ -2512,6 +2512,7 @@ return Q;
 	// model is required ever
 	function Query(model, instance) {
 		return {
+			
 			model : model,
 			instance : instance,
 			paginationQuery : '',
@@ -2543,7 +2544,7 @@ return Q;
 				return this;
 			},
 
-			between : function(attr,value1,value2){
+			between : function(attr, value1, value2){
 				var obj = {};
 				obj[attr] = {"$gte":value1, "$lte":value2};
 				this.whereQuery.push(obj);
