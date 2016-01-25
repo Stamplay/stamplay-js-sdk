@@ -12,7 +12,7 @@ This library  gives you access to the powerful Stamplay cloud platform from your
 <br>
 
 ##Getting Started
-The SDK is available for download on our website, on Bower and or on our CDN. To get started import the library in your project and initialize it by calling `init` function with your `appId`
+The SDK is available for download on our website, on Bower and on our CDN. To get started import the library in your project and initialize it by calling `init` function with your `appId`
 ```HTML
 <script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.0.1/stamplay.min.js"></script>
 <script> Stamplay.init("APPID"); </script>
