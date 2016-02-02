@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
+    "grunt-cli": "^0.1.13",
     "grunt-concurrent": "~0.3.0",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-compress": "^0.14.0",
