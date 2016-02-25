@@ -1,4 +1,10 @@
 # Stamplay JS SDK Changelog
+2.0.2 / 22-01-2015
+===================
+
+* Added asyncronous logout method
+* Force user to use init method
+* Added geoPoint integrations
 
 2.0.1 / 22-01-2015
 ===================

@@ -14,7 +14,7 @@ This library  gives you access to the powerful Stamplay cloud platform from your
 ##Getting Started
 The SDK is available for download on our website, on Bower and on our CDN. To get started import the library in your project and initialize it by calling `init` function with your `appId`
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.0.1/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.0.2/stamplay.min.js"></script>
 <script> Stamplay.init("APPID"); </script>
 ```
 
@@ -108,7 +108,7 @@ Also this components the sdk have some support objects to help you in common ope
 	* <code>greaterThanOrEqual(attr, value)</code> 
 	* <code>lessThan(attr, value)</code> 
 	* <code>lessThanOrEqual(attr, value)</code> 
-  	* <code>pagination(page, per_page)</code>
+  * <code>pagination(page, per_page)</code>
 	* <code>between(attr, value1, value2)</code> 
 	* <code>equalTo(attr, value)</code> 
 	* <code>exists(attr)</code> 
@@ -119,6 +119,14 @@ Also this components the sdk have some support objects to help you in common ope
 	* <code>populateOwner()</code>
 	* <code>select(attr,...)</code>
 	* <code>regex(attr, regex, options)</code>
+	* <code>near(type, coordinates, maxDistance, minDistance)</code>
+	* <code>nearSphere(type, coordinates, maxDistance, minDistance)</code>
+	* <code>geoIntersects(type, coordinates)</code>
+	* <code>geoWithinGeometry(type, coordinates)</code>
+	* <code>geoWithinPolygon(coordinates)</code>
+	* <code>geoWithinBox(coordinates)</code>
+	* <code>geoWithinCenter(coordinates)</code>
+	* <code>geoWithinCenterSphere(coordinates)</code>
 	* <code>or(query,..)</code> 
 	* <code>exec([callback])</code> 
 

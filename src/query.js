@@ -6,6 +6,25 @@
 (function (root) {
 	// constructor for Query Object
 	// model is required ever
+	function _createGeoQuery(queryOperator, shapeOperator, type, coordinates, maxDistance, minDistance) {
+		var obj ={_geolocation:{}}
+		obj._geolocation[queryOperator] = {};
+		obj._geolocation[queryOperator][shapeOperator] = {type:type, coordinates:coordinates}
+		if(maxDistance){
+			obj._geolocation[queryOperator].$maxDistance = maxDistance
+		}
+		if(minDistance){
+			obj._geolocation[queryOperator].$minDistance = minDistance	
+		}
+		return obj;
+	}
+	
+	function _createGeoWithinQuery(shapeOperator, coordinates){
+		var obj = {_geolocation:{$geoWithin:{}}}
+		obj._geolocation.$geoWithin[shapeOperator] = coordinates
+		return obj;
+	}
+
 	function Query(model, instance) {
 		return {
 			
@@ -126,6 +145,54 @@
 			select: function(){
 				this.selectionQuery =  '&select='+ Array.prototype.slice.call(arguments).join(", ").replace(" ",'')
 				return this
+			},
+
+			near: function(type, coordinates, maxDistance, minDistance){
+				var obj = _createGeoQuery("$near", "$geometry", type, coordinates, maxDistance, minDistance)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			nearSphere: function(type, coordinates, maxDistance, minDistance){
+				var obj = _createGeoQuery("$nearSphere", "$geometry", type, coordinates, maxDistance, minDistance)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			geoIntersects: function(type, coordinates){
+				var obj = _createGeoQuery("$geoIntersects", "$geometry", type, coordinates)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			geoWithinGeometry:function( type, coordinates){
+				var obj = _createGeoQuery("$geoWithin", "$geometry", type, coordinates)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			geoWithinPolygon: function(coordinates){
+				var obj = _createGeoWithinQuery('$polygon', coordinates)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			geoWithinBox: function(coordinates){
+				var obj = _createGeoWithinQuery('$box', coordinates)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			geoWithinCenter: function(coordinates){
+				var obj = _createGeoWithinQuery('$center',coordinates)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			geoWithinCenterSphere: function(coordinates){
+				var obj = _createGeoWithinQuery('$centerSphere',coordinates)
+				this.whereQuery.push(obj);
+				return this;
 			},
 
 			exec : function(callback){

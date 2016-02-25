@@ -1,4 +1,4 @@
-/*! Stamplay v2.0.1 | (c) 2016 Stamplay *///     Underscore.js 1.8.3
+/*! Stamplay v2.0.2 | (c) 2016 Stamplay *///     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -2255,7 +2255,7 @@ return Q;
 	root.Stamplay.init = function (appId) {
 		root.Stamplay.BASEURL = 'https://' + appId + '.stamplayapp.com';
 		root.Stamplay.APPID = appId;
-	};
+	}
 
 	function getURLParameter(name) {
 		return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
@@ -2278,17 +2278,14 @@ return Q;
 	/* function for handling any calls to Stamplay Platform */
 	/* Options parameter is an object  */
 	root.Stamplay.makeAPromise = function (options, callback) {
-		var headerStamplay;
 		if (options.thisParams) {
 			parseQueryParams(options);
 		}		
 		if (root.Stamplay.APPID != "") {
 			options.url = root.Stamplay.BASEURL + options.url;
-			headerStamplay = root.Stamplay.APPID;
+			var headerStamplay = root.Stamplay.APPID;
 		} else {
-			headerStamplay = location.host;
-			headerStamplay = headerStamplay.replace(/^www\./, '');
-			headerStamplay = headerStamplay.replace(/:[0-9]*$/g, '');
+			throw new Error('Please before using the sdk call method init with appId')
 		}
 		var req = new XMLHttpRequest();
 		req.open(options.method || 'GET', options.url, options.async || true);
@@ -2510,6 +2507,25 @@ return Q;
 (function (root) {
 	// constructor for Query Object
 	// model is required ever
+	function _createGeoQuery(queryOperator, shapeOperator, type, coordinates, maxDistance, minDistance) {
+		var obj ={_geolocation:{}}
+		obj._geolocation[queryOperator] = {};
+		obj._geolocation[queryOperator][shapeOperator] = {type:type, coordinates:coordinates}
+		if(maxDistance){
+			obj._geolocation[queryOperator].$maxDistance = maxDistance
+		}
+		if(minDistance){
+			obj._geolocation[queryOperator].$minDistance = minDistance	
+		}
+		return obj;
+	}
+	
+	function _createGeoWithinQuery(shapeOperator, coordinates){
+		var obj = {_geolocation:{$geoWithin:{}}}
+		obj._geolocation.$geoWithin[shapeOperator] = coordinates
+		return obj;
+	}
+
 	function Query(model, instance) {
 		return {
 			
@@ -2632,6 +2648,54 @@ return Q;
 				return this
 			},
 
+			near: function(type, coordinates, maxDistance, minDistance){
+				var obj = _createGeoQuery("$near", "$geometry", type, coordinates, maxDistance, minDistance)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			nearSphere: function(type, coordinates, maxDistance, minDistance){
+				var obj = _createGeoQuery("$nearSphere", "$geometry", type, coordinates, maxDistance, minDistance)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			geoIntersects: function(type, coordinates){
+				var obj = _createGeoQuery("$geoIntersects", "$geometry", type, coordinates)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			geoWithinGeometry:function( type, coordinates){
+				var obj = _createGeoQuery("$geoWithin", "$geometry", type, coordinates)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			geoWithinPolygon: function(coordinates){
+				var obj = _createGeoWithinQuery('$polygon', coordinates)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			geoWithinBox: function(coordinates){
+				var obj = _createGeoWithinQuery('$box', coordinates)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			geoWithinCenter: function(coordinates){
+				var obj = _createGeoWithinQuery('$center',coordinates)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
+			geoWithinCenterSphere: function(coordinates){
+				var obj = _createGeoWithinQuery('$centerSphere',coordinates)
+				this.whereQuery.push(obj);
+				return this;
+			},
+
 			exec : function(callback){
 				//build query
 				for(var i=0;i<this.whereQuery.length;i++){	
@@ -2720,11 +2784,17 @@ return Q;
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId
 			}, callbackObject)
 		},
-		logout : function () {
-			if (Stamplay.USESTORAGE) {
+		logout : function (val, callbackObject) {
+			if (Stamplay.USESTORAGE)
 				store.remove(window.location.origin + '-jwt');
+			if(val){
+				return Stamplay.makeAPromise({
+				method: 'GET',
+				url: '/auth/' + Stamplay.VERSION + '/logout'
+				}, callbackObject)
+			}else{
+				root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
 			}
-			root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
 		},
 		resetPassword: function(data, callbackObject){
 			return Stamplay.makeAPromise({

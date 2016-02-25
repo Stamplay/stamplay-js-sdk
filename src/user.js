@@ -55,11 +55,17 @@
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId
 			}, callbackObject)
 		},
-		logout : function () {
-			if (Stamplay.USESTORAGE) {
+		logout : function (val, callbackObject) {
+			if (Stamplay.USESTORAGE)
 				store.remove(window.location.origin + '-jwt');
+			if(val){
+				return Stamplay.makeAPromise({
+				method: 'GET',
+				url: '/auth/' + Stamplay.VERSION + '/logout'
+				}, callbackObject)
+			}else{
+				root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
 			}
-			root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
 		},
 		resetPassword: function(data, callbackObject){
 			return Stamplay.makeAPromise({

@@ -1,6 +1,8 @@
 /* globals suite,Stamplay,setup,sinon,teardown,test,assert,_ */
 suite('Cobject ', function () {
 
+  var stamplayUrl = 'https://stamplay.stamplayapp.com'
+
   var instance;
   var object_value = {
     p1: 'test'
@@ -49,7 +51,7 @@ suite('Cobject ', function () {
       assert.equal(resp.comment, 'Hey there');
       done();
     })
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, '{ "_id": 123, "comment": "Hey there" }');
@@ -62,7 +64,7 @@ suite('Cobject ', function () {
       assert.equal(resp.comment, 'Hey there');
       done();
     },function(){})
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, '{ "_id": 123, "comment": "Hey there" }');
@@ -76,7 +78,7 @@ suite('Cobject ', function () {
     instance._id=123;
     assert.equal(this.request.method, 'POST');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(instance));
@@ -90,7 +92,7 @@ suite('Cobject ', function () {
     instance._id=123;
     assert.equal(this.request.method, 'POST');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(instance));
@@ -105,7 +107,7 @@ suite('Cobject ', function () {
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestBody, JSON.stringify(instance));
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify({
@@ -122,7 +124,7 @@ suite('Cobject ', function () {
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestBody, JSON.stringify(instance));
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify({
@@ -139,7 +141,7 @@ suite('Cobject ', function () {
     assert.equal(this.request.method, 'PATCH');
     assert.equal(this.request.requestBody, JSON.stringify(instance));
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify({_id: 123}));
@@ -154,7 +156,7 @@ suite('Cobject ', function () {
     assert.equal(this.request.method, 'PATCH');
     assert.equal(this.request.requestBody, JSON.stringify(instance));
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify({_id: 123}));
@@ -166,7 +168,7 @@ suite('Cobject ', function () {
     })
     assert.equal(this.request.method, 'DELETE');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
     assert.isUndefined(this.request.requestBody);
     this.request.respond(200, {
       "Content-Type": "application/json"
@@ -179,7 +181,7 @@ suite('Cobject ', function () {
     })
     assert.equal(this.request.method, 'DELETE');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
     assert.isUndefined(this.request.requestBody);
     this.request.respond(200, {
       "Content-Type": "application/json"
@@ -213,7 +215,7 @@ suite('Cobject ', function () {
     assert.equal(this.request.requestBody, JSON.stringify({
       type: 'upvote'
     }));
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/vote');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/vote');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(instance));
@@ -246,7 +248,7 @@ suite('Cobject ', function () {
     assert.equal(this.request.requestBody, JSON.stringify({
       type: 'upvote'
     }));
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/vote');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/vote');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(instance));
@@ -278,7 +280,7 @@ suite('Cobject ', function () {
     assert.equal(this.request.requestBody, JSON.stringify({
       type: 'downvote'
     }));
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/vote');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/vote');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(instance));
@@ -310,7 +312,7 @@ suite('Cobject ', function () {
     assert.equal(this.request.requestBody, JSON.stringify({
       type: 'downvote'
     }));
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/vote');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/vote');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(instance));
@@ -339,7 +341,7 @@ suite('Cobject ', function () {
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
     assert.equal(this.request.requestBody, JSON.stringify({rate: 1}));
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/rate');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/rate');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(instance));
@@ -368,7 +370,7 @@ suite('Cobject ', function () {
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
     assert.equal(this.request.requestBody, JSON.stringify({rate: 1}));
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/rate');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/rate');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(instance));
@@ -396,7 +398,7 @@ suite('Cobject ', function () {
     };
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/comment');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/comment');
     assert.equal(this.request.requestBody, JSON.stringify(data));
 
     this.request.respond(200, {
@@ -426,7 +428,7 @@ suite('Cobject ', function () {
     };
     assert.equal(this.request.method, 'PUT');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/comment');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123456789012345678901234/comment');
     assert.equal(this.request.requestBody, JSON.stringify(data));
 
     this.request.respond(200, {
@@ -440,7 +442,7 @@ suite('Cobject ', function () {
     })
     assert.equal(this.request.method, 'GET');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/find/pippo');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/find/pippo');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify({}));
@@ -452,7 +454,7 @@ suite('Cobject ', function () {
     })
     assert.equal(this.request.method, 'GET');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/find/pippo');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/find/pippo');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify({}));
@@ -464,7 +466,7 @@ suite('Cobject ', function () {
     })
     assert.equal(this.request.method, 'GET');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/find/owner');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/find/owner');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify({}));
@@ -476,7 +478,7 @@ suite('Cobject ', function () {
     })
     assert.equal(this.request.method, 'GET');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-    assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/cobjectId/find/owner');
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/find/owner');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify({}));

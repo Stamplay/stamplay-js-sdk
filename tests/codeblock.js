@@ -1,6 +1,7 @@
 /* globals suite,Stamplay,setup,sinon,teardown,test,assert,_ */
 suite('Codeblock', function () {
 
+  var stamplayUrl = 'https://stamplay.stamplayapp.com'
   var codeblock;
   var response = {
     name: 'myCodeblock',
@@ -8,7 +9,6 @@ suite('Codeblock', function () {
   };
 
   setup('Creating a new Codeblock', function () {
-
     codeblock = Stamplay.Codeblock('myCodeblock');
     this.xhr = sinon.useFakeXMLHttpRequest();
     this.request;
@@ -40,7 +40,7 @@ suite('Codeblock', function () {
 
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
+      assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
       assert.equal(this.request.body, undefined);
       this.request.respond(200, {
         "Content-Type": "application/json"
@@ -56,7 +56,7 @@ suite('Codeblock', function () {
 
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
+      assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
       assert.equal(this.request.body, undefined);
       this.request.respond(200, {
         "Content-Type": "application/json"
@@ -72,7 +72,7 @@ suite('Codeblock', function () {
 
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
+      assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
       assert.equal(this.request.requestBody, JSON.stringify(body));
       this.request.respond(200, {
         "Content-Type": "application/json"
@@ -88,7 +88,7 @@ suite('Codeblock', function () {
 
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
+      assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
       assert.equal(this.request.requestBody, JSON.stringify(body));
       this.request.respond(200, {
         "Content-Type": "application/json"
@@ -113,7 +113,7 @@ suite('Codeblock', function () {
       
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
+      assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
       assert.equal(this.request.requestBody, JSON.stringify(body));
       this.request.respond(200, {
         "Content-Type": "application/json"
@@ -138,7 +138,7 @@ suite('Codeblock', function () {
       
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
+      assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
       assert.equal(this.request.requestBody, JSON.stringify(body));
       this.request.respond(200, {
         "Content-Type": "application/json"
@@ -157,7 +157,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'PATCH');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
   //     assert.equal(this.request.body, undefined);
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"
@@ -177,7 +177,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'PATCH');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
   //     assert.equal(this.request.requestBody, JSON.stringify(body));
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"
@@ -203,7 +203,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'PATCH');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
   //     assert.equal(this.request.requestBody, JSON.stringify(body));
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"
@@ -222,7 +222,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'PUT');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
   //     assert.equal(this.request.body, undefined);
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"
@@ -242,7 +242,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'PUT');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
   //     assert.equal(this.request.requestBody, JSON.stringify(body));
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"
@@ -268,7 +268,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'PUT');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
   //     assert.equal(this.request.requestBody, JSON.stringify(body));
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"
@@ -288,7 +288,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'GET');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
   //     assert.equal(this.request.body, undefined);
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"
@@ -308,7 +308,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'GET');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
   //     assert.equal(this.request.requestBody, undefined);
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"
@@ -334,7 +334,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'GET');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
   //     assert.equal(this.request.requestBody, undefined);
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"
@@ -354,7 +354,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'GET');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
   //     assert.equal(this.request.requestBody, undefined);
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"
@@ -374,7 +374,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'DELETE');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
   //     assert.equal(this.request.body, undefined);
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"
@@ -394,7 +394,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'DELETE');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock');
   //     assert.equal(this.request.requestBody, undefined);
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"
@@ -420,7 +420,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'DELETE');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
   //     assert.equal(this.request.requestBody, undefined);
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"
@@ -440,7 +440,7 @@ suite('Codeblock', function () {
 
   //     assert.equal(this.request.method, 'DELETE');
   //     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-  //     assert.equal(this.request.url, '/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
+  //     assert.equal(this.request.url, stamplayUrl+'/api/codeblock/' + Stamplay.VERSION + '/run/mycodeblock?p1=1&p2=2');
   //     assert.equal(this.request.requestBody, undefined);
   //     this.request.respond(200, {
   //       "Content-Type": "application/json"

@@ -5,7 +5,7 @@
 	- Launch mocha-phantomjs ./tests/tests.html
 */
 suite('User', function () {
-
+  var stamplayUrl = 'https://stamplay.stamplayapp.com'
 	var user;
 	var onSignup = {
 		"_id": 123,
@@ -62,7 +62,7 @@ suite('User', function () {
 	test('user currentUser method (callback)', function (done) {
 		user.currentUser(function(err, result){done()})
 		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/getStatus');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/getStatus');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(validUser));
@@ -71,7 +71,7 @@ suite('User', function () {
 	test('user currentUser method (promise)', function (done) {
 		user.currentUser().then(function(resp){done();},function(err){})
 		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/getStatus');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/getStatus');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(validUser));
@@ -81,14 +81,15 @@ suite('User', function () {
 		var services = ['facebook', 'google', 'twitter', 'dropbox', 'linkedin', 'instagram', 'angellist', 'github'];
 		var arr = [];
 		var stub = sinon.stub(Stamplay.Support, "redirect", function (url) {
-			arr.push(url);
+			var url = url.replace('file://','')
+			arr.push(stamplayUrl+url);
 		});
 		services.forEach(function (service) {
 			var url = user.socialLogin(service);
 		});
 		services.forEach(function (service, i) {
-			var url = '/auth/' + Stamplay.VERSION + '/' + service + '/connect';
-			assert.equal(arr[i], location.protocol + '//' + document.domain + url);
+			var url = stamplayUrl+'/auth/' + Stamplay.VERSION + '/' + service + '/connect';
+			assert.equal(arr[i], url);
 		});
 		Stamplay.Support.redirect.restore(); // Unwraps the spy
 	});
@@ -99,7 +100,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'POST');
-		assert.equal(this.request.url, '/auth/' + Stamplay.VERSION + '/local/login');
+		assert.equal(this.request.url, stamplayUrl+'/auth/' + Stamplay.VERSION + '/local/login');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(onSignup));
@@ -111,11 +112,12 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'POST');
-		assert.equal(this.request.url, '/auth/' + Stamplay.VERSION + '/local/login');
+		assert.equal(this.request.url, stamplayUrl+'/auth/' + Stamplay.VERSION + '/local/login');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(onSignup));
 	});
+
 
 	test('user signup method with Stamplay service (callback)', function (done) {
 		var data = {
@@ -130,7 +132,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'POST');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(data));
@@ -151,7 +153,7 @@ suite('User', function () {
 		})
 
 		assert.equal(this.request.method, 'POST');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(data));
@@ -168,6 +170,29 @@ suite('User', function () {
 		assert.equal(url, '/auth/' + Stamplay.VERSION + '/logout');
 	});
 
+
+	test('user logout method with async (callback)', function (done) {
+		user.logout(true, function(err,result){
+			done();
+		})
+		assert.equal(this.request.method, 'GET');
+		assert.equal(this.request.url, stamplayUrl+'/auth/' + Stamplay.VERSION + '/logout');
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		},JSON.stringify({}));
+	});
+
+	test('user logout method with async (promise)', function (done) {
+		user.logout(true).then(function(result){
+			done();
+		})
+		assert.equal(this.request.method, 'GET');
+		assert.equal(this.request.url, stamplayUrl+'/auth/' + Stamplay.VERSION + '/logout');
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, JSON.stringify({}));
+	});
+
 	test('user resetPassword function (callback)', function (done) {
 		var data = {
 			email:'a@a.it',
@@ -175,7 +200,7 @@ suite('User', function () {
 		};
 		user.resetPassword(data, function(err,result){done();});
 		assert.equal(this.request.method, 'POST');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/resetpassword');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/resetpassword');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(data));		
@@ -188,7 +213,7 @@ suite('User', function () {
 		};
 		user.resetPassword(data).then(function(result){done();});
 		assert.equal(this.request.method, 'POST');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/resetpassword');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/resetpassword');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(data));
@@ -201,7 +226,7 @@ suite('User', function () {
 		})
 
 		assert.equal(this.request.method, 'PUT');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/follow');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/follow');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify({}));
@@ -214,7 +239,7 @@ suite('User', function () {
 		})
 
 		assert.equal(this.request.method, 'PUT');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/follow');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/follow');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify({}));
@@ -226,7 +251,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'PUT');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/unfollow');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/unfollow');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify({}));
@@ -238,7 +263,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'PUT');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/unfollow');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/unfollow');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify({}));
@@ -250,7 +275,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/activities');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/activities');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify({}));
@@ -262,7 +287,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/activities');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/activities');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify({}));
@@ -274,7 +299,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/following');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/following');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify({}));
@@ -286,7 +311,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/following');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/following');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify({}));
@@ -297,7 +322,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/followed_by');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/followed_by');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify({}));
@@ -308,7 +333,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/followed_by');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/followed_by');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify({}));
@@ -320,7 +345,7 @@ suite('User', function () {
 			assert.equal(result.displayName, 'John Stamplay');
 			done();
 		})
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, '{ "_id": 123, "displayName": "John Stamplay" }');
@@ -332,7 +357,7 @@ suite('User', function () {
 			assert.equal(result.displayName, 'John Stamplay');
 			done();
 		})
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, '{ "_id": 123, "displayName": "John Stamplay" }');
@@ -345,7 +370,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'PUT');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, '{ "_id": 123, "displayName": "John Stamplay" }');
@@ -358,7 +383,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'PUT');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, '{ "_id": 123, "displayName": "John Stamplay" }');
@@ -372,7 +397,7 @@ suite('User', function () {
 		assert.equal(this.request.method, 'POST');
 		assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
 		assert.equal(this.request.requestBody, JSON.stringify(newUser));
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(newUser));
@@ -386,7 +411,7 @@ suite('User', function () {
 		assert.equal(this.request.method, 'POST');
 		assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
 		assert.equal(this.request.requestBody, JSON.stringify(newUser));
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify(newUser));
@@ -397,7 +422,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'DELETE');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223');
 		assert.isUndefined(this.request.requestBody);
 
 		this.request.respond(200, {
@@ -410,7 +435,7 @@ suite('User', function () {
 			done();
 		})
 		assert.equal(this.request.method, 'DELETE');
-		assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223');
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223');
 		assert.isUndefined(this.request.requestBody);
 		this.request.respond(200, {
 			"Content-Type": "application/json"
@@ -421,7 +446,7 @@ suite('User', function () {
     user.getRoles(function(err,result){done()})
     assert.equal(this.request.method, 'GET');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-    assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/roles');
+    assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/roles');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(response));
@@ -432,7 +457,7 @@ suite('User', function () {
     user.getRoles().then(function(result){done()})
     assert.equal(this.request.method, 'GET');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-    assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/roles');
+    assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/roles');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(response));
@@ -443,7 +468,7 @@ suite('User', function () {
   	user.getRole('123451234512345123451234', function(err,result){done()})
     assert.equal(this.request.method, 'GET');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-    assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/roles/123451234512345123451234');
+    assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/roles/123451234512345123451234');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(response));
@@ -453,7 +478,7 @@ suite('User', function () {
   	user.getRole('123451234512345123451234').then(function(result){done()})
     assert.equal(this.request.method, 'GET');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-    assert.equal(this.request.url, '/api/user/' + Stamplay.VERSION + '/roles/123451234512345123451234');
+    assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/roles/123451234512345123451234');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(response));

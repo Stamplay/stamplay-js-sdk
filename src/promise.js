@@ -17,17 +17,14 @@
 	/* function for handling any calls to Stamplay Platform */
 	/* Options parameter is an object  */
 	root.Stamplay.makeAPromise = function (options, callback) {
-		var headerStamplay;
 		if (options.thisParams) {
 			parseQueryParams(options);
 		}		
 		if (root.Stamplay.APPID != "") {
 			options.url = root.Stamplay.BASEURL + options.url;
-			headerStamplay = root.Stamplay.APPID;
+			var headerStamplay = root.Stamplay.APPID;
 		} else {
-			headerStamplay = location.host;
-			headerStamplay = headerStamplay.replace(/^www\./, '');
-			headerStamplay = headerStamplay.replace(/:[0-9]*$/g, '');
+			throw new Error('Please before using the sdk call method init with appId')
 		}
 		var req = new XMLHttpRequest();
 		req.open(options.method || 'GET', options.url, options.async || true);

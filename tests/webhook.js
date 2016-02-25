@@ -1,5 +1,7 @@
 /* globals suite,Stamplay,setup,sinon,teardown,test,assert,_ */
 suite('Webhook', function () {
+  
+  var stamplayUrl = 'https://stamplay.stamplayapp.com'
 
   var webhook;
   var response = {
@@ -39,7 +41,7 @@ suite('Webhook', function () {
     webhook.post( null, function(err, result){done()})
     assert.equal(this.request.method, 'POST');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/webhook/' + Stamplay.VERSION + '/mywebhook/catch');
+    assert.equal(this.request.url, stamplayUrl+'/api/webhook/' + Stamplay.VERSION + '/mywebhook/catch');
 
     this.request.respond(200, {
       "Content-Type": "application/json"
@@ -53,7 +55,7 @@ suite('Webhook', function () {
     }) 
     assert.equal(this.request.method, 'POST');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-    assert.equal(this.request.url, '/api/webhook/' + Stamplay.VERSION + '/mywebhook/catch');
+    assert.equal(this.request.url, stamplayUrl+'/api/webhook/' + Stamplay.VERSION + '/mywebhook/catch');
 
     this.request.respond(200, {
       "Content-Type": "application/json"

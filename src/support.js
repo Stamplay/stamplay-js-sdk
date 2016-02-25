@@ -1,4 +1,4 @@
-/* globals  Stamplay, Q */
+/* globals  Stamplay */
 
 /* Add Support function to Stamplay
  * it use for handling some functionality

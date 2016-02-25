@@ -35,12 +35,10 @@ suite('Stamplay ', function () {
 		});
 
 		test('init function works fine', function () {		
-			assert.equal(window.Stamplay.BASEURL, '');
-			assert.equal(window.Stamplay.APPID, '' );
 			window.Stamplay.init('test');
 			assert.equal(window.Stamplay.BASEURL, 'https://test.stamplayapp.com');
 			assert.equal(window.Stamplay.APPID, 'test' );
-			window.Stamplay.init('');
+			window.Stamplay.init('stamplay');
 		});
 	})
 

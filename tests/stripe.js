@@ -2,6 +2,8 @@
 
   suite('Stripe', function () {
 
+    var stamplayUrl = 'https://stamplay.stamplayapp.com'
+
     setup('Creating a new Stripe', function () {
 
       stripe =  Stamplay.Stripe;
@@ -72,7 +74,7 @@
       })
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers');
 
       this.request.respond(200, {
         "Content-Type": "application/json"
@@ -85,7 +87,7 @@
       })
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers');
 
       this.request.respond(200, {
         "Content-Type": "application/json"
@@ -98,7 +100,7 @@
       })
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -110,7 +112,7 @@
       })
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -122,7 +124,7 @@
       })
       assert.equal(this.request.method, 'PUT');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -135,7 +137,7 @@
       })
       assert.equal(this.request.method, 'PUT');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -147,7 +149,7 @@
       })
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/charges');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/charges');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -160,7 +162,7 @@
       })
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/charges');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/charges');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -172,7 +174,7 @@
       })
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -184,7 +186,7 @@
       })
       assert.equal(this.request.method, 'POST');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json;charset=utf-8");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -196,7 +198,7 @@
         done()})
       assert.equal(this.request.method, 'GET');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -207,7 +209,7 @@
         done()})
       assert.equal(this.request.method, 'GET');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -218,7 +220,7 @@
         done()})
       assert.equal(this.request.method, 'GET');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions?page=1&per_page=2');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions?page=1&per_page=2');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -230,7 +232,7 @@
       })
       assert.equal(this.request.method, 'GET');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions?page=1&per_page=2');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions?page=1&per_page=2');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -242,7 +244,7 @@
       })
       assert.equal(this.request.method, 'GET');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -254,7 +256,7 @@
       })
       assert.equal(this.request.method, 'GET');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -265,7 +267,7 @@
         done();
       })
       assert.equal(this.request.method, 'DELETE');
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -276,7 +278,7 @@
         done();
       })
       assert.equal(this.request.method, 'DELETE');
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -287,7 +289,7 @@
         done()
       })
       assert.equal(this.request.method, 'PUT');
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, JSON.stringify(response));
@@ -299,7 +301,7 @@
       })
 
       assert.equal(this.request.method, 'PUT');
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
 
       this.request.respond(200, {
         "Content-Type": "application/json"
@@ -317,7 +319,7 @@
         done()
       })
       assert.equal(this.request.method, 'PUT');
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
       assert.equal(this.request.requestBody, JSON.stringify(expectedBody));
 
       this.request.respond(200, {
@@ -336,7 +338,7 @@
         done()
       })
       assert.equal(this.request.method, 'PUT');
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/subscriptions/subscriptionId');
       assert.equal(this.request.requestBody, JSON.stringify(expectedBody));
 
       this.request.respond(200, {
@@ -349,7 +351,7 @@
 
       assert.equal(this.request.method, 'GET');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
 
       this.request.respond(200, {
         "Content-Type": "application/json"
@@ -361,7 +363,7 @@
 
       assert.equal(this.request.method, 'GET');
       assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
-      assert.equal(this.request.url, '/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
+      assert.equal(this.request.url, stamplayUrl+'/api/stripe/' + Stamplay.VERSION + '/customers/123451234512345123451234/cards');
 
       this.request.respond(200, {
         "Content-Type": "application/json"

@@ -1,8 +1,11 @@
 /* globals suite,Stamplay,setup,sinon,teardown,test,assert,_ */
 suite('Stamplay Query ', function () {
 
+  var stamplayUrl = 'https://stamplay.stamplayapp.com'
+
   //For each test
   setup('Stamplay Query', function () {
+
     this.xhr = sinon.useFakeXMLHttpRequest();
     this.request;
     var _this = this;
@@ -144,6 +147,38 @@ suite('Stamplay Query ', function () {
       assert.isFunction( Stamplay.Query('object', 'tag').exec);
     });
 
+    test('has near method', function () {
+      assert.isFunction( Stamplay.Query('object', 'tag').near);
+    });
+
+    test('has nearSphere method', function () {
+      assert.isFunction( Stamplay.Query('object', 'tag').near);
+    });
+
+    test('has geoIntersects method', function () {
+      assert.isFunction( Stamplay.Query('object', 'tag').geoIntersects);
+    });
+
+    test('has geoWithinGeometry method', function () {
+      assert.isFunction( Stamplay.Query('object', 'tag').geoWithinGeometry);
+    });
+
+    test('has geoWithinPolygon method', function () {
+      assert.isFunction( Stamplay.Query('object', 'tag').geoWithinPolygon);
+    });
+    
+    test('has geoWithinBox method', function () {
+      assert.isFunction( Stamplay.Query('object', 'tag').geoWithinBox);
+    });   
+
+    test('has geoWithinCenter method', function () {
+      assert.isFunction( Stamplay.Query('object', 'tag').geoWithinCenter);
+    });
+
+    test('has geoWithinCenterSphere method', function () {
+      assert.isFunction( Stamplay.Query('object', 'tag').geoWithinCenterSphere);
+    });
+
   })
 
   suite('Exec', function(){
@@ -152,7 +187,7 @@ suite('Stamplay Query ', function () {
       query.exec(function(err,result){
         done()
       })
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":"pippo"}');
+      assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":"pippo"}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -161,7 +196,7 @@ suite('Stamplay Query ', function () {
     test('exec() equal works (promise)', function (done) {
       var query =  Stamplay.Query('object', 'tag').equalTo('pippo', 'pippo');
       query.exec().then(function(err,result){done()})
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":"pippo"}');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":"pippo"}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -170,7 +205,7 @@ suite('Stamplay Query ', function () {
     test('exec() gte works (callback)', function (done) {
       var query =  Stamplay.Query('object', 'tag').greaterThanOrEqual('a', 4);
       query.exec(function (err,result) {done()});
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"a":{"$gte":4}}');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"a":{"$gte":4}}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -179,7 +214,7 @@ suite('Stamplay Query ', function () {
     test('exec() gte works (promise)', function (done) {
       var query =  Stamplay.Query('object', 'tag').greaterThanOrEqual('a', 4);
       query.exec().then(function (result) {done()});
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"a":{"$gte":4}}');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"a":{"$gte":4}}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -188,7 +223,7 @@ suite('Stamplay Query ', function () {
     test('exec() lte works (callback)', function (done) {
       var query =  Stamplay.Query('object', 'tag').lessThanOrEqual('a', 2);
       query.exec(function (err, result) {done()});
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"a":{"$lte":2}}');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"a":{"$lte":2}}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -197,7 +232,7 @@ suite('Stamplay Query ', function () {
     test('exec() lte works (promise)', function (done) {
       var query =  Stamplay.Query('object', 'tag').lessThanOrEqual('a', 2);
       query.exec().then(function (result) {done()});
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"a":{"$lte":2}}');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"a":{"$lte":2}}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -208,7 +243,7 @@ suite('Stamplay Query ', function () {
       query.exec(function (err, result) {
         done()
       });
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -219,7 +254,7 @@ suite('Stamplay Query ', function () {
       query.exec().then(function (result) {
         done()
       });
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$regex":"^a","$options":"i"}}');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$regex":"^a","$options":"i"}}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -230,7 +265,7 @@ suite('Stamplay Query ', function () {
       query.exec(function (err, result) {
         done()
       });
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$regex":"^a","$options":"i"}}');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$regex":"^a","$options":"i"}}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -241,7 +276,7 @@ suite('Stamplay Query ', function () {
       query.exec().then(function (result) {
         done()
       });
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -250,7 +285,7 @@ suite('Stamplay Query ', function () {
     test('exec() pagination works (callback)', function (done) {
       var query =  Stamplay.Query('object', 'tag').exists('pippo').pagination(1,2);
       query.exec(function (err, result) {done()});
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&page=1&per_page=2');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&page=1&per_page=2');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -261,7 +296,7 @@ suite('Stamplay Query ', function () {
       query.exec().then(function (result) {
         done()
       });
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&page=1&per_page=2');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&page=1&per_page=2');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -270,7 +305,7 @@ suite('Stamplay Query ', function () {
     test('exec() populate works (callback)', function (done) {
       var query =  Stamplay.Query('object', 'tag').exists('pippo').populate();
       query.exec(function (err, result) {done()});
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&populate=true');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&populate=true');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -281,7 +316,7 @@ suite('Stamplay Query ', function () {
       query.exec().then(function (result) {
         done()
       });
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&populate=true');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&populate=true');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -290,7 +325,7 @@ suite('Stamplay Query ', function () {
     test('exec() populateOwner works (callback)', function (done) {
       var query =  Stamplay.Query('object', 'tag').exists('pippo').populateOwner();
       query.exec(function (err, result) {done()});
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&populate_owner=true');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&populate_owner=true');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -301,7 +336,7 @@ suite('Stamplay Query ', function () {
       query.exec().then(function (result) {
         done()
       });
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&populate_owner=true');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&populate_owner=true');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -310,7 +345,7 @@ suite('Stamplay Query ', function () {
     test('exec() select works (callback)', function (done) {
       var query =  Stamplay.Query('object', 'tag').exists('pippo').select('a','b');
       query.exec(function (err, result) {done()});
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&select=a,b');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&select=a,b');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -321,7 +356,183 @@ suite('Stamplay Query ', function () {
       query.exec().then(function (result) {
         done()
       });
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&select=a,c');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":{"$exists":true}}&select=a,c');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() near works (callback)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').near('Point', [1,2], 1, 2);
+      query.exec(function (err, result) {done()});
+      var urlPath = '/tag?where={"_geolocation":{"$near":{"$geometry":{"type":"Point","coordinates":[1,2]},"$maxDistance":1,"$minDistance":2}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() near works (promise)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').near('Point', [1,2], 1, 2);
+      query.exec().then(function (result) {
+        done()
+      });
+      var urlPath = '/tag?where={"_geolocation":{"$near":{"$geometry":{"type":"Point","coordinates":[1,2]},"$maxDistance":1,"$minDistance":2}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() nearSphere works (callback)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').nearSphere('Point', [1,2], 1, 2);
+      query.exec(function (err, result) {done()});
+      var urlPath = '/tag?where={"_geolocation":{"$nearSphere":{"$geometry":{"type":"Point","coordinates":[1,2]},"$maxDistance":1,"$minDistance":2}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() nearSphere works (promise)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').nearSphere('Point', [1,2], 1, 2);
+      query.exec().then(function (result) {
+        done()
+      });
+      var urlPath = '/tag?where={"_geolocation":{"$nearSphere":{"$geometry":{"type":"Point","coordinates":[1,2]},"$maxDistance":1,"$minDistance":2}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() geoIntersects works (callback)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').geoIntersects('Point', [1,2]);
+      query.exec(function (err, result) {done()});
+      var urlPath = '/tag?where={"_geolocation":{"$geoIntersects":{"$geometry":{"type":"Point","coordinates":[1,2]}}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() geoIntersects works (promise)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').geoIntersects('Point', [1,2]);
+      query.exec().then(function (result) {
+        done()
+      });
+      var urlPath = '/tag?where={"_geolocation":{"$geoIntersects":{"$geometry":{"type":"Point","coordinates":[1,2]}}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() geoWithinGeometry works (callback)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').geoWithinGeometry('Point', [1,2]);
+      query.exec(function (err, result) {done()});
+      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$geometry":{"type":"Point","coordinates":[1,2]}}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() geoWithinGeometry works (promise)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').geoWithinGeometry('Point', [1,2]);
+      query.exec().then(function (result) {
+        done()
+      });
+      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$geometry":{"type":"Point","coordinates":[1,2]}}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() geoWithinPolygon works (callback)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').geoWithinPolygon([1,2]);
+      query.exec(function (err, result) {done()});
+      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$polygon":[1,2]}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() geoWithinPolygon works (promise)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').geoWithinPolygon([1,2]);
+      query.exec().then(function (result) {
+        done()
+      });
+      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$polygon":[1,2]}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() geoWithinBox works (callback)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').geoWithinBox([1,2]);
+      query.exec(function (err, result) {done()});
+      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$box":[1,2]}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() geoWithinBox works (promise)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').geoWithinBox([1,2]);
+      query.exec().then(function (result) {
+        done()
+      });
+      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$box":[1,2]}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() geoWithinCenter works (callback)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').geoWithinCenter([1,2]);
+      query.exec(function (err, result) {done()});
+      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$center":[1,2]}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() geoWithinCenter works (promise)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').geoWithinCenter([1,2]);
+      query.exec().then(function (result) {
+        done()
+      });
+      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$center":[1,2]}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() geoWithinCenterSphere works (callback)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').geoWithinCenterSphere([1,2]);
+      query.exec(function (err, result) {done()});
+      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$centerSphere":[1,2]}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() geoWithinCenterSphere works (promise)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').geoWithinCenterSphere([1,2]);
+      query.exec().then(function (result) {
+        done()
+      });
+      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$centerSphere":[1,2]}}}'
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -333,7 +544,7 @@ suite('Stamplay Query ', function () {
       var query =  Stamplay.Query('object', 'tag').or(query1, query2);
 
       query.exec(function (err, result) {done()});
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"$or":[{"b":{"$exists":false}},{"c":"c"}]}');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"$or":[{"b":{"$exists":false}},{"c":"c"}]}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -345,7 +556,7 @@ suite('Stamplay Query ', function () {
       var query =  Stamplay.Query('object', 'tag').or(query1, query2);
 
       query.exec().then(function (result) {done()});
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"$or":[{"b":{"$exists":false}},{"c":"c"}]}');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"$or":[{"b":{"$exists":false}},{"c":"c"}]}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -357,7 +568,7 @@ suite('Stamplay Query ', function () {
       var query =  Stamplay.Query('object', 'tag').or([query1, query2]);
 
       query.exec(function () {done()});
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"$or":[{"b":{"$exists":false}},{"c":"c"}]}');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"$or":[{"b":{"$exists":false}},{"c":"c"}]}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
@@ -369,7 +580,7 @@ suite('Stamplay Query ', function () {
       var query =  Stamplay.Query('object', 'tag').or([query1, query2]);
 
       query.exec().then(function () {done()});
-      assert.equal(this.request.url, '/api/cobject/' + Stamplay.VERSION + '/tag?where={"$or":[{"b":{"$exists":false}},{"c":"c"}]}');
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"$or":[{"b":{"$exists":false}},{"c":"c"}]}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
