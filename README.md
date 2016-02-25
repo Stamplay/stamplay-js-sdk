@@ -108,8 +108,8 @@ Also this components the sdk have some support objects to help you in common ope
 	* <code>greaterThanOrEqual(attr, value)</code> 
 	* <code>lessThan(attr, value)</code> 
 	* <code>lessThanOrEqual(attr, value)</code> 
-  * <code>pagination(page, per_page)</code>
-	* <code>between(attr, value1, value2)</code> 
+	* <code>pagination(page, per_page)</code>
+	* <code>between(attr, value1, value2)</code>
 	* <code>equalTo(attr, value)</code> 
 	* <code>exists(attr)</code> 
 	* <code>notExists(attr)</code> 
