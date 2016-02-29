@@ -2672,26 +2672,9 @@ return Q;
 				return this;
 			},
 
-			geoWithinPolygon: function(coordinates){
-				var obj = _createGeoWithinQuery('$polygon', coordinates)
-				this.whereQuery.push(obj);
-				return this;
-			},
-
-			geoWithinBox: function(coordinates){
-				var obj = _createGeoWithinQuery('$box', coordinates)
-				this.whereQuery.push(obj);
-				return this;
-			},
-
-			geoWithinCenter: function(coordinates){
-				var obj = _createGeoWithinQuery('$center',coordinates)
-				this.whereQuery.push(obj);
-				return this;
-			},
-
-			geoWithinCenterSphere: function(coordinates){
-				var obj = _createGeoWithinQuery('$centerSphere',coordinates)
+			geoWithinCenterSphere: function(coordinates, radius){
+				var finalParam = [coordinates, radius]
+				var obj = _createGeoWithinQuery('$centerSphere',finalParam)
 				this.whereQuery.push(obj);
 				return this;
 			},
@@ -2784,10 +2767,10 @@ return Q;
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId
 			}, callbackObject)
 		},
-		logout : function (val, callbackObject) {
+		logout : function (async, callbackObject) {
 			if (Stamplay.USESTORAGE)
 				store.remove(window.location.origin + '-jwt');
-			if(val){
+			if(async){
 				return Stamplay.makeAPromise({
 				method: 'GET',
 				url: '/auth/' + Stamplay.VERSION + '/logout'

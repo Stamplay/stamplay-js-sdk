@@ -171,26 +171,9 @@
 				return this;
 			},
 
-			geoWithinPolygon: function(coordinates){
-				var obj = _createGeoWithinQuery('$polygon', coordinates)
-				this.whereQuery.push(obj);
-				return this;
-			},
-
-			geoWithinBox: function(coordinates){
-				var obj = _createGeoWithinQuery('$box', coordinates)
-				this.whereQuery.push(obj);
-				return this;
-			},
-
-			geoWithinCenter: function(coordinates){
-				var obj = _createGeoWithinQuery('$center',coordinates)
-				this.whereQuery.push(obj);
-				return this;
-			},
-
-			geoWithinCenterSphere: function(coordinates){
-				var obj = _createGeoWithinQuery('$centerSphere',coordinates)
+			geoWithinCenterSphere: function(coordinates, radius){
+				var finalParam = [coordinates, radius]
+				var obj = _createGeoWithinQuery('$centerSphere',finalParam)
 				this.whereQuery.push(obj);
 				return this;
 			},

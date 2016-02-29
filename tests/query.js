@@ -163,18 +163,6 @@ suite('Stamplay Query ', function () {
       assert.isFunction( Stamplay.Query('object', 'tag').geoWithinGeometry);
     });
 
-    test('has geoWithinPolygon method', function () {
-      assert.isFunction( Stamplay.Query('object', 'tag').geoWithinPolygon);
-    });
-    
-    test('has geoWithinBox method', function () {
-      assert.isFunction( Stamplay.Query('object', 'tag').geoWithinBox);
-    });   
-
-    test('has geoWithinCenter method', function () {
-      assert.isFunction( Stamplay.Query('object', 'tag').geoWithinCenter);
-    });
-
     test('has geoWithinCenterSphere method', function () {
       assert.isFunction( Stamplay.Query('object', 'tag').geoWithinCenterSphere);
     });
@@ -450,76 +438,11 @@ suite('Stamplay Query ', function () {
       }, '{}');
     });
 
-    test('exec() geoWithinPolygon works (callback)', function (done) {
-      var query =  Stamplay.Query('object', 'tag').geoWithinPolygon([1,2]);
-      query.exec(function (err, result) {done()});
-      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$polygon":[1,2]}}}'
-      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
-      this.request.respond(200, {
-        "Content-Type": "application/json"
-      }, '{}');
-    });
-
-    test('exec() geoWithinPolygon works (promise)', function (done) {
-      var query =  Stamplay.Query('object', 'tag').geoWithinPolygon([1,2]);
-      query.exec().then(function (result) {
-        done()
-      });
-      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$polygon":[1,2]}}}'
-      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
-      this.request.respond(200, {
-        "Content-Type": "application/json"
-      }, '{}');
-    });
-
-    test('exec() geoWithinBox works (callback)', function (done) {
-      var query =  Stamplay.Query('object', 'tag').geoWithinBox([1,2]);
-      query.exec(function (err, result) {done()});
-      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$box":[1,2]}}}'
-      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
-      this.request.respond(200, {
-        "Content-Type": "application/json"
-      }, '{}');
-    });
-
-    test('exec() geoWithinBox works (promise)', function (done) {
-      var query =  Stamplay.Query('object', 'tag').geoWithinBox([1,2]);
-      query.exec().then(function (result) {
-        done()
-      });
-      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$box":[1,2]}}}'
-      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
-      this.request.respond(200, {
-        "Content-Type": "application/json"
-      }, '{}');
-    });
-
-    test('exec() geoWithinCenter works (callback)', function (done) {
-      var query =  Stamplay.Query('object', 'tag').geoWithinCenter([1,2]);
-      query.exec(function (err, result) {done()});
-      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$center":[1,2]}}}'
-      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
-      this.request.respond(200, {
-        "Content-Type": "application/json"
-      }, '{}');
-    });
-
-    test('exec() geoWithinCenter works (promise)', function (done) {
-      var query =  Stamplay.Query('object', 'tag').geoWithinCenter([1,2]);
-      query.exec().then(function (result) {
-        done()
-      });
-      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$center":[1,2]}}}'
-      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
-      this.request.respond(200, {
-        "Content-Type": "application/json"
-      }, '{}');
-    });
 
     test('exec() geoWithinCenterSphere works (callback)', function (done) {
-      var query =  Stamplay.Query('object', 'tag').geoWithinCenterSphere([1,2]);
+      var query =  Stamplay.Query('object', 'tag').geoWithinCenterSphere([1,2],2);
       query.exec(function (err, result) {done()});
-      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$centerSphere":[1,2]}}}'
+      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$centerSphere":[[1,2],2]}}}'
       assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
       this.request.respond(200, {
         "Content-Type": "application/json"
@@ -527,11 +450,11 @@ suite('Stamplay Query ', function () {
     });
 
     test('exec() geoWithinCenterSphere works (promise)', function (done) {
-      var query =  Stamplay.Query('object', 'tag').geoWithinCenterSphere([1,2]);
+      var query =  Stamplay.Query('object', 'tag').geoWithinCenterSphere([1,2],2);
       query.exec().then(function (result) {
         done()
       });
-      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$centerSphere":[1,2]}}}'
+      var urlPath = '/tag?where={"_geolocation":{"$geoWithin":{"$centerSphere":[[1,2],2]}}}'
       assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + urlPath);
       this.request.respond(200, {
         "Content-Type": "application/json"

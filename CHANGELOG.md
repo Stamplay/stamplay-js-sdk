@@ -4,7 +4,7 @@
 
 * Added asyncronous logout method
 * Force user to use init method
-* Added geoPoint integrations
+* Added geoPoint query methods
 
 2.0.1 / 22-01-2015
 ===================

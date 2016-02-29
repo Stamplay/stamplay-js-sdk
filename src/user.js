@@ -55,10 +55,10 @@
 				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId
 			}, callbackObject)
 		},
-		logout : function (val, callbackObject) {
+		logout : function (async, callbackObject) {
 			if (Stamplay.USESTORAGE)
 				store.remove(window.location.origin + '-jwt');
-			if(val){
+			if(async){
 				return Stamplay.makeAPromise({
 				method: 'GET',
 				url: '/auth/' + Stamplay.VERSION + '/logout'
