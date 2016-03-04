@@ -22,9 +22,11 @@
 		}		
 		if (root.Stamplay.APPID != "") {
 			options.url = root.Stamplay.BASEURL + options.url;
-			var headerStamplay = root.Stamplay.APPID;
+			headerStamplay = root.Stamplay.APPID;
 		} else {
-			throw new Error('Please before using the sdk call method init with appId')
+			headerStamplay = location.host;
+			headerStamplay = headerStamplay.replace(/^www\./, '');
+			headerStamplay = headerStamplay.replace(/:[0-9]*$/g, '');
 		}
 		var req = new XMLHttpRequest();
 		req.open(options.method || 'GET', options.url, options.async || true);
