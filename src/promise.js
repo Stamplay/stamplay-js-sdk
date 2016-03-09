@@ -57,7 +57,7 @@
 		req.setRequestHeader('Content-Type', 'application/json');
 		req.setRequestHeader('stamplay-app', headerStamplay);
 		// V1 
-		if (Stamplay.USESTORAGE) {
+		if (root.Stamplay.USESTORAGE) {
 			var jwt = store.get(window.location.origin + '-jwt');
 			if (jwt) {
 				if (_jwtIsValidTimestamp(jwt)) {
@@ -72,7 +72,7 @@
 		var jwt = req.getResponseHeader('x-stamplay-jwt');
 		if (jwt) {
 			var decodedJWT = _decodeJWT(jwt);
-			if (Stamplay.USESTORAGE) {
+			if (root.Stamplay.USESTORAGE) {
 				store.set(window.location.origin + '-jwt', jwt);
 			}
 		}

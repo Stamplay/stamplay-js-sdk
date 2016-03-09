@@ -200,11 +200,11 @@
 					break
 				}
 
-				var Url = '/api/' + this.model + '/' + Stamplay.VERSION + '/' + this.instance 
+				var Url = '/api/' + this.model + '/' + root.Stamplay.VERSION + '/' + this.instance 
 								+'?where={'+this.executable+'}'+ this.paginationQuery + this.selectionQuery 
 								+ this.sortQuery + this.populateQuery + this.populateOwnerQuery
 
-				return Stamplay.makeAPromise({
+				return root.Stamplay.makeAPromise({
 					method: 'GET',
 					url:  Url,
 				},callback)

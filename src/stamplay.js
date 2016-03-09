@@ -23,7 +23,7 @@
 		root.Stamplay.USESTORAGE = true;
 	}
 	if (getURLParameter('jwt')) {
-		if (Stamplay.USESTORAGE) {
+		if (root.Stamplay.USESTORAGE) {
 			store.set(window.location.origin + '-jwt', getURLParameter('jwt'));
 		}
 	}

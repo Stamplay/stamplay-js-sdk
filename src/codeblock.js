@@ -46,7 +46,7 @@
 	//constructor
 	function Codeblock(resourceId) {
 		var resource = resourceId.replace(/[^\w\s]/gi, '').trim().toLowerCase().replace(/\s+/g, '_');
-		var url = '/api/codeblock/' + Stamplay.VERSION + '/run/' + resource;
+		var url = '/api/codeblock/' + root.Stamplay.VERSION + '/run/' + resource;
 		return {
 			run :function (data, queryParams, callbackObject) {
 				/*
@@ -58,7 +58,7 @@
 				var finalMethod = _parseMethod('POST');
 				var finalData = _parseData('POST', data);
 				var finalQuery = queryParams;
-				return Stamplay.makeAPromise({
+				return root.Stamplay.makeAPromise({
 					method: finalMethod,
 					data: finalData,
 					url: url,

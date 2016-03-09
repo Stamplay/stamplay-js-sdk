@@ -22,10 +22,10 @@
 		It very easy to use: Stamplay.Object([Objectid])
 	*/
 	var makeActionPromise = function (id, action, data, callbackObject) {
-		return Stamplay.makeAPromise({
+		return root.Stamplay.makeAPromise({
 			method: 'PUT',
 			data: (data) ? data : {},
-			url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + id + '/' + action
+			url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/' + this.resourceId + '/' + id + '/' + action
 		}, callbackObject)
 	};
 
@@ -51,14 +51,14 @@
 				resourceId:resourceId,				
 				findByCurrentUser : function (attr, callbackObject) {
 					if( (arguments.length==1 && _.isFunction(arguments[0])) || arguments.length==0){
-						return Stamplay.makeAPromise({
+						return root.Stamplay.makeAPromise({
 							method: 'GET',
-							url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/find/owner'
+							url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/' + this.resourceId + '/find/owner'
 						},arguments[0])
 					}else{
-						return Stamplay.makeAPromise({
+						return root.Stamplay.makeAPromise({
 							method: 'GET',
-							url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/find/'+attr
+							url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/' + this.resourceId + '/find/'+attr
 						},callbackObject)
 					}
 				},
