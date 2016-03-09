@@ -15,6 +15,8 @@
 	root.Stamplay.APPID = "";
 	/* baseUrl */
 	root.Stamplay.BASEURL = "";
+	/* options */
+	root.Stamplay.OPTIONS = {};
 	/*  check if exist local storage with the support of store.js */
 	if (window.localStorage && store.enabled) {
 		root.Stamplay.USESTORAGE = true;
@@ -24,10 +26,11 @@
 			store.set(window.location.origin + '-jwt', getURLParameter('jwt'));
 		}
 	}
-	/* init method for setup the base url */
-	root.Stamplay.init = function (appId) {
+	/* init method for setup the base url */ 
+	root.Stamplay.init = function (appId, options) {
 		root.Stamplay.BASEURL = 'https://' + appId + '.stamplayapp.com';
 		root.Stamplay.APPID = appId;
+		root.Stamplay.OPTIONS = options || {};
 	}
 
 	function getURLParameter(name) {

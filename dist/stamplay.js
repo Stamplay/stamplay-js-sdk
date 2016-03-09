@@ -2242,6 +2242,8 @@ return Q;
 	root.Stamplay.APPID = "";
 	/* baseUrl */
 	root.Stamplay.BASEURL = "";
+	/* options */
+	root.Stamplay.OPTIONS = {};
 	/*  check if exist local storage with the support of store.js */
 	if (window.localStorage && store.enabled) {
 		root.Stamplay.USESTORAGE = true;
@@ -2251,10 +2253,11 @@ return Q;
 			store.set(window.location.origin + '-jwt', getURLParameter('jwt'));
 		}
 	}
-	/* init method for setup the base url */
-	root.Stamplay.init = function (appId) {
+	/* init method for setup the base url */ 
+	root.Stamplay.init = function (appId, options) {
 		root.Stamplay.BASEURL = 'https://' + appId + '.stamplayapp.com';
 		root.Stamplay.APPID = appId;
+		root.Stamplay.OPTIONS = options || {};
 	}
 
 	function getURLParameter(name) {
@@ -2750,14 +2753,20 @@ return Q;
 			if(provider){
 				var jwt = store.get(window.location.origin + '-jwt');
 				if (jwt) {
-					// Store temporary cookie to permit user aggregation
+					// Store temporary cookie to permit user aggregation (multiple social identities)
 				  var date = new Date();
 	        date.setTime(date.getTime() + 5 * 60 * 1000);
 					document.cookie = 'stamplay.jwt='+jwt+'; expires=' + date.toGMTString() + '; path=/'
 				}
 				var url = '/auth/' + Stamplay.VERSION + '/' + provider + '/connect';
-				var port = (window.location.port) ? ':'+window.location.port : '';
-				root.Stamplay.Support.redirect(location.protocol + '//' + document.domain +port+ url);
+				var port = (window.location.port) ? ':'+window.location.port : '';	
+				var redirection = location.protocol + '//' + document.domain +port+ url
+				//if you are using sdk on your *personal site*
+				//remember to manage the callback url  for social login in editor
+				if(Stamplay.OPTIONS.absoluteUrl){
+					redirection = Stamplay.BASEURL+url
+				}
+				root.Stamplay.Support.redirect(redirection);
 			}else{
 				throw new Error('Stamplay.User.socialLogin needs the service name');
 			}
@@ -2778,7 +2787,13 @@ return Q;
 				url: '/auth/' + Stamplay.VERSION + '/logout'
 				}, callbackObject)
 			}else{
-				root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
+				var url = '/auth/' + Stamplay.VERSION + '/logout';
+				var port = (window.location.port) ? ':'+window.location.port : '';	
+				var redirection = location.protocol + '//' + document.domain +port+ url
+				if(Stamplay.OPTIONS.absoluteUrl){
+					redirection = Stamplay.BASEURL+url
+				}
+				root.Stamplay.Support.redirect(redirection);
 			}
 		},
 		resetPassword: function(data, callbackObject){
@@ -2877,6 +2892,21 @@ return Q;
 			url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + id + '/' + action
 		}, callbackObject)
 	};
+
+	var getId = function(resourceId, id){
+		return root.Stamplay.BaseComponent('cobject', resourceId+'/'+id).get()
+	};
+
+	var pushId = function(resourceId, id, newData, callbackObject){
+		return root.Stamplay.BaseComponent('cobject', resourceId).patch(id, newData, callbackObject)
+	};
+
+	var buildAttr = function(response, attribute, data){
+		var newData = {}
+		newData[attribute] = response[attribute]
+		newData[attribute].push(data)
+		return newData
+	}
 	//constructor
 	function Object(resourceId) {
 		if(resourceId){
@@ -2907,6 +2937,26 @@ return Q;
 				},
 				comment: function (id, text, callbackObject) {
 					return makeActionPromise.call(this, id, 'comment', {text: text}, callbackObject);
+				},
+				push: function (id, attribute, data, callbackObject){
+					if(callbackObject){
+						return getId(resourceId, id)
+						.then(function(response){
+							var newData = buildAttr(response, attribute, data)
+							return pushId(resourceId, id, newData, callbackObject)
+						}, function(err){
+							callbackObject(err, null)
+						}).fail(function(err){
+							callbackObject(err, null)
+						})
+					}else{
+						return getId(resourceId, id)
+						.then(function(response){
+							var newData = buildAttr(response, attribute, data)
+							return pushId(resourceId, id, newData)
+						})
+					}
+
 				}
 			}, root.Stamplay.BaseComponent('cobject', resourceId))
 		}else{

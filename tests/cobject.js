@@ -5,10 +5,9 @@ suite('Cobject ', function () {
 
   var instance;
   var object_value = {
-    p1: 'test'
+    p1: 'test',
   };
   var array_value = [1, 2, 3, 4];
-
   //For each test
   setup('Creating a new Cobject model', function () {
     cinstance = Stamplay.Object('cobjectId');
@@ -42,6 +41,7 @@ suite('Cobject ', function () {
     assert.isFunction(cinstance.save, 'save method exists');
     assert.isFunction(cinstance.update, 'update method exists');
     assert.isFunction(cinstance.remove, 'remove method exists');
+    assert.isFunction(cinstance.push, 'push method exists');
   });
 
   test('get method (callback)', function (done) {
@@ -460,7 +460,7 @@ suite('Cobject ', function () {
     }, JSON.stringify({}));
   });
 
-    test('findByCurrentUser without attr method (callback)', function (done) {
+  test('findByCurrentUser without attr method (callback)', function (done) {
     cinstance.findByCurrentUser(function(err, response){
       done()
     })
@@ -483,6 +483,5 @@ suite('Cobject ', function () {
       "Content-Type": "application/json"
     }, JSON.stringify({}));
   });
-
 
 });

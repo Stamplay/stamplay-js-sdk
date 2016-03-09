@@ -162,6 +162,7 @@ suite('User', function () {
 	test('user logout function', function () {
 		var arr = [];
 		var stub = sinon.stub(Stamplay.Support, "redirect", function (url) {
+			var url = url.replace('file://','')
 			arr.push(url);
 		});
 		user.logout();

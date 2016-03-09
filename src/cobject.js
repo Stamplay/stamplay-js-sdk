@@ -27,6 +27,21 @@
 			url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + id + '/' + action
 		}, callbackObject)
 	};
+
+	var getId = function(resourceId, id){
+		return root.Stamplay.BaseComponent('cobject', resourceId+'/'+id).get()
+	};
+
+	var pushId = function(resourceId, id, newData, callbackObject){
+		return root.Stamplay.BaseComponent('cobject', resourceId).patch(id, newData, callbackObject)
+	};
+
+	var buildAttr = function(response, attribute, data){
+		var newData = {}
+		newData[attribute] = response[attribute]
+		newData[attribute].push(data)
+		return newData
+	}
 	//constructor
 	function Object(resourceId) {
 		if(resourceId){
@@ -57,6 +72,26 @@
 				},
 				comment: function (id, text, callbackObject) {
 					return makeActionPromise.call(this, id, 'comment', {text: text}, callbackObject);
+				},
+				push: function (id, attribute, data, callbackObject){
+					if(callbackObject){
+						return getId(resourceId, id)
+						.then(function(response){
+							var newData = buildAttr(response, attribute, data)
+							return pushId(resourceId, id, newData, callbackObject)
+						}, function(err){
+							callbackObject(err, null)
+						}).fail(function(err){
+							callbackObject(err, null)
+						})
+					}else{
+						return getId(resourceId, id)
+						.then(function(response){
+							var newData = buildAttr(response, attribute, data)
+							return pushId(resourceId, id, newData)
+						})
+					}
+
 				}
 			}, root.Stamplay.BaseComponent('cobject', resourceId))
 		}else{

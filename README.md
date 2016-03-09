@@ -84,6 +84,7 @@ This JavaScript SDK expose the following components:
 	* <code>downVote(id, [callback])</code>
 	* <code>rate(id, rate, [callback])</code>
 	* <code>comment(id, text, [callback])</code>
+	* <code>push(id, attribute, data, [callback])</code>
 * [Code Block](#codeblock)
 	* <code>run(data, queryParams, [callback])</code> 
 * [Webhook](#webhook)

@@ -1,4 +1,9 @@
 # Stamplay JS SDK Changelog
+2.0.3 / 09-03-2015
+===================
+
+* Added push method on Object
+
 2.0.2 / 22-01-2015
 ===================
 

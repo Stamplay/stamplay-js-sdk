@@ -36,14 +36,20 @@
 			if(provider){
 				var jwt = store.get(window.location.origin + '-jwt');
 				if (jwt) {
-					// Store temporary cookie to permit user aggregation
+					// Store temporary cookie to permit user aggregation (multiple social identities)
 				  var date = new Date();
 	        date.setTime(date.getTime() + 5 * 60 * 1000);
 					document.cookie = 'stamplay.jwt='+jwt+'; expires=' + date.toGMTString() + '; path=/'
 				}
 				var url = '/auth/' + Stamplay.VERSION + '/' + provider + '/connect';
-				var port = (window.location.port) ? ':'+window.location.port : '';
-				root.Stamplay.Support.redirect(location.protocol + '//' + document.domain +port+ url);
+				var port = (window.location.port) ? ':'+window.location.port : '';	
+				var redirection = location.protocol + '//' + document.domain +port+ url
+				//if you are using sdk on your *personal site*
+				//remember to manage the callback url  for social login in editor
+				if(Stamplay.OPTIONS.absoluteUrl){
+					redirection = Stamplay.BASEURL+url
+				}
+				root.Stamplay.Support.redirect(redirection);
 			}else{
 				throw new Error('Stamplay.User.socialLogin needs the service name');
 			}
@@ -64,7 +70,13 @@
 				url: '/auth/' + Stamplay.VERSION + '/logout'
 				}, callbackObject)
 			}else{
-				root.Stamplay.Support.redirect('/auth/' + Stamplay.VERSION + '/logout');
+				var url = '/auth/' + Stamplay.VERSION + '/logout';
+				var port = (window.location.port) ? ':'+window.location.port : '';	
+				var redirection = location.protocol + '//' + document.domain +port+ url
+				if(Stamplay.OPTIONS.absoluteUrl){
+					redirection = Stamplay.BASEURL+url
+				}
+				root.Stamplay.Support.redirect(redirection);
 			}
 		},
 		resetPassword: function(data, callbackObject){
