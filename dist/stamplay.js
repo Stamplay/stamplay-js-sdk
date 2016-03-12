@@ -2233,7 +2233,8 @@ return Q;
 */
 /* Initizialize library */
 (function (root) {
-	
+	'use strict';
+
 	/*  Inizialization of Stamplay Object */
 	root.Stamplay = root.Stamplay || {};
 	/* setting attribute API Version */
@@ -2268,6 +2269,7 @@ return Q;
  * Very simple to use: Stamplay.makePromise({options})
  */
 (function (root) {
+	'use strict';
 
 	/* private function for handling this parameters */
 	var parseQueryParams = function (options) {
@@ -2284,9 +2286,9 @@ return Q;
 		if (options.thisParams) {
 			parseQueryParams(options);
 		}		
+		var headerStamplay = root.Stamplay.APPID;
 		if (root.Stamplay.APPID != "") {
 			options.url = root.Stamplay.BASEURL + options.url;
-			headerStamplay = root.Stamplay.APPID;
 		} else {
 			headerStamplay = location.host;
 			headerStamplay = headerStamplay.replace(/^www\./, '');
@@ -2417,6 +2419,7 @@ return Q;
  *  It extends Model and Collection.
  */
 (function (root) {
+	'use strict';
 
 	function BaseComponent(brickId, resourceId) {
 		
@@ -2483,6 +2486,7 @@ return Q;
  * very easy to use : Stamplay.Support.redirect('http://stamplay.com')
  */
 (function (root) {
+	'use strict';
 
 	// constructor for Support Object
 	function Support() {
@@ -2510,6 +2514,8 @@ return Q;
  * very easy to use : Stamplay.Query('user').equalTo('name':'john')
  */
 (function (root) {
+	'use strict';
+
 	// constructor for Query Object
 	// model is required ever
 	function _createGeoQuery(queryOperator, shapeOperator, type, coordinates, maxDistance, minDistance) {
@@ -2546,13 +2552,13 @@ return Q;
 
 			or : function(){
 				var obj = { $or : []};
-				
+				var args = arguments;
 				if (arguments[0] instanceof Array) {
-					arguments = arguments[0];
+					args = arguments[0];
 				}
-				for(var i=0; i<arguments.length; i++){
-					if(arguments[i].whereQuery)	
-						obj.$or.push(arguments[i].whereQuery[0]);
+				for(var i=0; i<args.length; i++){
+					if(args[i].whereQuery)	
+						obj.$or.push(args[i].whereQuery[0]);
 					else
 						throw new Error('Please Or function take only Query object');
 				}
@@ -2728,6 +2734,8 @@ return Q;
 */
 
 (function (root) {
+	'use strict';
+
 	/*
 		User component : Stamplay.User 
 		This class rappresent the User component on Stamplay platform
@@ -2879,6 +2887,7 @@ return Q;
 	PUT     '/api/cobject/VERSION/:cobjectId/:id/twitter_share 
 */
 (function (root) {
+	'use strict';
 
 	/**
 		Custom object component : Stamplay.Object 
@@ -2969,6 +2978,7 @@ return Q;
  *  POST   '/api/webhook/VERSION/:webhookId/catch'
  */
 (function (root) {
+	'use strict';
 
 	/*
 		Webhook component : Stamplay.Webhook 
@@ -3016,6 +3026,7 @@ return Q;
  * GET   'api/stripe/VERSION/customers/:userId/subscriptions'
  */
 (function (root) {
+	'use strict';
 
 	/*
 		Stripe component : Stamplay.Stripe 
@@ -3138,6 +3149,8 @@ return Q;
  *  POST   '/api/codeblock/VERSION/:CodeblockId/run'
  */
 (function (root) {
+	'use strict';
+
 	/*
 		Codeblock component : Stamplay.Codeblock 
 		This class rappresent the Codeblock Object component on Stamplay platform

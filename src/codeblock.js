@@ -4,6 +4,8 @@
  *  POST   '/api/codeblock/VERSION/:CodeblockId/run'
  */
 (function (root) {
+	'use strict';
+
 	/*
 		Codeblock component : Stamplay.Codeblock 
 		This class rappresent the Codeblock Object component on Stamplay platform

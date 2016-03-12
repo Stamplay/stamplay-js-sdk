@@ -11,6 +11,8 @@
 */
 
 (function (root) {
+	'use strict';
+
 	/*
 		User component : Stamplay.User 
 		This class rappresent the User component on Stamplay platform

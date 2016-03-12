@@ -4,6 +4,7 @@
  *  POST   '/api/webhook/VERSION/:webhookId/catch'
  */
 (function (root) {
+	'use strict';
 
 	/*
 		Webhook component : Stamplay.Webhook 

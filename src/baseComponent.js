@@ -5,6 +5,7 @@
  *  It extends Model and Collection.
  */
 (function (root) {
+	'use strict';
 
 	function BaseComponent(brickId, resourceId) {
 		
