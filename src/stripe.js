@@ -7,6 +7,7 @@
  * GET   'api/stripe/VERSION/customers/:userId/subscriptions'
  */
 (function (root) {
+	'use strict';
 
 	/*
 		Stripe component : Stamplay.Stripe 

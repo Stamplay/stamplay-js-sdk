@@ -14,6 +14,7 @@
 	PUT     '/api/cobject/VERSION/:cobjectId/:id/twitter_share 
 */
 (function (root) {
+	'use strict';
 
 	/**
 		Custom object component : Stamplay.Object 

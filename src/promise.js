@@ -4,6 +4,7 @@
  * Very simple to use: Stamplay.makePromise({options})
  */
 (function (root) {
+	'use strict';
 
 	/* private function for handling this parameters */
 	var parseQueryParams = function (options) {
@@ -20,9 +21,9 @@
 		if (options.thisParams) {
 			parseQueryParams(options);
 		}		
+		var headerStamplay = root.Stamplay.APPID;
 		if (root.Stamplay.APPID != "") {
 			options.url = root.Stamplay.BASEURL + options.url;
-			headerStamplay = root.Stamplay.APPID;
 		} else {
 			headerStamplay = location.host;
 			headerStamplay = headerStamplay.replace(/^www\./, '');

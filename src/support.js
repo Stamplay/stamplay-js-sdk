@@ -5,6 +5,7 @@
  * very easy to use : Stamplay.Support.redirect('http://stamplay.com')
  */
 (function (root) {
+	'use strict';
 
 	// constructor for Support Object
 	function Support() {

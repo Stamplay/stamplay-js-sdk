@@ -4,6 +4,8 @@
  * very easy to use : Stamplay.Query('user').equalTo('name':'john')
  */
 (function (root) {
+	'use strict';
+
 	// constructor for Query Object
 	// model is required ever
 	function _createGeoQuery(queryOperator, shapeOperator, type, coordinates, maxDistance, minDistance) {
@@ -40,13 +42,13 @@
 
 			or : function(){
 				var obj = { $or : []};
-				
+				var args = arguments;
 				if (arguments[0] instanceof Array) {
-					arguments = arguments[0];
+					args = arguments[0];
 				}
-				for(var i=0; i<arguments.length; i++){
-					if(arguments[i].whereQuery)	
-						obj.$or.push(arguments[i].whereQuery[0]);
+				for(var i=0; i<args.length; i++){
+					if(args[i].whereQuery)	
+						obj.$or.push(args[i].whereQuery[0]);
 					else
 						throw new Error('Please Or function take only Query object');
 				}
