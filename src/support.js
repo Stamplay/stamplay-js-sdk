@@ -17,10 +17,10 @@
 
 		// function for check if you have user with a specific email 
 		this.validateEmail = function (email, callbackObject) {
-			return Stamplay.makeAPromise({
+			return root.Stamplay.makeAPromise({
 				method: 'POST',
 				data: { email: email },
-				url: '/api/auth/' + Stamplay.VERSION + '/validate/email'
+				url: '/api/auth/' + root.Stamplay.VERSION + '/validate/email'
 			}, callbackObject);
 		};
 	}

@@ -22,16 +22,16 @@
 		brickId:'user',
 		resourceId:'users',
 		currentUser : function (callbackObject){
-			return Stamplay.makeAPromise({
+			return root.Stamplay.makeAPromise({
 				method: 'GET',
-				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/getStatus'
+				url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/getStatus'
 			}, callbackObject)
 		},
 		login :function (data, callbackObject) {
-			return Stamplay.makeAPromise({
+			return root.Stamplay.makeAPromise({
 				method: 'POST',
 				data: data,
-				url: '/auth/' + Stamplay.VERSION + '/local/login',
+				url: '/auth/' + root.Stamplay.VERSION + '/local/login',
 			}, callbackObject)
 		},
 		socialLogin: function(provider){
@@ -43,13 +43,13 @@
 	        date.setTime(date.getTime() + 5 * 60 * 1000);
 					document.cookie = 'stamplay.jwt='+jwt+'; expires=' + date.toGMTString() + '; path=/'
 				}
-				var url = '/auth/' + Stamplay.VERSION + '/' + provider + '/connect';
+				var url = '/auth/' + root.Stamplay.VERSION + '/' + provider + '/connect';
 				var port = (window.location.port) ? ':'+window.location.port : '';	
 				var redirection = location.protocol + '//' + document.domain +port+ url
 				//if you are using sdk on your *personal site*
 				//remember to manage the callback url  for social login in editor
-				if(Stamplay.OPTIONS.absoluteUrl){
-					redirection = Stamplay.BASEURL+url
+				if(root.Stamplay.OPTIONS.absoluteUrl){
+					redirection = root.Stamplay.BASEURL+url
 				}
 				root.Stamplay.Support.redirect(redirection);
 			}else{
@@ -57,90 +57,90 @@
 			}
 		},
 		signup : function (data, callbackObject) {
-			return Stamplay.makeAPromise({
+			return root.Stamplay.makeAPromise({
 				method: 'POST',
 				data: data,
-				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId
+				url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/' + this.resourceId
 			}, callbackObject)
 		},
 		logout : function (async, callbackObject) {
-			if (Stamplay.USESTORAGE)
+			if (root.Stamplay.USESTORAGE)
 				store.remove(window.location.origin + '-jwt');
 			if(async){
-				return Stamplay.makeAPromise({
+				return root.Stamplay.makeAPromise({
 				method: 'GET',
-				url: '/auth/' + Stamplay.VERSION + '/logout'
+				url: '/auth/' + root.Stamplay.VERSION + '/logout'
 				}, callbackObject)
 			}else{
-				var url = '/auth/' + Stamplay.VERSION + '/logout';
+				var url = '/auth/' + root.Stamplay.VERSION + '/logout';
 				var port = (window.location.port) ? ':'+window.location.port : '';	
 				var redirection = location.protocol + '//' + document.domain +port+ url
-				if(Stamplay.OPTIONS.absoluteUrl){
-					redirection = Stamplay.BASEURL+url
+				if(root.Stamplay.OPTIONS.absoluteUrl){
+					redirection = root.Stamplay.BASEURL+url
 				}
 				root.Stamplay.Support.redirect(redirection);
 			}
 		},
 		resetPassword: function(data, callbackObject){
-			return Stamplay.makeAPromise({
+			return root.Stamplay.makeAPromise({
 				method: 'POST',
 				data: data,
-				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/resetpassword'
+				url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/resetpassword'
 			}, callbackObject)
 		},
 		activities : function (id, callbackObject) {
-			return Stamplay.makeAPromise({
+			return root.Stamplay.makeAPromise({
 				method: 'GET',
-				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/activities'
+				url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/'+id+'/activities'
 			}, callbackObject)
 		},
 		following : function (id, callbackObject) {
-			return Stamplay.makeAPromise({
+			return root.Stamplay.makeAPromise({
 				method: 'GET',
-				url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/following'
+				url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/'+id+'/following'
 			}, callbackObject)
 		},
 		followedBy : function (id, callbackObject) {
-				return Stamplay.makeAPromise({
+				return root.Stamplay.makeAPromise({
 					method: 'GET',
-					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/'+id+'/followed_by'
+					url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/'+id+'/followed_by'
 				}, callbackObject)
 		},
 		follow : function (id, callbackObject) {
-				return Stamplay.makeAPromise({
+				return root.Stamplay.makeAPromise({
 					method: 'PUT',
 					data: {'userId': id},
-					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/follow'
+					url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/follow'
 				}, callbackObject)
 		},
 		unfollow : function (id, callbackObject) {
-				return Stamplay.makeAPromise({
+				return root.Stamplay.makeAPromise({
 					method: 'PUT',
 					data: {'userId': id},
-					url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/users/unfollow'
+					url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/unfollow'
 				}, callbackObject)
 		},
 		getRoles:function (callbackObject) {
-			return Stamplay.makeAPromise({
+			return root.Stamplay.makeAPromise({
 				method: 'GET',
-				url: '/api/user/' + Stamplay.VERSION + '/roles'
+				url: '/api/user/' + root.Stamplay.VERSION + '/roles'
 			}, callbackObject);
 		},
 		getRole:function (roleId, callbackObject) {
-				return Stamplay.makeAPromise({
+				return root.Stamplay.makeAPromise({
 					method: 'GET',
-					url: '/api/user/' + Stamplay.VERSION + '/roles/'+ roleId
+					url: '/api/user/' + root.Stamplay.VERSION + '/roles/'+ roleId
 				}, callbackObject);
 		}
 	}
 	_.extend(User, root.Stamplay.BaseComponent(User.brickId, User.resourceId))
 	delete User.patch
 	User.remove = function(id, callbackObject){
-		return Stamplay.makeAPromise({
+		return root.Stamplay.makeAPromise({
 			method: 'DELETE',
-			url: '/api/' + this.brickId + '/' + Stamplay.VERSION + '/' + this.resourceId + '/' + id
+			url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/' + this.resourceId + '/' + id
 		},callbackObject).then(function(resp){
-			if (Stamplay.USESTORAGE) {
+			if (root.Stamplay.USESTORAGE) {
 				var jwt = store.get(window.location.origin + '-jwt');
 				if (jwt) {
 					store.remove(window.location.origin + '-jwt');

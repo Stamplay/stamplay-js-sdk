@@ -15,17 +15,17 @@
 	//constructor
 	function Webhook(resourceId) {
 		var resource = resourceId.replace(/[^\w\s]/gi, '').trim().toLowerCase().replace(/\s+/g, '_');
-		var url = '/api/webhook/' + Stamplay.VERSION + '/' + resource + '/catch';
+		var url = '/api/webhook/' + root.Stamplay.VERSION + '/' + resource + '/catch';
 		return {
 			post: function (data, callbackObject) {
-				return Stamplay.makeAPromise({
+				return root.Stamplay.makeAPromise({
 					method: 'POST',
 					data: data,
 					url: url
 				}, callbackObject);
 			},
 			// put: function (data, queryParams, callbackObject) {
-			// 	return Stamplay.makeAPromise({
+			// 	return root.Stamplay.makeAPromise({
 			// 		method: 'PUT',
 			// 		data: data,
 			// 		url: url,
@@ -33,7 +33,7 @@
 			// 	}, callbackObject);
 			// },
 			// get: function (queryParams, callbackObject) {
-			// 	return Stamplay.makeAPromise({
+			// 	return root.Stamplay.makeAPromise({
 			// 		method: 'GET',
 			// 		url: url,
 			// 		thisParams: queryParams
