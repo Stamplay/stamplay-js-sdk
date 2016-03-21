@@ -46,6 +46,7 @@ lib-cov
 *.gz.min.css
 .idea
 dump.rdb
+aws-keys.json
 
 # wiki
 #####################

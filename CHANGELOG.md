@@ -1,21 +1,32 @@
 # Stamplay JS SDK Changelog
-2.0.3 / 11-03-2015
+
+2.0.4 / 21-03-2016
+===================
+
+* Added Options obj in init method in order to manage some settings
+* Added support to oauth social login for ionic apps
+* Enable strict mode (Thanks to lbragaglia)
+* Fix global Reference (Thanks to lbragaglia)
+* Added no dependecies version of sdk (Thanks to lbragaglia)
+
+
+2.0.3 / 11-03-2016
 ===================
 
 * Added push method on Object
 
-2.0.2 / 22-01-2015
+2.0.2 / 22-01-2016
 ===================
 
 * Added asyncronous logout method
 * Added geoPoint query methods
 
-2.0.1 / 22-01-2015
+2.0.1 / 22-01-2016
 ===================
 
 * New method to query object: select, populate, populateOwner and regex
 
-2.0.0 / 13-01-2015
+2.0.0 / 13-01-2016
 ===================
 
 * Breaking changes: Complete refactoring of all method and added the callback paradigm
@@ -146,7 +157,7 @@
 0.0.4 / 19-02-2015
 ==================
 
-* Fix save method on Model Component
+* Fixed save method on Model Component
 
 0.0.3 / 08-01-2015
 ==================

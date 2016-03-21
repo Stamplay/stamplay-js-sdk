@@ -1,6 +1,6 @@
 {
   "name": "stamplay-sdk",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "homepage": "https://stamplay.com",
   "private": false,
   "author": {
@@ -15,13 +15,12 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
+    "grunt-aws-s3": "^0.14.4",
     "grunt-cli": "^0.1.13",
-    "grunt-concurrent": "~0.3.0",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-compress": "^0.14.0",
     "grunt-contrib-concat": "~0.5.1",
     "grunt-contrib-uglify": "~0.9.1",
-    "grunt-exec": "~0.4.2",
     "load-grunt-config": "^0.8.0-beta.1"
   }
 }

@@ -22,11 +22,13 @@
 	if (window.localStorage && store.enabled) {
 		root.Stamplay.USESTORAGE = true;
 	}
+
 	if (getURLParameter('jwt')) {
 		if (root.Stamplay.USESTORAGE) {
 			store.set(window.location.origin + '-jwt', getURLParameter('jwt'));
 		}
 	}
+	
 	/* init method for setup the base url */ 
 	root.Stamplay.init = function (appId, options) {
 		root.Stamplay.BASEURL = 'https://' + appId + '.stamplayapp.com';

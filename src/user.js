@@ -18,6 +18,7 @@
 		This class rappresent the User component on Stamplay platform
 		It very easy to use: Stamplay.User
 	*/
+	
 	var  User = {
 		brickId:'user',
 		resourceId:'users',
@@ -31,27 +32,41 @@
 			return root.Stamplay.makeAPromise({
 				method: 'POST',
 				data: data,
-				url: '/auth/' + root.Stamplay.VERSION + '/local/login',
+				url: '/auth/' + root.Stamplay.VERSION + '/local/login'
 			}, callbackObject)
 		},
 		socialLogin: function(provider){
 			if(provider){
-				var jwt = store.get(window.location.origin + '-jwt');
-				if (jwt) {
-					// Store temporary cookie to permit user aggregation (multiple social identities)
-				  var date = new Date();
-	        date.setTime(date.getTime() + 5 * 60 * 1000);
-					document.cookie = 'stamplay.jwt='+jwt+'; expires=' + date.toGMTString() + '; path=/'
-				}
 				var url = '/auth/' + root.Stamplay.VERSION + '/' + provider + '/connect';
-				var port = (window.location.port) ? ':'+window.location.port : '';	
-				var redirection = location.protocol + '//' + document.domain +port+ url
-				//if you are using sdk on your *personal site*
-				//remember to manage the callback url  for social login in editor
-				if(root.Stamplay.OPTIONS.absoluteUrl){
-					redirection = root.Stamplay.BASEURL+url
+				if(root.Stamplay.OPTIONS.isMobile){
+						//need an external plugin to work - https://github.com/apache/cordova-plugin-inappbrowser 
+						var popup = window.open(root.Stamplay.BASEURL+url, 'socialLogin', 'left=1,top=1,width=600,height=600')
+						popup.addEventListener('loadstart', function (e) {
+						if(e.url.indexOf('jwt=') > -1){
+							var jwt = e.url.split('jwt=')[1]
+							store.set(window.location.origin + '-jwt', jwt);
+							if(root.Stamplay.OPTIONS.autoRefreshSocialLogin || true)
+								location.reload();
+							popup.close();
+						}
+        	});
+				}else{
+					var jwt = store.get(window.location.origin + '-jwt');
+					if (jwt) {
+						// Store temporary cookie to permit user aggregation (multiple social identities)
+					  var date = new Date();
+		        date.setTime(date.getTime() + 5 * 60 * 1000);
+						document.cookie = 'stamplay.jwt='+jwt+'; expires=' + date.toGMTString() + '; path=/'
+					}
+					var port = (window.location.port) ? ':'+window.location.port : '';	
+					var redirection = location.protocol + '//' + document.domain +port+ url
+					//if you are using sdk on your *personal site*
+					//remember to manage the callback url for social login in editor
+					if(root.Stamplay.OPTIONS.absoluteUrl){
+						redirection = root.Stamplay.BASEURL+url
+					}
+					root.Stamplay.Support.redirect(redirection);
 				}
-				root.Stamplay.Support.redirect(redirection);
 			}else{
 				throw new Error('Stamplay.User.socialLogin needs the service name');
 			}

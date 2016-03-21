@@ -206,7 +206,7 @@
 
 				return root.Stamplay.makeAPromise({
 					method: 'GET',
-					url:  Url,
+					url:  Url
 				},callback)
 			}
 		}
