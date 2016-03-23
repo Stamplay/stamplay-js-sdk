@@ -6,12 +6,14 @@
   "author": {
     "name": "Stamplay javascript SDK"
   },
+  "main": "dist/stamplay-nodeps.js",
   "scripts": {
     "test": "mocha-phantomjs ./tests/tests.html"
   },
   "dependencies": {
-    "mocha-phantomjs": "3.5.0",
-    "phantomjs": "1.9.19"
+    "underscore": "~1.8.3",
+    "store": "~1.3.17",
+    "q": "1.4.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -21,6 +23,8 @@
     "grunt-contrib-compress": "^0.14.0",
     "grunt-contrib-concat": "~0.5.1",
     "grunt-contrib-uglify": "~0.9.1",
-    "load-grunt-config": "^0.8.0-beta.1"
+    "load-grunt-config": "^0.8.0-beta.1",
+    "mocha-phantomjs": "3.5.0",
+    "phantomjs": "1.9.19"
   }
 }
