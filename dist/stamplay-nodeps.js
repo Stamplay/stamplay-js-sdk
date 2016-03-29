@@ -1,4 +1,4 @@
-/*! Stamplay v2.0.4 | (c) 2016 Stamplay *//**
+/*! Stamplay v2.0.5 | (c) 2016 Stamplay *//**
 @author Stamplay
 @version 2.0
 @description an awesome javascript sdk for Stamplay 
@@ -539,8 +539,9 @@
 						//need an external plugin to work - https://github.com/apache/cordova-plugin-inappbrowser 
 						var popup = window.open(root.Stamplay.BASEURL+url, 'socialLogin', 'left=1,top=1,width=600,height=600')
 						popup.addEventListener('loadstart', function (e) {
+							var reg = new RegExp('jwt=([A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.[A-Za-z0-9-_.+=]+)')
 						if(e.url.indexOf('jwt=') > -1){
-							var jwt = e.url.split('jwt=')[1]
+							var jwt = e.url.match(reg)[1]
 							store.set(window.location.origin + '-jwt', jwt);
 							if(root.Stamplay.OPTIONS.autoRefreshSocialLogin || true)
 								location.reload();

@@ -15,7 +15,7 @@ module.exports = {
     files: [{
       cwd: 'dist/',
       src: ['**.min.js','**.js','**.min.js.map'],
-      dest: 'lib/<%= pkg.version %>',
+      dest: 'libs/stamplay-js-sdk/<%= pkg.version %>',
       action: 'upload',
       expand: true
     }]
@@ -32,7 +32,7 @@ module.exports = {
     files: [{
       cwd: 'dist/',
       src: ['**.gz.js'],
-      dest: 'lib/<%= pkg.version %>',
+      dest: 'libs/stamplay-js-sdk/<%= pkg.version %>',
       action: 'upload',
       expand: true
     }]

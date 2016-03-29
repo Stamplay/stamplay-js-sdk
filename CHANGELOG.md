@@ -1,5 +1,10 @@
 # Stamplay JS SDK Changelog
 
+2.0.5 / 29-03-2016
+===================
+
+* Fixed jwt token retrieve flow in ionic app
+
 2.0.4 / 21-03-2016
 ===================
 
