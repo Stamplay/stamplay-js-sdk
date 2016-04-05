@@ -12,7 +12,7 @@
 
 		// function to redirect to specified url
 		this.redirect = function (url) {
-			window.location.href = url;
+			root.location.href = url;
 		};
 
 		// function for check if you have user with a specific email 
@@ -23,6 +23,7 @@
 				url: '/api/auth/' + root.Stamplay.VERSION + '/validate/email'
 			}, callbackObject);
 		};
+
 	}
 	var support = new Support();
 	// Added Support Object to Stamplay

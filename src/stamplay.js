@@ -19,13 +19,13 @@
 	/* options */
 	root.Stamplay.OPTIONS = {};
 	/*  check if exist local storage with the support of store.js */
-	if (window.localStorage && store.enabled) {
+	if (root.localStorage && store.enabled) {
 		root.Stamplay.USESTORAGE = true;
 	}
 
 	if (getURLParameter('jwt')) {
 		if (root.Stamplay.USESTORAGE) {
-			store.set(window.location.origin + '-jwt', getURLParameter('jwt'));
+			store.set(root.location.origin + '-jwt', getURLParameter('jwt'));
 		}
 	}
 	
@@ -36,8 +36,29 @@
 		root.Stamplay.OPTIONS = options || {};
 	}
 
+	root.Stamplay.isString = function(val) {
+	  return typeof val === 'string' || ((!!val && typeof val === 'object') && Object.prototype.toString.call(val) === '[object String]');
+	}
+
+	root.Stamplay.isNumber = function(val) {
+		return typeof value == 'number' ||  (!isNaN(parseFloat(val)) && isFinite(val))
+  }
+		
+	root.Stamplay.isFunction = function(functionToCheck) {
+	 	return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+	}
+
+	root.Stamplay.extend = function(source, obj){
+   	var keys = Object.keys(obj), i, keyLen = keys.length, key;
+    for (i = 0; i < keyLen; ++i) {
+      key = keys[i];
+      source[key] = obj[key];
+    }
+    return source;
+	}
+
 	function getURLParameter(name) {
-		return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
+		return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(root.location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
 	}
 
 }(this));

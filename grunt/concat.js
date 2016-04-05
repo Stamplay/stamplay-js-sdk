@@ -9,7 +9,6 @@ var stamplaySources = [
   'src/webhook.js',
   'src/stripe.js',
   'src/codeblock.js',
-  'src/role.js'
 ];
 module.exports = {
   options: {
@@ -22,7 +21,6 @@ module.exports = {
   dist: {
     files: {
       'dist/stamplay.js': [
-        'bower_components/underscore/underscore-min.js',
         'bower_components/q/q.js',
         'bower_components/store.js/store.js'
       ].concat(stamplaySources),

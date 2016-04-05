@@ -58,6 +58,7 @@ This JavaScript SDK expose the following components:
 * [User](#user)
 	* <code>save(data, [callback])</code>
   * <code>get(data, [callback])</code>
+  * <code>getById(id, data, [callback])</code>
   * <code>remove(id, [callback])</code>
   * <code>update(id, data, [callback] )</code>
   * <code>currentUser([callback])</code>
@@ -68,6 +69,7 @@ This JavaScript SDK expose the following components:
   * <code>resetPassword(data, [callback])</code>
   * <code>getRoles([callback])</code>
   * <code>getRole(id, [callback])</code>
+  * <code>setRole(id, roleId, [callback])</code>
   * <code>follow(id, [callback])</code>
   * <code>unfollow(id, [callback])</code>
   * <code>followedBy(id, [callback])</code>
@@ -76,6 +78,7 @@ This JavaScript SDK expose the following components:
 * [Object](#custom-object)
 	* <code>save(data, [callback])</code>
 	* <code>get(data, [callback])</code>
+	* <code>getById(id, data, [callback])</code>
 	* <code>remove(id, [callback])</code>
 	* <code>update(id, data, [callback])</code>
 	* <code>patch(id, data, [callback])</code>

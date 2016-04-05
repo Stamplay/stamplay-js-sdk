@@ -1,4 +1,4 @@
-/* globals  Stamplay,_ */
+/* globals  Stamplay */
 
 /* Brick : Cobject 
 	GET     '/api/cobject/VERSION/:cobjectId 
@@ -46,11 +46,11 @@
 	//constructor
 	function Object(resourceId) {
 		if(resourceId){
-			return _.extend({
+			return root.Stamplay.extend({
 				brickId:'cobject',
 				resourceId:resourceId,				
 				findByCurrentUser : function (attr, callbackObject) {
-					if( (arguments.length==1 && _.isFunction(arguments[0])) || arguments.length==0){
+					if( (arguments.length==1 && root.Stamplay.isFunction(arguments[0])) || arguments.length==0){
 						return root.Stamplay.makeAPromise({
 							method: 'GET',
 							url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/' + this.resourceId + '/find/owner'

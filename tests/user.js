@@ -51,12 +51,14 @@ suite('User', function () {
 		assert.isFunction(user.following, 'following method exists');
 		assert.isFunction(user.followedBy, 'followedBy method exists');
 		assert.isFunction(user.get, 'get method exists');
+		assert.isFunction(user.getById, 'getById method exists');
 		assert.isFunction(user.save, 'save method exists');
 		assert.isFunction(user.update, 'update method exists');
 		assert.isFunction(user.remove, 'remove method exists');
 		assert.isUndefined(user.patch, 'patch method not exists')
 		assert.isFunction(user.getRoles, 'getRoles method exists');
     assert.isFunction(user.getRole, 'getRole method exists');
+    assert.isFunction(user.setRole, 'setRole method exists');
 	});
 
 	test('user currentUser method (callback)', function (done) {
@@ -165,30 +167,33 @@ suite('User', function () {
 			var url = url.replace('file://','')
 			arr.push(url);
 		});
+		store.set(window.location.origin + '-jwt', '12345')
 		user.logout();
 		Stamplay.Support.redirect.restore(); // Unwraps the spy
 		var url = arr[0] || '';
-		assert.equal(url, '/auth/' + Stamplay.VERSION + '/logout');
+		assert.equal(url, '/auth/' + Stamplay.VERSION + '/logout?jwt=12345');
 	});
 
 
 	test('user logout method with async (callback)', function (done) {
+		store.set(window.location.origin + '-jwt', '12345')
 		user.logout(true, function(err,result){
 			done();
 		})
 		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, stamplayUrl+'/auth/' + Stamplay.VERSION + '/logout');
+		assert.equal(this.request.url, stamplayUrl+'/auth/' + Stamplay.VERSION + '/logout?jwt=12345');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		},JSON.stringify({}));
 	});
 
 	test('user logout method with async (promise)', function (done) {
+		store.set(window.location.origin + '-jwt', '12345')
 		user.logout(true).then(function(result){
 			done();
 		})
 		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, stamplayUrl+'/auth/' + Stamplay.VERSION + '/logout');
+		assert.equal(this.request.url, stamplayUrl+'/auth/' + Stamplay.VERSION + '/logout?jwt=12345');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
 		}, JSON.stringify({}));
@@ -364,6 +369,30 @@ suite('User', function () {
 		}, '{ "_id": 123, "displayName": "John Stamplay" }');
 	});
 
+	test('getById method (callback)', function (done) {
+		Stamplay.User.getById('123',{},function(err,result){
+			assert.equal(result._id, 123);
+			assert.equal(result.displayName, 'John Stamplay');
+			done();
+		})
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123');
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, '{ "_id": 123, "displayName": "John Stamplay" }');
+	});
+
+	test('getById method (promise)', function (done) {
+		Stamplay.User.getById('123',{}).then(function(result){
+			assert.equal(result._id, 123);
+			assert.equal(result.displayName, 'John Stamplay');
+			done();
+		})
+		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123');
+		this.request.respond(200, {
+			"Content-Type": "application/json"
+		}, '{ "_id": 123, "displayName": "John Stamplay" }');
+	});
+
 	test('update method (callback)', function (done){
 		Stamplay.User.update('123',{}, function(err,result){
 			assert.equal(result._id, 123);
@@ -480,6 +509,24 @@ suite('User', function () {
     assert.equal(this.request.method, 'GET');
     assert.equal(this.request.requestHeaders['Content-Type'], "application/json");
     assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/roles/123451234512345123451234');
+    this.request.respond(200, {
+      "Content-Type": "application/json"
+    }, JSON.stringify(response));
+  });
+
+  test('setRole method (callback)', function (done) {
+  	user.setRole('123451234512345123451234','123456', function(err,result){done()})
+    assert.equal(this.request.method, 'PATCH');
+    assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123451234512345123451234/role');
+    this.request.respond(200, {
+      "Content-Type": "application/json"
+    }, JSON.stringify(response));
+  });
+
+  test('setRole method (promise)', function (done) {
+  	user.setRole('123451234512345123451234','123456').then(function(result){done()})
+    assert.equal(this.request.method, 'PATCH');
+    assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123451234512345123451234/role');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, JSON.stringify(response));

@@ -2,7 +2,7 @@ module.exports = {
   options: {
     accessKeyId: '<%= aws.AWSAccessKeyId %>',
     secretAccessKey: '<%= aws.AWSSecretKey %>',
-    uploadConcurrency: 5
+    uploadConcurrency: 10
   },
   'deploy-js':{
     options: {
@@ -16,6 +16,12 @@ module.exports = {
       cwd: 'dist/',
       src: ['**.min.js','**.js','**.min.js.map'],
       dest: 'libs/stamplay-js-sdk/<%= pkg.version %>',
+      action: 'upload',
+      expand: true
+    },{
+      cwd: 'dist/',
+      src: ['**.min.js','**.js','**.min.js.map'],
+      dest: 'libs/stamplay-js-sdk',
       action: 'upload',
       expand: true
     }]
@@ -33,6 +39,12 @@ module.exports = {
       cwd: 'dist/',
       src: ['**.gz.js'],
       dest: 'libs/stamplay-js-sdk/<%= pkg.version %>',
+      action: 'upload',
+      expand: true
+    },{
+      cwd: 'dist/',
+      src: ['**.gz.js'],
+      dest: 'libs/stamplay-js-sdk',
       action: 'upload',
       expand: true
     }]

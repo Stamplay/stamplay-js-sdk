@@ -25,7 +25,7 @@
 			}, callbackObject);
 		},
 		createCreditCard : function (userId, token, callbackObject) {
-			if (arguments.length >= 2 && (_.isString(arguments[0]) && _.isString(arguments[1]))) {
+			if (arguments.length >= 2 && (root.Stamplay.isString(arguments[0]) && root.Stamplay.isString(arguments[1]))) {
 				return root.Stamplay.makeAPromise({
 					method: 'POST',
 					data: {'token': token},
@@ -36,7 +36,7 @@
 			}
 		},
 		updateCreditCard : function (userId, token, callbackObject) {
-			if (arguments.length >= 2 && (_.isString(arguments[0]) && _.isString(arguments[1]))) {
+			if (arguments.length >= 2 && (root.Stamplay.isString(arguments[0]) && root.Stamplay.isString(arguments[1]))) {
 					return root.Stamplay.makeAPromise({
 						method: 'PUT',
 						data: {'token': token},
@@ -47,7 +47,7 @@
 			}
 		},
 		charge : function (userId, token, amount, currency, callbackObject) {
-			if (arguments.length >= 4 && (_.isString(arguments[0]) && _.isString(arguments[1]) && _.isNumber(arguments[2]) && _.isString(arguments[3]) )){
+			if (arguments.length >= 4 && (root.Stamplay.isString(arguments[0]) && root.Stamplay.isString(arguments[1]) && root.Stamplay.isNumber(arguments[2]) && root.Stamplay.isString(arguments[3]) )){
 				return root.Stamplay.makeAPromise({
 					method: 'POST',
 					data: {
@@ -63,7 +63,7 @@
 			}
 		},
 		createSubscription : function (userId, planId, callbackObject) {
-			if (arguments.length >= 2 && (_.isString(arguments[0]) && _.isString(arguments[1]))) {
+			if (arguments.length >= 2 && (root.Stamplay.isString(arguments[0]) && root.Stamplay.isString(arguments[1]))) {
 				return root.Stamplay.makeAPromise({
 					method: 'POST',
 					data: {'planId': planId},
@@ -85,7 +85,7 @@
 			}
 		},
 		getSubscription : function (userId, subscriptionId, callbackObject) {
-			if (arguments.length >= 2 && (_.isString(arguments[0]) && _.isString(arguments[1]))) {
+			if (arguments.length >= 2 && (root.Stamplay.isString(arguments[0]) && root.Stamplay.isString(arguments[1]))) {
 				return root.Stamplay.makeAPromise({
 					method: 'GET',
 					url: this.url + 'customers/' + userId + '/subscriptions/' + subscriptionId,

@@ -38,6 +38,7 @@ suite('Cobject ', function () {
     assert.isFunction(cinstance.rate, 'rate status exists');
     assert.isFunction(cinstance.comment, 'comment status exists');
     assert.isFunction(cinstance.get, 'get method exists');
+    assert.isFunction(cinstance.getById, 'getById method exists');
     assert.isFunction(cinstance.save, 'save method exists');
     assert.isFunction(cinstance.update, 'update method exists');
     assert.isFunction(cinstance.remove, 'remove method exists');
@@ -65,6 +66,32 @@ suite('Cobject ', function () {
       done();
     },function(){})
     assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId');
+    this.request.respond(200, {
+      "Content-Type": "application/json"
+    }, '{ "_id": 123, "comment": "Hey there" }');
+  });
+
+  test('getById method (callback)', function (done) {
+    var newCinstance = Stamplay.Object('cobjectId');
+    newCinstance.getById(123, {}, function(err,resp){
+      assert.equal(resp._id, 123);
+      assert.equal(resp.comment, 'Hey there');
+      done();
+    })
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
+    this.request.respond(200, {
+      "Content-Type": "application/json"
+    }, '{ "_id": 123, "comment": "Hey there" }');
+  });
+
+  test('getById method (promise)', function (done) {
+    var newCinstance = Stamplay.Object('cobjectId');
+    newCinstance.getById(123,{}).then(function(resp){
+      assert.equal(resp._id, 123);
+      assert.equal(resp.comment, 'Hey there');
+      done();
+    },function(){})
+    assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/cobjectId/123');
     this.request.respond(200, {
       "Content-Type": "application/json"
     }, '{ "_id": 123, "comment": "Hey there" }');

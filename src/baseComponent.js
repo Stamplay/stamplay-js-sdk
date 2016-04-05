@@ -48,6 +48,9 @@
 			get: function(data, callbackObject){
 				return buildEndpoint(this.brickId, this.resourceId, 'GET', false, data, callbackObject)
 			},
+			getById:function(id, data, callbackObject){
+				return buildEndpoint(this.brickId, this.resourceId, 'GET', id, data, callbackObject)
+			},
 			save : function (data, callbackObject) {
 				return buildEndpoint(this.brickId, this.resourceId, 'POST', false, data, callbackObject)
 			},
@@ -55,7 +58,7 @@
 				removeAttributes(this.brickId, data);
 				return buildEndpoint(this.brickId, this.resourceId, 'PATCH', id, data, callbackObject)
 			},
-			update: function(id, data,  callbackObject){
+			update: function(id, data, callbackObject){
 				removeAttributes(this.brickId, data);
 				return buildEndpoint(this.brickId, this.resourceId, 'PUT', id, data, callbackObject)
 			},

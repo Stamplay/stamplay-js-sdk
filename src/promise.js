@@ -58,12 +58,12 @@
 		req.setRequestHeader('stamplay-app', headerStamplay);
 		// V1 
 		if (root.Stamplay.USESTORAGE) {
-			var jwt = store.get(window.location.origin + '-jwt');
+			var jwt = store.get(root.location.origin + '-jwt');
 			if (jwt) {
 				if (_jwtIsValidTimestamp(jwt)) {
 					req.setRequestHeader('x-stamplay-jwt', jwt);
 				} else {
-					store.remove(window.location.origin + '-jwt');
+					store.remove(root.location.origin + '-jwt');
 				}
 			}
 		}
@@ -73,7 +73,7 @@
 		if (jwt) {
 			var decodedJWT = _decodeJWT(jwt);
 			if (root.Stamplay.USESTORAGE) {
-				store.set(window.location.origin + '-jwt', jwt);
+				store.set(root.location.origin + '-jwt', jwt);
 			}
 		}
 		return decodedJWT;
