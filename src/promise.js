@@ -55,6 +55,10 @@
 		});
 		// Default content-Type  
 		req.setRequestHeader('Content-Type', 'application/json');
+
+		// Make the backend know that's xhr request
+		req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
 		req.setRequestHeader('stamplay-app', headerStamplay);
 		// V1 
 		if (root.Stamplay.USESTORAGE) {
