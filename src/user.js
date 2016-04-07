@@ -81,7 +81,6 @@
 		},
 		logout : function (async, callbackObject) {
 			var jwt = store.get(root.location.origin + '-jwt');
-
 			if (root.Stamplay.USESTORAGE)
 				store.remove(root.location.origin + '-jwt');
 			if(async){

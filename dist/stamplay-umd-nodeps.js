@@ -1,20 +1,20 @@
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
-    define('Stamplay', ["Q","store.js"], function (a0,b1) {
+    define('Stamplay', ["Q","store"], function (a0,b1) {
       return (root['Stamplay'] = factory(a0,b1));
     });
   } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
-    module.exports = factory(require("Q"),require("store.js"));
+    module.exports = factory(require("Q"),require("store"));
   } else {
-    root['Stamplay'] = factory(Q,store.js);
+    root['Stamplay'] = factory(Q,store);
   }
-}(this, function (Q, store.js) {
+}(this, function (Q, store) {
 
-/*! Stamplay v2.0.5 | (c) 2016 Stamplay *//**
+/*! Stamplay v2.0.6 | (c) 2016 Stamplay *//**
 @author Stamplay
 @version 2.0
 @description an awesome javascript sdk for Stamplay 
@@ -131,7 +131,9 @@
 		});
 		// Default content-Type  
 		req.setRequestHeader('Content-Type', 'application/json');
+    req.setRequestHeader('Accept', 'application/json, text/plain');
 		req.setRequestHeader('stamplay-app', headerStamplay);
+		
 		// V1 
 		if (root.Stamplay.USESTORAGE) {
 			var jwt = store.get(root.location.origin + '-jwt');
@@ -225,7 +227,8 @@
 		return now && validSince && validUntil && now >= validSince && now <= validUntil;
 	}
 
-}(this));/* 
+}(this));
+/* 
  * Exspose BaseComponent the super class of all components on Stamplay.
  *  It extends Model and Collection.
  */
@@ -619,7 +622,6 @@
 		},
 		logout : function (async, callbackObject) {
 			var jwt = store.get(root.location.origin + '-jwt');
-
 			if (root.Stamplay.USESTORAGE)
 				store.remove(root.location.origin + '-jwt');
 			if(async){

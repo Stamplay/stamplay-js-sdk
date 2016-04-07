@@ -1,5 +1,14 @@
 # Stamplay JS SDK Changelog
 
+2.0.6 / 07-04-2016
+===================
+
+* Change flow for logout operation
+* Added UMD version of sdk
+* Removed underscore dependecies
+* Added getById method to User and Object
+* Added setRole method to User
+
 2.0.5 / 29-03-2016
 ===================
 

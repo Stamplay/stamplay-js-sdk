@@ -1,4 +1,4 @@
-/*! Stamplay v2.0.5 | (c) 2016 Stamplay */// vim:ts=4:sts=4:sw=4:
+/*! Stamplay v2.0.6 | (c) 2016 Stamplay */// vim:ts=4:sts=4:sw=4:
 /*!
  *
  * Copyright 2009-2012 Kris Kowal under the terms of the MIT
@@ -2338,7 +2338,9 @@ return Q;
 		});
 		// Default content-Type  
 		req.setRequestHeader('Content-Type', 'application/json');
+    req.setRequestHeader('Accept', 'application/json, text/plain');
 		req.setRequestHeader('stamplay-app', headerStamplay);
+		
 		// V1 
 		if (root.Stamplay.USESTORAGE) {
 			var jwt = store.get(root.location.origin + '-jwt');
@@ -2432,7 +2434,8 @@ return Q;
 		return now && validSince && validUntil && now >= validSince && now <= validUntil;
 	}
 
-}(this));/* 
+}(this));
+/* 
  * Exspose BaseComponent the super class of all components on Stamplay.
  *  It extends Model and Collection.
  */
@@ -2826,7 +2829,6 @@ return Q;
 		},
 		logout : function (async, callbackObject) {
 			var jwt = store.get(root.location.origin + '-jwt');
-
 			if (root.Stamplay.USESTORAGE)
 				store.remove(root.location.origin + '-jwt');
 			if(async){

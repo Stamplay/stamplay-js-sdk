@@ -7,9 +7,9 @@ module.exports = {
 	    amdModuleId: 'Stamplay', 
 	    globalAlias: 'Stamplay', 
 	    deps: { 
-	      'default': ['Q', 'store.js'],
-	      amd: ['Q', 'store.js'],
-	      cjs: ['Q', 'store.js']
+	      'default': ['Q', 'store'],
+	      amd: ['Q', 'store'],
+	      cjs: ['Q', 'store']
 	    }
 	  }
   }
