@@ -431,6 +431,13 @@
 				return this;
 			},
 
+			notEqualTo : function(attr, value){
+				var obj = {};
+				obj[attr] = {"$ne":value};
+				this.whereQuery.push(obj)
+				return this;
+			},
+
 			sortAscending : function(value){
 				this.sortQuery ='&sort='+value
 				return this;

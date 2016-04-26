@@ -83,6 +83,12 @@ suite('Stamplay Query ', function () {
       assert.equal(query.whereQuery[0].b, 'b');
     });
 
+    test('has notEqualTo method', function () {
+      var query =  Stamplay.Query('object', 'tag').notEqualTo('b', 'a');
+      assert.isObject(query.whereQuery[0]);
+      assert.equal(query.whereQuery[0].b.$ne, 'a');
+    });
+
     test('has sortAscending method', function () {
       var query =  Stamplay.Query('object', 'tag').sortAscending('b');
       assert.equal(query.sortQuery, '&sort=b');
@@ -185,6 +191,26 @@ suite('Stamplay Query ', function () {
       var query =  Stamplay.Query('object', 'tag').equalTo('pippo', 'pippo');
       query.exec().then(function(err,result){done()})
       assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"pippo":"pippo"}');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() notEqualTo works (callback)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').notEqualTo('a', 2);
+      query.exec(function(err,result){
+        done()
+      })
+      assert.equal(this.request.url, stamplayUrl + '/api/cobject/' + Stamplay.VERSION + '/tag?where={"a":{"$ne":2}}');
+      this.request.respond(200, {
+        "Content-Type": "application/json"
+      }, '{}');
+    });
+
+    test('exec() notEqualTo works (promise)', function (done) {
+      var query =  Stamplay.Query('object', 'tag').notEqualTo('a', 2);
+      query.exec().then(function(err,result){done()})
+      assert.equal(this.request.url, stamplayUrl +'/api/cobject/' + Stamplay.VERSION + '/tag?where={"a":{"$ne":2}}');
       this.request.respond(200, {
         "Content-Type": "application/json"
       }, '{}');
