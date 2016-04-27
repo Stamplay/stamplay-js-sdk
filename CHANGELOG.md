@@ -1,5 +1,10 @@
 # Stamplay JS SDK Changelog
 
+2.0.7 / 27-04-2016
+===================
+
+* Added notEqualTo method to Query
+
 2.0.6 / 07-04-2016
 ===================
 
