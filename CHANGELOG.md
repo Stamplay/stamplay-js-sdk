@@ -1,5 +1,11 @@
 # Stamplay JS SDK Changelog
 
+2.0.8 / 06-06-2016
+===================
+
+* Publish to NPM
+
+
 2.0.7 / 27-04-2016
 ===================
 
@@ -74,17 +80,17 @@
 1.2.9 / 09-09-2015
 ===================
 
-* Redirect for social login in local environment now have the port 
+* Redirect for social login in local environment now have the port
 
 1.2.8 / 20-08-2015
 ===================
 
-* Added stripe.updateCreditCard method 
+* Added stripe.updateCreditCard method
 
 1.2.7 / 17-08-2015
 ===================
 
-* Added stripe.getCreditCard method 
+* Added stripe.getCreditCard method
 
 1.2.6 / 06-08-2015
 ===================
@@ -124,7 +130,7 @@
 * Added deleteSubscription method on Stripe
 * Added updateSubscription method on Stripe
 * All xhr requests use application/json content type
-* When a user is destroyed logs out 
+* When a user is destroyed logs out
 
 1.2.0  / 26-06-2015
 =================
@@ -146,7 +152,7 @@
 
 * Fix bugs
 * Improve stability
-* Added JWT 
+* Added JWT
 
 0.0.12  / 21-04-2015
 =================
@@ -159,19 +165,19 @@
 
 * Added sort method on query
 
-0.0.9 / 
+0.0.9 /
 =================
 
 * Fix comment method
 * Added header attribute on Collection (see pagination and totalElements obj)
 * Added count method
-* Modify the return of Query.exec() 
+* Modify the return of Query.exec()
 * Added initialization method on collection
 
-0.0.6 / 03-03-2015 
+0.0.6 / 03-03-2015
 ==================
 
-* Added underscore method to Collection and Model, added total element and link to collection for handle the pagination 
+* Added underscore method to Collection and Model, added total element and link to collection for handle the pagination
 
 0.0.4 / 19-02-2015
 ==================
@@ -181,7 +187,7 @@
 0.0.3 / 08-01-2015
 ==================
 
-* Added Query object to make to easy use query and webHook component 
+* Added Query object to make to easy use query and webHook component
 
 0.0.2 / 19-09-2014
 ==================

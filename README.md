@@ -14,7 +14,7 @@ This library  gives you access to the powerful Stamplay cloud platform from your
 ##Getting Started
 The SDK is available for download on our website, on Bower and on our CDN. To get started import the library in your project and initialize it by calling `init` function with your `appId`
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.0.7/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.0.8/stamplay.min.js"></script>
 <script> Stamplay.init("APPID"); </script>
 ```
 
@@ -54,7 +54,7 @@ Stamplay.Object('foo').save(data).then(function(result){
 
 ##Available components
 This JavaScript SDK expose the following components:
- 
+
 * [User](#user)
 	* <code>save(data, [callback])</code>
   * <code>get(data, [callback])</code>
@@ -89,36 +89,36 @@ This JavaScript SDK expose the following components:
 	* <code>comment(id, text, [callback])</code>
 	* <code>push(id, attribute, data, [callback])</code>
 * [Code Block](#codeblock)
-	* <code>run(data, queryParams, [callback])</code> 
+	* <code>run(data, queryParams, [callback])</code>
 * [Webhook](#webhook)
-	* <code>post(data, [callback])</code> 
+	* <code>post(data, [callback])</code>
 * [Stripe](#stripe)
-	* <code>charge(userId, token, amount, currency, [callback])</code> 
-	* <code>createCreditCard(userId, token, [callback])</code> 
-	* <code>createCustomer(userId, [callback])</code> 
-	* <code>createSubscriptionuserId, planId, [callback])</code> 
-	* <code>deleteSubscription(userId, subscriptionId, options, [callback])</code> 
-	* <code>getCreditCard(userId, [callback])</code> 
-	* <code>getSubscription(userId, subscriptionId, [callback])</code> 
-	* <code>getSubscriptions(userId, options, [callback])</code> 
-	* <code>updateCreditCard(userId, token, [callback])</code> 
-	* <code>updateSubscription(userId, subscriptionId, options, [callback])</code> 
+	* <code>charge(userId, token, amount, currency, [callback])</code>
+	* <code>createCreditCard(userId, token, [callback])</code>
+	* <code>createCustomer(userId, [callback])</code>
+	* <code>createSubscriptionuserId, planId, [callback])</code>
+	* <code>deleteSubscription(userId, subscriptionId, options, [callback])</code>
+	* <code>getCreditCard(userId, [callback])</code>
+	* <code>getSubscription(userId, subscriptionId, [callback])</code>
+	* <code>getSubscriptions(userId, options, [callback])</code>
+	* <code>updateCreditCard(userId, token, [callback])</code>
+	* <code>updateSubscription(userId, subscriptionId, options, [callback])</code>
 
 
 Also this components the sdk have some support objects to help you in common operation:
 
 * [Query](#query)
-	* <code>greaterThan(attr, value)</code> 
-	* <code>greaterThanOrEqual(attr, value)</code> 
-	* <code>lessThan(attr, value)</code> 
-	* <code>lessThanOrEqual(attr, value)</code> 
+	* <code>greaterThan(attr, value)</code>
+	* <code>greaterThanOrEqual(attr, value)</code>
+	* <code>lessThan(attr, value)</code>
+	* <code>lessThanOrEqual(attr, value)</code>
 	* <code>pagination(page, per_page)</code>
 	* <code>between(attr, value1, value2)</code>
-	* <code>equalTo(attr, value)</code> 
-	* <code>notEqualTo(attr, value)</code> 
-	* <code>exists(attr)</code> 
-	* <code>notExists(attr)</code> 
-	* <code>sortAscending(attr)</code> 
+	* <code>equalTo(attr, value)</code>
+	* <code>notEqualTo(attr, value)</code>
+	* <code>exists(attr)</code>
+	* <code>notExists(attr)</code>
+	* <code>sortAscending(attr)</code>
 	* <code>sortDescending(attr)</code>
 	* <code>populate()</code>
 	* <code>populateOwner()</code>
@@ -129,8 +129,8 @@ Also this components the sdk have some support objects to help you in common ope
 	* <code>geoIntersects(type, coordinates)</code>
 	* <code>geoWithinGeometry(type, coordinates)</code>
 	* <code>geoWithinCenterSphere(coordinates, radius)</code>
-	* <code>or(query,..)</code> 
-	* <code>exec([callback])</code> 
+	* <code>or(query,..)</code>
+	* <code>exec([callback])</code>
 
 -------------------------------------------------------
 
@@ -157,4 +157,3 @@ You can also download this project and using all the precompiled files in src fo
 Go to [API Reference](https://stamplay.com/docs/jssdk/v2/reference) to see a lot of examples.
 Enjoy!
 <img align="right" src="https://editor.stamplay.com/img/logo-robot-no-neck.png" height=60>
-
