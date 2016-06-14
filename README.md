@@ -65,7 +65,7 @@ This JavaScript SDK expose the following components:
   * <code>login(data, [callback])</code>
   * <code>socialLogin(provider)</code>
   * <code>signup(data, [callback])</code>
-  * <code>logout()</code>
+  * <code>logout(async)</code>
   * <code>resetPassword(data, [callback])</code>
   * <code>getRoles([callback])</code>
   * <code>getRole(id, [callback])</code>
