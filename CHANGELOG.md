@@ -1,5 +1,11 @@
 # Stamplay JS SDK Changelog
 
+2.0.9 / 11-07-2016
+===================
+
+* Fixed a bug on social login redirection
+
+
 2.0.8 / 06-06-2016
 ===================
 
