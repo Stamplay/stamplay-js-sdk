@@ -14,7 +14,7 @@
   }
 }(this, function (Q, store) {
 
-/*! Stamplay v2.0.8 | (c) 2016 Stamplay *//**
+/*! Stamplay v2.0.9 | (c) 2016 Stamplay *//**
 @author Stamplay
 @version 2.0
 @description an awesome javascript sdk for Stamplay 
@@ -548,8 +548,8 @@
 	}
 	// Added Query Object to Stamplay
 	root.Stamplay.Query = Query;
-})(this);/* 
-	Brick : User 
+})(this);/*
+	Brick : User
  	GET    '/api/user/VERSION/users'
   GET    '/api/user/VERSION/users/:id'
   POST   '/api/user/VERSION/users'
@@ -562,11 +562,11 @@
 	'use strict';
 
 	/*
-		User component : Stamplay.User 
+		User component : Stamplay.User
 		This class rappresent the User component on Stamplay platform
 		It very easy to use: Stamplay.User
 	*/
-	
+
 	var  User = {
 		brickId:'user',
 		resourceId:'users',
@@ -587,14 +587,14 @@
 			if(provider){
 				var url = '/auth/' + root.Stamplay.VERSION + '/' + provider + '/connect';
 				if(root.Stamplay.OPTIONS.isMobile){
-						//need an external plugin to work - https://github.com/apache/cordova-plugin-inappbrowser 
+						//need an external plugin to work - https://github.com/apache/cordova-plugin-inappbrowser
 						var popup = root.open(root.Stamplay.BASEURL+url, 'socialLogin', 'left=1,top=1,width=600,height=600')
 						popup.addEventListener('loadstart', function (e) {
 						var reg = new RegExp('jwt=([A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.[A-Za-z0-9-_.+=]+)')
 						if(e.url.indexOf('jwt=') > -1){
 							var jwt = e.url.match(reg)[1]
 							store.set(root.location.origin + '-jwt', jwt);
-							if(root.Stamplay.OPTIONS.autoRefreshSocialLogin || true)
+							if(root.Stamplay.OPTIONS.autoRefreshSocialLogin)
 								location.reload();
 							popup.close();
 						}
@@ -607,7 +607,7 @@
 		        date.setTime(date.getTime() + 5 * 60 * 1000);
 						root.document.cookie = 'stamplay.jwt='+jwt+'; expires=' + date.toGMTString() + '; path=/'
 					}
-					var port = (root.location.port) ? ':'+root.location.port : '';	
+					var port = (root.location.port) ? ':'+root.location.port : '';
 					var redirection = location.protocol + '//' + root.document.domain +port+ url
 					//if you are using sdk on your *personal site*
 					//remember to manage the callback url for social login in editor
@@ -638,7 +638,7 @@
 				}, callbackObject)
 			}else{
 				var url = '/auth/' + root.Stamplay.VERSION + '/logout?jwt='+jwt;
-				var port = (root.location.port) ? ':'+root.location.port : '';	
+				var port = (root.location.port) ? ':'+root.location.port : '';
 				var redirection = location.protocol + '//' + root.document.domain +port+ url
 				if(root.Stamplay.OPTIONS.absoluteUrl){
 					redirection = root.Stamplay.BASEURL+url
@@ -720,9 +720,10 @@
 			}
 		})
 	}
-	//Added User to Stamplay 
+	//Added User to Stamplay
 	root.Stamplay.User = User;
-})(this);/* Brick : Cobject 
+})(this);
+/* Brick : Cobject 
 	GET     '/api/cobject/VERSION/:cobjectId 
 	GET     '/api/cobject/VERSION/:cobjectId/:id   
 	PUT     '/api/cobject/VERSION/:cobjectId/:id   
