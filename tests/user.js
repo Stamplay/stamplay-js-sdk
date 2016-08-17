@@ -1,5 +1,5 @@
 /* globals suite,Stamplay,setup,sinon,teardown,test,assert */
-/*   
+/*
 	How to run this test
 	- Go to the root of the project
 	- Launch mocha-phantomjs ./tests/tests.html
@@ -45,11 +45,6 @@ suite('User', function () {
 		assert.isFunction(user.socialLogin, 'socialLogin  exists');
 		assert.isFunction(user.logout, 'logout method exists');
 		assert.isFunction(user.signup, 'signup method exists');
-		assert.isFunction(user.follow, 'follow method exists');
-		assert.isFunction(user.unfollow, 'unfollow method exists');
-		assert.isFunction(user.activities, 'activities method exists');
-		assert.isFunction(user.following, 'following method exists');
-		assert.isFunction(user.followedBy, 'followedBy method exists');
 		assert.isFunction(user.get, 'get method exists');
 		assert.isFunction(user.getById, 'getById method exists');
 		assert.isFunction(user.save, 'save method exists');
@@ -209,7 +204,7 @@ suite('User', function () {
 		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/resetpassword');
 		this.request.respond(200, {
 			"Content-Type": "application/json"
-		}, JSON.stringify(data));		
+		}, JSON.stringify(data));
 	});
 
 	test('user resetPassword function (promise)', function (done) {
@@ -224,126 +219,6 @@ suite('User', function () {
 			"Content-Type": "application/json"
 		}, JSON.stringify(data));
 	});
-
-	test('user follow function (callback)', function (done) {
-
-		user.follow('123123123123123124561223', function(err,result){
-			done();
-		})
-
-		assert.equal(this.request.method, 'PUT');
-		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/follow');
-		this.request.respond(200, {
-			"Content-Type": "application/json"
-		}, JSON.stringify({}));
-	});
-
-	test('user follow function (promise)', function (done) {
-
-		user.follow('123123123123123124561223').then(function(result){
-			done();
-		})
-
-		assert.equal(this.request.method, 'PUT');
-		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/follow');
-		this.request.respond(200, {
-			"Content-Type": "application/json"
-		}, JSON.stringify({}));
-	});
-
-	test('user unfollow function (callback)', function (done) {
-
-		user.unfollow('123123123123123124561223', function(err,result){
-			done();
-		})
-		assert.equal(this.request.method, 'PUT');
-		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/unfollow');
-		this.request.respond(200, {
-			"Content-Type": "application/json"
-		}, JSON.stringify({}));
-	});	
-
-	test('user unfollow function (promise)', function (done) {
-
-		user.unfollow('123123123123123124561223').then(function(result){
-			done();
-		})
-		assert.equal(this.request.method, 'PUT');
-		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/unfollow');
-		this.request.respond(200, {
-			"Content-Type": "application/json"
-		}, JSON.stringify({}));
-	});			
-
-	test('user activities function (callback)', function (done) {
-
-		user.activities('123123123123123124561223', function(err,result){
-			done();
-		})
-		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/activities');
-		this.request.respond(200, {
-			"Content-Type": "application/json"
-		}, JSON.stringify({}));
-	});		
-
-	test('user activities function (promise)', function (done) {
-
-		user.activities('123123123123123124561223').then(function(result){
-			done();
-		})
-		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/activities');
-		this.request.respond(200, {
-			"Content-Type": "application/json"
-		}, JSON.stringify({}));
-	});	
-
-	test('user following function (callback)', function (done) {
-
-		user.following('123123123123123124561223',function(err,result){
-			done();
-		})
-		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/following');
-		this.request.respond(200, {
-			"Content-Type": "application/json"
-		}, JSON.stringify({}));
-	});
-
-	test('user following function (promise)', function (done) {
-
-		user.following('123123123123123124561223').then(function(result){
-			done();
-		})
-		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/following');
-		this.request.respond(200, {
-			"Content-Type": "application/json"
-		}, JSON.stringify({}));
-	});				
-
-	test('user followedBy function (callback)', function (done) {
-		user.followedBy('123123123123123124561223', function(err,result){
-			done();
-		})
-		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/followed_by');
-		this.request.respond(200, {
-			"Content-Type": "application/json"
-		}, JSON.stringify({}));
-	});
-
-	test('user followedBy function (promise)', function (done) {
-		user.followedBy('123123123123123124561223').then(function(result){
-			done();
-		})
-		assert.equal(this.request.method, 'GET');
-		assert.equal(this.request.url, stamplayUrl+'/api/user/' + Stamplay.VERSION + '/users/123123123123123124561223/followed_by');
-		this.request.respond(200, {
-			"Content-Type": "application/json"
-		}, JSON.stringify({}));
-	});			
 
 	test('get method (callback)', function (done) {
 		Stamplay.User.get({},function(err,result){

@@ -14,7 +14,7 @@ This library  gives you access to the powerful Stamplay cloud platform from your
 ##Getting Started
 The SDK is available for download on our website, on Bower and on our CDN. To get started import the library in your project and initialize it by calling `init` function with your `appId`
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.0.9/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.1.0/stamplay.min.js"></script>
 <script> Stamplay.init("APPID"); </script>
 ```
 
@@ -70,11 +70,6 @@ This JavaScript SDK expose the following components:
   * <code>getRoles([callback])</code>
   * <code>getRole(id, [callback])</code>
   * <code>setRole(id, roleId, [callback])</code>
-  * <code>follow(id, [callback])</code>
-  * <code>unfollow(id, [callback])</code>
-  * <code>followedBy(id, [callback])</code>
-  * <code>following(id, [callback])</code>
-  * <code>activities(id, [callback])</code>
 * [Object](#custom-object)
 	* <code>save(data, [callback])</code>
 	* <code>get(data, [callback])</code>

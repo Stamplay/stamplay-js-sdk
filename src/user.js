@@ -105,38 +105,6 @@
 				url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/resetpassword'
 			}, callbackObject)
 		},
-		activities : function (id, callbackObject) {
-			return root.Stamplay.makeAPromise({
-				method: 'GET',
-				url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/'+id+'/activities'
-			}, callbackObject)
-		},
-		following : function (id, callbackObject) {
-			return root.Stamplay.makeAPromise({
-				method: 'GET',
-				url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/'+id+'/following'
-			}, callbackObject)
-		},
-		followedBy : function (id, callbackObject) {
-				return root.Stamplay.makeAPromise({
-					method: 'GET',
-					url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/'+id+'/followed_by'
-				}, callbackObject)
-		},
-		follow : function (id, callbackObject) {
-				return root.Stamplay.makeAPromise({
-					method: 'PUT',
-					data: {'userId': id},
-					url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/follow'
-				}, callbackObject)
-		},
-		unfollow : function (id, callbackObject) {
-				return root.Stamplay.makeAPromise({
-					method: 'PUT',
-					data: {'userId': id},
-					url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/unfollow'
-				}, callbackObject)
-		},
 		getRoles:function (callbackObject) {
 			return root.Stamplay.makeAPromise({
 				method: 'GET',
