@@ -1,4 +1,4 @@
-/*! Stamplay v2.0.9 | (c) 2016 Stamplay */// vim:ts=4:sts=4:sw=4:
+/*! Stamplay v2.1.0 | (c) 2016 Stamplay */// vim:ts=4:sts=4:sw=4:
 /*!
  *
  * Copyright 2009-2012 Kris Kowal under the terms of the MIT
@@ -2859,38 +2859,6 @@ return Q;
 				data: data,
 				url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/resetpassword'
 			}, callbackObject)
-		},
-		activities : function (id, callbackObject) {
-			return root.Stamplay.makeAPromise({
-				method: 'GET',
-				url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/'+id+'/activities'
-			}, callbackObject)
-		},
-		following : function (id, callbackObject) {
-			return root.Stamplay.makeAPromise({
-				method: 'GET',
-				url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/'+id+'/following'
-			}, callbackObject)
-		},
-		followedBy : function (id, callbackObject) {
-				return root.Stamplay.makeAPromise({
-					method: 'GET',
-					url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/'+id+'/followed_by'
-				}, callbackObject)
-		},
-		follow : function (id, callbackObject) {
-				return root.Stamplay.makeAPromise({
-					method: 'PUT',
-					data: {'userId': id},
-					url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/follow'
-				}, callbackObject)
-		},
-		unfollow : function (id, callbackObject) {
-				return root.Stamplay.makeAPromise({
-					method: 'PUT',
-					data: {'userId': id},
-					url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/users/unfollow'
-				}, callbackObject)
 		},
 		getRoles:function (callbackObject) {
 			return root.Stamplay.makeAPromise({
