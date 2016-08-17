@@ -1,16 +1,19 @@
 # Stamplay JS SDK Changelog
 
+2.1.0 / 17-08-2016
+===================
+
+* Removed Follow / Unfollow and activity methods from User
+
 2.0.9 / 11-07-2016
 ===================
 
 * Fixed a bug on social login redirection
 
-
 2.0.8 / 06-06-2016
 ===================
 
 * Publish to NPM
-
 
 2.0.7 / 27-04-2016
 ===================
