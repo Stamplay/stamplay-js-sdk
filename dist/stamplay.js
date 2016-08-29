@@ -3196,7 +3196,9 @@ return Q;
 			run: function (data, queryParams, callbackObject) {
 				return _buildMethod('POST', url, data, queryParams, callbackObject);
 			},
-			post: this.run,
+			post: function (data, queryParams, callbackObject) {
+				return _buildMethod('POST', url, data, queryParams, callbackObject);
+			},
 			get: function (queryParams, callbackObject) {
 				return _buildMethod('GET', url, null, queryParams, callbackObject)
 			},

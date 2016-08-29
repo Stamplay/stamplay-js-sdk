@@ -25,7 +25,7 @@ suite('Codeblock', function () {
       this.xhr.restore();
     }
   });
-  // Codeblock.run()
+  // Codeblock.post()
   test('has the run method', function () {
     assert.isFunction(codeblock.run, 'run method exists');
   });
@@ -36,7 +36,7 @@ suite('Codeblock', function () {
       'that run method without arguments make POST api call without body nor query params (callback)',
       function (done) {
 
-        codeblock.run(null, null, function (err, response) {
+        codeblock.post(null, null, function (err, response) {
           done();
         })
 
@@ -56,7 +56,7 @@ suite('Codeblock', function () {
       'that run method without arguments make POST api call without body nor query params (promise)',
       function (done) {
 
-        codeblock.run(null, null).then(function (response) {
+        codeblock.post(null, null).then(function (response) {
           done();
         })
 
@@ -79,7 +79,7 @@ suite('Codeblock', function () {
           b1: 1,
           b2: 2
         }
-        codeblock.run(body, null, function (err, response) {
+        codeblock.post(body, null, function (err, response) {
           done();
         })
 
@@ -102,7 +102,7 @@ suite('Codeblock', function () {
           b1: 1,
           b2: 2
         }
-        codeblock.run(body, null).then(function (response) {
+        codeblock.post(body, null).then(function (response) {
           done();
         })
 
@@ -131,7 +131,7 @@ suite('Codeblock', function () {
           p2: 2
         }
 
-        codeblock.run(body, queryParams, function (err, response) {
+        codeblock.post(body, queryParams, function (err, response) {
           done();
         })
 
@@ -160,7 +160,7 @@ suite('Codeblock', function () {
           p2: 2
         }
 
-        codeblock.run(body, queryParams).then(function (response) {
+        codeblock.post(body, queryParams).then(function (response) {
           done();
         })
 
