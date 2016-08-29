@@ -14,7 +14,7 @@
   }
 }(this, function (Q, store) {
 
-/*! Stamplay v2.1.0 | (c) 2016 Stamplay *//**
+/*! Stamplay v2.1.1 | (c) 2016 Stamplay *//**
 @author Stamplay
 @version 2.0
 @description an awesome javascript sdk for Stamplay 
@@ -963,76 +963,51 @@
 		}
 	}
 	root.Stamplay.Stripe = Stripe;
-})(this);/* Brick : Codeblock 
+})(this);/* Brick : Codeblock
  *  POST   '/api/codeblock/VERSION/:CodeblockId/run'
  */
 (function (root) {
 	'use strict';
-
 	/*
-		Codeblock component : Stamplay.Codeblock 
+		Codeblock component : Stamplay.Codeblock
 		This class rappresent the Codeblock Object component on Stamplay platform
 		Stamplay.Codeblock(codeblockId)
 	*/
-	function _parseMethod(method) {
-		var result = 'POST';
-		if (typeof method === 'string') {
-			switch (method) {
-			case 'GET':
-			case 'POST':
-			case 'PUT':
-			case 'PATCH':
-			case 'DELETE':
-				result = method;
-				break;
-			default:
-				throw new Error('Stamplay.codeblock(): Invalid HTTP verb: available verbs are GET,POST,PUT,PATCH and DELETE');
-				break;
-			}
-		}
-		return result;
-	}
-
-	function _parseData(method, data) {
-		var result = (data == null || data == undefined) ? undefined : data;
-		switch (method) {
-		case 'POST':
-		case 'PUT':
-		case 'PATCH':
-			break;
-		default:
-			result = undefined;
-			break;
-		}
-		return result;
+	function _buildMethod(method, url, data, queryParams, callbackObject) {
+		return root.Stamplay.makeAPromise({
+			method: method,
+			data: data,
+			url: url,
+			thisParams: queryParams
+		}, callbackObject);
 	}
 	//constructor
 	function Codeblock(resourceId) {
 		var resource = resourceId.replace(/[^\w\s]/gi, '').trim().toLowerCase().replace(/\s+/g, '_');
 		var url = '/api/codeblock/' + root.Stamplay.VERSION + '/run/' + resource;
 		return {
-			run :function (data, queryParams, callbackObject) {
-				/*
-					args 0
-																  ->  POST			no     		no query params   
-					args 3 
-					method data queryParams -> 	method 		data 			queryParams	
-				*/				
-				var finalMethod = _parseMethod('POST');
-				var finalData = _parseData('POST', data);
-				var finalQuery = queryParams;
-				return root.Stamplay.makeAPromise({
-					method: finalMethod,
-					data: finalData,
-					url: url,
-					thisParams: queryParams
-				}, callbackObject);
-			}
+			run: function (data, queryParams, callbackObject) {
+				return _buildMethod('POST', url, data, queryParams, callbackObject);
+			},
+			post: this.run,
+			get: function (queryParams, callbackObject) {
+				return _buildMethod('GET', url, null, queryParams, callbackObject)
+			},
+			put: function (data, queryParams, callbackObject) {
+				return _buildMethod('PUT', url, data, queryParams, callbackObject)
+			},
+			patch: function (data, queryParams, callbackObject) {
+				return _buildMethod('PATCH', url, data, queryParams, callbackObject)
+			},
+			delete: function (queryParams, callbackObject) {
+				return _buildMethod('DELETE', url, null, queryParams, callbackObject)
+			},
 		}
 	}
-	//Added Codeblock to Stamplay 
+	//Added Codeblock to Stamplay
 	root.Stamplay.Codeblock = Codeblock;
 })(this);
+
 return Stamplay;
 
 }));
