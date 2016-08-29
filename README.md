@@ -85,10 +85,10 @@ This JavaScript SDK expose the following components:
 	* <code>push(id, attribute, data, [callback])</code>
 * [Code Block](#codeblock)
 	* <code>post(data, queryParams, [callback])</code>
-	* <code>get(data, queryParams, [callback])</code>
+	* <code>get(queryParams, [callback])</code>
 	* <code>put(data, queryParams, [callback])</code>
 	* <code>patch(data, queryParams, [callback])</code>
-	* <code>delete(data, queryParams, [callback])</code>
+	* <code>delete(queryParams, [callback])</code>
 * [Webhook](#webhook)
 	* <code>post(data, [callback])</code>
 * [Stripe](#stripe)
