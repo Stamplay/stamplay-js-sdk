@@ -1,6 +1,6 @@
 {
   "name": "stamplay-sdk",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "homepage": "https://stamplay.com",
   "description": "JS SDK for Stamplay",
   "private": false,
@@ -19,7 +19,7 @@
     "grunt": "~0.4.1",
     "grunt-aws-s3": "^0.14.4",
     "grunt-cli": "^0.1.13",
-    "grunt-umd":"2.3.5",
+    "grunt-umd": "2.3.5",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-compress": "^0.14.0",
     "grunt-contrib-concat": "~0.5.1",

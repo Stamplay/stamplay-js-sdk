@@ -14,7 +14,7 @@ This library  gives you access to the powerful Stamplay cloud platform from your
 ##Getting Started
 The SDK is available for download on our website, on Bower and on our CDN. To get started import the library in your project and initialize it by calling `init` function with your `appId`
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.1.0/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.1.1/stamplay.min.js"></script>
 <script> Stamplay.init("APPID"); </script>
 ```
 
@@ -84,7 +84,11 @@ This JavaScript SDK expose the following components:
 	* <code>comment(id, text, [callback])</code>
 	* <code>push(id, attribute, data, [callback])</code>
 * [Code Block](#codeblock)
-	* <code>run(data, queryParams, [callback])</code>
+	* <code>post(data, queryParams, [callback])</code>
+	* <code>get(queryParams, [callback])</code>
+	* <code>put(data, queryParams, [callback])</code>
+	* <code>patch(data, queryParams, [callback])</code>
+	* <code>delete(queryParams, [callback])</code>
 * [Webhook](#webhook)
 	* <code>post(data, [callback])</code>
 * [Stripe](#stripe)
@@ -149,6 +153,6 @@ You can also download this project and using all the precompiled files in src fo
 
 
 ## One more thing
-Go to [API Reference](https://stamplay.com/docs/jssdk/v2/reference) to see a lot of examples.
+Go to [API Reference](http://docs.stamplay.com/?lang=shell#sdk-and-client-libraries) to see a lot of examples.
 Enjoy!
 <img align="right" src="https://editor.stamplay.com/img/logo-robot-no-neck.png" height=60>

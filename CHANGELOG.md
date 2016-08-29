@@ -1,5 +1,10 @@
 # Stamplay JS SDK Changelog
 
+2.1.1 / 29-08-2016
+===================
+
+* Added GET,PUT,PATCH and DELETE method to codeblock
+
 2.1.0 / 17-08-2016
 ===================
 
