@@ -16,12 +16,14 @@ This library  gives you access to the powerful Stamplay cloud platform from your
 The SDK is available for on NPM, Bower and on our CDN.
 
 ###Using [npm](https://npmjs.com)
-```shell   
+
+```bash
 $ npm install -g stamplay-sdk
 ```
 
 ###Using [bower](https://bower.com) 
-```shell     
+
+```bash
 $ bower install -g stamplay-js-sdk
 ```
 
