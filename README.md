@@ -11,8 +11,23 @@
 This library  gives you access to the powerful Stamplay cloud platform from your JavaScript app. For more info on Stamplay and its features, see the <a href="https://stamplay.com">website</a> or the JavaScript guide
 <br>
 
-##Getting Started
-The SDK is available for download on our website, on Bower and on our CDN. To get started import the library in your project and initialize it by calling `init` function with your `appId`
+
+##Installation
+The SDK is available for on NPM, Bower and on our CDN.
+
+###Using [npm](https://npmjs.com)
+
+```bash
+$ npm install -g stamplay-sdk
+```
+
+###Using [bower](https://bower.com) 
+
+```bash
+$ bower install -g stamplay-js-sdk
+```
+
+To get started import the library in your project and initialize it by calling `init` function with your `appId`
 ```HTML
 <script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.1.1/stamplay.min.js"></script>
 <script> Stamplay.init("APPID"); </script>
