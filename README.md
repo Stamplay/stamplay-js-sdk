@@ -29,7 +29,7 @@ $ bower install -g stamplay-js-sdk
 
 To get started import the library in your project and initialize it by calling `init` function with your `appId`
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.1.1/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.1.2/stamplay.min.js"></script>
 <script> Stamplay.init("APPID"); </script>
 ```
 
@@ -92,7 +92,7 @@ This JavaScript SDK expose the following components:
 	* <code>remove(id, [callback])</code>
 	* <code>update(id, data, [callback])</code>
 	* <code>patch(id, data, [callback])</code>
-	* <code>findByCurrentUser([attr], [callback])</code>
+	* <code>findByCurrentUser([attr], [data], [callback])</code>
 	* <code>upVote(id, [callback])</code>
 	* <code>downVote(id, [callback])</code>
 	* <code>rate(id, rate, [callback])</code>
