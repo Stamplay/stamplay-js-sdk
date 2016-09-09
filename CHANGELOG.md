@@ -1,5 +1,10 @@
 # Stamplay JS SDK Changelog
 
+2.1.2 / 09-09-2016
+===================
+
+* Added params to findByCurrentUser 
+
 2.1.1 / 29-08-2016
 ===================
 
