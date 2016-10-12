@@ -1,6 +1,6 @@
 {
   "name": "stamplay-sdk",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "homepage": "https://stamplay.com",
   "description": "JS SDK for Stamplay",
   "private": false,
