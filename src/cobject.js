@@ -40,7 +40,7 @@
 
 	var buildAttr = function (response, attribute, data) {
 			var newData = {}
-			newData[attribute] = response[attribute]
+			newData[attribute] = response[attribute] || []
 			newData[attribute].push(data)
 			return newData
 		}

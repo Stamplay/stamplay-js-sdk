@@ -1,9 +1,14 @@
 # Stamplay JS SDK Changelog
 
+2.1.3 / 12-10-2016
+===================
+
+* Fix bug on push method in Object
+
 2.1.2 / 09-09-2016
 ===================
 
-* Added params to findByCurrentUser 
+* Added params to findByCurrentUser
 
 2.1.1 / 29-08-2016
 ===================
