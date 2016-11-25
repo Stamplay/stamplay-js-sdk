@@ -8,12 +8,14 @@
     "name": "Stamplay javascript SDK"
   },
   "main": "dist/stamplay-nodeps.js",
+  "typings": "./types/stamplay",
   "scripts": {
     "test": "mocha-phantomjs ./tests/tests.html"
   },
   "dependencies": {
     "store": "~1.3.17",
-    "q": "1.4.1"
+    "q": "1.4.1",
+    "@types/q": "0.0.32"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
