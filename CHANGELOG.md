@@ -1,5 +1,11 @@
 # Stamplay JS SDK Changelog
 
+2.1.4 / 25-11-2016
+===================
+
+* Added support for TypeScript by including stamplay.d.ts Definition File
+
+
 2.1.3 / 12-10-2016
 ===================
 

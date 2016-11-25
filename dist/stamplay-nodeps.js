@@ -1,4 +1,4 @@
-/*! Stamplay v2.1.3 | (c) 2016 Stamplay *//**
+/*! Stamplay v2.1.4 | (c) 2016 Stamplay *//**
 @author Stamplay
 @version 2.0
 @description an awesome javascript sdk for Stamplay

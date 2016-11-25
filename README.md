@@ -29,7 +29,7 @@ $ bower install -g stamplay-js-sdk
 
 To get started import the library in your project and initialize it by calling `init` function with your `appId`
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.1.3/stamplay.min.js"></script>
+<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.1.4/stamplay.min.js"></script>
 <script> Stamplay.init("APPID"); </script>
 ```
 
