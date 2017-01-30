@@ -1,4 +1,4 @@
-<img src="https://editor.stamplay.com/img/logo-robot-no-neck.png" align="left" width="170px" height="160px"/>
+<img src="https://editor.stamplay.com/img/stamplay-logo.png" align="left" width="170px" height="160px"/>
 <img align="left" width="0" height="160px" hspace="10"/>
 
 > #Stamplay JavaScript SDK
@@ -170,4 +170,4 @@ You can also download this project and using all the precompiled files in src fo
 ## One more thing
 Go to [API Reference](http://docs.stamplay.com/?lang=shell#sdk-and-client-libraries) to see a lot of examples.
 Enjoy!
-<img align="right" src="https://editor.stamplay.com/img/logo-robot-no-neck.png" height=60>
+<img align="right" src="https://editor.stamplay.com/img/stamplay-logo.png" height=60>
