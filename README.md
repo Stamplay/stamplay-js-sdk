@@ -168,6 +168,6 @@ You can also download this project and using all the precompiled files in src fo
 
 
 ## One more thing
-Go to [API Reference](http://docs.stamplay.com/?lang=shell#sdk-and-client-libraries) to see a lot of examples.
+Go to [API Reference](http://docs.stamplay.com/?lang=shell#sdk-and-client-libraries) to see a lot of examples. 
 Enjoy!
 <img align="right" src="https://editor.stamplay.com/img/stamplay-logo.png" height=60>
