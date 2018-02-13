@@ -449,9 +449,9 @@ combinedQuery.exec()
 
 Stamplay.Query("object", "movie")
     .geoWithinGeometry('Polygon',
-    [
-        [[-70, 40], [-72, 40], [-72, 50], [-70, 50], [-70, 40]]
-    ]).exec()
+        [
+            [[-70, 40], [-72, 40], [-72, 50], [-70, 50], [-70, 40]]
+        ]).exec()
     .then(function (res) {
         // success
     }, function (err) {
@@ -485,36 +485,6 @@ Stamplay.Query("object", "dinners")
         // error
     })
 
-Stamplay.Object("movie").downVote("object_id")
-    .then(function (res) {
-        // success
-    }, function (err) {
-        // error
-    })
-
-Stamplay.Object("movie").upVote("object_id")
-    .then(function (res) {
-        // success
-    }, function (err) {
-        // error
-    })
-
-var txt = "comment text goes here";
-
-Stamplay.Object("movie").comment("object_id", txt)
-    .then(function (res) {
-        // success
-    }, function (err) {
-        // error
-    })
-
-
-Stamplay.Object("movie").rate("object_id", 5)
-    .then(function (res) {
-        // success
-    }, function (err) {
-        // error
-    })
 
 var data4 = { message: "Hello" }
 var params = { name: "Stamplay", bar: "foo" }
@@ -572,80 +542,80 @@ Stamplay.Stripe.createCustomer("userId")
     .then(function (res) {
         // success
     },
-    function (err) {
-        // error
-    })
+        function (err) {
+            // error
+        })
 
 Stamplay.Stripe.getSubscription("userId",
     "subscriptionId")
     .then(function (res) {
         // success
     },
-    function (err) {
-        // error
-    })
+        function (err) {
+            // error
+        })
 
 Stamplay.Stripe.getSubscriptions("userId",
     { someOption: "value" })
     .then(function (res) {
         // success
     },
-    function (err) {
-        // error
-    })
+        function (err) {
+            // error
+        })
 
 Stamplay.Stripe.createSubscription("userId",
     "planId")
     .then(function (res) {
         // success
     },
-    function (err) {
-        // error
-    })
+        function (err) {
+            // error
+        })
 
 Stamplay.Stripe.updateSubscription("userId", "planId",
     { plan: "subscription_one" })
     .then(function (res) {
         // success
     },
-    function (err) {
-        // error
-    })
+        function (err) {
+            // error
+        })
 
 Stamplay.Stripe.deleteSubscription("userId",
     "planId")
     .then(function (res) {
         // success
     },
-    function (err) {
-        // error
-    })
+        function (err) {
+            // error
+        })
 
 Stamplay.Stripe.getCreditCard("userId")
     .then(function (res) {
         // success
     },
-    function (err) {
-        // error
-    })
+        function (err) {
+            // error
+        })
 
 Stamplay.Stripe.createCreditCard("userId",
     "token")
     .then(function (res) {
         // success
     },
-    function (err) {
-        // error
-    })
+        function (err) {
+            // error
+        })
 
 Stamplay.Stripe.updateCreditCard("userId",
     "token")
     .then(function (res) {
         // success
     },
-    function (err) {
-        // error
-    })
+        function (err) {
+            // error
+        })
 
 Stamplay.Stripe.charge("userId",
     "token",
@@ -654,6 +624,6 @@ Stamplay.Stripe.charge("userId",
     .then(function (res) {
         // Success
     },
-    function (err) {
-        // Handle Error
-    });
+        function (err) {
+            // Handle Error
+        });

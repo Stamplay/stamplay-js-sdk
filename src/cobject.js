@@ -7,11 +7,6 @@
 	PATCH   '/api/cobject/VERSION/:cobjectId/:id
 	POST    '/api/cobject/VERSION/:cobjectId
 	DELETE  '/api/cobject/VERSION/:cobjectId/:id
-	PUT			'/api/cobject/VERSION/:cobjectId/:id/rate
-	PUT     '/api/cobject/VERSION/:cobjectId/:id/comment
-	PUT     '/api/cobject/VERSION/:cobjectId/:id/vote
-	PUT     '/api/cobject/VERSION/:cobjectId/:id/facebook_share
-	PUT     '/api/cobject/VERSION/:cobjectId/:id/twitter_share
 */
 (function (root) {
 	'use strict';
@@ -39,12 +34,12 @@
 	};
 
 	var buildAttr = function (response, attribute, data) {
-			var newData = {}
-			newData[attribute] = response[attribute] || []
-			newData[attribute].push(data)
-			return newData
-		}
-		//constructor
+		var newData = {}
+		newData[attribute] = response[attribute] || []
+		newData[attribute].push(data)
+		return newData
+	}
+	//constructor
 	function Object(resourceId) {
 		if (resourceId) {
 			return root.Stamplay.extend({
@@ -82,26 +77,6 @@
 						url: '/api/' + this.brickId + '/' + root.Stamplay.VERSION + '/' + this.resourceId +
 							'/find/' + attribute
 					}, callback)
-				},
-				upVote: function (id, callbackObject) {
-					return makeActionPromise.call(this, id, 'vote', {
-						type: 'upvote'
-					}, callbackObject);
-				},
-				downVote: function (id, callbackObject) {
-					return makeActionPromise.call(this, id, 'vote', {
-						type: 'downvote'
-					}, callbackObject);
-				},
-				rate: function (id, vote, callbackObject) {
-					return makeActionPromise.call(this, id, 'rate', {
-						rate: vote
-					}, callbackObject);
-				},
-				comment: function (id, text, callbackObject) {
-					return makeActionPromise.call(this, id, 'comment', {
-						text: text
-					}, callbackObject);
 				},
 				push: function (id, attribute, data, callbackObject) {
 					if (callbackObject) {
