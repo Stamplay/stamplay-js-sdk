@@ -76,18 +76,6 @@ interface IObject {
     findByCurrentUser(attribute?: string, data?: any): Q.Promise<any>;
     findByCurrentUser(attribute?: string, data?: any, callback?: CallbackType): void;
 
-    upVote(id: string): Q.Promise<any>;
-    upVote(id: string, callback?: CallbackType): void;
-
-    downVote(id: string): Q.Promise<any>;
-    downVote(id: string, callback?: CallbackType): void;
-
-    rate(id: string, rate: number): Q.Promise<any>;
-    rate(id: string, rate: number, callback?: CallbackType): void;
-
-    comment(id: string, text: string): Q.Promise<any>;
-    comment(id: string, text: string, callback?: CallbackType): void;
-
     push(id: string, attribute: string, data: any): Q.Promise<any>;
     push(id: string, attribute: string, data: any, callback?: CallbackType): void;
 }
