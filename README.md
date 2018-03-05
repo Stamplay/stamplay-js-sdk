@@ -93,10 +93,6 @@ This JavaScript SDK expose the following components:
 	* <code>update(id, data, [callback])</code>
 	* <code>patch(id, data, [callback])</code>
 	* <code>findByCurrentUser([attr], [data], [callback])</code>
-	* <code>upVote(id, [callback])</code>
-	* <code>downVote(id, [callback])</code>
-	* <code>rate(id, rate, [callback])</code>
-	* <code>comment(id, text, [callback])</code>
 	* <code>push(id, attribute, data, [callback])</code>
 * [Code Block](#codeblock)
 	* <code>post(data, queryParams, [callback])</code>
