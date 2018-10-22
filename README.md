@@ -9,7 +9,6 @@
 [![Code Climate](https://codeclimate.com/github/Stamplay/stamplay-js-sdk/badges/gpa.svg)](https://codeclimate.com/github/Stamplay/stamplay-js-sdk)
 
 This library  gives you access to the powerful Stamplay cloud platform from your JavaScript app. For more info on Stamplay and its features, see the <a href="https://stamplay.com">website</a> or the JavaScript guide
-<br>
 
 
 ## Installation
