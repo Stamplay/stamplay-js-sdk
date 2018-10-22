@@ -1,7 +1,7 @@
 <img src="https://editor.stamplay.com/img/stamplay-logo.png" align="left" width="170px" height="160px"/>
 <img align="left" width="0" height="160px" hspace="10"/>
 
-> #Stamplay JavaScript SDK
+> # Stamplay JavaScript SDK
 
 [![Build Status](https://travis-ci.org/Stamplay/stamplay-js-sdk.svg?branch=master)](https://travis-ci.org/Stamplay/stamplay-js-sdk)
 [![Production version](http://img.shields.io/badge/download-47%20kB-blue.svg)](https://raw.githubusercontent.com/Stamplay/stamplay-js-sdk/master/dist/stamplay.min.js)
@@ -9,6 +9,8 @@
 [![Code Climate](https://codeclimate.com/github/Stamplay/stamplay-js-sdk/badges/gpa.svg)](https://codeclimate.com/github/Stamplay/stamplay-js-sdk)
 
 This library  gives you access to the powerful Stamplay cloud platform from your JavaScript app. For more info on Stamplay and its features, see the <a href="https://stamplay.com">website</a> or the JavaScript guide
+
+
 
 
 ## Installation
