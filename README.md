@@ -12,16 +12,16 @@ This library  gives you access to the powerful Stamplay cloud platform from your
 <br>
 
 
-##Installation
+## Installation
 The SDK is available for on NPM, Bower and on our CDN.
 
-###Using [npm](https://npmjs.com)
+### Using [npm](https://npmjs.com)
 
 ```bash
 $ npm install -g stamplay-sdk
 ```
 
-###Using [bower](https://bower.com) 
+### Using [bower](https://bower.com) 
 
 ```bash
 $ bower install -g stamplay-js-sdk
@@ -29,11 +29,11 @@ $ bower install -g stamplay-js-sdk
 
 To get started import the library in your project and initialize it by calling `init` function with your `appId`
 ```HTML
-<script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.1.4/stamplay.min.js"></script>
+<script src="https://cdn.stamplay.com/libs/stamplay-js-sdk/2.1.4/stamplay.min.js"></script>
 <script> Stamplay.init("APPID"); </script>
 ```
 
-##How to use it
+## How to use it
 Register a new user:
 ```javascript
 var data = {
@@ -67,7 +67,7 @@ Stamplay.Object('foo').save(data).then(function(result){
 })
 ```
 
-##Available components
+## Available components
 This JavaScript SDK expose the following components:
 
 * [User](#user)
